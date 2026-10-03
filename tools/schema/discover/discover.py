@@ -235,7 +235,16 @@ def fingerprints(root):
         files.extend(p for pattern in ('*.go', '*.py') for p in (root / directory).rglob(pattern)
                      if not p.name.endswith('_test.go') and not p.name.startswith('test_') and 'fixtures' not in p.parts)
     files.append(root / 'tools/schema/generate.sh')
-    return {'provenance': provenance, 'sources': {str(p.relative_to(root)): digest(p.read_bytes()) for p in sorted(files)}}
+    # Maintenance reuse must invalidate when offline verification/orchestration changes,
+    # not merely when schema producers change. Never hash ephemeral caches/credentials.
+    verification_files = [root / 'GNUmakefile']
+    for directory in ('internal', 'tools', '.github/workflows'):
+        for p in (root / directory).rglob('*'):
+            if (p.is_file() and not any(part in ('bin', '__pycache__', '.local') for part in p.relative_to(root).parts)
+                    and (p.name.endswith('_test.go') or p.suffix in ('.py', '.yml', '.json'))):
+                verification_files.append(p)
+    return {'provenance': provenance, 'sources': {str(p.relative_to(root)): digest(p.read_bytes()) for p in sorted(files)},
+            'verification': {str(p.relative_to(root)): digest(p.read_bytes()) for p in sorted(verification_files)}}
 
 def discover(source, inputs, state, *, requested=None, backfill=0, extras=False, nightly=False,
              replay=False, force=False, now=None, max_age_days=7):

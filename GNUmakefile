@@ -18,7 +18,7 @@ docs:
 fmt:
 	gofmt -s -w -e .
 
-test: testdiscovery testschema
+test: testdiscovery testschema testmaintenance
 	GOTOOLCHAIN=go1.25.8 TF_ACC_TERRAFORM_VERSION=1.14.0 go test -v -race -cover -timeout=120s ./...
 
 testdiscovery:
@@ -28,7 +28,13 @@ testschema:
 	python3 -m unittest discover -s tools/schema/normalize -v
 	python3 -m unittest discover -s tools/schema/validate -v
 
+testmaintenance:
+	python3 -m unittest discover -s tools/maintenance -v
+
+maintenance:
+	python3 tools/maintenance/maintain.py
+
 testacc:
 	python3 tools/chr/chr.py test
 
-.PHONY: fmt lint test testdiscovery testschema testacc build install generate docs
+.PHONY: fmt lint test testdiscovery testschema testmaintenance maintenance testacc build install generate docs
