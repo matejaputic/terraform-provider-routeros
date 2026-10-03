@@ -1,0 +1,77 @@
+{
+  "actionlint_version": "1.7.7",
+  "format": "routeros-capability-checkpoint-validation@1",
+  "go_race_mock_vet_build": "passed",
+  "limits": [
+    "static lifecycle triage only",
+    "delta gate checks adapted public contracts, not complete raw upstream semantics",
+    "no new corresponding-version live certification or publication",
+    "hosted durable restoration and review PR delivery unfinished"
+  ],
+  "live_acceptance_rerun": false,
+  "maintenance": {
+    "candidates": [
+      {
+        "checks": [
+          "official-generators",
+          "exact-specification",
+          "deterministic-generation",
+          "reviewed-contract-delta",
+          "tooling-tests",
+          "go-race-mock-tests",
+          "go-vet",
+          "go-build"
+        ],
+        "contract_delta_sha256": "1294fe7a5788961f23af18364d1f598b0211393a973aeafbaa8b400cc878a2f4",
+        "decision": "offline-compatible",
+        "generated_evidence_sha256": "ba9e73d893bdf5982df147de20e3b54a87f74f9c15e0a10985cd806746b30b32",
+        "key": "f9d49ff7197b2c09eb1db907d30c156119608e4b69b5a00f6563238baecc54c2",
+        "live_tested": false,
+        "published": false,
+        "seconds": 90.733,
+        "version": "7.25beta5"
+      },
+      {
+        "checks": [
+          "official-generators",
+          "exact-specification",
+          "deterministic-generation",
+          "reviewed-contract-delta",
+          "tooling-tests",
+          "go-race-mock-tests",
+          "go-vet",
+          "go-build"
+        ],
+        "contract_delta_sha256": "1294fe7a5788961f23af18364d1f598b0211393a973aeafbaa8b400cc878a2f4",
+        "decision": "offline-compatible",
+        "generated_evidence_sha256": "fc742b3ab1c5ba5bbf4c3226a50df11e4a84710bd1453fa68f355002cffaef2e",
+        "key": "b60223aac7bfadbd4f50322d3823fd22610364e749cac4edfcf41a6a2b2a1b54",
+        "live_tested": false,
+        "published": false,
+        "seconds": 76.186,
+        "version": "7.24.5"
+      }
+    ],
+    "first_outcome": "changed",
+    "repeat_outcome": "unchanged",
+    "upstream_sha": "adc39cdbb0a3062aa93cc7aff50ef1185a1c0b0a",
+    "verification_inputs_sha256": "9af1b9ac730a7a66af7a772707586f6004f713e5b7fd3fdac153cca9f8b440ef"
+  },
+  "matrix_counts": {
+    "families": {
+      "custom-or-unresolved": 32,
+      "hardware-update-only": 1,
+      "ordinary-collection-candidate": 146,
+      "singleton-candidate": 53
+    },
+    "implemented_subsets": 16,
+    "resource_constructors": 232,
+    "resource_names": 256
+  },
+  "matrix_determinism": "two byte-identical full recomputations; also checked by tooling tests",
+  "matrix_sha256": "8578dde8e77d76a87a206ee3d1b59c10fae372a003e4d593d64eba3d04e3045b",
+  "official_generation": "passed, unchanged public schemas/models",
+  "provider_revision": "17b7c0e015ce4b0f0693d9c965d5654929fdae2e",
+  "public_schema_changes": false,
+  "python_tooling_tests_passed": 90
+}
