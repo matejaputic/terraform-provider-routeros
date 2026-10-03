@@ -1,6 +1,6 @@
 # Resource coverage
 
-Runtime revision `framework-rest-preview-v10-batch-a`; **125 reviewed resource constructors**, zero data sources. The fixed 107 Batch A integrations are generated and registered, with focused mock/race and both pinned live lanes passing; VETH additionally passed both matching container-package lanes. Clean-source consolidated four-lane live suites and fresh immutable four-candidate maintenance replay/no-op passed at `c61b371`; hosted delivery remains in progress. [Exact expanded evidence](../../schemas/batch-a-expanded-validation.json). See the sole [constructor tracker and subset limitations](batch-a.md). The table below retains the original twenty-resource contract details.
+Runtime revision `framework-rest-preview-v10-batch-a`; **125 reviewed resource constructors**, zero data sources. The fixed 107 Batch A integrations are generated and registered, with focused mock/race and both pinned live lanes passing; VETH additionally passed both matching container-package lanes. Clean-source consolidated four-lane live suites and fresh immutable four-candidate maintenance replay/no-op passed at `c61b371`; normal push and [consolidated hosted verification](../../schemas/batch-a-hosted-validation.json) passed. The fixed Batch A integration milestone is complete. [Exact expanded evidence](../../schemas/batch-a-expanded-validation.json). See the sole [constructor tracker and subset limitations](batch-a.md). The table below retains the original twenty-resource contract details.
 
 | Resource | Implementation | Terraform mock CRUD/import | Live CHR CRUD/import |
 | --- | --- | --- | --- |
@@ -25,7 +25,7 @@ Runtime revision `framework-rest-preview-v10-batch-a`; **125 reviewed resource c
 | `routeros_ip_dhcp_relay` | Disabled-capable relay subset + IPv4 destinations | Pass | Pass (both base lanes, dirty-source focused suite) |
 | `routeros_ip_dns_record` | Named A/AAAA subset + replacement type | Pass | Pass (both base lanes, dirty-source focused suite) |
 
-All 107 Batch A constructors are integrated; final milestone delivery is not yet claimed. The original [two-resource focused evidence](../../schemas/batch-a-integration-validation.json) and following clean-source statements retain their historical scope.
+All 107 Batch A constructors are integrated and the fixed milestone delivery gates passed. The original [two-resource focused evidence](../../schemas/batch-a-integration-validation.json) and following clean-source statements retain their historical scope.
 
 The new option wave and all original regressions passed from clean revision `06d10a6` on both local pinned lanes; [wave evidence](../../schemas/dhcp-options-wave-validation.json) records exact bindings. The historical hosted evidence below remains specific to its original sixteen-resource revision.
 
@@ -71,4 +71,4 @@ Action applicability validates configuration intent separately from readback: Ro
 
 The harness adds an isolated second virtio NIC on a QEMU-only hub with **no host/network backend**, named `tf-port`. The management NIC remains untouched; existing `tf-test` is a disconnected bridge for IP tests. No KVM, privileged containers or host networking. Base uses only loopback REST/serial ports; explicitly requested container lanes briefly use a loopback password-SFTP provisioning port, then disable SSH. All test bridge/VLAN/list/pool names use `tf-coverage-`; cleanup verifies owned records and then destroys the entire guest/container, credentials and mutable disk even after test failures.
 
-Next work is the consolidated Batch A delivery gate, not another inventory or small resource wave. Release infrastructure (generated-candidate acceptance and durable tested/published receipts) remains separate unfinished work. Hardware/Batch B, unlisted fields/actions, traffic behavior and SDK-state migration remain unexposed or uncertified. Singletons and SSH keys use their reviewed special lifecycles, never invented blanket CRUD.
+The fixed Batch A milestone is complete; there is no remaining inventory or small-wave substitute for this delivery. Release infrastructure (generated-candidate acceptance and durable tested/published receipts) remains separate unfinished work. Hardware/Batch B, unlisted fields/actions, traffic behavior and SDK-state migration remain unexposed or uncertified. Singletons and SSH keys use their reviewed special lifecycles, never invented blanket CRUD.

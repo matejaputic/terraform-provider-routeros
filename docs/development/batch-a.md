@@ -1,10 +1,12 @@
-# Batch A — 107 integrations, final delivery gates in progress
+# Batch A — 107-constructor milestone complete
 
 The fixed roster remains **107 distinct constructors** (88 collections and 19
 singletons); **125 public constructors** including the eighteen preserved baseline
 resources. Batch B's other 107 constructors remain unexposed. Aliases do not count
-twice. Final milestone completion is NOT claimed until clean-source consolidated
-live evidence, immutable maintenance replay/no-op and hosted verification complete.
+twice. The fixed Batch A integration milestone is complete: clean-source
+consolidated acceptance, immutable expanded maintenance replay/no-op, normal push
+and inspected consolidated hosted verification passed. Release publication and
+maintenance live-tested/published receipt automation remain separate unfinished work.
 
 **Local consolidated gates passed at clean source `c61b371`:** the complete
 125-resource suites passed on both pinned base lanes (VETH explicitly unavailable)
@@ -12,8 +14,12 @@ and both pinned `routeros+container` lanes. Four fresh immutable expanded
 maintenance candidates generated twice, passed all offline gates and produced
 `offline-compatible` contract deltas; the repeat was an intact four-candidate
 no-op. [Expanded exact bindings](../../schemas/batch-a-expanded-validation.json)
-separate source-test binary evidence from offline candidate binaries. Hosted
-verification remains pending the normal delivery push.
+separate source-test binary evidence from offline candidate binaries.
+[Hosted run 37156502451](https://github.com/matejaputic/terraform-provider-routeros/actions/runs/37156502451)
+passed all five jobs at `48d6b43`; all four hash/package-bound acceptance artifacts
+and cleanup steps were inspected. [Hosted bindings](../../schemas/batch-a-hosted-validation.json)
+retain the initial official-CDN acquisition timeouts and successful failed-lane
+rerun, without weakening any gate.
 
 ## Constructor-level implementation tracker
 

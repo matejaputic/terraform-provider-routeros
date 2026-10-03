@@ -156,7 +156,7 @@
     "test_pattern": "^TestAcc(IPAddress|Collections|DHCPRouting|DHCPOptions|DHCPRelay|DNSRecord|Singletons|BatchACollections|Firewall|FirewallFamilies)CHR$"
   },
   "format": "routeros-batch-a-expanded-validation@1",
-  "hosted_verification": "pending normal push and consolidated inspection",
+  "hosted_verification": {"conclusion": "success", "evidence": "schemas/batch-a-hosted-validation.json", "provider_revision": "48d6b43b2fa47cf4adc579cb9ccc0dab29ca36c6", "run_url": "https://github.com/matejaputic/terraform-provider-routeros/actions/runs/37156502451", "scope": "all five jobs and all four target-bound artifacts inspected; normal main push; configuration lifecycle only"},
   "integration_counts": {
     "baseline": 18,
     "batch_a": 107,

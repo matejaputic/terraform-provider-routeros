@@ -1,0 +1,745 @@
+{
+  "conclusion": "success",
+  "format": "routeros-batch-a-hosted-validation@1",
+  "inspection": "consolidated offline/deterministic generation/race/vet/build/format job plus four clean-source target/recipe/package-bound full configuration acceptance artifacts inspected; all owned-guest cleanup steps passed",
+  "jobs": [
+    {
+      "completedAt": "2026-10-03T22:15:50Z",
+      "conclusion": "success",
+      "databaseId": 111303813010,
+      "name": "CHR acceptance (7.25beta5 x86_64/routeros+container)",
+      "startedAt": "2026-10-03T22:09:45Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-10-03T22:09:47Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-10-03T22:09:46Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:09:48Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "number": 2,
+          "startedAt": "2026-10-03T22:09:47Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:10:01Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e",
+          "number": 3,
+          "startedAt": "2026-10-03T22:09:48Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:10:02Z",
+          "conclusion": "success",
+          "name": "Run hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e",
+          "number": 4,
+          "startedAt": "2026-10-03T22:10:01Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:10:02Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548",
+          "number": 5,
+          "startedAt": "2026-10-03T22:10:02Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:15:47Z",
+          "conclusion": "success",
+          "name": "Disposable pinned-version CHR full reviewed-resource acceptance",
+          "number": 6,
+          "startedAt": "2026-10-03T22:10:02Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:15:47Z",
+          "conclusion": "success",
+          "name": "Ensure owned guest, credentials and mutable disk are removed",
+          "number": 7,
+          "startedAt": "2026-10-03T22:15:47Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:15:48Z",
+          "conclusion": "success",
+          "name": "Retain only redacted target provenance (not credentials or serial buffers)",
+          "number": 8,
+          "startedAt": "2026-10-03T22:15:47Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:15:48Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548",
+          "number": 14,
+          "startedAt": "2026-10-03T22:15:48Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:15:48Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e",
+          "number": 15,
+          "startedAt": "2026-10-03T22:15:48Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:15:48Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "number": 16,
+          "startedAt": "2026-10-03T22:15:48Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:15:49Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 17,
+          "startedAt": "2026-10-03T22:15:48Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/matejaputic/terraform-provider-routeros/actions/runs/37156502451/job/111303813010"
+    },
+    {
+      "completedAt": "2026-10-03T22:16:23Z",
+      "conclusion": "success",
+      "databaseId": 111303813060,
+      "name": "CHR acceptance (7.24.5 x86_64/routeros+container)",
+      "startedAt": "2026-10-03T22:09:45Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-10-03T22:09:49Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-10-03T22:09:46Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:09:50Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "number": 2,
+          "startedAt": "2026-10-03T22:09:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:10:04Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e",
+          "number": 3,
+          "startedAt": "2026-10-03T22:09:50Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:10:05Z",
+          "conclusion": "success",
+          "name": "Run hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e",
+          "number": 4,
+          "startedAt": "2026-10-03T22:10:04Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:10:05Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548",
+          "number": 5,
+          "startedAt": "2026-10-03T22:10:05Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:16:19Z",
+          "conclusion": "success",
+          "name": "Disposable pinned-version CHR full reviewed-resource acceptance",
+          "number": 6,
+          "startedAt": "2026-10-03T22:10:05Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:16:19Z",
+          "conclusion": "success",
+          "name": "Ensure owned guest, credentials and mutable disk are removed",
+          "number": 7,
+          "startedAt": "2026-10-03T22:16:19Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:16:20Z",
+          "conclusion": "success",
+          "name": "Retain only redacted target provenance (not credentials or serial buffers)",
+          "number": 8,
+          "startedAt": "2026-10-03T22:16:19Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:16:20Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548",
+          "number": 14,
+          "startedAt": "2026-10-03T22:16:20Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:16:21Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e",
+          "number": 15,
+          "startedAt": "2026-10-03T22:16:20Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:16:21Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "number": 16,
+          "startedAt": "2026-10-03T22:16:21Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:16:21Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 17,
+          "startedAt": "2026-10-03T22:16:21Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/matejaputic/terraform-provider-routeros/actions/runs/37156502451/job/111303813060"
+    },
+    {
+      "completedAt": "2026-10-03T22:04:47Z",
+      "conclusion": "success",
+      "databaseId": 111303813356,
+      "name": "CHR acceptance (7.24.5 x86_64/base)",
+      "startedAt": "2026-10-03T21:58:54Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-10-03T21:58:56Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-10-03T21:58:55Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T21:58:57Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "number": 2,
+          "startedAt": "2026-10-03T21:58:56Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T21:59:09Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e",
+          "number": 3,
+          "startedAt": "2026-10-03T21:58:57Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T21:59:10Z",
+          "conclusion": "success",
+          "name": "Run hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e",
+          "number": 4,
+          "startedAt": "2026-10-03T21:59:09Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T21:59:10Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548",
+          "number": 5,
+          "startedAt": "2026-10-03T21:59:10Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:04:43Z",
+          "conclusion": "success",
+          "name": "Disposable pinned-version CHR full reviewed-resource acceptance",
+          "number": 6,
+          "startedAt": "2026-10-03T21:59:10Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:04:44Z",
+          "conclusion": "success",
+          "name": "Ensure owned guest, credentials and mutable disk are removed",
+          "number": 7,
+          "startedAt": "2026-10-03T22:04:43Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:04:44Z",
+          "conclusion": "success",
+          "name": "Retain only redacted target provenance (not credentials or serial buffers)",
+          "number": 8,
+          "startedAt": "2026-10-03T22:04:44Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:04:44Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548",
+          "number": 14,
+          "startedAt": "2026-10-03T22:04:44Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:04:45Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e",
+          "number": 15,
+          "startedAt": "2026-10-03T22:04:44Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:04:45Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "number": 16,
+          "startedAt": "2026-10-03T22:04:45Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:04:45Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 17,
+          "startedAt": "2026-10-03T22:04:45Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/matejaputic/terraform-provider-routeros/actions/runs/37156502451/job/111303813356"
+    },
+    {
+      "completedAt": "2026-10-03T22:08:13Z",
+      "conclusion": "success",
+      "databaseId": 111303813466,
+      "name": "CHR acceptance (7.25beta5 x86_64/base)",
+      "startedAt": "2026-10-03T21:58:54Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-10-03T21:58:57Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-10-03T21:58:55Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T21:58:58Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "number": 2,
+          "startedAt": "2026-10-03T21:58:57Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T21:59:12Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e",
+          "number": 3,
+          "startedAt": "2026-10-03T21:58:58Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T21:59:13Z",
+          "conclusion": "success",
+          "name": "Run hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e",
+          "number": 4,
+          "startedAt": "2026-10-03T21:59:12Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T21:59:13Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548",
+          "number": 5,
+          "startedAt": "2026-10-03T21:59:13Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:08:09Z",
+          "conclusion": "success",
+          "name": "Disposable pinned-version CHR full reviewed-resource acceptance",
+          "number": 6,
+          "startedAt": "2026-10-03T21:59:13Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:08:10Z",
+          "conclusion": "success",
+          "name": "Ensure owned guest, credentials and mutable disk are removed",
+          "number": 7,
+          "startedAt": "2026-10-03T22:08:09Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:08:10Z",
+          "conclusion": "success",
+          "name": "Retain only redacted target provenance (not credentials or serial buffers)",
+          "number": 8,
+          "startedAt": "2026-10-03T22:08:10Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:08:11Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548",
+          "number": 14,
+          "startedAt": "2026-10-03T22:08:10Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:08:11Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e",
+          "number": 15,
+          "startedAt": "2026-10-03T22:08:11Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:08:11Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "number": 16,
+          "startedAt": "2026-10-03T22:08:11Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T22:08:11Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 17,
+          "startedAt": "2026-10-03T22:08:11Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/matejaputic/terraform-provider-routeros/actions/runs/37156502451/job/111303813466"
+    },
+    {
+      "completedAt": "2026-10-03T21:58:52Z",
+      "conclusion": "success",
+      "databaseId": 111303836178,
+      "name": "verify",
+      "startedAt": "2026-10-03T21:52:26Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-10-03T21:52:29Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-10-03T21:52:27Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T21:52:30Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "number": 2,
+          "startedAt": "2026-10-03T21:52:29Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T21:52:39Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e",
+          "number": 3,
+          "startedAt": "2026-10-03T21:52:30Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T21:52:40Z",
+          "conclusion": "success",
+          "name": "Run hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e",
+          "number": 4,
+          "startedAt": "2026-10-03T21:52:39Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T21:52:40Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548",
+          "number": 5,
+          "startedAt": "2026-10-03T21:52:40Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T21:53:13Z",
+          "conclusion": "success",
+          "name": "Offline discovery, adaptation and independent specification gates",
+          "number": 6,
+          "startedAt": "2026-10-03T21:52:40Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T21:53:55Z",
+          "conclusion": "success",
+          "name": "Deterministic official generation",
+          "number": 7,
+          "startedAt": "2026-10-03T21:53:13Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T21:58:20Z",
+          "conclusion": "success",
+          "name": "Unit and mock Terraform lifecycle tests (not live acceptance)",
+          "number": 8,
+          "startedAt": "2026-10-03T21:53:55Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T21:58:42Z",
+          "conclusion": "success",
+          "name": "Run go vet ./...",
+          "number": 9,
+          "startedAt": "2026-10-03T21:58:20Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T21:58:43Z",
+          "conclusion": "success",
+          "name": "Run go build .",
+          "number": 10,
+          "startedAt": "2026-10-03T21:58:42Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T21:58:43Z",
+          "conclusion": "success",
+          "name": "Run terraform fmt -check -recursive examples",
+          "number": 11,
+          "startedAt": "2026-10-03T21:58:43Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T21:58:43Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548",
+          "number": 20,
+          "startedAt": "2026-10-03T21:58:43Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T21:58:49Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e",
+          "number": 21,
+          "startedAt": "2026-10-03T21:58:43Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T21:58:49Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "number": 22,
+          "startedAt": "2026-10-03T21:58:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-03T21:58:49Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 23,
+          "startedAt": "2026-10-03T21:58:49Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/matejaputic/terraform-provider-routeros/actions/runs/37156502451/job/111303836178"
+    }
+  ],
+  "lanes": [
+    {
+      "acceptance_evidence_sha256": "7ddd863896a477d9febf682a31376af0e7b9c55bbb79ae6146a82de21ade03e5",
+      "artifact": "chr-7.24.5-base-37156502451-1",
+      "evidence": {
+        "architecture": "x86_64",
+        "flavor": "base",
+        "format": "routeros-chr-acceptance@1",
+        "limitations": "configuration lifecycle only; no traffic processing or release binary verification",
+        "provider_revision": "48d6b43b2fa47cf4adc579cb9ccc0dab29ca36c6",
+        "recipes_sha256": "66e454ac48fcedfd25aaea1885f584abef67229f2dfbcee79d6cebf8f365eb31",
+        "source_tree_clean": true,
+        "success": true,
+        "target_sha256": "51a4cb199ed42ca32dee494530b4ec9c658812e76d6d46b40ec23b5a29d42f23",
+        "terraform_version": "1.14.0",
+        "test_pattern": "^TestAcc(IPAddress|Collections|DHCPRouting|DHCPOptions|DHCPRelay|DNSRecord|Singletons|BatchACollections|Firewall|FirewallFamilies)CHR$",
+        "version": "7.24.5"
+      },
+      "target": {
+        "accelerator": "tcg",
+        "architecture-name": "x86_64",
+        "archive_sha256": "16f07222a3213352c9c4fbea4f4dec6a8ffb78fdc0fa5e398c23103ed357c6eb",
+        "board-name": "CHR QEMU Standard PC (i440FX + PIIX, 1996)",
+        "disk_sha256": "e4caf173aceb497433c5fc285bffee09c1e6761dfe0e658a2b178970249fc2d2",
+        "engine": "GitHub-hosted Docker",
+        "package_flavor": "base",
+        "packages": [
+          {
+            "disabled": "false",
+            "name": "routeros",
+            "version": "7.24.5"
+          }
+        ],
+        "recipes_sha256": "66e454ac48fcedfd25aaea1885f584abef67229f2dfbcee79d6cebf8f365eb31",
+        "version": "7.24.5 (stable)"
+      }
+    },
+    {
+      "acceptance_evidence_sha256": "8bf139ca522c8101378194bf8d0c974a9e205d089159a258c387ed8c100c1dca",
+      "artifact": "chr-7.24.5-routeros+container-37156502451-2",
+      "evidence": {
+        "architecture": "x86_64",
+        "flavor": "routeros+container",
+        "format": "routeros-chr-acceptance@1",
+        "limitations": "configuration lifecycle only; no traffic processing or release binary verification",
+        "provider_revision": "48d6b43b2fa47cf4adc579cb9ccc0dab29ca36c6",
+        "recipes_sha256": "66e454ac48fcedfd25aaea1885f584abef67229f2dfbcee79d6cebf8f365eb31",
+        "source_tree_clean": true,
+        "success": true,
+        "target_sha256": "3e16630eb041960c4e64f75bd69c1c1fc7eba82ff9afb8ba68e66ba5fcf2c943",
+        "terraform_version": "1.14.0",
+        "test_pattern": "^TestAcc(IPAddress|Collections|DHCPRouting|DHCPOptions|DHCPRelay|DNSRecord|Singletons|BatchACollections|Firewall|FirewallFamilies)CHR$",
+        "version": "7.24.5"
+      },
+      "target": {
+        "accelerator": "tcg",
+        "architecture-name": "x86_64",
+        "archive_sha256": "16f07222a3213352c9c4fbea4f4dec6a8ffb78fdc0fa5e398c23103ed357c6eb",
+        "board-name": "CHR QEMU Standard PC (i440FX + PIIX, 1996)",
+        "container_acquisition": {
+          "archive_sha256": "6acfd80b3f6edfd23cea14bfcdbbb183a6258acb3aedb3d7b0a23f60a19e51c6",
+          "installer": "owned password SFTP; verified RouterOS package installation on reboot",
+          "member": "container-7.24.5.npk",
+          "package_bytes": 1175697,
+          "package_sha256": "7515c52499bd11b063517c7b48a6553519976098040d9dec67f6bf087876a3c9",
+          "recipes_sha256": "61b8e91b88f675d50a3d24085afe4e7cbca7a98d9f2805b08073c097b229d930",
+          "url": "https://download.mikrotik.com/routeros/7.24.5/all_packages-x86-7.24.5.zip"
+        },
+        "disk_sha256": "e4caf173aceb497433c5fc285bffee09c1e6761dfe0e658a2b178970249fc2d2",
+        "engine": "GitHub-hosted Docker",
+        "package_flavor": "routeros+container",
+        "packages": [
+          {
+            "disabled": "false",
+            "name": "container",
+            "version": "7.24.5"
+          },
+          {
+            "disabled": "false",
+            "name": "routeros",
+            "version": "7.24.5"
+          }
+        ],
+        "recipes_sha256": "66e454ac48fcedfd25aaea1885f584abef67229f2dfbcee79d6cebf8f365eb31",
+        "version": "7.24.5 (stable)"
+      }
+    },
+    {
+      "acceptance_evidence_sha256": "e45a7f6cfaf47791672381374cfd2ad23f64ebcf8537514c1eb9be4608a3c779",
+      "artifact": "chr-7.25beta5-base-37156502451-1",
+      "evidence": {
+        "architecture": "x86_64",
+        "flavor": "base",
+        "format": "routeros-chr-acceptance@1",
+        "limitations": "configuration lifecycle only; no traffic processing or release binary verification",
+        "provider_revision": "48d6b43b2fa47cf4adc579cb9ccc0dab29ca36c6",
+        "recipes_sha256": "66e454ac48fcedfd25aaea1885f584abef67229f2dfbcee79d6cebf8f365eb31",
+        "source_tree_clean": true,
+        "success": true,
+        "target_sha256": "ac2303cac1cbfda7fcc01931bf09ed2b22de1f5e187da8965e36be838dc36c61",
+        "terraform_version": "1.14.0",
+        "test_pattern": "^TestAcc(IPAddress|Collections|DHCPRouting|DHCPOptions|DHCPRelay|DNSRecord|Singletons|BatchACollections|Firewall|FirewallFamilies)CHR$",
+        "version": "7.25beta5"
+      },
+      "target": {
+        "accelerator": "tcg",
+        "architecture-name": "x86_64",
+        "archive_sha256": "5b61cbbb457755985ae334a99cc4455c05d4bf6b966e56c3d8734c76b629130c",
+        "board-name": "CHR QEMU Standard PC (i440FX + PIIX, 1996)",
+        "disk_sha256": "0894045d5386188b685dcff78740fa0980022a95d738a608df608ee1b920f228",
+        "engine": "GitHub-hosted Docker",
+        "package_flavor": "base",
+        "packages": [
+          {
+            "disabled": "false",
+            "name": "routeros",
+            "version": "7.25beta5"
+          }
+        ],
+        "recipes_sha256": "66e454ac48fcedfd25aaea1885f584abef67229f2dfbcee79d6cebf8f365eb31",
+        "version": "7.25beta5"
+      }
+    },
+    {
+      "acceptance_evidence_sha256": "363e57223312de54b07711b9d132cb32ffbc57cd9981b7d92ce7402be129c114",
+      "artifact": "chr-7.25beta5-routeros+container-37156502451-2",
+      "evidence": {
+        "architecture": "x86_64",
+        "flavor": "routeros+container",
+        "format": "routeros-chr-acceptance@1",
+        "limitations": "configuration lifecycle only; no traffic processing or release binary verification",
+        "provider_revision": "48d6b43b2fa47cf4adc579cb9ccc0dab29ca36c6",
+        "recipes_sha256": "66e454ac48fcedfd25aaea1885f584abef67229f2dfbcee79d6cebf8f365eb31",
+        "source_tree_clean": true,
+        "success": true,
+        "target_sha256": "b46fe385a31d108e950e5f1bbcf8750da6dd99e18cc16cff9ace167cb5241539",
+        "terraform_version": "1.14.0",
+        "test_pattern": "^TestAcc(IPAddress|Collections|DHCPRouting|DHCPOptions|DHCPRelay|DNSRecord|Singletons|BatchACollections|Firewall|FirewallFamilies)CHR$",
+        "version": "7.25beta5"
+      },
+      "target": {
+        "accelerator": "tcg",
+        "architecture-name": "x86_64",
+        "archive_sha256": "5b61cbbb457755985ae334a99cc4455c05d4bf6b966e56c3d8734c76b629130c",
+        "board-name": "CHR QEMU Standard PC (i440FX + PIIX, 1996)",
+        "container_acquisition": {
+          "archive_sha256": "ae52ae5c917e9070afdd479f375f5923f429e015118dfe67e907e65af26ffa9d",
+          "installer": "owned password SFTP; verified RouterOS package installation on reboot",
+          "member": "container-7.25beta5.npk",
+          "package_bytes": 1142929,
+          "package_sha256": "0e18d644c273155ceeeed838d6eb85f7085f5391af82fd058844b82f4afe6750",
+          "recipes_sha256": "61b8e91b88f675d50a3d24085afe4e7cbca7a98d9f2805b08073c097b229d930",
+          "url": "https://download.mikrotik.com/routeros/7.25beta5/all_packages-x86-7.25beta5.zip"
+        },
+        "disk_sha256": "0894045d5386188b685dcff78740fa0980022a95d738a608df608ee1b920f228",
+        "engine": "GitHub-hosted Docker",
+        "package_flavor": "routeros+container",
+        "packages": [
+          {
+            "disabled": "false",
+            "name": "routeros",
+            "version": "7.25beta5"
+          },
+          {
+            "disabled": "false",
+            "name": "container",
+            "version": "7.25beta5"
+          }
+        ],
+        "recipes_sha256": "66e454ac48fcedfd25aaea1885f584abef67229f2dfbcee79d6cebf8f365eb31",
+        "version": "7.25beta5"
+      }
+    }
+  ],
+  "limitations": "source-configuration lifecycle evidence only; not maintenance-candidate live acceptance, release publication, hardware/traffic or SDK-state migration certification",
+  "provider_revision": "48d6b43b2fa47cf4adc579cb9ccc0dab29ca36c6",
+  "rerun": "attempt 1 container lanes failed before boot on official CDN acquisition timeouts; failed lanes rerun successfully in attempt 2; no validation gate weakened",
+  "run_id": 37156502451,
+  "run_url": "https://github.com/matejaputic/terraform-provider-routeros/actions/runs/37156502451"
+}
