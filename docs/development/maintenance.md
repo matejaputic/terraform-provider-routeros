@@ -45,7 +45,7 @@ The producer now applies [`semantic-identity-v1`](capabilities.md) after determi
 
 ## Scheduled workflow
 
-`.github/workflows/maintenance.yml` runs daily at 07:30 UTC and by dispatch. Upstream inputs enter through environment variables/argument arrays, not interpolated shell code. It has read-only repository permissions, pinned actions/tools, bounded job/command runtimes and no signing, VM or router credentials. It never writes generated candidates into the source branch or performs releases. Failed-run evidence is retained too.
+`.github/workflows/maintenance.yml` runs weekly on Mondays at 07:30 UTC and by dispatch. The weekly cadence reduces scheduled Actions usage; manual dispatch remains available for earlier checks. Upstream inputs enter through environment variables/argument arrays, not interpolated shell code. It has read-only repository permissions, pinned actions/tools, bounded job/command runtimes and no signing, VM or router credentials. It never writes generated candidates into the source branch or performs releases. Failed-run evidence is retained too.
 
 GitHub artifacts retain raw inputs, checkpoints, schemas/models, source archives, offline candidate binaries and summaries for **90 days**. Only the dedicated `.local/maintenance/` paths are uploaded; `.local/chr/` is never uploaded. These are **offline candidate artifacts**, not tested-latest releases. The initial implementation was pushed on 2026-10-03; hosted provider CI succeeded. Maintenance and new recovery-job conclusions are recorded separately in the [hosted checklist](hosted-checkpoint.md), not inferred from local passes.
 
