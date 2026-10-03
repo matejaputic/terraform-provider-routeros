@@ -1,0 +1,58 @@
+{
+  "candidates": [
+    {
+      "architecture": "x86",
+      "flavor": "base",
+      "generated_evidence_sha256": "face8c541d500997b4ad02021488f87a8ec6f9f06a6db0172dc84f37e0d0c492",
+      "generation_and_verification_seconds": 76.62,
+      "key": "af1ac9782119345767627279cd3e2ef79070c9fbe208e18288a60928a872f6bf",
+      "live_tested": false,
+      "offline_checks": [
+        "official-generators",
+        "exact-specification",
+        "deterministic-generation",
+        "tooling-tests",
+        "go-race-mock-tests",
+        "go-vet",
+        "go-build"
+      ],
+      "published": false,
+      "raw_input_sha256": "63e6923d4191a6337833db84ef2513a1b804714acb4f289a0ff747110e8abdcd",
+      "version": "7.25beta5"
+    },
+    {
+      "architecture": "x86",
+      "flavor": "base",
+      "generated_evidence_sha256": "f0554215919e3b57b83fd49035ff38780fbc34547c58e697a6aecc1518c44afa",
+      "generation_and_verification_seconds": 75.908,
+      "key": "19ec74c518f851069e35b72f593269286f19e7258d4a525c83c60658f07f6849",
+      "live_tested": false,
+      "offline_checks": [
+        "official-generators",
+        "exact-specification",
+        "deterministic-generation",
+        "tooling-tests",
+        "go-race-mock-tests",
+        "go-vet",
+        "go-build"
+      ],
+      "published": false,
+      "raw_input_sha256": "0d9530302562663f095eda82b4e370867b17d910576d0a9aea919c2247ca7fbe",
+      "version": "7.24.5"
+    }
+  ],
+  "first_outcome": "changed",
+  "format": "routeros-maintenance-validation@1",
+  "hosted_workflow_execution": "not yet observed; actionlint v1.7.7 passed",
+  "provider_revision": "70015da08bd5343dd5d60bf224f81672f92bda3a",
+  "repeat_outcome": "unchanged",
+  "repeat_seconds": 1.088,
+  "source_tree_changed_by_run": false,
+  "stages_advanced": [
+    "discovered",
+    "generated"
+  ],
+  "tested_or_published_receipts": false,
+  "upstream_sha": "adc39cdbb0a3062aa93cc7aff50ef1185a1c0b0a",
+  "verification_inputs_sha256": "f64cef0f3b8582d987075e017100734f2a2329ca5f8eff28f3c9301b4ef99ad3"
+}
