@@ -52,6 +52,21 @@ jobs:
           if [[ "$INCLUDE_EXTRA" == true ]]; then args+=(--extra); fi
           if [[ "$INCLUDE_NIGHTLY" == true ]]; then args+=(--nightly); fi
           python3 tools/maintenance/maintain.py "${args[@]}"
+      - name: Export verified offline recovery bundle
+        run: |
+          mkdir -p .local/recovery
+          python3 tools/maintenance/bundle.py export \
+            --output .local/maintenance --archive .local/recovery/bundle.tar \
+            > .local/recovery/bundle.sha256
+          cp .local/maintenance/latest-summary.json .local/recovery/summary.json
+      - name: Transfer recovery bundle (not permanent storage)
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: recovery-${{ github.run_id }}-${{ github.run_attempt }}
+          path: .local/recovery/
+          include-hidden-files: true
+          retention-days: 90
+          if-no-files-found: error
       - name: Summarize actual stage coverage (never infer live compatibility)
         if: always()
         shell: bash
@@ -85,3 +100,39 @@ jobs:
           # Only the dedicated offline maintenance tree, never .local/chr credentials/disks.
           include-hidden-files: true
           retention-days: 90
+  recovery-proof:
+    needs: candidates
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548 # v6.1.0
+        with:
+          python-version: '3.14.7'
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: recovery-${{ github.run_id }}-${{ github.run_attempt }}
+          path: .local/recovery
+      - name: Independently restore and verify unchanged immutable discovery on a fresh runner
+        run: |
+          python3 - <<'PY'
+          import json, sys
+          from pathlib import Path
+          sys.path.insert(0, 'tools/maintenance')
+          import bundle, maintain
+          transfer = Path('.local/recovery')
+          output = Path('.local/restored')
+          bundle.restore(transfer / 'bundle.tar', output,
+                         (transfer / 'bundle.sha256').read_text().strip())
+          previous = json.loads((transfer / 'summary.json').read_text())
+          manifest = next((output / 'runs' / previous['run_id'] / 'discovery').glob('manifest.json'))
+          saved = json.loads(manifest.read_text())
+          result = maintain.reconcile(maintain.ROOT, output, sha=saved['upstream_sha'],
+                                     replay=saved['replay'],
+                                     extra=any(c['flavor'] == 'extra' for c in saved['candidates']),
+                                     nightly=any(c['channel'] == 'nightly' for c in saved['candidates']))
+          maintain.require(result['outcome'] == 'unchanged', 'restored immutable run was not unchanged')
+          print('Verified fresh-runner offline restoration and no-op; no live or publication certification.')
+          PY

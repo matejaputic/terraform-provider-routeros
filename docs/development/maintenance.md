@@ -47,7 +47,22 @@ The producer now applies [`semantic-identity-v1`](capabilities.md) after determi
 
 `.github/workflows/maintenance.yml` runs daily at 07:30 UTC and by dispatch. Upstream inputs enter through environment variables/argument arrays, not interpolated shell code. It has read-only repository permissions, pinned actions/tools, bounded job/command runtimes and no signing, VM or router credentials. It never writes generated candidates into the source branch or performs releases. Failed-run evidence is retained too.
 
-GitHub artifacts retain raw inputs, checkpoints, schemas/models, source archives, offline candidate binaries and summaries for **90 days**. Only the dedicated `.local/maintenance/` paths are uploaded; `.local/chr/` is never uploaded. These are **offline candidate artifacts**, not tested-latest releases. The workflow definition is locally reviewed; hosted execution requires pushing this branch and observing the Actions run.
+GitHub artifacts retain raw inputs, checkpoints, schemas/models, source archives, offline candidate binaries and summaries for **90 days**. Only the dedicated `.local/maintenance/` paths are uploaded; `.local/chr/` is never uploaded. These are **offline candidate artifacts**, not tested-latest releases. The initial implementation was pushed on 2026-10-03; hosted provider CI succeeded. Maintenance and new recovery-job conclusions are recorded separately in the [hosted checklist](hosted-checkpoint.md), not inferred from local passes.
+
+### Verified recovery archives
+
+`tools/maintenance/bundle.py` exports deterministic offline bundles, excluding runtime logs, unreceipted partial candidates and CHR credentials/disks. It retains checkpoints, successful candidate artifacts and exact discovery manifests/raw inputs. Export independently verifies candidate identities, snapshot/index/metadata hashes, checkpoint identities and generated evidence inventories. Existing archive names are never replaced.
+
+```sh
+python3 tools/maintenance/bundle.py export --output .local/maintenance \
+  --archive .local/recovery/bundle.tar > .local/recovery/bundle.sha256
+python3 tools/maintenance/bundle.py restore --output .local/restored \
+  --archive .local/recovery/bundle.tar --sha256 '<trusted digest>'
+```
+
+Create `.local/recovery` before redirecting output. Restore requires a new directory and an externally trusted archive SHA256. It rejects traversal, links, duplicate members, oversized expansion, inventory corruption, missing snapshots and unsupported tested/published receipts. Verification happens in an isolated temporary directory before exposing checkpoints and bundles together. Restored generated proofs keep their original producer/verification bindings; subsequent fresh discovery must still pass current producer and verification-input gates. Hashes do not authenticate their own origin: a digest fetched from the same unauthenticated source is insufficient.
+
+The maintenance workflow transfers this bundle to a separate runner for an independent restore plus fresh immutable-discovery/no-op check. This is a recovery demonstration, **not durable cross-run storage**: Actions artifacts still expire. Ten additional tests cover deterministic/immutable export, fresh restore/reuse, stale verification, missing/modified evidence and raw snapshots, unsupported stages, malicious tar members and tampering. See the [hosted checkpoint checklist and human-only decision boundary](hosted-checkpoint.md).
 
 ### Explicit remaining work
 
