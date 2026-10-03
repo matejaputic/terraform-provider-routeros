@@ -9,6 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
+	"github.com/matejaputic/terraform-provider-routeros/internal/catalog"
 	"github.com/matejaputic/terraform-provider-routeros/internal/generated"
 	"net/http"
 	"net/http/httptest"
@@ -54,8 +55,13 @@ func TestProtocolSchema(t *testing.T) {
 			t.Fatal(d.Summary, d.Detail)
 		}
 	}
-	if len(resp.ResourceSchemas) != 16 || resp.ResourceSchemas["routeros_ip_address"] == nil {
+	if len(resp.ResourceSchemas) != 1+len(catalog.Collections()) || resp.ResourceSchemas["routeros_ip_address"] == nil {
 		t.Fatal("unexpected resource set")
+	}
+	for _, policy := range catalog.Collections() {
+		if resp.ResourceSchemas["routeros_"+policy.Name] == nil {
+			t.Fatalf("missing reviewed resource %s", policy.Name)
+		}
 	}
 	if len(resp.DataSourceSchemas) != 0 {
 		t.Fatal("unexpected data source")

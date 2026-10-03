@@ -266,7 +266,7 @@ def test(version=VERSION):
     env = os.environ.copy()
     env.update(ROS_HOSTURL=credentials['hosturl'], ROS_USERNAME=credentials['username'], ROS_PASSWORD=credentials['password'],
                ROS_TEST_DISPOSABLE='1', ROS_TEST_VERSION=version, TF_ACC='1', TF_ACC_TERRAFORM_VERSION='1.14.0', GOTOOLCHAIN='go1.25.8')
-    pattern = '^TestAcc(IPAddress|Collections|DHCPRouting|Firewall|FirewallFamilies)CHR$'
+    pattern = '^TestAcc(IPAddress|Collections|DHCPRouting|DHCPOptions|Firewall|FirewallFamilies)CHR$'
     run('go', 'test', './internal/provider', '-run', pattern, '-count=1', '-v', '-timeout', '5m', env=env)
     evidence = {'format': 'routeros-chr-acceptance@1', 'success': True,
                 'provider_revision': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),

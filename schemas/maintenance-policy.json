@@ -1,6 +1,6 @@
 {
   "automatic_offline_candidate_rule": "semantic identity after approved normalization; only field provenance and identity-list order may differ",
-  "baseline_descriptor_sha256": "4263282d01f399acbab13bef1220a60275f02fd11c3b7c2c2f4bac2c7b3f51bf",
+  "baseline_descriptor_sha256": "459ca116e82a30e17bcefe322a6c97bcbd03dd13210a5ee23e6b7509337ecd37",
   "format": "routeros-maintenance-policy@1",
   "lifecycle_path_id_codec_type_mode_default_validator_sensitivity_replacement_changes": "review-required",
   "novel_keys": "review-required",

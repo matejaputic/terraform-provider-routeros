@@ -194,6 +194,9 @@ func (r *collectionResource) validate(ctx context.Context, values map[string]att
 			if f.Name == "netmask" && (n < 0 || n > 32) {
 				return fmt.Errorf("netmask must be 0 to 32")
 			}
+			if (r.policy.Name == "ip_dhcp_client_option" || r.policy.Name == "ip_dhcp_server_option") && f.Name == "code" && (n < 1 || n > 254) {
+				return fmt.Errorf("DHCP option code must be 1 to 254")
+			}
 			if f.Name == "mtu" && (n < 68 || n > 65535) {
 				return fmt.Errorf("mtu must be 68 to 65535")
 			}
@@ -439,7 +442,12 @@ func (r *collectionResource) refresh(ctx context.Context, values map[string]attr
 	}
 	// Importing built-in/dynamic collections could otherwise delete hardware or
 	// system-owned records through ordinary CRUD. These objects are not managed.
-	for _, key := range []string{"builtin", "dynamic"} {
+	ownershipFlags := []string{"builtin", "dynamic"}
+	if r.policy.Name == "ip_dhcp_client_option" {
+		// RouterOS marks its default DHCP client options with this distinct flag.
+		ownershipFlags = append(ownershipFlags, "default")
+	}
+	for _, key := range ownershipFlags {
 		if v, exists := rows[0][key]; exists {
 			b, e := strictWireBool(v)
 			if e != nil {

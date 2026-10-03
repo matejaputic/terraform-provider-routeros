@@ -5,7 +5,7 @@ Run from the provider root. Python standard library adapter + official pinned Ha
 ## Commands
 
 ```sh
-# Offline baseline: pinned extracted sixteen-resource networking/DHCP/routing/firewall fixture.
+# Offline baseline: pinned extracted eighteen-resource networking/DHCP/routing/firewall fixture.
 bash tools/schema/generate.sh
 make testschema
 
@@ -44,13 +44,13 @@ Explicit `--input`/`--policy`/`--inspect` modes are developer artifact explorati
 
 The report is written last. `verify.py` binds all four artifacts to its hashes, detecting partial or tampered bundles before generation. Input validation failure changes none of these artifacts. An I/O failure can leave partial files, but they cannot pass the bundle gate. File writes are atomic and serialized by a POSIX lock.
 
-`generate.sh` stages official generator output, independently validates the Provider Code Specification, requires the exact sixteen Framework model/schema files, and only then replaces the specification/model. CLI exit success or warnings are **not** acceptance. Generated Go remains in `internal/generated/`; maintained Configure/CRUD/import code is not emitted or overwritten. Discovery stage receipts are not automatically advanced by this script; orchestration/evidence persistence belongs to Step 6.
+`generate.sh` stages official generator output, independently validates the Provider Code Specification, requires the exact declared Framework model/schema filenames (eighteen currently), rejecting omissions or substitutions even when counts match, and only then replaces the specification/model. CLI exit success or warnings are **not** acceptance. Generated Go remains in `internal/generated/`; maintained Configure/CRUD/import code is not emitted or overwritten. Discovery stage receipts are not automatically advanced by this script; orchestration/evidence persistence belongs to Step 6.
 
 ## Conservative adaptation policy
 
 - Resolve internal JSON-pointer refs, with bounds, cycle detection and no external fetches. Flatten supported object `allOf` recursively; union/array compositions and incompatible overlaps fail on approved input. Remove QueryOptions and command controls **before** resolving their unsupported unions.
 - Inventory complete collection PUT + item GET/PATCH/DELETE sets, create/update writable differences, pending enum fields and unsupported compositions. POST commands are separately excluded. Singleton/settings, hardware and incomplete/read-only endpoints remain deferred. Structural completeness is not lifecycle approval.
-- Sixteen resources are approved: IP address, bridge/bridge port, VLAN, interface list/member, IP pool, DHCP network/server/static lease, static route, permanent firewall address-list entries and reviewed ordered filter/NAT/mangle/raw rules. `generate.sh` always selects `--collections`; without that flag the standalone adapter retains the original IP-only exploration mode (not the complete provider artifact set). Unsupported unapproved endpoints are report findings, not partial public resources. Adding resources requires a reviewed policy, maintained lifecycle, registration and independent output/runtime gates.
+- Eighteen resources are approved: IP address, bridge/bridge port, VLAN, interface list/member, IP pool, DHCP network/server/static lease, static route, permanent firewall address-list entries and reviewed ordered filter/NAT/mangle/raw rules, and [DHCP client/server option subsets](../../../docs/development/dhcp-options-wave.md). `generate.sh` always selects `--collections`; without that flag the standalone adapter retains the original IP-only exploration mode (not the complete provider artifact set). Unsupported unapproved endpoints are report findings, not partial public resources. Adding resources requires a reviewed policy, maintained lifecycle, registration and independent output/runtime gates.
 - Remove `.query`, `.proplist`, `numbers`, `copy-from` and get-control state. Replace `.id` with one computed `id`; omit the item read's schema path parameter so the official extractor cannot invent a second ID. This is deliberately **schema-extraction** OpenAPI, not a REST routing contract. Wire metadata retains the ID path binding; runtime continues filtered collection GET for out-of-band deletion.
 - `schemas/ip-address-policy.json` is the reviewed reference/live exception catalog, now `ip-address-curated-v3`. Repair incomplete/empty read responses from those definitions. Retain catalog fields absent from crawls; inspect suggestions are version-bound but never authoritative types/defaults or automatic additions.
 - Required address/interface; optional+computed comment/disabled/network; computed ID, actual_interface, dynamic/invalid/slave/vrf. Preserve public booleans and reviewed yes/no codecs, validators and server-owned defaults. Type/boolean-domain drift, create-only approved fields without replacement policy and identifier collisions fail rather than silently changing contracts.
@@ -60,7 +60,7 @@ The report is written last. `verify.py` binds all four artifacts to its hashes, 
 
 ## Fixtures and evidence
 
-Six compact fixtures preserve the actual info/components and IP-address operation objects from committed restraml blobs at `adc39cdbb0a3062aa93cc7aff50ef1185a1c0b0a`. They are **extracted/reserialized fixtures**, not whole upstream byte copies; provenance records both full-source and fixture SHA256. Default generation is offline and uses the additional sixteen-resource stable/base fixture built by `build_collections.py`; its separate provenance binds the original source and extracted bytes. Networking policy lives in `internal/catalog/collections.json`, is embedded in runtime and included in producer fingerprints. Full snapshot mode stores the complete original bytes separately.
+Six compact fixtures preserve the actual info/components and IP-address operation objects from committed restraml blobs at `adc39cdbb0a3062aa93cc7aff50ef1185a1c0b0a`. They are **extracted/reserialized fixtures**, not whole upstream byte copies; provenance records both full-source and fixture SHA256. Default generation is offline and uses the additional eighteen-resource stable/base fixture built by `build_collections.py`; its separate provenance binds the original source and extracted bytes. Networking policy lives in `internal/catalog/collections.json`, is embedded in runtime and included in producer fingerprints. Full snapshot mode stores the complete original bytes separately.
 
 ```sh
 python3 tools/schema/normalize/fixtures/build.py --repository-dir ../restraml

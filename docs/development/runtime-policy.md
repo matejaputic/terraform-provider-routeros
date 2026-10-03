@@ -1,6 +1,6 @@
 # Maintained runtime policy (Step 4)
 
-Step 4 baseline revision: `framework-rest-preview-v3`. Superseded by `framework-rest-preview-v7` with [sixteen-resource networking/DHCP/routing/firewall coverage](coverage.md); the IP-specific guarantees below still apply. Step 4 originally registered only `routeros_ip_address`; no data sources, native API transport, singleton/hardware/order/async/action lifecycles or SDK-state migration claim.
+Step 4 baseline revision: `framework-rest-preview-v3`. Superseded by `framework-rest-preview-v8` with [eighteen-resource networking/DHCP/routing/firewall coverage](coverage.md); the IP-specific guarantees below still apply. Step 4 originally registered only `routeros_ip_address`; no data sources, native API transport, singleton/hardware/order/async/action lifecycles or SDK-state migration claim.
 
 ## REST and configuration
 

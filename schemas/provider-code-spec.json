@@ -352,6 +352,43 @@
 			}
 		},
 		{
+			"name": "ip_dhcp_client_option",
+			"schema": {
+				"attributes": [
+					{
+						"name": "code",
+						"int64": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "value",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "raw_value",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
 			"name": "ip_dhcp_server",
 			"schema": {
 				"attributes": [
@@ -536,6 +573,55 @@
 					},
 					{
 						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_dhcp_server_option",
+			"schema": {
+				"attributes": [
+					{
+						"name": "code",
+						"int64": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "force",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "value",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "raw_value",
 						"string": {
 							"computed_optional_required": "computed"
 						}

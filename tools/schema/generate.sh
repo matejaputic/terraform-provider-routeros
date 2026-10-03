@@ -17,11 +17,8 @@ tools/bin/tfplugingen-openapi generate --config schemas/generator-config.yml --o
 go run tools/schema/validate/main.go "$stage/provider-code-spec.json"
 mkdir -p "$stage/generated"
 tools/bin/tfplugingen-framework generate resources --input "$stage/provider-code-spec.json" --output "$stage/generated" --package generated
-test -f "$stage/generated/ip_address_resource_gen.go"
-test "$(find "$stage/generated" -type f -name '*.go' | wc -l | tr -d ' ')" = 16
-for name in interface_bridge interface_bridge_port interface_vlan interface_list interface_list_member ip_pool; do
- test -f "$stage/generated/${name}_resource_gen.go"
-done
+# Exact declared filenames, not a fixed count or partial initial-wave check.
+python3 tools/schema/validate/generated.py "$stage/generated"
 gofmt -w "$stage/generated"
 # Do not overwrite the last good specification/model with permissive CLI output.
 mv "$stage/provider-code-spec.json" schemas/provider-code-spec.json

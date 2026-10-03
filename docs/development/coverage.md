@@ -1,6 +1,6 @@
 # Resource coverage
 
-Runtime revision `framework-rest-preview-v7`; official generator models/schemas with maintained Framework lifecycles. Sixteen resources registered, zero data sources. Coverage is expanding in batches, not inferred from OpenAPI inventory.
+Runtime revision `framework-rest-preview-v8`; official generator models/schemas with maintained Framework lifecycles. Eighteen resources registered, zero data sources. Coverage is expanding in batches, not inferred from OpenAPI inventory.
 
 | Resource | Implementation | Terraform mock CRUD/import | Live CHR CRUD/import |
 | --- | --- | --- | --- |
@@ -20,12 +20,14 @@ Runtime revision `framework-rest-preview-v7`; official generator models/schemas 
 | `routeros_ip_firewall_nat` | Reviewed NAT targets/actions + explicit ordering | Pass | Pass |
 | `routeros_ip_firewall_mangle` | Connection/packet marking + explicit ordering | Pass | Pass |
 | `routeros_ip_firewall_raw` | Reviewed notrack/drop/basic actions + explicit ordering | Pass | Pass |
+| `routeros_ip_dhcp_client_option` | Reviewed option lifecycle + default-object guard | Pass | 7.24.5 development run passed; clean-revision lanes pending |
+| `routeros_ip_dhcp_server_option` | Reviewed option lifecycle + raw readback/force omission | Pass | 7.24.5 development run passed; clean-revision lanes pending |
 
 Original baseline live scope: disposable **RouterOS 7.24.5 x86_64/base CHR** on OrbStack Docker/QEMU TCG. At clean source revision `93d3527`, the complete five-suite/sixteen-resource configuration acceptance also passed on pinned **7.25beta5 x86_64/base**, locally and on isolated GitHub-hosted QEMU/TCG; the baseline passed again in both environments. [Hosted evidence](../../schemas/hosted-chr-validation.json) binds exact targets, enabled packages, image/recipe hashes and run URLs. This is source-revision lifecycle evidence, not proof for a newly generated maintenance candidate or released binary. No other version, architecture, extra package lane, native API transport or SDK-state migration is newly certified. Each resource exposes a reviewed field subset, **not every reference-provider field**. Read the individual schema docs; unknown attributes produce Terraform diagnostics rather than silent omissions.
 
 ## Maintained collection behavior
 
-`internal/catalog/collections.json` authorizes fifteen concrete collection paths and fields. This file is embedded in the runtime and bound into discovery producer fingerprints; schema inventory never authorizes registration. The snapshot adapter supports the reviewed string/bool/int64/string-list types, aliases, decimal/boolean/CSV codecs and name replacement. Official OpenAPI and Framework generators produce sixteen models/schemas. Independent gates require the complete exact resource/field/type/mode set before staged files replace last-good output. Name replacement modifiers and all lifecycle methods remain maintained code.
+`internal/catalog/collections.json` authorizes seventeen concrete collection paths and fields. This file is embedded in the runtime and bound into discovery producer fingerprints; schema inventory never authorizes registration. The snapshot adapter supports the reviewed string/bool/int64/string-list types, aliases, decimal/boolean/CSV codecs and name replacement. Official OpenAPI and Framework generators produce eighteen models/schemas. Independent gates require the complete exact resource/field/type/mode set before staged files replace last-good output. Name replacement modifiers and all lifecycle methods remain maintained code.
 
 CRUD uses PUT create, filtered collection GET by `.id`, PATCH update and DELETE item. Import accepts only an internal `*HEX` ID. Actual collection absence/typed 404 is distinguished from auth, malformed, partial and transport failures. Refresh commits a temporary model only after successful validation. Writes contain configured writable fields only, never computed state or IDs. Failed create-read preserves a known ID/partial state. Built-in or dynamic records cannot be imported/managed/deleted through this ordinary collection lifecycle. Changing a `name` replaces the object, matching the reviewed reference behavior, rather than silently renaming dependencies.
 
@@ -63,4 +65,4 @@ Action applicability validates configuration intent separately from readback: Ro
 
 The harness adds an isolated second virtio NIC on a QEMU-only hub with **no host/network backend**, named `tf-port`. The management NIC remains untouched; existing `tf-test` is a disconnected bridge for IP tests. No KVM, privileged containers, host networking or additional forwarded ports. All test bridge/VLAN/list/pool names use `tf-coverage-`; cleanup verifies owned records and then destroys the entire guest/container, credentials and mutable disk even after test failures.
 
-Next work: complete the fixed sixteen-resource hosted maintenance/release checkpoint, including actual generated-candidate acceptance and durable tested/published receipts. Broader firewall matchers/actions, unset/presence semantics and additional subsystems are deferred. Singleton settings, hardware configuration, actions, async resources, sensitive read-back and SDK-state migration remain specialized work rather than invented generic CRUD support.
+Next work: continue small evidence-backed resource waves; see the [DHCP option contract](dhcp-options-wave.md). Release infrastructure (actual generated-candidate acceptance and durable tested/published receipts) remains an unfinished parallel backlog, not a prerequisite for resource development. Broader firewall matchers/actions and unset/presence semantics remain separately reviewed work. Singleton settings, hardware configuration, actions, async resources, sensitive read-back and SDK-state migration remain specialized work rather than invented generic CRUD support.

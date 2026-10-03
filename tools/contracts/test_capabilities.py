@@ -119,7 +119,9 @@ class CapabilityTests(unittest.TestCase):
         matrix = c.matrix(c.ROOT / 'schemas/reference-contracts', self.before)
         self.assertEqual(matrix['counts']['resource_names'], 256)
         self.assertEqual(matrix['counts']['resource_constructors'], 232)
-        self.assertEqual(matrix['counts']['implemented_subsets'], 16)
+        self.assertEqual(matrix['counts']['implemented_subsets'], len(self.before['resources']))
+        exposed_names = {item['resource'] for row in matrix['constructors'] for item in row['implemented']}
+        self.assertEqual(exposed_names, {item['terraform_type'] for item in self.before['resources']})
         for row in matrix['constructors']:
             self.assertTrue(row['semantic_review_required'])
             self.assertFalse(row['automatic_exposure_authorized'])

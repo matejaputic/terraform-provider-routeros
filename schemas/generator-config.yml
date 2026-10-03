@@ -209,3 +209,29 @@ resources:
     delete:
       path: /ip/firewall/raw/{id}
       method: DELETE
+  ip_dhcp_client_option:
+    create:
+      path: /ip/dhcp-client/option
+      method: PUT
+    read:
+      path: /ip/dhcp-client/option/{id}
+      method: GET
+    update:
+      path: /ip/dhcp-client/option/{id}
+      method: PATCH
+    delete:
+      path: /ip/dhcp-client/option/{id}
+      method: DELETE
+  ip_dhcp_server_option:
+    create:
+      path: /ip/dhcp-server/option
+      method: PUT
+    read:
+      path: /ip/dhcp-server/option/{id}
+      method: GET
+    update:
+      path: /ip/dhcp-server/option/{id}
+      method: PATCH
+    delete:
+      path: /ip/dhcp-server/option/{id}
+      method: DELETE

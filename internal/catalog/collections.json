@@ -1,6 +1,6 @@
 [
   {
-    "revision": "collections-curated-v4",
+    "revision": "collections-curated-v5",
     "resource_name": "interface_bridge",
     "wire_path": "/interface/bridge",
     "schema_version": 0,
@@ -135,7 +135,7 @@
     ]
   },
   {
-    "revision": "collections-curated-v4",
+    "revision": "collections-curated-v5",
     "resource_name": "interface_bridge_port",
     "wire_path": "/interface/bridge/port",
     "schema_version": 0,
@@ -298,7 +298,7 @@
     ]
   },
   {
-    "revision": "collections-curated-v4",
+    "revision": "collections-curated-v5",
     "resource_name": "interface_vlan",
     "wire_path": "/interface/vlan",
     "schema_version": 0,
@@ -446,7 +446,7 @@
     ]
   },
   {
-    "revision": "collections-curated-v4",
+    "revision": "collections-curated-v5",
     "resource_name": "interface_list",
     "wire_path": "/interface/list",
     "schema_version": 0,
@@ -567,7 +567,7 @@
     ]
   },
   {
-    "revision": "collections-curated-v4",
+    "revision": "collections-curated-v5",
     "resource_name": "interface_list_member",
     "wire_path": "/interface/list/member",
     "schema_version": 0,
@@ -672,7 +672,7 @@
     ]
   },
   {
-    "revision": "collections-curated-v4",
+    "revision": "collections-curated-v5",
     "resource_name": "ip_pool",
     "wire_path": "/ip/pool",
     "schema_version": 0,
@@ -761,7 +761,7 @@
     "booleans": []
   },
   {
-    "revision": "collections-curated-v4",
+    "revision": "collections-curated-v5",
     "resource_name": "ip_dhcp_server_network",
     "wire_path": "/ip/dhcp-server/network",
     "schema_version": 0,
@@ -911,7 +911,7 @@
     ]
   },
   {
-    "revision": "collections-curated-v4",
+    "revision": "collections-curated-v5",
     "resource_name": "ip_dhcp_server",
     "wire_path": "/ip/dhcp-server",
     "schema_version": 0,
@@ -1077,7 +1077,7 @@
     ]
   },
   {
-    "revision": "collections-curated-v4",
+    "revision": "collections-curated-v5",
     "resource_name": "ip_dhcp_server_lease",
     "wire_path": "/ip/dhcp-server/lease",
     "schema_version": 0,
@@ -1226,7 +1226,7 @@
     ]
   },
   {
-    "revision": "collections-curated-v4",
+    "revision": "collections-curated-v5",
     "resource_name": "ip_route",
     "wire_path": "/ip/route",
     "schema_version": 0,
@@ -1419,7 +1419,7 @@
     ]
   },
   {
-    "revision": "collections-curated-v4",
+    "revision": "collections-curated-v5",
     "resource_name": "ip_firewall_addr_list",
     "wire_path": "/ip/firewall/address-list",
     "schema_version": 0,
@@ -1538,7 +1538,7 @@
     ]
   },
   {
-    "revision": "collections-curated-v4",
+    "revision": "collections-curated-v5",
     "resource_name": "ip_firewall_filter",
     "wire_path": "/ip/firewall/filter",
     "schema_version": 0,
@@ -1717,7 +1717,7 @@
     ]
   },
   {
-    "revision": "collections-curated-v4",
+    "revision": "collections-curated-v5",
     "resource_name": "ip_firewall_nat",
     "wire_path": "/ip/firewall/nat",
     "schema_version": 0,
@@ -1911,7 +1911,7 @@
     ]
   },
   {
-    "revision": "collections-curated-v4",
+    "revision": "collections-curated-v5",
     "resource_name": "ip_firewall_mangle",
     "wire_path": "/ip/firewall/mangle",
     "schema_version": 0,
@@ -2135,7 +2135,7 @@
     ]
   },
   {
-    "revision": "collections-curated-v4",
+    "revision": "collections-curated-v5",
     "resource_name": "ip_firewall_raw",
     "wire_path": "/ip/firewall/raw",
     "schema_version": 0,
@@ -2311,6 +2311,211 @@
       "log",
       "dynamic",
       "invalid"
+    ]
+  },
+  {
+    "revision": "collections-curated-v5",
+    "resource_name": "ip_dhcp_client_option",
+    "wire_path": "/ip/dhcp-client/option",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "sensitive": false,
+        "force_new": false,
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "codec": "wire-string",
+        "provenance": "reviewed pinned SDK schema and immutable upstream; live evidence tracked separately"
+      },
+      {
+        "name": "name",
+        "wire": "name",
+        "type": "string",
+        "mode": "required",
+        "sensitive": false,
+        "force_new": true,
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "codec": "wire-string",
+        "provenance": "reviewed pinned SDK schema and immutable upstream; live evidence tracked separately"
+      },
+      {
+        "name": "code",
+        "wire": "code",
+        "type": "integer",
+        "mode": "required",
+        "sensitive": false,
+        "force_new": false,
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "codec": "decimal",
+        "provenance": "reviewed pinned SDK schema and immutable upstream; live evidence tracked separately"
+      },
+      {
+        "name": "value",
+        "wire": "value",
+        "type": "string",
+        "mode": "required",
+        "sensitive": false,
+        "force_new": false,
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "codec": "wire-string",
+        "provenance": "reviewed pinned SDK schema and immutable upstream; live evidence tracked separately"
+      },
+      {
+        "name": "raw_value",
+        "wire": "raw-value",
+        "type": "string",
+        "mode": "computed",
+        "sensitive": false,
+        "force_new": false,
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "codec": "wire-string",
+        "provenance": "reviewed pinned SDK schema and immutable upstream; live evidence tracked separately"
+      }
+    ],
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "required": [
+      "name",
+      "code",
+      "value"
+    ],
+    "optional_computed": [],
+    "computed": [
+      "id",
+      "raw_value"
+    ],
+    "booleans": []
+  },
+  {
+    "revision": "collections-curated-v5",
+    "resource_name": "ip_dhcp_server_option",
+    "wire_path": "/ip/dhcp-server/option",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "sensitive": false,
+        "force_new": false,
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "codec": "wire-string",
+        "provenance": "reviewed pinned SDK schema and immutable upstream; live evidence tracked separately"
+      },
+      {
+        "name": "name",
+        "wire": "name",
+        "type": "string",
+        "mode": "required",
+        "sensitive": false,
+        "force_new": true,
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "codec": "wire-string",
+        "provenance": "reviewed pinned SDK schema and immutable upstream; live evidence tracked separately"
+      },
+      {
+        "name": "code",
+        "wire": "code",
+        "type": "integer",
+        "mode": "required",
+        "sensitive": false,
+        "force_new": false,
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "codec": "decimal",
+        "provenance": "reviewed pinned SDK schema and immutable upstream; live evidence tracked separately"
+      },
+      {
+        "name": "value",
+        "wire": "value",
+        "type": "string",
+        "mode": "required",
+        "sensitive": false,
+        "force_new": false,
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "codec": "wire-string",
+        "provenance": "reviewed pinned SDK schema and immutable upstream; live evidence tracked separately"
+      },
+      {
+        "name": "raw_value",
+        "wire": "raw-value",
+        "type": "string",
+        "mode": "computed",
+        "sensitive": false,
+        "force_new": false,
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "codec": "wire-string",
+        "provenance": "reviewed pinned SDK schema and immutable upstream; live evidence tracked separately"
+      },
+      {
+        "name": "comment",
+        "wire": "comment",
+        "type": "string",
+        "mode": "computed_optional",
+        "sensitive": false,
+        "force_new": false,
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "codec": "wire-string",
+        "provenance": "reviewed pinned SDK schema and immutable upstream; live evidence tracked separately",
+        "read_default": ""
+      },
+      {
+        "name": "force",
+        "wire": "force",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "sensitive": false,
+        "force_new": false,
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "codec": "yes/no",
+        "provenance": "reviewed pinned SDK schema and immutable upstream; live evidence tracked separately",
+        "read_default": "false"
+      }
+    ],
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "required": [
+      "name",
+      "code",
+      "value"
+    ],
+    "optional_computed": [
+      "comment",
+      "force"
+    ],
+    "computed": [
+      "id",
+      "raw_value"
+    ],
+    "booleans": [
+      "force"
     ]
   }
 ]

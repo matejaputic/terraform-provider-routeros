@@ -24,6 +24,10 @@ base=resources['ip_firewall_filter'][1]
 resources['ip_firewall_nat']=('/ip/firewall/nat',base+[('to-addresses','string','computed_optional')])
 resources['ip_firewall_mangle']=('/ip/firewall/mangle',base+[('new-connection-mark','string','computed_optional'),('new-packet-mark','string','computed_optional'),('passthrough','boolean','computed_optional')])
 resources['ip_firewall_raw']=('/ip/firewall/raw',list(base))
+# Reviewed DHCP option wave; no aliases or automatically discovered fields.
+option_fields=[('name','string','required'),('code','integer','required'),('value','string','required'),('raw-value','string','computed')]
+resources['ip_dhcp_client_option']=('/ip/dhcp-client/option',list(option_fields))
+resources['ip_dhcp_server_option']=('/ip/dhcp-server/option',option_fields+[('comment','string','computed_optional'),('force','boolean','computed_optional')])
 policies=[]
 for name,(path,items) in resources.items():
  attrs=[]
@@ -40,7 +44,8 @@ for name,(path,items) in resources.items():
   if name=='ip_dhcp_server' and tf=='conflict_detection': attrs[-1]['read_default']='true'
   if name=='ip_dhcp_server_lease' and tf=='block_access': attrs[-1]['read_default']='false'
   if name=='ip_route' and tf in ('dynamic','active'): attrs[-1]['read_default']='false'
+  if name=='ip_dhcp_server_option' and tf=='force': attrs[-1]['read_default']='false'
   if name=='interface_bridge' and tf=='pvid': attrs[-1]['conditional_read']='vlan_filtering'
- policy={'revision':'collections-curated-v4','resource_name':name,'wire_path':path,'schema_version':0,'migration_compatibility':'not claimed','attributes':attrs,'reference_sha':'0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb','required':[f['name'] for f in attrs if f['mode']=='required'],'optional_computed':[f['name'] for f in attrs if f['mode']=='computed_optional'],'computed':[f['name'] for f in attrs if f['mode']=='computed'],'booleans':[f['name'] for f in attrs if f['type']=='boolean']}
+ policy={'revision':'collections-curated-v5','resource_name':name,'wire_path':path,'schema_version':0,'migration_compatibility':'not claimed','attributes':attrs,'reference_sha':'0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb','required':[f['name'] for f in attrs if f['mode']=='required'],'optional_computed':[f['name'] for f in attrs if f['mode']=='computed_optional'],'computed':[f['name'] for f in attrs if f['mode']=='computed'],'booleans':[f['name'] for f in attrs if f['type']=='boolean']}
  policies.append(policy)
 (ROOT/'internal/catalog/collections.json').write_text(json.dumps(policies,indent=2)+'\n')

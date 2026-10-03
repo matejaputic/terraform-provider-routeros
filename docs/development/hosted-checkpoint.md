@@ -1,4 +1,6 @@
-# Hosted sixteen-resource checkpoint
+# Hosted maintenance/release checkpoint
+
+The observations below belong to the original sixteen-resource baseline. Remaining-resource development now proceeds first; release gates must certify the actual current reviewed resource set, not a hard-coded historical count.
 
 ## Decision boundary
 
@@ -39,4 +41,4 @@ On 2026-10-03, using authenticated `gh` against the existing repository:
 - `37127449183`: both guests were running and reached login; the diagnostics loop incorrectly shadowed the requested prompt. A new regression test guards the corrected loop. The observed beta REST version is exactly `7.25beta5`, not an assumed channel-suffixed spelling.
 - `37128095056` at clean revision `93d3527`: offline CI and both full live lanes passed. Both downloaded target/evidence bindings were independently verified. Both complete suites also passed locally from that clean revision, and all guests/credentials/mutable disks were removed. See [`schemas/hosted-chr-validation.json`](../../schemas/hosted-chr-validation.json).
 
-These failures were ordinary operational problems, not human-only exceptions. Source-revision live acceptance does not automatically certify generated maintenance candidates, released binaries or other lanes. No new resource, field, action or Registry promotion is authorized. Successful offline restoration is not a provider release.
+These failures were ordinary operational problems, not human-only exceptions. Source-revision live acceptance does not automatically certify generated maintenance candidates, released binaries or other lanes. These historical runs did not authorize new resource/field/action exposure or Registry promotion. Subsequent resource waves require their own explicit reviewed contracts and evidence. Successful offline restoration is not a provider release.
