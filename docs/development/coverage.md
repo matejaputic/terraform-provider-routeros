@@ -1,6 +1,6 @@
 # Resource coverage
 
-Runtime revision `framework-rest-preview-v10-batch-a`; **125 reviewed resource constructors**, zero data sources. The fixed 107 Batch A integrations are generated and registered, with focused mock/race and both pinned live lanes passing; VETH additionally passed both matching container-package lanes. Final clean-source consolidated verification/maintenance/hosted delivery gates remain in progress. See the sole [constructor tracker and subset limitations](batch-a.md). The table below retains the original twenty-resource contract details.
+Runtime revision `framework-rest-preview-v10-batch-a`; **125 reviewed resource constructors**, zero data sources. The fixed 107 Batch A integrations are generated and registered, with focused mock/race and both pinned live lanes passing; VETH additionally passed both matching container-package lanes. Clean-source consolidated four-lane live suites and fresh immutable four-candidate maintenance replay/no-op passed at `c61b371`; hosted delivery remains in progress. [Exact expanded evidence](../../schemas/batch-a-expanded-validation.json). See the sole [constructor tracker and subset limitations](batch-a.md). The table below retains the original twenty-resource contract details.
 
 | Resource | Implementation | Terraform mock CRUD/import | Live CHR CRUD/import |
 | --- | --- | --- | --- |

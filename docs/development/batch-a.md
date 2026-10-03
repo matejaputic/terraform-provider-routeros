@@ -6,11 +6,21 @@ resources. Batch B's other 107 constructors remain unexposed. Aliases do not cou
 twice. Final milestone completion is NOT claimed until clean-source consolidated
 live evidence, immutable maintenance replay/no-op and hosted verification complete.
 
+**Local consolidated gates passed at clean source `c61b371`:** the complete
+125-resource suites passed on both pinned base lanes (VETH explicitly unavailable)
+and both pinned `routeros+container` lanes. Four fresh immutable expanded
+maintenance candidates generated twice, passed all offline gates and produced
+`offline-compatible` contract deltas; the repeat was an intact four-candidate
+no-op. [Expanded exact bindings](../../schemas/batch-a-expanded-validation.json)
+separate source-test binary evidence from offline candidate binaries. Hosted
+verification remains pending the normal delivery push.
+
 ## Constructor-level implementation tracker
 
 This is the sole current tracker. Frozen ledger statuses remain historical planning
 evidence, never an exposure selector. `pass` below means observed focused tests;
-live results so far bind dirty source, not a maintenance candidate or release.
+live results now include the consolidated clean-source four-lane run at
+`c61b371`; no maintenance-candidate live or release certification is claimed.
 
 | Constructor / canonical resource | Reviewed contract | Lifecycle | Official generation | Registration | Mock/race | Live |
 | --- | --- | --- | --- | --- | --- | --- |

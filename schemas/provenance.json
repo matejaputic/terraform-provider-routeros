@@ -139,7 +139,7 @@
   "framework_generator": "v0.4.1",
   "input_kind": "125 reviewed resource subsets; pinned matching base/extra extracted publications; snapshot mode binds the immutable companion in discovery metadata",
   "license": "MPL-2.0",
-  "live_acceptance": "Expanded dirty-source suites passed both pinned base and routeros+container lanes. Full clean-source consolidated evidence and final maintenance replay are pending; historical eighteen-resource evidence remains unchanged.",
+  "live_acceptance": "Complete source-configuration suites passed at clean c61b371c4c2e2e71a5899e59680e3ce008277ae8 on 7.24.5 and 7.25beta5 x86_64/base and routeros+container. Four fresh immutable expanded maintenance candidates passed offline-only replay and intact no-op repeat. Exact source/test-binary/target/package/candidate bindings: schemas/batch-a-expanded-validation.json. Hosted delivery pending; no release or maintenance-candidate live receipt claimed.",
   "migration_compatibility": "not claimed",
   "normalizer_revision": "snapshot-catalog-v8-batch-a",
   "openapi_generator": "v0.3.0",
