@@ -1,0 +1,52 @@
+{
+  "format": "routeros-hosted-chr-validation@1",
+  "observed_date": "2026-10-03",
+  "provider_revision": "93d35274545cad4e0215348e32c01d36ad578096",
+  "workflow_run": "https://github.com/matejaputic/terraform-provider-routeros/actions/runs/37128095056",
+  "conclusion": "success",
+  "offline_job": "https://github.com/matejaputic/terraform-provider-routeros/actions/runs/37128095056/job/111217461442",
+  "recipes_sha256": "66e454ac48fcedfd25aaea1885f584abef67229f2dfbcee79d6cebf8f365eb31",
+  "test_pattern": "^TestAcc(IPAddress|Collections|DHCPRouting|Firewall|FirewallFamilies)CHR$",
+  "terraform_version": "1.14.0",
+  "source_tree_clean": true,
+  "runner": "ubuntu-24.04 GitHub-hosted Docker; QEMU/TCG, no KVM",
+  "independent_download_verification": "both target SHA256 bindings, successful acceptance evidence, clean provider revision and exact enabled base-package lane verified",
+  "lanes": [
+    {
+      "version": "7.24.5",
+      "actual_version": "7.24.5 (stable)",
+      "architecture": "x86_64",
+      "flavor": "base",
+      "enabled_packages": [{"name": "routeros", "version": "7.24.5", "disabled": "false"}],
+      "archive_sha256": "16f07222a3213352c9c4fbea4f4dec6a8ffb78fdc0fa5e398c23103ed357c6eb",
+      "disk_sha256": "e4caf173aceb497433c5fc285bffee09c1e6761dfe0e658a2b178970249fc2d2",
+      "target_sha256": "f5b44fb43a419303d6dfc679d01d5c2095c08b0af0c59664a925177cfcc4b7a7",
+      "job": "https://github.com/matejaputic/terraform-provider-routeros/actions/runs/37128095056/job/111217776186",
+      "artifact_id": 11276445014,
+      "artifact_zip_sha256": "a7aa9d3a601bf0aca20a4a79e92d201a9f8683ceecf8ede0512ff1bba3110fc5",
+      "local_clean_revision_regression": "passed; target hash 4ccfc3e82fd5a854b7af34552a3f458a09c443adf08f3fe0f2095b024b1e9258"
+    },
+    {
+      "version": "7.25beta5",
+      "actual_version": "7.25beta5",
+      "architecture": "x86_64",
+      "flavor": "base",
+      "enabled_packages": [{"name": "routeros", "version": "7.25beta5", "disabled": "false"}],
+      "archive_sha256": "5b61cbbb457755985ae334a99cc4455c05d4bf6b966e56c3d8734c76b629130c",
+      "disk_sha256": "0894045d5386188b685dcff78740fa0980022a95d738a608df608ee1b920f228",
+      "target_sha256": "abb78cb6dd01b5f7f904cca85554192b66fbc059016d150af6a4fec760a04124",
+      "job": "https://github.com/matejaputic/terraform-provider-routeros/actions/runs/37128095056/job/111217776241",
+      "artifact_id": 11274594470,
+      "artifact_zip_sha256": "7e0d4097a56e9811ba161a5b5e4040d0114b3eb0c10e25acd1fe6541069d6f0d",
+      "local_clean_revision_regression": "passed; target hash 505677333018da0e1d2f4027e6d6652f7c5306f5b9e529d7e98e464a0ae607dd"
+    }
+  ],
+  "cleanup": "both hosted cleanup steps succeeded; local owned guests, credentials and mutable disks removed",
+  "limitations": [
+    "Source-revision configuration lifecycle acceptance, not acceptance of a snapshot-generated maintenance candidate",
+    "No maintenance tested/published receipts advanced",
+    "No release binary, traffic processing, SDK migration, extra packages or other architecture certified",
+    "Actions artifacts expire; protected permanent storage remains unfinished",
+    "No GitHub provider prerelease or Registry release published"
+  ]
+}
