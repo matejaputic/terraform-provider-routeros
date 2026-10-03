@@ -1,0 +1,58 @@
+{
+  "bundle_files_sha256": {
+    "reconciliation.json": "ea718fb829a16f06b6de59b3f73136165c3ac0e55b047a7afce390ff10768ef2",
+    "reference-contracts.json": "1d6154b2615618aafffa9777a672e8d899e02426f4457dadd2cbfdbb42c76657"
+  },
+  "data_source_names": 16,
+  "deterministic_extraction": "two byte-identical full extractions",
+  "format": "routeros-reference-checkpoint-validation@1",
+  "indexed_test_functions": 209,
+  "maintenance": {
+    "candidates": [
+      {
+        "candidate_key": "e30ed64bfedeb8636240b4efe53d36abee93c7884115fbb5bcc58a6d1f895ded",
+        "checks": [
+          "official-generators",
+          "exact-specification",
+          "deterministic-generation",
+          "tooling-tests",
+          "go-race-mock-tests",
+          "go-vet",
+          "go-build"
+        ],
+        "generated_evidence_sha256": "ded5d121ac391133586220eea2a5f3387e0a377642fd6c5fc1eac8bd16d3b821",
+        "live_tested": false,
+        "published": false,
+        "version": "7.25beta5"
+      },
+      {
+        "candidate_key": "128e9d72e91591203844953cab04b12444c6e74f410116318aaac07cc7cb6d38",
+        "checks": [
+          "official-generators",
+          "exact-specification",
+          "deterministic-generation",
+          "tooling-tests",
+          "go-race-mock-tests",
+          "go-vet",
+          "go-build"
+        ],
+        "generated_evidence_sha256": "b58fc2852baf0d7c93864d0443ed0a52e250f2dd87a9e9d1a85c62a80a556e37",
+        "live_tested": false,
+        "published": false,
+        "version": "7.24.5"
+      }
+    ],
+    "first_outcome": "changed",
+    "repeat_outcome": "unchanged",
+    "upstream_sha": "adc39cdbb0a3062aa93cc7aff50ef1185a1c0b0a"
+  },
+  "provider_revision": "45381e330ed3dc336f79e19565c6505414deff86",
+  "public_contract_changes": false,
+  "python_tooling_tests_passed": 73,
+  "race_mock_vet_build_official_generation": "passed",
+  "reconciled_public_resources": 16,
+  "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+  "resource_constructors": 232,
+  "resource_names": 256,
+  "workflow_actionlint_version": "1.7.7"
+}

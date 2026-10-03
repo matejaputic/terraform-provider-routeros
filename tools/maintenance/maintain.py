@@ -55,8 +55,9 @@ def verification_inputs(root):
     # Discovery binds runtime/adapter/generator inputs; additionally invalidate offline
     # verification reuse on tests, fixtures, build policy or orchestration changes.
     files = subprocess.check_output(['git', 'ls-files', '-z'], cwd=root).decode().split('\0')
-    included = [p for p in files if p and (p.startswith(('internal/', 'tools/', '.github/workflows/'))
-                or p in ('GNUmakefile', 'go.mod', 'go.sum'))]
+    included = [p for p in files if p and not p.endswith('.md')
+                and (p.startswith(('internal/', 'tools/', '.github/workflows/'))
+                     or p in ('GNUmakefile', 'go.mod', 'go.sum'))]
     return discovery.digest(discovery.encode({p: discovery.digest((root / p).read_bytes())
                                              for p in sorted(included)}))
 

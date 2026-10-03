@@ -158,6 +158,15 @@ class MaintenanceTests(unittest.TestCase):
         self.assertEqual(len(self.calls), 4)
         self.assertEqual(len(self.state()['candidates']), 4)
 
+    def test_tool_documentation_change_does_not_invalidate_offline_receipts(self):
+        self.reconcile()
+        doc = self.root / 'tools/contracts/README.md'
+        doc.parent.mkdir(parents=True, exist_ok=True)
+        doc.write_text('Documentation-only update.\n')
+        self.commit(self.root)
+        self.assertEqual(self.reconcile()['outcome'], 'unchanged')
+        self.assertEqual(len(self.calls), 2)
+
     def test_ignored_tool_cache_does_not_invalidate_keys(self):
         self.reconcile()
         cache = self.root / 'tools/bin/cache.json'
