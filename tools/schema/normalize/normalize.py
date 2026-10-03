@@ -205,12 +205,32 @@ def inventory(spec):
         result.append(entry)
     return result
 
-def normalize(raw, policy, *, metadata=None, origin=None):
-    spec = discover.parse(raw)
-    check(isinstance(spec, dict) and isinstance(spec.get('info'), dict), 'input must have an OpenAPI info object')
+class SchemaSnapshot:
+    """Invocation-local immutable-input reuse; never an approval cache.
+
+    Policies, fields and lifecycle observations are checked for every resource.
+    Resolver only reads this parsed input. Inventory is observed once, then copied
+    before any resource-specific classification so reports cannot taint siblings.
+    """
+    def __init__(self, raw):
+        self.input_sha256 = sha(raw)
+        self.spec = discover.parse(raw)
+        check(isinstance(self.spec, dict) and isinstance(self.spec.get('info'), dict), 'input must have an OpenAPI info object')
+        self.version = discover.version(self.spec.get('info', {}).get('version'))
+        discover.validate_spec(self.spec, self.version, 'adapter input')
+        self._inventory = None
+
+    def observed_inventory(self):
+        if self._inventory is None:
+            self._inventory = inventory(self.spec)
+        return self._inventory
+
+
+def normalize(raw, policy, *, metadata=None, origin=None, snapshot=None, include_inventory=True):
+    snapshot = snapshot or SchemaSnapshot(raw)
+    check(snapshot.input_sha256 == sha(raw), 'cached schema input hash mismatch')
+    spec, version = snapshot.spec, snapshot.version
     check(isinstance(policy, dict), 'policy must be an object')
-    version = discover.version(spec.get('info', {}).get('version'))
-    discover.validate_spec(spec, version, 'adapter input')
     check(policy.get('schema_version') == 0 and policy.get('migration_compatibility') == 'not claimed', 'unreviewed schema-version/migration policy')
     name = policy.get('resource_name')
     check(name in APPROVED_PATHS and policy.get('wire_path') == APPROVED_PATHS[name], 'unsupported lifecycle registration')
@@ -302,7 +322,8 @@ def normalize(raw, policy, *, metadata=None, origin=None):
         'runtime_read': {'method': 'GET', 'path': path, 'id_filter': '.id'},
         'operations': {'create': {'method': 'PUT', 'path': path}, 'update': {'method': 'PATCH', 'path': path + '/{id}'}, 'delete': {'method': 'DELETE', 'path': path + '/{id}'}},
         'fields': sorted(fields, key=lambda f: f['name']), 'migration_compatibility': 'not claimed'}]}
-    catalog = inventory(spec)
+    observed_catalog = snapshot.observed_inventory()
+    catalog = copy.deepcopy(observed_catalog) if include_inventory else []
     for entry in catalog:
         if entry['path'] == path and entry['classification'] == 'collection-candidate-unreviewed':
             entry['classification'] = 'approved-maintained-resource'
@@ -314,7 +335,7 @@ def normalize(raw, policy, *, metadata=None, origin=None):
               'config_sha256': None, 'wire_descriptor_sha256': sha(discover.encode(descriptor)),
               'metadata_sha256': meta_hashes, 'normalized_sha256': sha(discover.encode(normalized)),
               'supported_resources': [resource_name], 'data_sources': [], 'catalog': catalog,
-              'coverage': {'structural_crud_candidates': sum(e.get('structural_crud', False) for e in catalog),
+              'coverage': {'structural_crud_candidates': sum(e.get('structural_crud', False) for e in observed_catalog),
                            'approved_maintained_resources': 1, 'automatically_exposed_new_resources': 0},
               'adaptations': {'removed_controls': sorted(resolver.removed), 'synthetic_id': True,
                   'removed_schema_path_parameter': 'id', 'repaired_response_from_curated_policy': True,
@@ -345,6 +366,7 @@ def main():
     try:
         check(args.input.stat().st_size <= discover.LIMIT, 'input exceeds size limit')
         raw = args.input.read_bytes()
+        snapshot = SchemaSnapshot(raw)
         check(not args.manifest or not args.inspect, 'manifest metadata cannot be overridden')
         check(len({p.name for p in args.inspect}) == len(args.inspect), 'duplicate inspect filenames')
         metadata = {}
@@ -372,7 +394,7 @@ def main():
             check(candidate['schema_sha256'] == sha(raw), 'input does not match discovered schema hash')
             discover.valid_path(candidate['schema_path'])
             check(discover.SHA.fullmatch(manifest['upstream_sha']) and candidate['upstream_sha'] == manifest['upstream_sha'], 'upstream SHA mismatch')
-            check(discover.parse(raw)['info']['version'] == candidate['version'], 'candidate version mismatch')
+            check(snapshot.version == candidate['version'], 'candidate version mismatch')
             # Re-read only saved immutable snapshot metadata, with hash checks.
             metadata = {}
             for path, hashes in candidate['metadata'].items():
@@ -393,13 +415,13 @@ def main():
             check(origin['fixture_sha256'] == sha(raw), 'collection fixture hash mismatch')
         policy = discover.parse(args.policy.read_bytes())
         check(not args.manifest or sha(discover.encode(policy)) == sha(discover.encode(discover.parse((ROOT / 'schemas/ip-address-policy.json').read_bytes()))), 'manifest policy override forbidden')
-        normalized, config, descriptor, report = normalize(raw, policy, metadata=metadata, origin=origin)
+        normalized, config, descriptor, report = normalize(raw, policy, metadata=metadata, origin=origin, snapshot=snapshot)
         if args.collections:
             policies = discover.parse((ROOT / 'internal/catalog/collections.json').read_bytes())
             check({p['resource_name'] for p in policies} == set(APPROVED_PATHS) - {'ip_address'} and len(policies) == len(APPROVED_PATHS) - 1, 'incomplete/duplicate reviewed networking catalog')
             reports = {}
             for collection_policy in policies:
-                extra, extra_config, extra_descriptor, extra_report = normalize(raw, collection_policy, metadata=metadata, origin=origin)
+                extra, extra_config, extra_descriptor, extra_report = normalize(raw, collection_policy, metadata=metadata, origin=origin, snapshot=snapshot, include_inventory=False)
                 check(not (set(normalized['paths']) & set(extra['paths'])), 'duplicate catalog paths')
                 normalized['paths'].update(extra['paths'])
                 config += extra_config.split(b'resources:\n', 1)[1]
