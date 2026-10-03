@@ -30,6 +30,16 @@ class ExecutionPlatformTests(unittest.TestCase):
         self.assertIs(console.s, ready)
         self.assertEqual(console.buffer, b'Login: ')
 
+    def test_diagnostic_markers_do_not_change_expected_prompt(self):
+        console = harness.Console.__new__(harness.Console)
+        console.s = Mock()
+        console.s.recv.side_effect = [b'booting', b'Login: ']
+        console.buffer = b''
+        console.events = set()
+        self.assertEqual(console.expect(b'Login:'), b'booting')
+        self.assertIn('login-prompt', console.events)
+        self.assertEqual(console.buffer, b' ')
+
     def test_unknown_recipe_refused_before_execution(self):
         with patch.object(harness, 'execution_platform') as engine:
             with self.assertRaisesRegex(RuntimeError, 'pinned acquisition recipe'):

@@ -16,7 +16,7 @@ func expectedCHRVersion(t *testing.T) string {
 	case "", "7.24.5":
 		return "7.24.5 (stable)"
 	case "7.25beta5":
-		return "7.25beta5 (testing)"
+		return "7.25beta5"
 	default:
 		t.Fatal("unsupported disposable CHR acceptance recipe")
 		return ""
@@ -24,7 +24,7 @@ func expectedCHRVersion(t *testing.T) string {
 }
 
 func TestExpectedCHRVersion(t *testing.T) {
-	for input, expected := range map[string]string{"": "7.24.5 (stable)", "7.24.5": "7.24.5 (stable)", "7.25beta5": "7.25beta5 (testing)"} {
+	for input, expected := range map[string]string{"": "7.24.5 (stable)", "7.24.5": "7.24.5 (stable)", "7.25beta5": "7.25beta5"} {
 		t.Setenv("ROS_TEST_VERSION", input)
 		if actual := expectedCHRVersion(t); actual != expected {
 			t.Fatalf("recipe version: got %q want %q", actual, expected)

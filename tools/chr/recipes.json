@@ -8,7 +8,7 @@
   "7.25beta5": {
     "archive_sha256": "5b61cbbb457755985ae334a99cc4455c05d4bf6b966e56c3d8734c76b629130c",
     "disk_sha256": "0894045d5386188b685dcff78740fa0980022a95d738a608df608ee1b920f228",
-    "target_version": "7.25beta5 (testing)",
+    "target_version": "7.25beta5",
     "acquisition": "official https://download.mikrotik.com/routeros/7.25beta5/chr-7.25beta5.img.zip downloaded 2026-10-03 using HTTP/1.1; hashes are acquisition pins, not live compatibility evidence"
   }
 }

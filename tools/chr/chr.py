@@ -73,9 +73,9 @@ class Console:
                 if not chunk:
                     raise RuntimeError('CHR console disconnected')
                 self.buffer += chunk
-                for token, event in ((b'Login:', 'login-prompt'), (b'Kernel panic', 'kernel-panic'),
-                                     (b'Rebooting', 'guest-reboot'), (b'No bootable device', 'no-boot-device')):
-                    if token in self.buffer:
+                for marker, event in ((b'Login:', 'login-prompt'), (b'Kernel panic', 'kernel-panic'),
+                                      (b'Rebooting', 'guest-reboot'), (b'No bootable device', 'no-boot-device')):
+                    if marker in self.buffer:
                         self.events.add(event)
             except TimeoutError:
                 pass
@@ -190,10 +190,9 @@ def start(hosted=False, version=VERSION):
         '-display', 'none', '-monitor', 'none',
         '-serial', 'tcp:0.0.0.0:2323,server=on,wait=off', '-no-reboot', stdout=subprocess.DEVNULL)
         console = Console()
-        console.send('')
-        console.expect(b'Login: ')
+        console.expect(b'Login:')
         console.send('admin+ct')
-        console.expect(b'Password: ')
+        console.expect(b'Password:')
         console.send('')
         console.expect(b'[Y/n]: ')
         console.send('n')
@@ -225,9 +224,10 @@ def start(hosted=False, version=VERSION):
                 if time.monotonic() > deadline:
                     raise RuntimeError('CHR REST did not become ready') from None
                 time.sleep(1)
+        provenance = {k: target.get(k) for k in ('version', 'architecture-name', 'board-name')}
+        (STATE / 'target.json').write_text(json.dumps(provenance, indent=2) + '\n')
         if target.get('version') != recipe['target_version'] or target.get('architecture-name') != 'x86_64':
             raise RuntimeError('CHR version/architecture mismatch')
-        provenance = {k: target.get(k) for k in ('version', 'architecture-name', 'board-name')}
         packages = request(credentials, '/system/package')
         validate_packages(packages, version)
         provenance.update({'archive_sha256': zip_hash, 'disk_sha256': disk_hash,
