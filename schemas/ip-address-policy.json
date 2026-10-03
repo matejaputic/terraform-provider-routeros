@@ -1,0 +1,192 @@
+{
+  "revision": "ip-address-curated-v3",
+  "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+  "wire_path": "/ip/address",
+  "id_wire_key": ".id",
+  "required": [
+    "address",
+    "interface"
+  ],
+  "optional_computed": [
+    "comment",
+    "disabled",
+    "network"
+  ],
+  "computed": [
+    "id",
+    "actual_interface",
+    "dynamic",
+    "invalid",
+    "slave",
+    "vrf"
+  ],
+  "booleans": [
+    "disabled",
+    "dynamic",
+    "invalid",
+    "slave"
+  ],
+  "validators": {
+    "address": "IP or CIDR",
+    "network": "IP",
+    "interface": "nonempty, no instance enum"
+  },
+  "defaults": "Unconfigured writable fields retain server defaults; no device-instance enum or invented default",
+  "import": "RouterOS .id, read using filtered collection GET",
+  "mutation_input": "Configuration values only; never echo computed plan/state properties",
+  "live_review": {
+    "target": "7.24.5 (stable), x86_64 CHR, base routeros package",
+    "vrf_exception": "Reference SDK schema allows vrf, but live PATCH returns HTTP 400 unknown parameter vrf; expose computed-only for this supported baseline",
+    "bare_address_policy": "Write a bare IP with explicit /32 host prefix; preserve its configured representation only on semantically identical readback, avoiding inherited PATCH netmasks",
+    "id_exception": "Literal * ID succeeds; percent-encoded %2A ID returns HTTP 400 missing or invalid resource identifier",
+    "supported_state": "Required fields, comment, disabled, network, actual_interface, dynamic, invalid, slave and vrf readback verified by live Terraform lifecycle"
+  },
+  "migration_compatibility": "not claimed",
+  "resource_name": "ip_address",
+  "schema_version": 0,
+  "attributes": [
+    {
+      "name": "actual_interface",
+      "wire": "actual-interface",
+      "type": "string",
+      "mode": "computed",
+      "sensitive": false,
+      "force_new": false,
+      "enum_kind": "none",
+      "validators": null,
+      "default": null,
+      "codec": "wire-string",
+      "provenance": "reviewed reference schema and Step 1 CHR baseline"
+    },
+    {
+      "name": "address",
+      "wire": "address",
+      "type": "string",
+      "mode": "required",
+      "sensitive": false,
+      "force_new": false,
+      "enum_kind": "none",
+      "validators": "IP or CIDR",
+      "default": null,
+      "codec": "wire-string",
+      "provenance": "reviewed reference schema and Step 1 CHR baseline"
+    },
+    {
+      "name": "comment",
+      "wire": "comment",
+      "type": "string",
+      "mode": "computed_optional",
+      "sensitive": false,
+      "force_new": false,
+      "enum_kind": "none",
+      "validators": null,
+      "default": "server-owned",
+      "codec": "wire-string",
+      "provenance": "reviewed reference schema and Step 1 CHR baseline"
+    },
+    {
+      "name": "disabled",
+      "wire": "disabled",
+      "type": "boolean",
+      "mode": "computed_optional",
+      "sensitive": false,
+      "force_new": false,
+      "enum_kind": "none",
+      "validators": null,
+      "default": "server-owned",
+      "codec": "yes/no",
+      "provenance": "reviewed reference schema and Step 1 CHR baseline"
+    },
+    {
+      "name": "dynamic",
+      "wire": "dynamic",
+      "type": "boolean",
+      "mode": "computed",
+      "sensitive": false,
+      "force_new": false,
+      "enum_kind": "none",
+      "validators": null,
+      "default": null,
+      "codec": "yes/no",
+      "provenance": "reviewed reference schema and Step 1 CHR baseline"
+    },
+    {
+      "name": "id",
+      "wire": ".id",
+      "type": "string",
+      "mode": "computed",
+      "sensitive": false,
+      "force_new": false,
+      "enum_kind": "none",
+      "validators": null,
+      "default": null,
+      "codec": "wire-string",
+      "provenance": "reviewed reference schema and Step 1 CHR baseline"
+    },
+    {
+      "name": "interface",
+      "wire": "interface",
+      "type": "string",
+      "mode": "required",
+      "sensitive": false,
+      "force_new": false,
+      "enum_kind": "device-instance-removed",
+      "validators": "nonempty, no instance enum",
+      "default": null,
+      "codec": "wire-string",
+      "provenance": "reviewed reference schema and Step 1 CHR baseline"
+    },
+    {
+      "name": "invalid",
+      "wire": "invalid",
+      "type": "boolean",
+      "mode": "computed",
+      "sensitive": false,
+      "force_new": false,
+      "enum_kind": "none",
+      "validators": null,
+      "default": null,
+      "codec": "yes/no",
+      "provenance": "reviewed reference schema and Step 1 CHR baseline"
+    },
+    {
+      "name": "network",
+      "wire": "network",
+      "type": "string",
+      "mode": "computed_optional",
+      "sensitive": false,
+      "force_new": false,
+      "enum_kind": "none",
+      "validators": "IP",
+      "default": "server-owned",
+      "codec": "wire-string",
+      "provenance": "reviewed reference schema and Step 1 CHR baseline"
+    },
+    {
+      "name": "slave",
+      "wire": "slave",
+      "type": "boolean",
+      "mode": "computed",
+      "sensitive": false,
+      "force_new": false,
+      "enum_kind": "none",
+      "validators": null,
+      "default": null,
+      "codec": "yes/no",
+      "provenance": "reviewed reference schema and Step 1 CHR baseline"
+    },
+    {
+      "name": "vrf",
+      "wire": "vrf",
+      "type": "string",
+      "mode": "computed",
+      "sensitive": false,
+      "force_new": false,
+      "enum_kind": "none",
+      "validators": null,
+      "default": null,
+      "codec": "wire-string",
+      "provenance": "reviewed reference schema and Step 1 CHR baseline"
+    }
+  ]
+}

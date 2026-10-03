@@ -1,0 +1,174 @@
+{
+  "files": [],
+  "format": "restraml-docs-index@1",
+  "generatedAt": "2026-10-02T00:00:00Z",
+  "latestStableVersion": "7.24.5",
+  "latestVersion": "7.25beta5",
+  "nightly": {
+    "builtAt": "2026-10-01T23:00:00Z",
+    "nightlyVersion": "7.25_ab434"
+  },
+  "rootPath": "docs",
+  "versions": [
+    {
+      "dirs": [
+        {
+          "dirs": [],
+          "files": [
+            {
+              "name": "openapi.json",
+              "path": "docs/7.24.5/extra/openapi.json",
+              "type": "file"
+            }
+          ],
+          "name": "extra",
+          "path": "docs/7.24.5/extra",
+          "type": "dir"
+        }
+      ],
+      "files": [
+        {
+          "name": "openapi.json",
+          "path": "docs/7.24.5/openapi.json",
+          "type": "file"
+        },
+        {
+          "name": "deep-inspect.json",
+          "path": "docs/7.24.5/deep-inspect.json",
+          "type": "file"
+        }
+      ],
+      "name": "7.24.5",
+      "path": "docs/7.24.5",
+      "type": "dir"
+    },
+    {
+      "dirs": [
+        {
+          "dirs": [],
+          "files": [
+            {
+              "name": "openapi.json",
+              "path": "docs/7.25beta5/extra/openapi.json",
+              "type": "file"
+            }
+          ],
+          "name": "extra",
+          "path": "docs/7.25beta5/extra",
+          "type": "dir"
+        }
+      ],
+      "files": [
+        {
+          "name": "openapi.json",
+          "path": "docs/7.25beta5/openapi.json",
+          "type": "file"
+        },
+        {
+          "name": "deep-inspect.json",
+          "path": "docs/7.25beta5/deep-inspect.json",
+          "type": "file"
+        }
+      ],
+      "name": "7.25beta5",
+      "path": "docs/7.25beta5",
+      "type": "dir"
+    },
+    {
+      "dirs": [
+        {
+          "dirs": [],
+          "files": [
+            {
+              "name": "openapi.json",
+              "path": "docs/7.25rc1/extra/openapi.json",
+              "type": "file"
+            }
+          ],
+          "name": "extra",
+          "path": "docs/7.25rc1/extra",
+          "type": "dir"
+        }
+      ],
+      "files": [
+        {
+          "name": "openapi.json",
+          "path": "docs/7.25rc1/openapi.json",
+          "type": "file"
+        },
+        {
+          "name": "deep-inspect.json",
+          "path": "docs/7.25rc1/deep-inspect.json",
+          "type": "file"
+        }
+      ],
+      "name": "7.25rc1",
+      "path": "docs/7.25rc1",
+      "type": "dir"
+    },
+    {
+      "dirs": [
+        {
+          "dirs": [],
+          "files": [
+            {
+              "name": "openapi.json",
+              "path": "docs/7.24.4/extra/openapi.json",
+              "type": "file"
+            }
+          ],
+          "name": "extra",
+          "path": "docs/7.24.4/extra",
+          "type": "dir"
+        }
+      ],
+      "files": [
+        {
+          "name": "openapi.json",
+          "path": "docs/7.24.4/openapi.json",
+          "type": "file"
+        },
+        {
+          "name": "deep-inspect.json",
+          "path": "docs/7.24.4/deep-inspect.json",
+          "type": "file"
+        }
+      ],
+      "name": "7.24.4",
+      "path": "docs/7.24.4",
+      "type": "dir"
+    },
+    {
+      "dirs": [
+        {
+          "dirs": [],
+          "files": [
+            {
+              "name": "openapi.json",
+              "path": "docs/nightly/extra/openapi.json",
+              "type": "file"
+            }
+          ],
+          "name": "extra",
+          "path": "docs/nightly/extra",
+          "type": "dir"
+        }
+      ],
+      "files": [
+        {
+          "name": "openapi.json",
+          "path": "docs/nightly/openapi.json",
+          "type": "file"
+        },
+        {
+          "name": "deep-inspect.json",
+          "path": "docs/nightly/deep-inspect.json",
+          "type": "file"
+        }
+      ],
+      "name": "nightly",
+      "path": "docs/nightly",
+      "type": "dir"
+    }
+  ]
+}

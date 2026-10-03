@@ -1,0 +1,31 @@
+{
+  "builtAt": "2026-10-01T23:00:00Z",
+  "nightlyVersion": "7.25_ab434",
+  "provenance": {
+    "arm64": {
+      "extra": {
+        "arch": "arm64",
+        "builtAt": "2026-10-01T22:00:00Z",
+        "nightlyVersion": "7.25_ab434",
+        "phase": "extra",
+        "postVersion": "7.25_ab434"
+      }
+    },
+    "x86": {
+      "base": {
+        "arch": "x86",
+        "builtAt": "2026-10-01T22:00:00Z",
+        "nightlyVersion": "7.25_ab434",
+        "phase": "base",
+        "postVersion": "7.25_ab434"
+      },
+      "extra": {
+        "arch": "x86",
+        "builtAt": "2026-10-01T22:00:00Z",
+        "nightlyVersion": "7.25_ab434",
+        "phase": "extra",
+        "postVersion": "7.25_ab434"
+      }
+    }
+  }
+}

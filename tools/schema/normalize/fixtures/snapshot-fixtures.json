@@ -1,0 +1,68 @@
+{
+  "7.24.5-extra.upstream.json": {
+    "extraction": "Unmodified OpenAPI info/components and two IP-address path objects, JSON reserialized. Not the complete upstream artifact.",
+    "fixture_sha256": "4973770d1eb4b2ddaca1a1be43f6cf860097e10c05f36b354fbb9ecf1a056312",
+    "flavor": "extra",
+    "kind": "extracted-offline-fixture",
+    "repository": "tikoci/restraml",
+    "schema_path": "docs/7.24.5/extra/openapi.json",
+    "upstream_full_sha256": "4edf2959623784de511c9cc72686950d4b3886d2cbcf9693259575303373349e",
+    "upstream_sha": "adc39cdbb0a3062aa93cc7aff50ef1185a1c0b0a",
+    "version": "7.24.5"
+  },
+  "7.25_ab434-base.upstream.json": {
+    "extraction": "Unmodified OpenAPI info/components and two IP-address path objects, JSON reserialized. Not the complete upstream artifact.",
+    "fixture_sha256": "dabce4312e604d14f0be293c3bdffef3f2da714cb9519c811144a8a32373218f",
+    "flavor": "base",
+    "kind": "extracted-offline-fixture",
+    "repository": "tikoci/restraml",
+    "schema_path": "docs/nightly/openapi.json",
+    "upstream_full_sha256": "c6a92a93088dabb16e2f8b1252267141b107e72dad7a4d1731dad53e7e4dd204",
+    "upstream_sha": "adc39cdbb0a3062aa93cc7aff50ef1185a1c0b0a",
+    "version": "7.25_ab434"
+  },
+  "7.25_ab434-extra.upstream.json": {
+    "extraction": "Unmodified OpenAPI info/components and two IP-address path objects, JSON reserialized. Not the complete upstream artifact.",
+    "fixture_sha256": "dabce4312e604d14f0be293c3bdffef3f2da714cb9519c811144a8a32373218f",
+    "flavor": "extra",
+    "kind": "extracted-offline-fixture",
+    "repository": "tikoci/restraml",
+    "schema_path": "docs/nightly/extra/openapi.json",
+    "upstream_full_sha256": "9a4befda932de04d5daee70dc420cd8373b45be9411046fc5ec2c114ea51b57e",
+    "upstream_sha": "adc39cdbb0a3062aa93cc7aff50ef1185a1c0b0a",
+    "version": "7.25_ab434"
+  },
+  "7.25beta5-base.upstream.json": {
+    "extraction": "Unmodified OpenAPI info/components and two IP-address path objects, JSON reserialized. Not the complete upstream artifact.",
+    "fixture_sha256": "edd4913aef75f629b2a478e480ae353e6c394fda770b88fc667f17220e73dde8",
+    "flavor": "base",
+    "kind": "extracted-offline-fixture",
+    "repository": "tikoci/restraml",
+    "schema_path": "docs/7.25beta5/openapi.json",
+    "upstream_full_sha256": "63e6923d4191a6337833db84ef2513a1b804714acb4f289a0ff747110e8abdcd",
+    "upstream_sha": "adc39cdbb0a3062aa93cc7aff50ef1185a1c0b0a",
+    "version": "7.25beta5"
+  },
+  "7.25beta5-extra.upstream.json": {
+    "extraction": "Unmodified OpenAPI info/components and two IP-address path objects, JSON reserialized. Not the complete upstream artifact.",
+    "fixture_sha256": "edd4913aef75f629b2a478e480ae353e6c394fda770b88fc667f17220e73dde8",
+    "flavor": "extra",
+    "kind": "extracted-offline-fixture",
+    "repository": "tikoci/restraml",
+    "schema_path": "docs/7.25beta5/extra/openapi.json",
+    "upstream_full_sha256": "49861799a76e6a88307a2edc5ba8f4c578e66f87dac74d65840157f6e82e6d73",
+    "upstream_sha": "adc39cdbb0a3062aa93cc7aff50ef1185a1c0b0a",
+    "version": "7.25beta5"
+  },
+  "ip-address.upstream.json": {
+    "extraction": "Unmodified OpenAPI info/components and two IP-address path objects, JSON reserialized. Not the complete upstream artifact.",
+    "fixture_sha256": "4973770d1eb4b2ddaca1a1be43f6cf860097e10c05f36b354fbb9ecf1a056312",
+    "flavor": "base",
+    "kind": "extracted-offline-fixture",
+    "repository": "tikoci/restraml",
+    "schema_path": "docs/7.24.5/openapi.json",
+    "upstream_full_sha256": "0d9530302562663f095eda82b4e370867b17d910576d0a9aea919c2247ca7fbe",
+    "upstream_sha": "adc39cdbb0a3062aa93cc7aff50ef1185a1c0b0a",
+    "version": "7.24.5"
+  }
+}

@@ -1,4 +1,4 @@
-default: fmt lint install generate
+default: test build
 
 build:
 	go build -v ./...
@@ -10,15 +10,25 @@ lint:
 	golangci-lint run
 
 generate:
+	bash tools/schema/generate.sh
+
+docs:
 	cd tools; go generate ./...
 
 fmt:
 	gofmt -s -w -e .
 
-test:
-	go test -v -cover -timeout=120s -parallel=10 ./...
+test: testdiscovery testschema
+	GOTOOLCHAIN=go1.25.8 TF_ACC_TERRAFORM_VERSION=1.14.0 go test -v -race -cover -timeout=120s ./...
+
+testdiscovery:
+	python3 -m unittest discover -s tools/schema/discover -v
+
+testschema:
+	python3 -m unittest discover -s tools/schema/normalize -v
+	python3 -m unittest discover -s tools/schema/validate -v
 
 testacc:
-	TF_ACC=1 go test -v -cover -timeout 120m ./...
+	python3 tools/chr/chr.py test
 
-.PHONY: fmt lint test testacc build install generate
+.PHONY: fmt lint test testdiscovery testschema testacc build install generate docs

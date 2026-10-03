@@ -1,0 +1,211 @@
+provider:
+  name: routeros
+resources:
+  ip_address:
+    create:
+      path: /ip/address
+      method: PUT
+    read:
+      path: /ip/address/{id}
+      method: GET
+    update:
+      path: /ip/address/{id}
+      method: PATCH
+    delete:
+      path: /ip/address/{id}
+      method: DELETE
+  interface_bridge:
+    create:
+      path: /interface/bridge
+      method: PUT
+    read:
+      path: /interface/bridge/{id}
+      method: GET
+    update:
+      path: /interface/bridge/{id}
+      method: PATCH
+    delete:
+      path: /interface/bridge/{id}
+      method: DELETE
+  interface_bridge_port:
+    create:
+      path: /interface/bridge/port
+      method: PUT
+    read:
+      path: /interface/bridge/port/{id}
+      method: GET
+    update:
+      path: /interface/bridge/port/{id}
+      method: PATCH
+    delete:
+      path: /interface/bridge/port/{id}
+      method: DELETE
+  interface_vlan:
+    create:
+      path: /interface/vlan
+      method: PUT
+    read:
+      path: /interface/vlan/{id}
+      method: GET
+    update:
+      path: /interface/vlan/{id}
+      method: PATCH
+    delete:
+      path: /interface/vlan/{id}
+      method: DELETE
+  interface_list:
+    create:
+      path: /interface/list
+      method: PUT
+    read:
+      path: /interface/list/{id}
+      method: GET
+    update:
+      path: /interface/list/{id}
+      method: PATCH
+    delete:
+      path: /interface/list/{id}
+      method: DELETE
+  interface_list_member:
+    create:
+      path: /interface/list/member
+      method: PUT
+    read:
+      path: /interface/list/member/{id}
+      method: GET
+    update:
+      path: /interface/list/member/{id}
+      method: PATCH
+    delete:
+      path: /interface/list/member/{id}
+      method: DELETE
+  ip_pool:
+    create:
+      path: /ip/pool
+      method: PUT
+    read:
+      path: /ip/pool/{id}
+      method: GET
+    update:
+      path: /ip/pool/{id}
+      method: PATCH
+    delete:
+      path: /ip/pool/{id}
+      method: DELETE
+  ip_dhcp_server_network:
+    create:
+      path: /ip/dhcp-server/network
+      method: PUT
+    read:
+      path: /ip/dhcp-server/network/{id}
+      method: GET
+    update:
+      path: /ip/dhcp-server/network/{id}
+      method: PATCH
+    delete:
+      path: /ip/dhcp-server/network/{id}
+      method: DELETE
+  ip_dhcp_server:
+    create:
+      path: /ip/dhcp-server
+      method: PUT
+    read:
+      path: /ip/dhcp-server/{id}
+      method: GET
+    update:
+      path: /ip/dhcp-server/{id}
+      method: PATCH
+    delete:
+      path: /ip/dhcp-server/{id}
+      method: DELETE
+  ip_dhcp_server_lease:
+    create:
+      path: /ip/dhcp-server/lease
+      method: PUT
+    read:
+      path: /ip/dhcp-server/lease/{id}
+      method: GET
+    update:
+      path: /ip/dhcp-server/lease/{id}
+      method: PATCH
+    delete:
+      path: /ip/dhcp-server/lease/{id}
+      method: DELETE
+  ip_route:
+    create:
+      path: /ip/route
+      method: PUT
+    read:
+      path: /ip/route/{id}
+      method: GET
+    update:
+      path: /ip/route/{id}
+      method: PATCH
+    delete:
+      path: /ip/route/{id}
+      method: DELETE
+  ip_firewall_addr_list:
+    create:
+      path: /ip/firewall/address-list
+      method: PUT
+    read:
+      path: /ip/firewall/address-list/{id}
+      method: GET
+    update:
+      path: /ip/firewall/address-list/{id}
+      method: PATCH
+    delete:
+      path: /ip/firewall/address-list/{id}
+      method: DELETE
+  ip_firewall_filter:
+    create:
+      path: /ip/firewall/filter
+      method: PUT
+    read:
+      path: /ip/firewall/filter/{id}
+      method: GET
+    update:
+      path: /ip/firewall/filter/{id}
+      method: PATCH
+    delete:
+      path: /ip/firewall/filter/{id}
+      method: DELETE
+  ip_firewall_nat:
+    create:
+      path: /ip/firewall/nat
+      method: PUT
+    read:
+      path: /ip/firewall/nat/{id}
+      method: GET
+    update:
+      path: /ip/firewall/nat/{id}
+      method: PATCH
+    delete:
+      path: /ip/firewall/nat/{id}
+      method: DELETE
+  ip_firewall_mangle:
+    create:
+      path: /ip/firewall/mangle
+      method: PUT
+    read:
+      path: /ip/firewall/mangle/{id}
+      method: GET
+    update:
+      path: /ip/firewall/mangle/{id}
+      method: PATCH
+    delete:
+      path: /ip/firewall/mangle/{id}
+      method: DELETE
+  ip_firewall_raw:
+    create:
+      path: /ip/firewall/raw
+      method: PUT
+    read:
+      path: /ip/firewall/raw/{id}
+      method: GET
+    update:
+      path: /ip/firewall/raw/{id}
+      method: PATCH
+    delete:
+      path: /ip/firewall/raw/{id}
+      method: DELETE

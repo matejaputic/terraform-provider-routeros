@@ -6,6 +6,10 @@ terraform.tfplan
 terraform.tfstate
 bin/
 dist/
+.local/
+__pycache__/
+*.pyc
+/schemas/adaptation.lock
 modules-dev/
 /pkg/
 website/.vagrant

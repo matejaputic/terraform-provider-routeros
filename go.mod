@@ -1,4 +1,4 @@
-module github.com/hashicorp/terraform-provider-scaffolding-framework
+module github.com/matejaputic/terraform-provider-routeros
 
 go 1.25.8
 

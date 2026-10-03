@@ -1,0 +1,18 @@
+{
+  "info": {
+    "title": "Synthetic fixture",
+    "version": "7.25rc1"
+  },
+  "openapi": "3.0.3",
+  "paths": {
+    "/ip/address": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Synthetic"
+          }
+        }
+      }
+    }
+  }
+}

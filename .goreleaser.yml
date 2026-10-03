@@ -1,10 +1,7 @@
 # Visit https://goreleaser.com for documentation on how to customize this
 # behavior.
 version: 2
-before:
-  hooks:
-    # this is just an example and not a requirement for provider building/publishing
-    - go mod tidy
+project_name: terraform-provider-routeros
 builds:
 - env:
     # goreleaser does not work with CGO, it could also complicate
@@ -15,7 +12,7 @@ builds:
   flags:
     - -trimpath
   ldflags:
-    - '-s -w -X main.version={{.Version}} -X main.commit={{.Commit}}'
+    - '-s -w -X main.version={{.Version}}'
   goos:
     - freebsd
     - windows
@@ -65,7 +62,7 @@ release:
   extra_files:
     - glob: 'terraform-registry-manifest.json'
       name_template: '{{ .ProjectName }}_{{ .Version }}_manifest.json'
-  # If you want to manually examine the release before its live, uncomment this line:
-  # draft: true
+  # Publication remains blocked by the release workflow pending acceptance gates.
+  draft: true
 changelog:
   disable: true

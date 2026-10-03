@@ -9,7 +9,7 @@ import (
 	"log"
 
 	"github.com/hashicorp/terraform-plugin-framework/providerserver"
-	"github.com/hashicorp/terraform-provider-scaffolding-framework/internal/provider"
+	"github.com/matejaputic/terraform-provider-routeros/internal/provider"
 )
 
 var (
@@ -28,10 +28,8 @@ func main() {
 	flag.Parse()
 
 	opts := providerserver.ServeOpts{
-		// TODO: Update this string with the published name of your provider.
-		// Also update the tfplugindocs generate command to either remove the
-		// -provider-name flag or set its value to the updated provider name.
-		Address: "registry.terraform.io/hashicorp/scaffolding",
+		// Development identity; Registry authorization is a separate release gate.
+		Address: "registry.terraform.io/matejaputic/routeros",
 		Debug:   debug,
 	}
 

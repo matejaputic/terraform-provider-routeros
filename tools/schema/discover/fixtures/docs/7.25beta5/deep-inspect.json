@@ -1,0 +1,10 @@
+{
+  "_meta": {
+    "architecture": "x86",
+    "generatedAt": "2026-10-01T23:00:00Z",
+    "version": "7.25beta5"
+  },
+  "ip": {
+    "_type": "path"
+  }
+}

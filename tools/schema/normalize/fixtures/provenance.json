@@ -1,0 +1,9 @@
+{
+  "extraction": "Unmodified OpenAPI info/components and two IP-address path objects, JSON reserialized. Not the complete upstream artifact.",
+  "fixture_sha256": "4973770d1eb4b2ddaca1a1be43f6cf860097e10c05f36b354fbb9ecf1a056312",
+  "kind": "extracted-offline-fixture",
+  "repository": "tikoci/restraml",
+  "schema_path": "docs/7.24.5/openapi.json",
+  "upstream_full_sha256": "0d9530302562663f095eda82b4e370867b17d910576d0a9aea919c2247ca7fbe",
+  "upstream_sha": "adc39cdbb0a3062aa93cc7aff50ef1185a1c0b0a"
+}

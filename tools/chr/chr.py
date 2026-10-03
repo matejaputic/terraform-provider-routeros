@@ -1,0 +1,200 @@
+#!/usr/bin/env python3
+"""Disposable x86 CHR in QEMU/TCG on OrbStack's Docker engine.
+No privileged container, bridged LAN, KVM, production-router inputs, or secret logs.
+"""
+import argparse
+import base64
+import hashlib
+import json
+import os
+from pathlib import Path
+import secrets
+import shutil
+import socket
+import subprocess
+import time
+import urllib.error
+import urllib.request
+import zipfile
+
+ROOT = Path(__file__).resolve().parents[2]
+STATE = ROOT / '.local/chr'
+NAME = 'routeros-provider-step1'
+IMAGE = 'routeros-provider-chr:step1'
+VERSION = '7.24.5'
+ZIP_HASH = '16f07222a3213352c9c4fbea4f4dec6a8ffb78fdc0fa5e398c23103ed357c6eb'
+DISK_HASH = 'e4caf173aceb497433c5fc285bffee09c1e6761dfe0e658a2b178970249fc2d2'
+URL = f'https://download.mikrotik.com/routeros/{VERSION}/chr-{VERSION}.img.zip'
+CREDENTIALS = STATE / 'credentials.json'
+
+def run(*args, **kwargs):
+    return subprocess.run(args, check=True, cwd=ROOT, **kwargs)
+
+def digest(path):
+    with path.open('rb') as f:
+        return hashlib.file_digest(f, 'sha256').hexdigest()
+
+class Console:
+    def __init__(self):
+        deadline = time.monotonic() + 30
+        while True:
+            try:
+                self.s = socket.create_connection(('127.0.0.1', 18723), timeout=2)
+                break
+            except OSError:
+                if time.monotonic() > deadline:
+                    raise RuntimeError('CHR console did not become ready') from None
+                time.sleep(1)
+        self.s.settimeout(1)
+        self.buffer = b''
+
+    def send(self, text):
+        # CRLF submits twice on RouterOS's serial console, including passwords.
+        self.s.sendall(text.encode() + b'\r')
+
+    def expect(self, token, timeout=120):
+        deadline = time.monotonic() + timeout
+        while time.monotonic() < deadline:
+            if token in self.buffer:
+                before, self.buffer = self.buffer.split(token, 1)
+                return before
+            try:
+                chunk = self.s.recv(65536)
+                if not chunk:
+                    raise RuntimeError('CHR console disconnected')
+                self.buffer += chunk
+            except TimeoutError:
+                pass
+        # Never print console buffers: they can contain secrets.
+        raise RuntimeError('Timed out waiting for CHR console prompt')
+
+    def command(self, command):
+        self.send(command)
+        response = self.expect(b'] > ', 30)
+        if any(x in response.lower() for x in (b'failure:', b'bad command', b'syntax error', b'expected end')):
+            raise RuntimeError('CHR bootstrap command failed: ' + command.split(' ')[0])
+
+
+def request(credentials, path, method='GET', data=None):
+    auth = base64.b64encode((credentials['username'] + ':' + credentials['password']).encode()).decode()
+    r = urllib.request.Request(credentials['hosturl'] + '/rest' + path,
+                               method=method,
+                               data=json.dumps(data).encode() if data is not None else None,
+                               headers={'Authorization': 'Basic ' + auth, 'Content-Type': 'application/json'})
+    with urllib.request.urlopen(r, timeout=10) as response:
+        body = response.read()
+        return json.loads(body) if body else None
+
+
+def start():
+    if subprocess.check_output(['docker', 'context', 'show'], text=True).strip() != 'orbstack':
+        raise RuntimeError('Select the OrbStack Docker context first; no other Docker engine will be modified')
+    existing = subprocess.check_output(['docker', 'ps', '-a', '--filter', 'name=^/' + NAME + '$', '--format', '{{.Names}}'], text=True).strip()
+    if existing:
+        raise RuntimeError('Disposable container already exists; run stop before starting a fresh fixture')
+    STATE.mkdir(parents=True, exist_ok=True, mode=0o700)
+    os.chmod(STATE, 0o700)
+    archive = STATE / f'chr-{VERSION}.img.zip'
+    if not archive.exists():
+        run('curl', '-fsSL', '--retry', '2', '--max-time', '240', URL, '-o', str(archive))
+    if digest(archive) != ZIP_HASH:
+        raise RuntimeError('CHR archive hash mismatch; refusing boot')
+    original = STATE / f'chr-{VERSION}.img'
+    with zipfile.ZipFile(archive) as z:
+        # Extract only the expected name, not arbitrary archive paths.
+        with z.open(original.name) as source, original.open('wb') as target:
+            shutil.copyfileobj(source, target)
+    if digest(original) != DISK_HASH:
+        raise RuntimeError('CHR disk hash mismatch; refusing boot')
+    disk = STATE / 'test.img'
+    shutil.copyfile(original, disk)
+    os.chmod(disk, 0o666)  # unprivileged container UID; parent is mode 0700
+    with (STATE / 'build.log').open('w') as log:
+        run('docker', 'build', '--platform', 'linux/arm64', '-t', IMAGE, 'tools/chr', stdout=log, stderr=subprocess.STDOUT)
+    credentials = {'hosturl': 'http://127.0.0.1:18780', 'username': 'admin', 'password': secrets.token_hex(24)}
+    fd = os.open(CREDENTIALS, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+    with os.fdopen(fd, 'w') as f:
+        json.dump(credentials, f)
+    run('docker', 'run', '-d', '--name', NAME, '--label', 'routeros-provider.disposable=true',
+        '--platform', 'linux/arm64', '--cpus', '2', '--memory', '1536m', '--cap-drop', 'ALL',
+        '--security-opt', 'no-new-privileges', '-p', '127.0.0.1:18780:8080', '-p', '127.0.0.1:18723:2323',
+        '-v', str(disk) + ':/chr.img', IMAGE, '-machine', 'pc', '-accel', 'tcg', '-m', '1024', '-smp', '1',
+        '-drive', 'file=/chr.img,format=raw,if=ide', '-netdev', 'user,id=net0,restrict=on,hostfwd=tcp:0.0.0.0:8080-:80',
+        '-device', 'virtio-net-pci,netdev=net0',
+        '-netdev', 'hubport,id=testnet,hubid=1', '-device', 'virtio-net-pci,netdev=testnet,mac=52:54:00:00:00:02',
+        '-display', 'none', '-monitor', 'none',
+        '-serial', 'tcp:0.0.0.0:2323,server=on,wait=off', '-no-reboot', stdout=subprocess.DEVNULL)
+    try:
+        console = Console()
+        console.send('')
+        console.expect(b'Login: ')
+        console.send('admin+ct')
+        console.expect(b'Password: ')
+        console.send('')
+        console.expect(b'[Y/n]: ')
+        console.send('n')
+        console.expect(b'new password> ')
+        console.send(credentials['password'])
+        console.expect(b'repeat new password> ')
+        console.send(credentials['password'])
+        console.expect(b'] > ')
+        # The default DHCP client supplies 10.0.2.15/24; restricted slirp omits
+        # a default gateway, so add one for replies to Docker's hostfwd peer.
+        for command in [
+            '/ip route add dst-address=0.0.0.0/0 gateway=10.0.2.2',
+            '/interface bridge add name=tf-test',
+            '/interface ethernet set [find default-name=ether2] name=tf-port',
+            '/ip service set www disabled=no available-from=0.0.0.0/0 port=80',
+            '/ip service disable ftp', '/ip service disable ssh', '/ip service disable telnet',
+            '/ip service disable winbox', '/ip service disable api', '/ip service disable api-ssl',
+            '/ip service disable www-ssl', '/ip service disable reverse-proxy',
+            '/system identity set name=terraform-acceptance-chr',
+        ]:
+            console.command(command)
+        console.s.close()
+        deadline = time.monotonic() + 60
+        while True:
+            try:
+                target = request(credentials, '/system/resource')
+                break
+            except (OSError, urllib.error.URLError):
+                if time.monotonic() > deadline:
+                    raise RuntimeError('CHR REST did not become ready') from None
+                time.sleep(1)
+        if target.get('version') != '7.24.5 (stable)' or target.get('architecture-name') != 'x86_64':
+            raise RuntimeError('CHR version/architecture mismatch')
+        provenance = {k: target.get(k) for k in ('version', 'architecture-name', 'board-name')}
+        packages = request(credentials, '/system/package')
+        provenance.update({'archive_sha256': ZIP_HASH, 'disk_sha256': DISK_HASH, 'accelerator': 'tcg', 'engine': 'OrbStack Docker',
+                           'packages': [{k: p.get(k) for k in ('name', 'version', 'disabled')} for p in packages]})
+        (STATE / 'target.json').write_text(json.dumps(provenance, indent=2) + '\n')
+        print('Ready: disposable RouterOS 7.24.5 x86_64 at 127.0.0.1:18780 (credentials not displayed)')
+    except BaseException:
+        stop()
+        raise
+
+
+def test():
+    credentials = json.loads(CREDENTIALS.read_text())
+    env = os.environ.copy()
+    env.update(ROS_HOSTURL=credentials['hosturl'], ROS_USERNAME=credentials['username'], ROS_PASSWORD=credentials['password'],
+               ROS_TEST_DISPOSABLE='1', TF_ACC='1', TF_ACC_TERRAFORM_VERSION='1.14.0', GOTOOLCHAIN='go1.25.8')
+    run('go', 'test', './internal/provider', '-run', '^TestAcc(IPAddress|Collections|DHCPRouting|Firewall|FirewallFamilies)CHR$', '-count=1', '-v', '-timeout', '5m', env=env)
+
+
+def stop():
+    # Refuse to remove a same-name container not owned by this harness.
+    p = subprocess.run(['docker', 'inspect', '--format', '{{index .Config.Labels "routeros-provider.disposable"}}', NAME], capture_output=True, text=True)
+    if p.returncode == 0:
+        if p.stdout.strip() != 'true':
+            raise RuntimeError('Refusing cleanup of a container not owned by this harness')
+        run('docker', 'rm', '-f', NAME, stdout=subprocess.DEVNULL)
+    CREDENTIALS.unlink(missing_ok=True)
+    (STATE / 'test.img').unlink(missing_ok=True)
+    print('Disposable CHR stopped; credentials and mutable test disk removed')
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('command', choices=['start', 'test', 'stop'])
+    args = parser.parse_args()
+    {'start': start, 'test': test, 'stop': stop}[args.command]()
