@@ -241,7 +241,8 @@ def fingerprints(root):
     for directory in ('internal', 'tools', '.github/workflows'):
         for p in (root / directory).rglob('*'):
             if (p.is_file() and not any(part in ('bin', '__pycache__', '.local') for part in p.relative_to(root).parts)
-                    and (p.name.endswith('_test.go') or p.suffix in ('.py', '.yml', '.json'))):
+                    and (p.name.endswith('_test.go') or p.suffix in ('.py', '.yml', '.json')
+                         or (directory == 'tools' and p.suffix == '.go'))):
                 verification_files.append(p)
     return {'provenance': provenance, 'sources': {str(p.relative_to(root)): digest(p.read_bytes()) for p in sorted(files)},
             'verification': {str(p.relative_to(root)): digest(p.read_bytes()) for p in sorted(verification_files)}}

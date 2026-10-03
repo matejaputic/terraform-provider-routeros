@@ -22,7 +22,7 @@ jobs:
         with:
           python-version: '3.14.7'
       - name: Offline discovery, adaptation and independent specification gates
-        run: make testdiscovery testschema testmaintenance
+        run: make testdiscovery testschema testmaintenance testcontracts
       - name: Deterministic official generation
         run: |
           bash tools/schema/generate.sh
