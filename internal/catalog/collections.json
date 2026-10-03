@@ -2517,5 +2517,273 @@
     "booleans": [
       "force"
     ]
+  },
+  {
+    "revision": "collections-curated-v5",
+    "resource_name": "ip_dhcp_relay",
+    "wire_path": "/ip/dhcp-relay",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "sensitive": false,
+        "force_new": false,
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "codec": "wire-string",
+        "provenance": "reviewed pinned SDK schema and immutable upstream; live evidence tracked separately"
+      },
+      {
+        "name": "name",
+        "wire": "name",
+        "type": "string",
+        "mode": "required",
+        "sensitive": false,
+        "force_new": true,
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "codec": "wire-string",
+        "provenance": "reviewed pinned SDK schema and immutable upstream; live evidence tracked separately"
+      },
+      {
+        "name": "interface",
+        "wire": "interface",
+        "type": "string",
+        "mode": "required",
+        "sensitive": false,
+        "force_new": false,
+        "enum_kind": "device-instance-removed",
+        "validators": null,
+        "default": null,
+        "codec": "wire-string",
+        "provenance": "reviewed pinned SDK schema and immutable upstream; live evidence tracked separately"
+      },
+      {
+        "name": "dhcp_server",
+        "wire": "dhcp-server",
+        "type": "string",
+        "mode": "required",
+        "sensitive": false,
+        "force_new": false,
+        "enum_kind": "none",
+        "validators": "maintained ValidateConfig: validateDHCPRelayString",
+        "default": null,
+        "codec": "wire-string",
+        "provenance": "reviewed pinned SDK schema and immutable upstream; live evidence tracked separately"
+      },
+      {
+        "name": "disabled",
+        "wire": "disabled",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "sensitive": false,
+        "force_new": false,
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "codec": "yes/no",
+        "provenance": "reviewed pinned SDK schema and immutable upstream; live evidence tracked separately"
+      },
+      {
+        "name": "local_address",
+        "wire": "local-address",
+        "type": "string",
+        "mode": "computed_optional",
+        "sensitive": false,
+        "force_new": false,
+        "enum_kind": "none",
+        "validators": "maintained ValidateConfig: validateDHCPRelayString",
+        "default": "server-owned",
+        "codec": "wire-string",
+        "provenance": "reviewed pinned SDK schema and immutable upstream; live evidence tracked separately"
+      },
+      {
+        "name": "add_relay_info",
+        "wire": "add-relay-info",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "sensitive": false,
+        "force_new": false,
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "codec": "yes/no",
+        "provenance": "reviewed pinned SDK schema and immutable upstream; live evidence tracked separately"
+      },
+      {
+        "name": "invalid",
+        "wire": "invalid",
+        "type": "boolean",
+        "mode": "computed",
+        "sensitive": false,
+        "force_new": false,
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "codec": "yes/no",
+        "provenance": "reviewed pinned SDK schema and immutable upstream; live evidence tracked separately"
+      }
+    ],
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "required": [
+      "name",
+      "interface",
+      "dhcp_server"
+    ],
+    "optional_computed": [
+      "disabled",
+      "local_address",
+      "add_relay_info"
+    ],
+    "computed": [
+      "id",
+      "invalid"
+    ],
+    "booleans": [
+      "disabled",
+      "add_relay_info",
+      "invalid"
+    ]
+  },
+  {
+    "revision": "collections-curated-v5",
+    "resource_name": "ip_dns_record",
+    "wire_path": "/ip/dns/static",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "sensitive": false,
+        "force_new": false,
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "codec": "wire-string",
+        "provenance": "reviewed pinned SDK schema and immutable upstream; live evidence tracked separately"
+      },
+      {
+        "name": "name",
+        "wire": "name",
+        "type": "string",
+        "mode": "required",
+        "sensitive": false,
+        "force_new": true,
+        "enum_kind": "none",
+        "validators": "maintained ValidateConfig: validateDNSAddressRecord",
+        "default": null,
+        "codec": "wire-string",
+        "provenance": "reviewed pinned SDK schema and immutable upstream; live evidence tracked separately"
+      },
+      {
+        "name": "type",
+        "wire": "type",
+        "type": "string",
+        "mode": "required",
+        "sensitive": false,
+        "force_new": true,
+        "enum_kind": "none",
+        "validators": "maintained ValidateConfig: validateDNSAddressRecord",
+        "default": null,
+        "codec": "wire-string",
+        "provenance": "reviewed pinned SDK schema and immutable upstream; live evidence tracked separately"
+      },
+      {
+        "name": "address",
+        "wire": "address",
+        "type": "string",
+        "mode": "required",
+        "sensitive": false,
+        "force_new": false,
+        "enum_kind": "none",
+        "validators": "maintained ValidateConfig: validateDNSAddressRecord",
+        "default": null,
+        "codec": "wire-string",
+        "provenance": "reviewed pinned SDK schema and immutable upstream; live evidence tracked separately"
+      },
+      {
+        "name": "comment",
+        "wire": "comment",
+        "type": "string",
+        "mode": "computed_optional",
+        "sensitive": false,
+        "force_new": false,
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "codec": "wire-string",
+        "provenance": "reviewed pinned SDK schema and immutable upstream; live evidence tracked separately",
+        "read_default": ""
+      },
+      {
+        "name": "disabled",
+        "wire": "disabled",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "sensitive": false,
+        "force_new": false,
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "codec": "yes/no",
+        "provenance": "reviewed pinned SDK schema and immutable upstream; live evidence tracked separately"
+      },
+      {
+        "name": "match_subdomain",
+        "wire": "match-subdomain",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "sensitive": false,
+        "force_new": false,
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "codec": "yes/no",
+        "provenance": "reviewed pinned SDK schema and immutable upstream; live evidence tracked separately",
+        "read_default": "false"
+      },
+      {
+        "name": "dynamic",
+        "wire": "dynamic",
+        "type": "boolean",
+        "mode": "computed",
+        "sensitive": false,
+        "force_new": false,
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "codec": "yes/no",
+        "provenance": "reviewed pinned SDK schema and immutable upstream; live evidence tracked separately"
+      }
+    ],
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "required": [
+      "name",
+      "type",
+      "address"
+    ],
+    "optional_computed": [
+      "comment",
+      "disabled",
+      "match_subdomain"
+    ],
+    "computed": [
+      "id",
+      "dynamic"
+    ],
+    "booleans": [
+      "disabled",
+      "match_subdomain",
+      "dynamic"
+    ]
   }
 ]

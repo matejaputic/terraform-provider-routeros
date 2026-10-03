@@ -1,6 +1,6 @@
 # Resource coverage
 
-Runtime revision `framework-rest-preview-v8`; official generator models/schemas with maintained Framework lifecycles. Eighteen resources registered, zero data sources. Coverage is expanding in batches, not inferred from OpenAPI inventory.
+Runtime revision `framework-rest-preview-v9`; official generator models/schemas with maintained Framework lifecycles. Twenty resources registered, zero data sources. Coverage is expanding in batches, not inferred from OpenAPI inventory.
 
 | Resource | Implementation | Terraform mock CRUD/import | Live CHR CRUD/import |
 | --- | --- | --- | --- |
@@ -22,6 +22,13 @@ Runtime revision `framework-rest-preview-v8`; official generator models/schemas 
 | `routeros_ip_firewall_raw` | Reviewed notrack/drop/basic actions + explicit ordering | Pass | Pass |
 | `routeros_ip_dhcp_client_option` | Reviewed option lifecycle + default-object guard | Pass | Pass (7.24.5 / 7.25beta5) |
 | `routeros_ip_dhcp_server_option` | Reviewed option lifecycle + raw readback/force omission | Pass | Pass (7.24.5 / 7.25beta5) |
+| `routeros_ip_dhcp_relay` | Disabled-capable relay subset + IPv4 destinations | Pass | Pass (both base lanes, dirty-source focused suite) |
+| `routeros_ip_dns_record` | Named A/AAAA subset + replacement type | Pass | Pass (both base lanes, dirty-source focused suite) |
+
+Batch A remains **2/107 integrated, not complete**. See the sole current
+[constructor tracker and contract limitations](batch-a.md) and
+[hash-bound focused evidence](../../schemas/batch-a-integration-validation.json).
+The following clean-source statements retain their historical scope.
 
 The new option wave and all original regressions passed from clean revision `06d10a6` on both local pinned lanes; [wave evidence](../../schemas/dhcp-options-wave-validation.json) records exact bindings. The historical hosted evidence below remains specific to its original sixteen-resource revision.
 
@@ -29,7 +36,7 @@ Original baseline live scope: disposable **RouterOS 7.24.5 x86_64/base CHR** on 
 
 ## Maintained collection behavior
 
-`internal/catalog/collections.json` authorizes seventeen concrete collection paths and fields. This file is embedded in the runtime and bound into discovery producer fingerprints; schema inventory never authorizes registration. The snapshot adapter supports the reviewed string/bool/int64/string-list types, aliases, decimal/boolean/CSV codecs and name replacement. Official OpenAPI and Framework generators produce eighteen models/schemas. Independent gates require the complete exact resource/field/type/mode set before staged files replace last-good output. Name replacement modifiers and all lifecycle methods remain maintained code.
+`internal/catalog/collections.json` authorizes nineteen concrete collection paths and fields. This file is embedded in the runtime and bound into discovery producer fingerprints; schema inventory never authorizes registration. The snapshot adapter supports the reviewed string/bool/int64/string-list types, aliases, decimal/boolean/CSV codecs and name replacement. Official OpenAPI and Framework generators produce twenty models/schemas. Independent gates require the complete exact resource/field/type/mode set before staged files replace last-good output. Name replacement modifiers and all lifecycle methods remain maintained code.
 
 CRUD uses PUT create, filtered collection GET by `.id`, PATCH update and DELETE item. Import accepts only an internal `*HEX` ID. Actual collection absence/typed 404 is distinguished from auth, malformed, partial and transport failures. Refresh commits a temporary model only after successful validation. Writes contain configured writable fields only, never computed state or IDs. Failed create-read preserves a known ID/partial state. Built-in or dynamic records cannot be imported/managed/deleted through this ordinary collection lifecycle. Changing a `name` replaces the object, matching the reviewed reference behavior, rather than silently renaming dependencies.
 

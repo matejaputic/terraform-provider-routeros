@@ -28,6 +28,8 @@ func collectionConstructors() []func() resource.Resource {
 		"ip_firewall_raw":        generated.IpFirewallRawResourceSchema,
 		"ip_dhcp_client_option":  generated.IpDhcpClientOptionResourceSchema,
 		"ip_dhcp_server_option":  generated.IpDhcpServerOptionResourceSchema,
+		"ip_dhcp_relay":          generated.IpDhcpRelayResourceSchema,
+		"ip_dns_record":          generated.IpDnsRecordResourceSchema,
 	}
 	result := []func() resource.Resource{}
 	for _, policy := range catalog.Collections() {

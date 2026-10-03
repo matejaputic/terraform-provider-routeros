@@ -110,6 +110,11 @@ func (r *collectionResource) ValidateConfig(ctx context.Context, q resource.Vali
 	}
 }
 func (r *collectionResource) validate(ctx context.Context, values map[string]attr.Value, apply bool) error {
+	if r.policy.Name == "ip_dns_record" {
+		if err := validateDNSAddressRecord(values); err != nil {
+			return err
+		}
+	}
 	for _, f := range r.policy.Fields {
 		v := values[f.Name]
 		if v == nil {
@@ -149,6 +154,11 @@ func (r *collectionResource) validate(ctx context.Context, values map[string]att
 			}
 			if r.orderedFirewall() && f.Name == "place_before" && text != "" && !itemID.MatchString(text) {
 				return fmt.Errorf("place_before requires *HEX or empty string")
+			}
+			if r.policy.Name == "ip_dhcp_relay" {
+				if err := validateDHCPRelayString(f.Name, text); err != nil {
+					return err
+				}
 			}
 			if f.Name == "protocol_mode" && !oneOf(text, "none", "stp", "rstp", "mstp") {
 				return fmt.Errorf("protocol_mode must be none, stp, rstp or mstp")
@@ -455,6 +465,17 @@ func (r *collectionResource) refresh(ctx context.Context, values map[string]attr
 			}
 			if b.ValueBool() {
 				return nil, false, fmt.Errorf("system-owned or dynamic objects are not manageable")
+			}
+		}
+	}
+	if r.policy.Name == "ip_dns_record" {
+		// Refuse imported regex/firewall-list actions absent from this contract.
+		for _, key := range []string{"regexp", "address-list"} {
+			if raw, present := rows[0][key]; present {
+				text, ok := raw.(string)
+				if !ok || text != "" {
+					return nil, false, fmt.Errorf("DNS record has an unmanaged action or matcher")
+				}
 			}
 		}
 	}

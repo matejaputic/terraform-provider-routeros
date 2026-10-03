@@ -4,10 +4,69 @@ The owner authorized completion of the **fixed 107-constructor Batch A**. The
 milestone target remains **125 total implemented constructors**. It has not been
 reduced, completed, or substituted with a smaller wave.
 
-**Current implementation accounting: 0/107 new public resources completed;
-18 existing constructors remain registered.** No new resource schemas/models,
-public registrations, live certification, maintenance-candidate certification or
-release certification are claimed by this foundation checkpoint.
+**Current integration accounting: 2/107 new public resources registered;
+20 total constructors. The 107-resource milestone remains incomplete.** Both
+new resources have official generated bindings, maintained collection behavior,
+race/mock coverage and focused live evidence on both pinned base lanes. Their
+live evidence binds dirty-source file hashes, not a clean-source revision.
+No expanded maintenance-candidate or release certification is claimed.
+
+## Constructor-level implementation tracker
+
+All 105 other frozen ledger IDs remain pending in every column; the frozen ledger
+is planning evidence and remains unchanged. This table is the sole current tracker.
+
+| Constructor / canonical name | Contract | Lifecycle | Official generation | Registration | Mock/race | Live base lanes |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ResourceDhcpRelay` / `routeros_ip_dhcp_relay` | reviewed subset below | CRUD, import, replacement name | both pinned generators | public | passed | 7.24.5 and 7.25beta5 passed, dirty source |
+| `ResourceDnsRecord` / `routeros_ip_dns_record` | A/AAAA subset below | CRUD, import, replacement name/type | both pinned generators | public | passed | 7.24.5 and 7.25beta5 passed, dirty source |
+
+Reviewed contracts live in `internal/catalog/collections.json`, reproduced by
+`tools/schema/normalize/build_policy.py`. The normalizer's explicit path and
+replacement/default checks, independent specification/file-set gates, official
+Framework bindings, public registration and CHR test selector were extended
+alongside each contract. No custom schema/model emitter was added. Existing
+baseline policy objects and generated files retain their contracts.
+
+- **DHCP relay:** required replacement-owned name, interface and canonical CSV
+  of unique unicast IPv4 DHCP destinations; optional/computed disabled,
+  add-relay-info and local-address (including `0.0.0.0` auto-selection); computed
+  invalid status. No duration, VRF or option-82 remote-ID contract is exposed.
+  Destination list order/spelling must already be canonical. Disabled relays on
+  the disconnected test bridge are used; no DHCP forwarding is certified.
+- **DNS address record:** required replacement-owned lowercase ASCII hostname
+  and A/AAAA type, required canonical address matching the type; optional/computed
+  comment, disabled and match-subdomain; computed dynamic status. Empty comments
+  clear. RouterOS omits false match-subdomain, so its explicit reviewed read
+  default is false. Live testing caught the initial missing default, then both
+  lanes passed after the correction. Regex/firewall-list actions and dynamic or
+  built-in imports fail closed. No other record types, TTL/duration, regex,
+  forwarding or firewall side effects are exposed; no DNS traffic is certified.
+
+Both reuse collection preflight ownership checks, atomic readback, omission,
+failed-write recovery and import ID handling. New Terraform mocks exercise CRUD,
+import, subsequent empty plans, drift repair, external deletion recreation and
+replacement, with malformed/ownership/configuration negatives. Real target
+suites use disabled owned objects, remove them, and guest cleanup removes all
+mutable disks and temporary credentials even on failure.
+
+Evidence: `schemas/batch-a-integration-validation.json`. Example:
+`examples/dhcp-relay-dns/main.tf`. The expanded twenty-resource maintenance
+baseline is explicit (`semantic-identity-v2-dhcp-relay-dns-address`); semantic
+identity/delta rejection rules are unchanged. Current reference reconciliation,
+capability matrix and provenance are refreshed; historical checkpoint evidence
+and the frozen 107/107 partition remain untouched.
+
+Observed integration gates: complete `make test` (including race/real Terraform
+mocks; provider package measured 80.758s under its existing 120s bound), new
+per-constructor write/read-failure recovery regressions, tooling gates, vet/build,
+pinned Terraform example formatting, actionlint and diff checks pass. A repeat
+of both official generators is byte-identical across all twenty bindings and
+adapted artifacts. All eighteen baseline descriptors and generated files were
+independently compared with the accepted baseline and remain byte-identical.
+Full clean-source live matrix, expanded immutable maintenance replay/no-op,
+consolidated hosted verification and the remaining 105 implementations are still
+required. The foundation notes below describe the earlier e9ee547 checkpoint.
 
 ## Frozen ledger and immutable observations
 
@@ -115,14 +174,15 @@ estimate or a substitute for larger batching and actual implementation work.
 
 No new CHR guests, credentials, hosted runs or pushes were created for this
 foundation work. No full 125-resource regression or final maintenance replay has
-occurred. Existing eighteen-resource historical evidence is unchanged.
+occurred. Existing eighteen-resource historical evidence is unchanged. These foundation
+check results predate the public integrations recorded above.
 
 ## Resume the same milestone
 
 1. Integrate reviewed singleton contracts through both official generators and
    exact independent gates; keep `/set` runtime versus observed item PATCH
    distinctions explicit. Do not expose the shared helper without those bindings.
-2. Execute **all** 88 collection rows by family with useful reviewed fields and
+2. Execute the **remaining 86 of 88** collection rows by family with useful reviewed fields and
    maintained validators/codecs/ownership/readback/recovery. Resolve VETH and
    SSH-key special cases inside the original roster.
 3. Add per-resource real mock/negative scenarios and safe applicable target lanes;

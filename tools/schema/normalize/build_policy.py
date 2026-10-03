@@ -28,12 +28,29 @@ resources['ip_firewall_raw']=('/ip/firewall/raw',list(base))
 option_fields=[('name','string','required'),('code','integer','required'),('value','string','required'),('raw-value','string','computed')]
 resources['ip_dhcp_client_option']=('/ip/dhcp-client/option',list(option_fields))
 resources['ip_dhcp_server_option']=('/ip/dhcp-server/option',option_fields+[('comment','string','computed_optional'),('force','boolean','computed_optional')])
+# Batch A DHCP relay: deliberately omit duration and option-82 payload fields
+# until their canonicalization and clearing semantics have dedicated review.
+resources['ip_dhcp_relay']=('/ip/dhcp-relay',[
+ ('name','string','required'),('interface','string','required'),
+ ('dhcp-server','string','required'),('disabled','boolean','computed_optional'),
+ ('local-address','string','computed_optional'),('add-relay-info','boolean','computed_optional'),
+ ('invalid','boolean','computed')])
+# Batch A named address DNS records: A/AAAA only; no regex, forwarding,
+# dynamic firewall address-list actions, or duration canonicalization.
+resources['ip_dns_record']=('/ip/dns/static',[
+ ('name','string','required'),('type','string','required'),('address','string','required'),
+ ('comment','string','computed_optional'),('disabled','boolean','computed_optional'),
+ ('match-subdomain','boolean','computed_optional'),('dynamic','boolean','computed')])
 policies=[]
 for name,(path,items) in resources.items():
  attrs=[]
  for wire,kind,mode in [('.id','string','computed')]+items:
   tf='id' if wire=='.id' else wire.replace('-','_')
   attrs.append({'name':tf,'wire':wire,'type':kind,'mode':mode,'sensitive':False,'force_new':wire=='name','enum_kind':'device-instance-removed' if wire in ('interface','bridge','list','include','exclude','next-pool') else 'none','validators':None,'default':'server-owned' if mode=='computed_optional' else None,'codec':'csv' if kind=='array' else 'yes/no' if kind=='boolean' else 'decimal' if kind=='integer' else 'wire-string','provenance':'reviewed pinned SDK schema and immutable upstream; live evidence tracked separately'})
+  if name=='ip_dhcp_relay' and tf in ('dhcp_server','local_address'): attrs[-1]['validators']='maintained ValidateConfig: validateDHCPRelayString'
+  if name=='ip_dns_record' and tf in ('name','type','address'): attrs[-1]['validators']='maintained ValidateConfig: validateDNSAddressRecord'
+  if name=='ip_dns_record' and tf=='type': attrs[-1]['force_new']=True
+  if name=='ip_dns_record' and tf=='match_subdomain': attrs[-1]['read_default']='false'
   if name in ('ip_firewall_filter','ip_firewall_nat','ip_firewall_mangle','ip_firewall_raw') and tf=='place_before': attrs[-1]['codec']='placement'
   if name in ('ip_firewall_filter','ip_firewall_nat','ip_firewall_mangle','ip_firewall_raw') and tf in ('src_address_list','dst_address_list','to_addresses','new_connection_mark','new_packet_mark'): attrs[-1]['read_default']=''
   if tf in ('comment','include','exclude'): attrs[-1]['read_default']=''

@@ -389,6 +389,61 @@
 			}
 		},
 		{
+			"name": "ip_dhcp_relay",
+			"schema": {
+				"attributes": [
+					{
+						"name": "add_relay_info",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "dhcp_server",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "interface",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "local_address",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "invalid",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
 			"name": "ip_dhcp_server",
 			"schema": {
 				"attributes": [
@@ -622,6 +677,61 @@
 					},
 					{
 						"name": "raw_value",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_dns_record",
+			"schema": {
+				"attributes": [
+					{
+						"name": "address",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "match_subdomain",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "type",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "dynamic",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "id",
 						"string": {
 							"computed_optional_required": "computed"
 						}

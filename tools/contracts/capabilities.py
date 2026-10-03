@@ -131,6 +131,7 @@ def matrix(bundle, descriptors):
                       'internal/provider/firewall_order.go', 'internal/provider/firewall_actions.go',
                       'internal/provider/firewall_config_validation.go', 'internal/provider/firewall_address.go',
                       'internal/provider/recovery.go', 'internal/provider/validators.go',
+                      'internal/provider/dhcp_relay.go', 'internal/provider/dns_record.go',
                       'internal/catalog/collections.go', 'internal/catalog/ip_address.go']
     codec_helpers = {'wire-string': 'payload/decodeField (or maintained IP address lifecycle)',
                      'yes/no': 'strictWireBool/decodeField', 'decimal': 'payload/decodeField',

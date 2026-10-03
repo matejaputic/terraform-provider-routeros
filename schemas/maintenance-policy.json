@@ -1,12 +1,12 @@
 {
   "automatic_offline_candidate_rule": "semantic identity after approved normalization; only field provenance and identity-list order may differ",
-  "baseline_descriptor_sha256": "459ca116e82a30e17bcefe322a6c97bcbd03dd13210a5ee23e6b7509337ecd37",
+  "baseline_descriptor_sha256": "b6606a94ca81419f227926f3d19dc4249cede3ba65b2cea7f5c2b6918b0e835f",
   "format": "routeros-maintenance-policy@1",
   "lifecycle_path_id_codec_type_mode_default_validator_sensitivity_replacement_changes": "review-required",
   "novel_keys": "review-required",
   "publication": "not authorized",
   "raw_upstream_semantics": "not certified by public-contract identity",
-  "revision": "semantic-identity-v1",
+  "revision": "semantic-identity-v2-dhcp-relay-dns-address",
   "schema_expansion": "review-required",
   "state_migration": "not authorized",
   "tested_receipt": "requires separately verified corresponding-version live evidence"

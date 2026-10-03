@@ -235,3 +235,29 @@ resources:
     delete:
       path: /ip/dhcp-server/option/{id}
       method: DELETE
+  ip_dhcp_relay:
+    create:
+      path: /ip/dhcp-relay
+      method: PUT
+    read:
+      path: /ip/dhcp-relay/{id}
+      method: GET
+    update:
+      path: /ip/dhcp-relay/{id}
+      method: PATCH
+    delete:
+      path: /ip/dhcp-relay/{id}
+      method: DELETE
+  ip_dns_record:
+    create:
+      path: /ip/dns/static
+      method: PUT
+    read:
+      path: /ip/dns/static/{id}
+      method: GET
+    update:
+      path: /ip/dns/static/{id}
+      method: PATCH
+    delete:
+      path: /ip/dns/static/{id}
+      method: DELETE
