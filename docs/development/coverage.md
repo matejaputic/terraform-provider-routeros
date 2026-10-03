@@ -20,8 +20,10 @@ Runtime revision `framework-rest-preview-v8`; official generator models/schemas 
 | `routeros_ip_firewall_nat` | Reviewed NAT targets/actions + explicit ordering | Pass | Pass |
 | `routeros_ip_firewall_mangle` | Connection/packet marking + explicit ordering | Pass | Pass |
 | `routeros_ip_firewall_raw` | Reviewed notrack/drop/basic actions + explicit ordering | Pass | Pass |
-| `routeros_ip_dhcp_client_option` | Reviewed option lifecycle + default-object guard | Pass | 7.24.5 development run passed; clean-revision lanes pending |
-| `routeros_ip_dhcp_server_option` | Reviewed option lifecycle + raw readback/force omission | Pass | 7.24.5 development run passed; clean-revision lanes pending |
+| `routeros_ip_dhcp_client_option` | Reviewed option lifecycle + default-object guard | Pass | Pass (7.24.5 / 7.25beta5) |
+| `routeros_ip_dhcp_server_option` | Reviewed option lifecycle + raw readback/force omission | Pass | Pass (7.24.5 / 7.25beta5) |
+
+The new option wave and all original regressions passed from clean revision `06d10a6` on both local pinned lanes; [wave evidence](../../schemas/dhcp-options-wave-validation.json) records exact bindings. The historical hosted evidence below remains specific to its original sixteen-resource revision.
 
 Original baseline live scope: disposable **RouterOS 7.24.5 x86_64/base CHR** on OrbStack Docker/QEMU TCG. At clean source revision `93d3527`, the complete five-suite/sixteen-resource configuration acceptance also passed on pinned **7.25beta5 x86_64/base**, locally and on isolated GitHub-hosted QEMU/TCG; the baseline passed again in both environments. [Hosted evidence](../../schemas/hosted-chr-validation.json) binds exact targets, enabled packages, image/recipe hashes and run URLs. This is source-revision lifecycle evidence, not proof for a newly generated maintenance candidate or released binary. No other version, architecture, extra package lane, native API transport or SDK-state migration is newly certified. Each resource exposes a reviewed field subset, **not every reference-provider field**. Read the individual schema docs; unknown attributes produce Terraform diagnostics rather than silent omissions.
 

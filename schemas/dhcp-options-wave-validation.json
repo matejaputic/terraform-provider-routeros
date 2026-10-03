@@ -1,0 +1,75 @@
+{
+  "format": "routeros-resource-wave-validation@1",
+  "wave": "dhcp-client-server-options",
+  "provider_revision": "06d10a653af935cc99dc6635b968217c255909f7",
+  "source_tree_clean": true,
+  "registered_resources": 18,
+  "registered_data_sources": 0,
+  "new_resources": ["routeros_ip_dhcp_client_option", "routeros_ip_dhcp_server_option"],
+  "remaining_reference_constructors": 214,
+  "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+  "upstream_sha": "adc39cdbb0a3062aa93cc7aff50ef1185a1c0b0a",
+  "offline_checks": {
+    "make_test": "passed",
+    "python_tests": 110,
+    "go_race_mock": "passed",
+    "provider_and_inspector_vet": "passed",
+    "provider_build": "passed",
+    "official_generation_repeated_byte_identical": true,
+    "actionlint_version": "v1.7.7",
+    "actionlint": "passed"
+  },
+  "live_acceptance": {
+    "scope": "all six suites / eighteen resource configuration lifecycles from the committed source revision, not snapshot-generated candidates or release binaries",
+    "test_pattern": "^TestAcc(IPAddress|Collections|DHCPRouting|DHCPOptions|Firewall|FirewallFamilies)CHR$",
+    "terraform_version": "1.14.0",
+    "recipes_sha256": "66e454ac48fcedfd25aaea1885f584abef67229f2dfbcee79d6cebf8f365eb31",
+    "lanes": [
+      {
+        "version": "7.24.5",
+        "rest_version": "7.24.5 (stable)",
+        "architecture": "x86_64",
+        "flavor": "base",
+        "engine": "OrbStack Docker",
+        "accelerator": "tcg",
+        "packages": [{"name": "routeros", "version": "7.24.5", "disabled": "false"}],
+        "target_sha256": "4ccfc3e82fd5a854b7af34552a3f458a09c443adf08f3fe0f2095b024b1e9258",
+        "archive_sha256": "16f07222a3213352c9c4fbea4f4dec6a8ffb78fdc0fa5e398c23103ed357c6eb",
+        "disk_sha256": "e4caf173aceb497433c5fc285bffee09c1e6761dfe0e658a2b178970249fc2d2",
+        "result": "passed",
+        "guest_credentials_mutable_disk_removed": true
+      },
+      {
+        "version": "7.25beta5",
+        "rest_version": "7.25beta5",
+        "architecture": "x86_64",
+        "flavor": "base",
+        "engine": "OrbStack Docker",
+        "accelerator": "tcg",
+        "packages": [{"name": "routeros", "version": "7.25beta5", "disabled": "false"}],
+        "target_sha256": "505677333018da0e1d2f4027e6d6652f7c5306f5b9e529d7e98e464a0ae607dd",
+        "archive_sha256": "5b61cbbb457755985ae334a99cc4455c05d4bf6b966e56c3d8734c76b629130c",
+        "disk_sha256": "0894045d5386188b685dcff78740fa0980022a95d738a608df608ee1b920f228",
+        "result": "passed",
+        "guest_credentials_mutable_disk_removed": true
+      }
+    ]
+  },
+  "maintenance_replay": {
+    "scope": "offline discovered/generated only; no tested/published receipts",
+    "verification_inputs_sha256": "e80c92b0f0a475c47a6ac8dabe05e2801f4cc74c6942c4738fb5e000e95473cf",
+    "run_id": "20261003T151233Z-2bde90b5",
+    "candidates": [
+      {"version": "7.25beta5", "flavor": "base", "key": "dad99d0f3bc4368de41163e61648d226d2fe2d346c7e3aebead248fadbf15d35", "status": "generated"},
+      {"version": "7.24.5", "flavor": "base", "key": "4140c66214a31fd84501c778bacce5a7168d5899bcc220a53622090291ba8aac", "status": "generated"}
+    ],
+    "repeat_run_id": "20261003T151559Z-7e942e13",
+    "repeat_outcome": "unchanged"
+  },
+  "limitations": [
+    "Reviewed field subsets, not full reference parity or aliases",
+    "Options remain unattached; no DHCP exchange, packet processing or full value-expression grammar certified",
+    "No native API, other architecture/package/version or SDK-state migration certified",
+    "No generated-candidate live receipt, durable checkpoint storage, release binary or publication certified"
+  ]
+}

@@ -25,4 +25,10 @@ Initial owned 7.24.5 x86_64/base probes confirmed string/hex value roundtrip, co
 
 Add typed validation/negative-read/ownership/recovery tests and real Terraform mock CRUD/import/empty-plan/update/clearing/replacement/drift tests. Add `TestAccDHCPOptionsCHR` to the explicit full-suite selector, using unique `tf-coverage-` names, independent state and exact disposable-version/architecture guards. Validate both pinned versions with all original regression suites. Records remain unreferenced, and the entire guest/credentials/mutable disk must be removed after every outcome.
 
-Evidence and exact completion status will be recorded after actual tests; initial probes are not full lifecycle acceptance or generated-candidate release certification.
+## Completed validation
+
+At clean revision `06d10a653af935cc99dc6635b968217c255909f7`, all six suites covering all eighteen registered resources passed locally on both pinned **7.24.5 and 7.25beta5 x86_64/base** guests. Both guests, credentials and mutable disks were removed. The DHCP option suite verifies literal-to-hex/code updates, raw readback, omitted false force, force true/false, comment clearing, both imports, empty second plans/applies, out-of-band server-option drift repair, deleted client-option recreation and both name replacements.
+
+`make test` passed 110 Python tooling tests and Go race/mock coverage, plus provider/inspector vet, build, byte-identical repeated official generation and actionlint. The clean-source immutable maintenance replay generated stable/base and beta/base offline candidates and an intact repeat returned unchanged. Fail-closed delta tests remain intact against the explicitly expanded baseline. See [`schemas/dhcp-options-wave-validation.json`](../../schemas/dhcp-options-wave-validation.json).
+
+Coverage is now **18 of 232 constructors**, with **214 constructors remaining** (aliases/data sources separately tracked). These are source-revision configuration lifecycle and offline-generation results, not live acceptance of a snapshot-generated maintenance candidate, a release binary or DHCP exchange. Hosted results for the final pushed revision must be observed separately.

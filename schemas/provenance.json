@@ -16,7 +16,7 @@
   "default_fixture_sha256": "0557a4a54ed2ea2abc3d1392006ebef0367ea96cc7ccc53ecd889e6b07685767",
   "exposed_resources": ["routeros_ip_address", "routeros_interface_bridge", "routeros_interface_bridge_port", "routeros_interface_vlan", "routeros_interface_list", "routeros_interface_list_member", "routeros_ip_pool", "routeros_ip_dhcp_server_network", "routeros_ip_dhcp_server", "routeros_ip_dhcp_server_lease", "routeros_ip_route", "routeros_ip_firewall_addr_list", "routeros_ip_firewall_filter", "routeros_ip_firewall_nat", "routeros_ip_firewall_mangle", "routeros_ip_firewall_raw", "routeros_ip_dhcp_client_option", "routeros_ip_dhcp_server_option"],
   "exposed_data_sources": [],
-  "live_acceptance": "historical sixteen-resource baseline passed on pinned 7.24.5 and 7.25beta5 x86_64/base CHR; DHCP option wave acceptance pending; source-revision evidence only",
+  "live_acceptance": "all eighteen resources passed locally on pinned 7.24.5 and 7.25beta5 x86_64/base CHR at clean source 06d10a653af935cc99dc6635b968217c255909f7; see schemas/dhcp-options-wave-validation.json; not generated-candidate/release-binary evidence",
   "codegen_spec_dependencies": {"openapi_generator": "v0.1.0", "framework_generator": "v0.2.0"},
   "migration_compatibility": "not claimed"
 }
