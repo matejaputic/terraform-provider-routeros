@@ -42,7 +42,7 @@ func testFirewallCHR(t *testing.T, family string) {
 	if e = c.Request(ctx, "GET", "/system/resource", "", nil, nil, &sys); e != nil {
 		t.Fatal(e)
 	}
-	if sys["version"] != "7.24.5 (stable)" || sys["architecture-name"] != "x86_64" {
+	if sys["version"] != expectedCHRVersion(t) || sys["architecture-name"] != "x86_64" {
 		t.Fatal("wrong lane")
 	}
 	cfg := func(comment, before string) string {

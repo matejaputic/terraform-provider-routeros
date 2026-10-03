@@ -22,9 +22,8 @@ STATE = ROOT / '.local/chr'
 NAME = 'routeros-provider-step1'
 IMAGE = 'routeros-provider-chr:step1'
 VERSION = '7.24.5'
-ZIP_HASH = '16f07222a3213352c9c4fbea4f4dec6a8ffb78fdc0fa5e398c23103ed357c6eb'
-DISK_HASH = 'e4caf173aceb497433c5fc285bffee09c1e6761dfe0e658a2b178970249fc2d2'
-URL = f'https://download.mikrotik.com/routeros/{VERSION}/chr-{VERSION}.img.zip'
+RECIPES_PATH = ROOT / 'tools/chr/recipes.json'
+RECIPES = json.loads(RECIPES_PATH.read_text())
 CREDENTIALS = STATE / 'credentials.json'
 
 def run(*args, **kwargs):
@@ -36,17 +35,28 @@ def digest(path):
 
 class Console:
     def __init__(self):
-        deadline = time.monotonic() + 30
-        while True:
-            try:
-                self.s = socket.create_connection(('127.0.0.1', 18723), timeout=2)
-                break
-            except OSError:
-                if time.monotonic() > deadline:
-                    raise RuntimeError('CHR console did not become ready') from None
-                time.sleep(1)
-        self.s.settimeout(1)
+        deadline = time.monotonic() + 120
         self.buffer = b''
+        self.events = set()
+        while time.monotonic() < deadline:
+            connection = None
+            try:
+                connection = socket.create_connection(('127.0.0.1', 18723), timeout=2)
+                connection.settimeout(2)
+                # Docker's host port can accept before QEMU's serial server is ready.
+                # Require actual serial bytes, not merely an accepted TCP socket.
+                connection.sendall(b'\r')
+                initial = connection.recv(65536)
+                if initial:
+                    self.s, self.buffer = connection, initial
+                    self.s.settimeout(1)
+                    return
+            except OSError:
+                pass
+            if connection is not None:
+                connection.close()
+            time.sleep(1)
+        raise RuntimeError('CHR console did not become ready') from None
 
     def send(self, text):
         # CRLF submits twice on RouterOS's serial console, including passwords.
@@ -63,6 +73,10 @@ class Console:
                 if not chunk:
                     raise RuntimeError('CHR console disconnected')
                 self.buffer += chunk
+                for token, event in ((b'Login:', 'login-prompt'), (b'Kernel panic', 'kernel-panic'),
+                                     (b'Rebooting', 'guest-reboot'), (b'No bootable device', 'no-boot-device')):
+                    if token in self.buffer:
+                        self.events.add(event)
             except TimeoutError:
                 pass
         # Never print console buffers: they can contain secrets.
@@ -100,7 +114,7 @@ def execution_platform(hosted=False):
     return 'linux/arm64', 'OrbStack Docker'
 
 
-def validate_packages(packages):
+def validate_packages(packages, version=VERSION):
     if not isinstance(packages, list) or not packages:
         raise RuntimeError('CHR package inventory is missing or malformed')
     enabled = []
@@ -113,18 +127,27 @@ def validate_packages(packages):
         if disabled in ('false', 'no', False):
             enabled.append(package)
     if (len(enabled) != 1 or enabled[0].get('name') != 'routeros'
-            or enabled[0].get('version') != VERSION):
+            or enabled[0].get('version') != version):
         raise RuntimeError('CHR enabled packages do not match the pinned base lane')
 
 
-def start(hosted=False):
+def start(hosted=False, version=VERSION):
+    if version not in RECIPES:
+        raise RuntimeError('No pinned acquisition recipe for this RouterOS version')
+    recipe = RECIPES[version]
+    zip_hash, disk_hash = recipe['archive_sha256'], recipe['disk_sha256']
+    url = f'https://download.mikrotik.com/routeros/{version}/chr-{version}.img.zip'
     platform, engine = execution_platform(hosted)
     existing = subprocess.check_output(['docker', 'ps', '-a', '--filter', 'name=^/' + NAME + '$', '--format', '{{.Names}}'], text=True).strip()
     if existing:
         raise RuntimeError('Disposable container already exists; run stop before starting a fresh fixture')
     STATE.mkdir(parents=True, exist_ok=True, mode=0o700)
     os.chmod(STATE, 0o700)
-    archive = STATE / f'chr-{VERSION}.img.zip'
+    # Never let an unsuccessful new attempt inherit a previous successful proof.
+    (STATE / 'target.json').unlink(missing_ok=True)
+    (STATE / 'acceptance-evidence.json').unlink(missing_ok=True)
+    (STATE / 'diagnostics.json').unlink(missing_ok=True)
+    archive = STATE / f'chr-{version}.img.zip'
     if not archive.exists():
         partial = archive.with_suffix('.download')
         try:
@@ -132,20 +155,20 @@ def start(hosted=False):
             # Prefer bounded HTTP/1.1 acquisition, never a different/unverified image.
             run('curl', '--http1.1', '-fsSL', '--connect-timeout', '15',
                 '--retry', '2', '--retry-all-errors', '--retry-max-time', '300',
-                '--max-time', '180', URL, '-o', str(partial))
-            if digest(partial) != ZIP_HASH:
+                '--max-time', '180', url, '-o', str(partial))
+            if digest(partial) != zip_hash:
                 raise RuntimeError('CHR downloaded archive hash mismatch; refusing cache promotion')
             partial.replace(archive)
         finally:
             partial.unlink(missing_ok=True)
-    if digest(archive) != ZIP_HASH:
+    if digest(archive) != zip_hash:
         raise RuntimeError('CHR archive hash mismatch; refusing boot')
-    original = STATE / f'chr-{VERSION}.img'
+    original = STATE / f'chr-{version}.img'
     with zipfile.ZipFile(archive) as z:
         # Extract only the expected name, not arbitrary archive paths.
         with z.open(original.name) as source, original.open('wb') as target:
             shutil.copyfileobj(source, target)
-    if digest(original) != DISK_HASH:
+    if digest(original) != disk_hash:
         raise RuntimeError('CHR disk hash mismatch; refusing boot')
     disk = STATE / 'test.img'
     shutil.copyfile(original, disk)
@@ -202,26 +225,57 @@ def start(hosted=False):
                 if time.monotonic() > deadline:
                     raise RuntimeError('CHR REST did not become ready') from None
                 time.sleep(1)
-        if target.get('version') != '7.24.5 (stable)' or target.get('architecture-name') != 'x86_64':
+        if target.get('version') != recipe['target_version'] or target.get('architecture-name') != 'x86_64':
             raise RuntimeError('CHR version/architecture mismatch')
         provenance = {k: target.get(k) for k in ('version', 'architecture-name', 'board-name')}
         packages = request(credentials, '/system/package')
-        validate_packages(packages)
-        provenance.update({'archive_sha256': ZIP_HASH, 'disk_sha256': DISK_HASH, 'accelerator': 'tcg', 'engine': engine,
+        validate_packages(packages, version)
+        provenance.update({'archive_sha256': zip_hash, 'disk_sha256': disk_hash,
+                           'recipes_sha256': digest(RECIPES_PATH),
+                           'accelerator': 'tcg', 'engine': engine,
                            'packages': [{k: p.get(k) for k in ('name', 'version', 'disabled')} for p in packages]})
         (STATE / 'target.json').write_text(json.dumps(provenance, indent=2) + '\n')
-        print('Ready: disposable RouterOS 7.24.5 x86_64 at 127.0.0.1:18780 (credentials not displayed)')
+        print(f'Ready: disposable RouterOS {version} x86_64 at 127.0.0.1:18780 (credentials not displayed)')
     except BaseException:
-        stop()
+        # Never save Docker logs or console buffers. These whitelisted fields
+        # diagnose guest exit/OOM/readiness without disclosing bootstrap secrets.
+        try:
+            diagnostics = {'format': 'routeros-chr-diagnostics@1', 'version': version,
+                           'console_events': sorted(console.events) if 'console' in locals() else []}
+            result = subprocess.run(['docker', 'inspect', '--format', '{{json .State}}', NAME],
+                                    capture_output=True, text=True, timeout=10)
+            if result.returncode == 0:
+                status = json.loads(result.stdout)
+                diagnostics['container'] = {k: status.get(k) for k in ('Running', 'ExitCode', 'OOMKilled', 'Dead')}
+            (STATE / 'diagnostics.json').write_text(json.dumps(diagnostics, indent=2) + '\n')
+        except Exception:
+            pass  # Diagnostic failures must never prevent guest/credential cleanup.
+        finally:
+            stop()
         raise
 
 
-def test():
+def test(version=VERSION):
+    (STATE / 'acceptance-evidence.json').unlink(missing_ok=True)
+    if version not in RECIPES:
+        raise RuntimeError('No pinned test recipe for this RouterOS version')
+    provenance = json.loads((STATE / 'target.json').read_text())
+    if provenance.get('version') != RECIPES[version]['target_version']:
+        raise RuntimeError('Acceptance recipe differs from the booted target')
     credentials = json.loads(CREDENTIALS.read_text())
     env = os.environ.copy()
     env.update(ROS_HOSTURL=credentials['hosturl'], ROS_USERNAME=credentials['username'], ROS_PASSWORD=credentials['password'],
-               ROS_TEST_DISPOSABLE='1', TF_ACC='1', TF_ACC_TERRAFORM_VERSION='1.14.0', GOTOOLCHAIN='go1.25.8')
-    run('go', 'test', './internal/provider', '-run', '^TestAcc(IPAddress|Collections|DHCPRouting|Firewall|FirewallFamilies)CHR$', '-count=1', '-v', '-timeout', '5m', env=env)
+               ROS_TEST_DISPOSABLE='1', ROS_TEST_VERSION=version, TF_ACC='1', TF_ACC_TERRAFORM_VERSION='1.14.0', GOTOOLCHAIN='go1.25.8')
+    pattern = '^TestAcc(IPAddress|Collections|DHCPRouting|Firewall|FirewallFamilies)CHR$'
+    run('go', 'test', './internal/provider', '-run', pattern, '-count=1', '-v', '-timeout', '5m', env=env)
+    evidence = {'format': 'routeros-chr-acceptance@1', 'success': True,
+                'provider_revision': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
+                'source_tree_clean': not subprocess.check_output(['git', 'status', '--porcelain'], cwd=ROOT),
+                'target_sha256': digest(STATE / 'target.json'), 'recipes_sha256': digest(RECIPES_PATH),
+                'version': version, 'architecture': 'x86_64', 'flavor': 'base',
+                'test_pattern': pattern, 'terraform_version': '1.14.0',
+                'limitations': 'configuration lifecycle only; no traffic processing or release binary verification'}
+    (STATE / 'acceptance-evidence.json').write_text(json.dumps(evidence, indent=2) + '\n')
 
 
 def stop():
@@ -239,8 +293,12 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('command', choices=['start', 'test', 'stop'])
     parser.add_argument('--hosted', action='store_true', help='Permit only this repository GitHub-hosted runner')
+    parser.add_argument('--version', choices=sorted(RECIPES), default=VERSION,
+                        help='Pinned acquisition/acceptance recipe; defaults to baseline')
     args = parser.parse_args()
     if args.command == 'start':
-        start(hosted=args.hosted)
+        start(hosted=args.hosted, version=args.version)
+    elif args.command == 'test':
+        test(version=args.version)
     else:
-        {'test': test, 'stop': stop}[args.command]()
+        stop()

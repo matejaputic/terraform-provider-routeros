@@ -36,7 +36,12 @@ jobs:
       - run: go vet ./...
       - run: go build .
       - run: terraform fmt -check -recursive examples
-  baseline-chr:
+  pinned-chr:
+    name: CHR acceptance (${{ matrix.version }} x86_64/base)
+    strategy:
+      fail-fast: false
+      matrix:
+        version: ['7.24.5', '7.25beta5']
     needs: verify
     if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'matejaputic/terraform-provider-routeros'
     runs-on: ubuntu-24.04
@@ -55,14 +60,16 @@ jobs:
       - uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548 # v6.1.0
         with:
           python-version: '3.14.7'
-      - name: Disposable pinned baseline CHR full sixteen-resource acceptance
+      - name: Disposable pinned-version CHR full sixteen-resource acceptance
+        env:
+          CHR_VERSION: ${{ matrix.version }}
         shell: bash
         run: |
           trap 'python3 tools/chr/chr.py stop' EXIT
           trap 'exit 130' INT
           trap 'exit 143' TERM
-          python3 tools/chr/chr.py start --hosted
-          python3 tools/chr/chr.py test
+          python3 tools/chr/chr.py start --hosted --version "$CHR_VERSION"
+          python3 tools/chr/chr.py test --version "$CHR_VERSION"
       - name: Ensure owned guest, credentials and mutable disk are removed
         if: always()
         run: python3 tools/chr/chr.py stop
@@ -70,9 +77,11 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: baseline-chr-${{ github.run_id }}-${{ github.run_attempt }}
+          name: chr-${{ matrix.version }}-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
             .local/chr/target.json
+            .local/chr/acceptance-evidence.json
+            .local/chr/diagnostics.json
             .local/chr/build.log
           if-no-files-found: warn
           retention-days: 90

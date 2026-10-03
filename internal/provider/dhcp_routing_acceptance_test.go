@@ -32,7 +32,7 @@ func TestAccDHCPRoutingCHR(t *testing.T) {
 	if e = c.Request(context.Background(), "GET", "/system/resource", "", nil, nil, &sys); e != nil {
 		t.Fatal(e)
 	}
-	if sys["version"] != "7.24.5 (stable)" || sys["architecture-name"] != "x86_64" {
+	if sys["version"] != expectedCHRVersion(t) || sys["architecture-name"] != "x86_64" {
 		t.Fatal("wrong target lane")
 	}
 	cfg := func(comment string) string { return dhcpRoutingConfig(`provider "routeros" {}`, comment) }

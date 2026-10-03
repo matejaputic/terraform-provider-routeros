@@ -35,7 +35,7 @@ func TestAccIPAddressCHR(t *testing.T) {
 	if e = c.Request(context.Background(), "GET", "/system/resource", "", nil, nil, &target); e != nil {
 		t.Fatal(e)
 	}
-	if target["version"] != "7.24.5 (stable)" || target["architecture-name"] != "x86_64" {
+	if target["version"] != expectedCHRVersion(t) || target["architecture-name"] != "x86_64" {
 		t.Fatalf("unexpected acceptance target: version=%v arch=%v", target["version"], target["architecture-name"])
 	}
 	t.Logf("CHR acceptance target: version=%v architecture=%v board=%v", target["version"], target["architecture-name"], target["board-name"])

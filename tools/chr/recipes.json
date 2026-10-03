@@ -1,0 +1,14 @@
+{
+  "7.24.5": {
+    "archive_sha256": "16f07222a3213352c9c4fbea4f4dec6a8ffb78fdc0fa5e398c23103ed357c6eb",
+    "disk_sha256": "e4caf173aceb497433c5fc285bffee09c1e6761dfe0e658a2b178970249fc2d2",
+    "target_version": "7.24.5 (stable)",
+    "acquisition": "official MikroTik CHR archive; existing reviewed baseline"
+  },
+  "7.25beta5": {
+    "archive_sha256": "5b61cbbb457755985ae334a99cc4455c05d4bf6b966e56c3d8734c76b629130c",
+    "disk_sha256": "0894045d5386188b685dcff78740fa0980022a95d738a608df608ee1b920f228",
+    "target_version": "7.25beta5 (testing)",
+    "acquisition": "official https://download.mikrotik.com/routeros/7.25beta5/chr-7.25beta5.img.zip downloaded 2026-10-03 using HTTP/1.1; hashes are acquisition pins, not live compatibility evidence"
+  }
+}

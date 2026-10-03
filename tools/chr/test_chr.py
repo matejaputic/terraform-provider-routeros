@@ -1,6 +1,8 @@
 import os
+from pathlib import Path
+import tempfile
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 import chr as harness
 
@@ -16,6 +18,32 @@ class ExecutionPlatformTests(unittest.TestCase):
                          [{'name': 'routeros', 'version': harness.VERSION}, {'name': 'extra', 'version': harness.VERSION}]):
             with self.subTest(packages=packages), self.assertRaises(RuntimeError):
                 harness.validate_packages(packages)
+
+    def test_console_retries_proxy_socket_until_actual_serial_bytes(self):
+        early = Mock()
+        early.recv.side_effect = ConnectionResetError()
+        ready = Mock()
+        ready.recv.return_value = b'Login: '
+        with patch.object(harness.socket, 'create_connection', side_effect=[early, ready]), patch.object(harness.time, 'sleep'):
+            console = harness.Console()
+        early.close.assert_called_once()
+        self.assertIs(console.s, ready)
+        self.assertEqual(console.buffer, b'Login: ')
+
+    def test_unknown_recipe_refused_before_execution(self):
+        with patch.object(harness, 'execution_platform') as engine:
+            with self.assertRaisesRegex(RuntimeError, 'pinned acquisition recipe'):
+                harness.start(version='unreviewed')
+            engine.assert_not_called()
+
+    def test_failed_test_cannot_retain_previous_success(self):
+        with tempfile.TemporaryDirectory() as name:
+            state = Path(name)
+            proof = state / 'acceptance-evidence.json'
+            proof.write_text('{"success": true}')
+            with patch.object(harness, 'STATE', state), self.assertRaises(RuntimeError):
+                harness.test(version='unreviewed')
+            self.assertFalse(proof.exists())
 
     def test_local_context_preserved(self):
         with patch.object(harness.subprocess, 'check_output', return_value='orbstack\n'):

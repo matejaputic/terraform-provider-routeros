@@ -34,7 +34,7 @@ func TestAccCollectionsCHR(t *testing.T) {
 	if e := c.Request(context.Background(), "GET", "/system/resource", "", nil, nil, &system); e != nil {
 		t.Fatal(e)
 	}
-	if system["version"] != "7.24.5 (stable)" || system["architecture-name"] != "x86_64" {
+	if system["version"] != expectedCHRVersion(t) || system["architecture-name"] != "x86_64" {
 		t.Fatal("unexpected target lane")
 	}
 	cfg := func(comment string) string { return networkingConfig(`provider "routeros" {}`, comment) }
