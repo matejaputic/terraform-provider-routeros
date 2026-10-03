@@ -100,6 +100,23 @@ def execution_platform(hosted=False):
     return 'linux/arm64', 'OrbStack Docker'
 
 
+def validate_packages(packages):
+    if not isinstance(packages, list) or not packages:
+        raise RuntimeError('CHR package inventory is missing or malformed')
+    enabled = []
+    for package in packages:
+        if not isinstance(package, dict):
+            raise RuntimeError('CHR package inventory is malformed')
+        disabled = package.get('disabled', 'false')
+        if type(disabled) not in (str, bool) or disabled not in ('false', 'no', False, 'true', 'yes', True):
+            raise RuntimeError('CHR package enabled state is unknown')
+        if disabled in ('false', 'no', False):
+            enabled.append(package)
+    if (len(enabled) != 1 or enabled[0].get('name') != 'routeros'
+            or enabled[0].get('version') != VERSION):
+        raise RuntimeError('CHR enabled packages do not match the pinned base lane')
+
+
 def start(hosted=False):
     platform, engine = execution_platform(hosted)
     existing = subprocess.check_output(['docker', 'ps', '-a', '--filter', 'name=^/' + NAME + '$', '--format', '{{.Names}}'], text=True).strip()
@@ -109,7 +126,18 @@ def start(hosted=False):
     os.chmod(STATE, 0o700)
     archive = STATE / f'chr-{VERSION}.img.zip'
     if not archive.exists():
-        run('curl', '-fsSL', '--retry', '2', '--max-time', '240', URL, '-o', str(archive))
+        partial = archive.with_suffix('.download')
+        try:
+            # HTTP/2 GETs were reset by the vendor CDN in both local and hosted runs.
+            # Prefer bounded HTTP/1.1 acquisition, never a different/unverified image.
+            run('curl', '--http1.1', '-fsSL', '--connect-timeout', '15',
+                '--retry', '2', '--retry-all-errors', '--retry-max-time', '300',
+                '--max-time', '180', URL, '-o', str(partial))
+            if digest(partial) != ZIP_HASH:
+                raise RuntimeError('CHR downloaded archive hash mismatch; refusing cache promotion')
+            partial.replace(archive)
+        finally:
+            partial.unlink(missing_ok=True)
     if digest(archive) != ZIP_HASH:
         raise RuntimeError('CHR archive hash mismatch; refusing boot')
     original = STATE / f'chr-{VERSION}.img'
@@ -178,10 +206,7 @@ def start(hosted=False):
             raise RuntimeError('CHR version/architecture mismatch')
         provenance = {k: target.get(k) for k in ('version', 'architecture-name', 'board-name')}
         packages = request(credentials, '/system/package')
-        enabled = [p for p in packages if p.get('disabled', 'false') in ('false', 'no', False)]
-        if (len(enabled) != 1 or enabled[0].get('name') != 'routeros'
-                or enabled[0].get('version') != VERSION):
-            raise RuntimeError('CHR enabled packages do not match the pinned base lane')
+        validate_packages(packages)
         provenance.update({'archive_sha256': ZIP_HASH, 'disk_sha256': DISK_HASH, 'accelerator': 'tcg', 'engine': engine,
                            'packages': [{k: p.get(k) for k in ('name', 'version', 'disabled')} for p in packages]})
         (STATE / 'target.json').write_text(json.dumps(provenance, indent=2) + '\n')

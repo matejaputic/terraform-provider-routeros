@@ -1,0 +1,46 @@
+{
+  "format": "routeros-hosted-recovery-validation@1",
+  "observed_date": "2026-10-03",
+  "provider_revision": "b55d7511297b82d0b7ae7a44362b9a4611c97ed2",
+  "upstream_sha": "adc39cdbb0a3062aa93cc7aff50ef1185a1c0b0a",
+  "verification_inputs_sha256": "f43f5fb85cd2bd9e41919a36566b67be3e01b7eb42987529dbc1d1976a0700d5",
+  "workflow_run": "https://github.com/matejaputic/terraform-provider-routeros/actions/runs/37125989726",
+  "run_conclusion": "success",
+  "generation_job": "https://github.com/matejaputic/terraform-provider-routeros/actions/runs/37125989726/job/111211263950",
+  "fresh_runner_job": "https://github.com/matejaputic/terraform-provider-routeros/actions/runs/37125989726/job/111212106877",
+  "fresh_runner_outcome": "unchanged",
+  "independent_download_restore": "passed inventory, snapshot, candidate identity and generated receipt verification",
+  "bundle_sha256": "80cc55a74ab45696b86fe27aff93ed981e1fc0ea97a9a52c9613f4501362b574",
+  "github_artifact": {
+    "id": 11275451993,
+    "name": "recovery-37125989726-1",
+    "transport_zip_sha256": "f72afc71f617fde0b952780417426352f7946a6327f23ff6fa040393ce7c45e2",
+    "size_in_bytes": 31151414,
+    "retention_days": 90,
+    "permanent_storage": false
+  },
+  "candidates": [
+    {
+      "version": "7.24.5",
+      "flavor": "base",
+      "schema_architecture": "x86",
+      "key": "57d0aa99eebb24f2aacbaa3c55e1d1db8c857d1d8636411cda52c9f96ae5aa47",
+      "schema_sha256": "0d9530302562663f095eda82b4e370867b17d910576d0a9aea919c2247ca7fbe",
+      "generated_evidence_sha256": "2d5b380f529b6acf8cdb9f2950c1012d364535256dba532842410931a863cf03"
+    },
+    {
+      "version": "7.25beta5",
+      "flavor": "base",
+      "schema_architecture": "x86",
+      "key": "e504feba23f66e76485bf51ec1bf2fc5e8840aee430ce2aa988629ec65710c8a",
+      "schema_sha256": "63e6923d4191a6337833db84ef2513a1b804714acb4f289a0ff747110e8abdcd",
+      "generated_evidence_sha256": "a753fae63aa3d8b22393f3854e908a1d7bb21036d7d393e709db8ba16cc15871"
+    }
+  ],
+  "limitations": [
+    "Immutable historical publication replay, not an observed cron or upstream event",
+    "Only discovered and generated receipts; no corresponding-target tested or published receipt",
+    "Fresh runner transfer within one run, not protected durable cross-run storage",
+    "Not a provider prerelease or Terraform Registry delivery"
+  ]
+}

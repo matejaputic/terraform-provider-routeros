@@ -6,6 +6,17 @@ import chr as harness
 
 
 class ExecutionPlatformTests(unittest.TestCase):
+    def test_pinned_base_enabled_packages(self):
+        for disabled in ('false', 'no', False):
+            harness.validate_packages([{'name': 'routeros', 'version': harness.VERSION, 'disabled': disabled}])
+        for packages in (None, [], ['malformed'],
+                         [{'name': 'routeros', 'version': 'wrong'}],
+                         [{'name': 'routeros', 'version': harness.VERSION, 'disabled': 'unknown'}],
+                         [{'name': 'routeros', 'version': harness.VERSION, 'disabled': 0}],
+                         [{'name': 'routeros', 'version': harness.VERSION}, {'name': 'extra', 'version': harness.VERSION}]):
+            with self.subTest(packages=packages), self.assertRaises(RuntimeError):
+                harness.validate_packages(packages)
+
     def test_local_context_preserved(self):
         with patch.object(harness.subprocess, 'check_output', return_value='orbstack\n'):
             self.assertEqual(harness.execution_platform(), ('linux/arm64', 'OrbStack Docker'))
