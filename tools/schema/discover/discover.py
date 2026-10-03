@@ -231,6 +231,9 @@ def fingerprints(root):
     files = [root / 'go.mod', root / 'go.sum', root / 'tools/go.mod', root / 'tools/go.sum',
              root / 'schemas/ip-address-policy.json', root / 'internal/catalog/collections.json', root / 'schemas/generator-config.yml',
              root / 'tools/schema/discover/discover.py']
+    for name in ('schemas/maintenance-policy.json', 'schemas/wire-descriptors.json'):
+        if (root / name).is_file():
+            files.append(root / name)
     for directory in ('internal/client', 'internal/provider', 'internal/catalog', 'tools/schema/normalize', 'tools/schema/validate'):
         files.extend(p for pattern in ('*.go', '*.py') for p in (root / directory).rglob(pattern)
                      if not p.name.endswith('_test.go') and not p.name.startswith('test_') and 'fixtures' not in p.parts)

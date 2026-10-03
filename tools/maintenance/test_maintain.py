@@ -101,6 +101,77 @@ class MaintenanceTests(unittest.TestCase):
         self.reconcile()
         self.assertEqual(sum('generated' in e['stages'] for e in self.state()['candidates'].values()), 3)
 
+    def test_review_candidate_keeps_actionable_report_without_receipt(self):
+        def review(root, archive, candidate, manifest, snapshot, destination, log):
+            report = {'format': 'routeros-contract-delta@1', 'decision': 'review-required',
+                      'findings': [{'path': '/resources/routeros_ip_address/fields/address/type',
+                                    'kind': 'value-change'}]}
+            log.with_suffix('.contract-delta.json').write_bytes(m.discovery.encode(report))
+            raise m.MaintenanceError('contract delta requires review')
+        with self.assertRaises(m.MaintenanceError):
+            self.reconcile(producer=review)
+        summary = json.loads((self.output / 'latest-summary.json').read_text())
+        item = summary['candidates'][0]
+        self.assertEqual(item['status'], 'review-required')
+        self.assertTrue((self.output / item['review_artifact']).is_file())
+        self.assertTrue(all(set(e['stages']) == {'discovered'} for e in self.state()['candidates'].values()))
+        self.reconcile()
+        self.assertEqual(sum('generated' in e['stages'] for e in self.state()['candidates'].values()), 2)
+
+    def test_review_failed_force_preserves_successful_receipts(self):
+        self.reconcile()
+        before = m.inventory(self.output / 'candidates')
+        stages = self.state()['candidates']
+        def review(root, archive, candidate, manifest, snapshot, destination, log):
+            log.with_suffix('.contract-delta.json').write_bytes(m.discovery.encode({'decision': 'review-required'}))
+            raise m.MaintenanceError('review')
+        with self.assertRaises(m.MaintenanceError):
+            self.reconcile(force=True, producer=review)
+        self.assertEqual(before, m.inventory(self.output / 'candidates'))
+        self.assertEqual(stages, self.state()['candidates'])
+        self.assertEqual(self.reconcile()['outcome'], 'unchanged')
+
+    def test_reviewed_policy_changes_invalidate_candidate_and_verification_keys(self):
+        self.reconcile()
+        first = set(self.calls)
+        verification = m.verification_inputs(self.root)
+        path = self.root / 'schemas/maintenance-policy.json'
+        value = json.loads(path.read_text())
+        value['revision'] = 'reviewed-next-revision'
+        path.write_text(json.dumps(value))
+        self.commit(self.root)
+        self.assertNotEqual(verification, m.verification_inputs(self.root))
+        self.reconcile()
+        self.assertEqual(len(self.calls), 4)
+        self.assertFalse(first & set(self.calls[2:]))
+
+    def test_real_producer_delta_gate_stops_before_tests_or_binary(self):
+        archive = self.base / 'source.tar'
+        self.git(self.root, 'archive', '--format=tar', '--output=' + str(archive), 'HEAD')
+        log = self.base / 'candidate.log'
+        destination = self.base / 'candidate'
+        original = m.run
+        calls = []
+        def command(args, work, log, **kwargs):
+            calls.append(args)
+            if args[0] == 'bash':
+                path = work / 'schemas/wire-descriptors.json'
+                value = json.loads(path.read_text())
+                value['resources'][0]['fields'][0]['type'] = 'integer'
+                path.write_bytes(m.discovery.encode(value))
+            elif 'capabilities.py' in args[1]:
+                original(args, work, log, **kwargs)
+            else:
+                self.fail('tests/build must not run after rejected delta')
+        candidate = {'key': 'fixture', 'upstream_sha': 'fixture', 'schema_path': 'schema.json'}
+        with patch.object(m, 'run', command), self.assertRaises(m.MaintenanceError):
+            m.produce(self.root, archive, candidate, self.base / 'manifest.json', self.base,
+                      destination, log)
+        report = json.loads(log.with_suffix('.contract-delta.json').read_text())
+        self.assertEqual(report['decision'], 'review-required')
+        self.assertFalse(destination.exists())
+        self.assertEqual(len(calls), 3)
+
     def test_corrupt_artifact_or_evidence_cannot_be_noop(self):
         self.reconcile()
         key = self.calls[0]

@@ -57,7 +57,8 @@ def verification_inputs(root):
     files = subprocess.check_output(['git', 'ls-files', '-z'], cwd=root).decode().split('\0')
     included = [p for p in files if p and not p.endswith('.md')
                 and (p.startswith(('internal/', 'tools/', '.github/workflows/'))
-                     or p in ('GNUmakefile', 'go.mod', 'go.sum'))]
+                     or p in ('GNUmakefile', 'go.mod', 'go.sum',
+                              'schemas/maintenance-policy.json', 'schemas/wire-descriptors.json'))]
     return discovery.digest(discovery.encode({p: discovery.digest((root / p).read_bytes())
                                              for p in sorted(included)}))
 
@@ -104,6 +105,8 @@ def produce(root, archive, candidate, manifest, snapshot, destination, log):
         work = Path(name)
         with tarfile.open(archive) as source:
             source.extractall(work, filter='data')
+        baseline = work / '.approved-descriptors.json'
+        baseline.write_bytes((work / 'schemas/wire-descriptors.json').read_bytes())
         run(['bash', 'tools/schema/generate.sh', '--manifest', str(manifest), '--key', candidate['key'],
              '--input', str(snapshot / candidate['upstream_sha'] / candidate['schema_path'])], work, log)
         first = {str(p.relative_to(work)): discovery.digest(p.read_bytes())
@@ -115,6 +118,11 @@ def produce(root, archive, candidate, manifest, snapshot, destination, log):
                   for folder in ('schemas', 'internal/generated')
                   for p in (work / folder).rglob('*') if p.is_file() and p.name != 'adaptation.lock'}
         require(first == second, 'official generation is nondeterministic')
+        delta_report = log.with_suffix('.contract-delta.json')
+        run([sys.executable, 'tools/contracts/capabilities.py', 'delta', '--baseline', str(baseline),
+             '--candidate', str(work / 'schemas/wire-descriptors.json'),
+             '--output', str(delta_report)], work, log)
+        (work / 'schemas/contract-delta.json').write_bytes(delta_report.read_bytes())
         run(['make', 'test'], work, log)
         run(['go', 'vet', './...'], work, log)
         destination.mkdir(parents=True)
@@ -171,12 +179,21 @@ def reconcile(root, output, *, sha=None, repository=None, extra=False, nightly=F
                 # Force revalidates into a separate run directory; never overwrites a receipt/artifact.
                 destination = run_dir / candidate['key']
                 begin = time.monotonic()
-                producer(root, archive, candidate, manifest_path, snapshot, destination,
-                         run_dir / (candidate['key'] + '.log'))
+                try:
+                    producer(root, archive, candidate, manifest_path, snapshot, destination,
+                             run_dir / (candidate['key'] + '.log'))
+                except Exception:
+                    delta = run_dir / (candidate['key'] + '.contract-delta.json')
+                    if delta.is_file():
+                        decision = discovery.parse(delta.read_bytes()).get('decision')
+                        if decision == 'review-required':
+                            item.update(status='review-required', review_artifact=str(delta.relative_to(output)))
+                    raise
                 proof = {'format': FORMAT, 'candidate_key': candidate['key'], 'stage': 'generated',
                          'success': True, 'provider_revision': revision,
                          'verification_inputs_sha256': verification,
                          'checks': ['official-generators', 'exact-specification', 'deterministic-generation',
+                                    'reviewed-contract-delta',
                                     'tooling-tests', 'go-race-mock-tests', 'go-vet', 'go-build'],
                          'live_tested': False, 'published': False, 'artifacts': inventory(destination)}
                 proof_raw = discovery.encode(proof)
