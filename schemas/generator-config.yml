@@ -261,3 +261,1305 @@ resources:
     delete:
       path: /ip/dns/static/{id}
       method: DELETE
+  ip_dhcp_server_config:
+    create:
+      path: /ip/dhcp-server/config/set
+      method: POST
+    read:
+      path: /ip/dhcp-server/config
+      method: GET
+    update:
+      path: /ip/dhcp-server/config/set
+      method: POST
+  ip_firewall_connection_tracking:
+    create:
+      path: /ip/firewall/connection/tracking/set
+      method: POST
+    read:
+      path: /ip/firewall/connection/tracking
+      method: GET
+    update:
+      path: /ip/firewall/connection/tracking/set
+      method: POST
+  interface_bridge_settings:
+    create:
+      path: /interface/bridge/settings/set
+      method: POST
+    read:
+      path: /interface/bridge/settings
+      method: GET
+    update:
+      path: /interface/bridge/settings/set
+      method: POST
+  ip_ipsec_settings:
+    create:
+      path: /ip/ipsec/settings/set
+      method: POST
+    read:
+      path: /ip/ipsec/settings
+      method: GET
+    update:
+      path: /ip/ipsec/settings/set
+      method: POST
+  ip_neighbor_discovery_settings:
+    create:
+      path: /ip/neighbor/discovery-settings/set
+      method: POST
+    read:
+      path: /ip/neighbor/discovery-settings
+      method: GET
+    update:
+      path: /ip/neighbor/discovery-settings/set
+      method: POST
+  ip_settings:
+    create:
+      path: /ip/settings/set
+      method: POST
+    read:
+      path: /ip/settings
+      method: GET
+    update:
+      path: /ip/settings/set
+      method: POST
+  ip_tftp_settings:
+    create:
+      path: /ip/tftp/settings/set
+      method: POST
+    read:
+      path: /ip/tftp/settings
+      method: GET
+    update:
+      path: /ip/tftp/settings/set
+      method: POST
+  ip_traffic_flow:
+    create:
+      path: /ip/traffic-flow/set
+      method: POST
+    read:
+      path: /ip/traffic-flow
+      method: GET
+    update:
+      path: /ip/traffic-flow/set
+      method: POST
+  ip_traffic_flow_ipfix:
+    create:
+      path: /ip/traffic-flow/ipfix/set
+      method: POST
+    read:
+      path: /ip/traffic-flow/ipfix
+      method: GET
+    update:
+      path: /ip/traffic-flow/ipfix/set
+      method: POST
+  ipv6_settings:
+    create:
+      path: /ipv6/settings/set
+      method: POST
+    read:
+      path: /ipv6/settings
+      method: GET
+    update:
+      path: /ipv6/settings/set
+      method: POST
+  ip_nat_pmp:
+    create:
+      path: /ip/nat-pmp/set
+      method: POST
+    read:
+      path: /ip/nat-pmp
+      method: GET
+    update:
+      path: /ip/nat-pmp/set
+      method: POST
+  radius_incoming:
+    create:
+      path: /radius/incoming/set
+      method: POST
+    read:
+      path: /radius/incoming
+      method: GET
+    update:
+      path: /radius/incoming/set
+      method: POST
+  system_identity:
+    create:
+      path: /system/identity/set
+      method: POST
+    read:
+      path: /system/identity
+      method: GET
+    update:
+      path: /system/identity/set
+      method: POST
+  system_note:
+    create:
+      path: /system/note/set
+      method: POST
+    read:
+      path: /system/note
+      method: GET
+    update:
+      path: /system/note/set
+      method: POST
+  system_ntp_client:
+    create:
+      path: /system/ntp/client/set
+      method: POST
+    read:
+      path: /system/ntp/client
+      method: GET
+    update:
+      path: /system/ntp/client/set
+      method: POST
+  system_ntp_server:
+    create:
+      path: /system/ntp/server/set
+      method: POST
+    read:
+      path: /system/ntp/server
+      method: GET
+    update:
+      path: /system/ntp/server/set
+      method: POST
+  tool_mac_server:
+    create:
+      path: /tool/mac-server/set
+      method: POST
+    read:
+      path: /tool/mac-server
+      method: GET
+    update:
+      path: /tool/mac-server/set
+      method: POST
+  tool_mac_server_ping:
+    create:
+      path: /tool/mac-server/ping/set
+      method: POST
+    read:
+      path: /tool/mac-server/ping
+      method: GET
+    update:
+      path: /tool/mac-server/ping/set
+      method: POST
+  tool_mac_server_winbox:
+    create:
+      path: /tool/mac-server/mac-winbox/set
+      method: POST
+    read:
+      path: /tool/mac-server/mac-winbox
+      method: GET
+    update:
+      path: /tool/mac-server/mac-winbox/set
+      method: POST
+  system_certificate_scep_server:
+    create:
+      path: /certificate/scep-server
+      method: PUT
+    read:
+      path: /certificate/scep-server/{id}
+      method: GET
+    update:
+      path: /certificate/scep-server/{id}
+      method: PATCH
+    delete:
+      path: /certificate/scep-server/{id}
+      method: DELETE
+  ip_dhcp_client:
+    create:
+      path: /ip/dhcp-client
+      method: PUT
+    read:
+      path: /ip/dhcp-client/{id}
+      method: GET
+    update:
+      path: /ip/dhcp-client/{id}
+      method: PATCH
+    delete:
+      path: /ip/dhcp-client/{id}
+      method: DELETE
+  ip_dhcp_server_option_matcher:
+    create:
+      path: /ip/dhcp-server/matcher
+      method: PUT
+    read:
+      path: /ip/dhcp-server/matcher/{id}
+      method: GET
+    update:
+      path: /ip/dhcp-server/matcher/{id}
+      method: PATCH
+    delete:
+      path: /ip/dhcp-server/matcher/{id}
+      method: DELETE
+  ip_dhcp_server_option_set:
+    create:
+      path: /ip/dhcp-server/option/sets
+      method: PUT
+    read:
+      path: /ip/dhcp-server/option/sets/{id}
+      method: GET
+    update:
+      path: /ip/dhcp-server/option/sets/{id}
+      method: PATCH
+    delete:
+      path: /ip/dhcp-server/option/sets/{id}
+      method: DELETE
+  ip_dns_adlist:
+    create:
+      path: /ip/dns/adlist
+      method: PUT
+    read:
+      path: /ip/dns/adlist/{id}
+      method: GET
+    update:
+      path: /ip/dns/adlist/{id}
+      method: PATCH
+    delete:
+      path: /ip/dns/adlist/{id}
+      method: DELETE
+  ip_vrf:
+    create:
+      path: /ip/vrf
+      method: PUT
+    read:
+      path: /ip/vrf/{id}
+      method: GET
+    update:
+      path: /ip/vrf/{id}
+      method: PATCH
+    delete:
+      path: /ip/vrf/{id}
+      method: DELETE
+  ipv6_address:
+    create:
+      path: /ipv6/address
+      method: PUT
+    read:
+      path: /ipv6/address/{id}
+      method: GET
+    update:
+      path: /ipv6/address/{id}
+      method: PATCH
+    delete:
+      path: /ipv6/address/{id}
+      method: DELETE
+  ipv6_dhcp_client:
+    create:
+      path: /ipv6/dhcp-client
+      method: PUT
+    read:
+      path: /ipv6/dhcp-client/{id}
+      method: GET
+    update:
+      path: /ipv6/dhcp-client/{id}
+      method: PATCH
+    delete:
+      path: /ipv6/dhcp-client/{id}
+      method: DELETE
+  ipv6_dhcp_client_option:
+    create:
+      path: /ipv6/dhcp-client/option
+      method: PUT
+    read:
+      path: /ipv6/dhcp-client/option/{id}
+      method: GET
+    update:
+      path: /ipv6/dhcp-client/option/{id}
+      method: PATCH
+    delete:
+      path: /ipv6/dhcp-client/option/{id}
+      method: DELETE
+  ipv6_firewall_addr_list:
+    create:
+      path: /ipv6/firewall/address-list
+      method: PUT
+    read:
+      path: /ipv6/firewall/address-list/{id}
+      method: GET
+    update:
+      path: /ipv6/firewall/address-list/{id}
+      method: PATCH
+    delete:
+      path: /ipv6/firewall/address-list/{id}
+      method: DELETE
+  ipv6_firewall_filter:
+    create:
+      path: /ipv6/firewall/filter
+      method: PUT
+    read:
+      path: /ipv6/firewall/filter/{id}
+      method: GET
+    update:
+      path: /ipv6/firewall/filter/{id}
+      method: PATCH
+    delete:
+      path: /ipv6/firewall/filter/{id}
+      method: DELETE
+  ipv6_neighbor_discovery:
+    create:
+      path: /ipv6/nd
+      method: PUT
+    read:
+      path: /ipv6/nd/{id}
+      method: GET
+    update:
+      path: /ipv6/nd/{id}
+      method: PATCH
+    delete:
+      path: /ipv6/nd/{id}
+      method: DELETE
+  ipv6_route:
+    create:
+      path: /ipv6/route
+      method: PUT
+    read:
+      path: /ipv6/route/{id}
+      method: GET
+    update:
+      path: /ipv6/route/{id}
+      method: PATCH
+    delete:
+      path: /ipv6/route/{id}
+      method: DELETE
+  interface_6to4:
+    create:
+      path: /interface/6to4
+      method: PUT
+    read:
+      path: /interface/6to4/{id}
+      method: GET
+    update:
+      path: /interface/6to4/{id}
+      method: PATCH
+    delete:
+      path: /interface/6to4/{id}
+      method: DELETE
+  interface_bonding:
+    create:
+      path: /interface/bonding
+      method: PUT
+    read:
+      path: /interface/bonding/{id}
+      method: GET
+    update:
+      path: /interface/bonding/{id}
+      method: PATCH
+    delete:
+      path: /interface/bonding/{id}
+      method: DELETE
+  interface_bridge_vlan:
+    create:
+      path: /interface/bridge/vlan
+      method: PUT
+    read:
+      path: /interface/bridge/vlan/{id}
+      method: GET
+    update:
+      path: /interface/bridge/vlan/{id}
+      method: PATCH
+    delete:
+      path: /interface/bridge/vlan/{id}
+      method: DELETE
+  interface_dot1x_client:
+    create:
+      path: /interface/dot1x/client
+      method: PUT
+    read:
+      path: /interface/dot1x/client/{id}
+      method: GET
+    update:
+      path: /interface/dot1x/client/{id}
+      method: PATCH
+    delete:
+      path: /interface/dot1x/client/{id}
+      method: DELETE
+  interface_dot1x_server:
+    create:
+      path: /interface/dot1x/server
+      method: PUT
+    read:
+      path: /interface/dot1x/server/{id}
+      method: GET
+    update:
+      path: /interface/dot1x/server/{id}
+      method: PATCH
+    delete:
+      path: /interface/dot1x/server/{id}
+      method: DELETE
+  interface_gre6:
+    create:
+      path: /interface/gre6
+      method: PUT
+    read:
+      path: /interface/gre6/{id}
+      method: GET
+    update:
+      path: /interface/gre6/{id}
+      method: PATCH
+    delete:
+      path: /interface/gre6/{id}
+      method: DELETE
+  interface_l2tp_client:
+    create:
+      path: /interface/l2tp-client
+      method: PUT
+    read:
+      path: /interface/l2tp-client/{id}
+      method: GET
+    update:
+      path: /interface/l2tp-client/{id}
+      method: PATCH
+    delete:
+      path: /interface/l2tp-client/{id}
+      method: DELETE
+  interface_macvlan:
+    create:
+      path: /interface/macvlan
+      method: PUT
+    read:
+      path: /interface/macvlan/{id}
+      method: GET
+    update:
+      path: /interface/macvlan/{id}
+      method: PATCH
+    delete:
+      path: /interface/macvlan/{id}
+      method: DELETE
+  interface_ovpn_server:
+    create:
+      path: /interface/ovpn-server
+      method: PUT
+    read:
+      path: /interface/ovpn-server/{id}
+      method: GET
+    update:
+      path: /interface/ovpn-server/{id}
+      method: PATCH
+    delete:
+      path: /interface/ovpn-server/{id}
+      method: DELETE
+  interface_pppoe_client:
+    create:
+      path: /interface/pppoe-client
+      method: PUT
+    read:
+      path: /interface/pppoe-client/{id}
+      method: GET
+    update:
+      path: /interface/pppoe-client/{id}
+      method: PATCH
+    delete:
+      path: /interface/pppoe-client/{id}
+      method: DELETE
+  interface_pppoe_server:
+    create:
+      path: /interface/pppoe-server
+      method: PUT
+    read:
+      path: /interface/pppoe-server/{id}
+      method: GET
+    update:
+      path: /interface/pppoe-server/{id}
+      method: PATCH
+    delete:
+      path: /interface/pppoe-server/{id}
+      method: DELETE
+  interface_sstp_client:
+    create:
+      path: /interface/sstp-client
+      method: PUT
+    read:
+      path: /interface/sstp-client/{id}
+      method: GET
+    update:
+      path: /interface/sstp-client/{id}
+      method: PATCH
+    delete:
+      path: /interface/sstp-client/{id}
+      method: DELETE
+  interface_veth:
+    create:
+      path: /interface/veth
+      method: PUT
+    read:
+      path: /interface/veth/{id}
+      method: GET
+    update:
+      path: /interface/veth/{id}
+      method: PATCH
+    delete:
+      path: /interface/veth/{id}
+      method: DELETE
+  interface_vxlan:
+    create:
+      path: /interface/vxlan
+      method: PUT
+    read:
+      path: /interface/vxlan/{id}
+      method: GET
+    update:
+      path: /interface/vxlan/{id}
+      method: PATCH
+    delete:
+      path: /interface/vxlan/{id}
+      method: DELETE
+  interface_vxlan_vteps:
+    create:
+      path: /interface/vxlan/vteps
+      method: PUT
+    read:
+      path: /interface/vxlan/vteps/{id}
+      method: GET
+    update:
+      path: /interface/vxlan/vteps/{id}
+      method: PATCH
+    delete:
+      path: /interface/vxlan/vteps/{id}
+      method: DELETE
+  interface_wireguard:
+    create:
+      path: /interface/wireguard
+      method: PUT
+    read:
+      path: /interface/wireguard/{id}
+      method: GET
+    update:
+      path: /interface/wireguard/{id}
+      method: PATCH
+    delete:
+      path: /interface/wireguard/{id}
+      method: DELETE
+  interface_wireguard_peer:
+    create:
+      path: /interface/wireguard/peers
+      method: PUT
+    read:
+      path: /interface/wireguard/peers/{id}
+      method: GET
+    update:
+      path: /interface/wireguard/peers/{id}
+      method: PATCH
+    delete:
+      path: /interface/wireguard/peers/{id}
+      method: DELETE
+  ip_dns_forwarders:
+    create:
+      path: /ip/dns/forwarders
+      method: PUT
+    read:
+      path: /ip/dns/forwarders/{id}
+      method: GET
+    update:
+      path: /ip/dns/forwarders/{id}
+      method: PATCH
+    delete:
+      path: /ip/dns/forwarders/{id}
+      method: DELETE
+  ip_firewall_layer7_protocol:
+    create:
+      path: /ip/firewall/layer7-protocol
+      method: PUT
+    read:
+      path: /ip/firewall/layer7-protocol/{id}
+      method: GET
+    update:
+      path: /ip/firewall/layer7-protocol/{id}
+      method: PATCH
+    delete:
+      path: /ip/firewall/layer7-protocol/{id}
+      method: DELETE
+  ip_hotspot:
+    create:
+      path: /ip/hotspot
+      method: PUT
+    read:
+      path: /ip/hotspot/{id}
+      method: GET
+    update:
+      path: /ip/hotspot/{id}
+      method: PATCH
+    delete:
+      path: /ip/hotspot/{id}
+      method: DELETE
+  ip_hotspot_ip_binding:
+    create:
+      path: /ip/hotspot/ip-binding
+      method: PUT
+    read:
+      path: /ip/hotspot/ip-binding/{id}
+      method: GET
+    update:
+      path: /ip/hotspot/ip-binding/{id}
+      method: PATCH
+    delete:
+      path: /ip/hotspot/ip-binding/{id}
+      method: DELETE
+  ip_hotspot_profile:
+    create:
+      path: /ip/hotspot/profile
+      method: PUT
+    read:
+      path: /ip/hotspot/profile/{id}
+      method: GET
+    update:
+      path: /ip/hotspot/profile/{id}
+      method: PATCH
+    delete:
+      path: /ip/hotspot/profile/{id}
+      method: DELETE
+  ip_hotspot_user:
+    create:
+      path: /ip/hotspot/user
+      method: PUT
+    read:
+      path: /ip/hotspot/user/{id}
+      method: GET
+    update:
+      path: /ip/hotspot/user/{id}
+      method: PATCH
+    delete:
+      path: /ip/hotspot/user/{id}
+      method: DELETE
+  ip_hotspot_user_profile:
+    create:
+      path: /ip/hotspot/user/profile
+      method: PUT
+    read:
+      path: /ip/hotspot/user/profile/{id}
+      method: GET
+    update:
+      path: /ip/hotspot/user/profile/{id}
+      method: PATCH
+    delete:
+      path: /ip/hotspot/user/profile/{id}
+      method: DELETE
+  ip_hotspot_walled_garden:
+    create:
+      path: /ip/hotspot/walled-garden
+      method: PUT
+    read:
+      path: /ip/hotspot/walled-garden/{id}
+      method: GET
+    update:
+      path: /ip/hotspot/walled-garden/{id}
+      method: PATCH
+    delete:
+      path: /ip/hotspot/walled-garden/{id}
+      method: DELETE
+  ip_hotspot_walled_garden_ip:
+    create:
+      path: /ip/hotspot/walled-garden/ip
+      method: PUT
+    read:
+      path: /ip/hotspot/walled-garden/ip/{id}
+      method: GET
+    update:
+      path: /ip/hotspot/walled-garden/ip/{id}
+      method: PATCH
+    delete:
+      path: /ip/hotspot/walled-garden/ip/{id}
+      method: DELETE
+  ip_ipsec_identity:
+    create:
+      path: /ip/ipsec/identity
+      method: PUT
+    read:
+      path: /ip/ipsec/identity/{id}
+      method: GET
+    update:
+      path: /ip/ipsec/identity/{id}
+      method: PATCH
+    delete:
+      path: /ip/ipsec/identity/{id}
+      method: DELETE
+  ip_ipsec_mode_config:
+    create:
+      path: /ip/ipsec/mode-config
+      method: PUT
+    read:
+      path: /ip/ipsec/mode-config/{id}
+      method: GET
+    update:
+      path: /ip/ipsec/mode-config/{id}
+      method: PATCH
+    delete:
+      path: /ip/ipsec/mode-config/{id}
+      method: DELETE
+  ip_ipsec_peer:
+    create:
+      path: /ip/ipsec/peer
+      method: PUT
+    read:
+      path: /ip/ipsec/peer/{id}
+      method: GET
+    update:
+      path: /ip/ipsec/peer/{id}
+      method: PATCH
+    delete:
+      path: /ip/ipsec/peer/{id}
+      method: DELETE
+  ip_ipsec_policy:
+    create:
+      path: /ip/ipsec/policy
+      method: PUT
+    read:
+      path: /ip/ipsec/policy/{id}
+      method: GET
+    update:
+      path: /ip/ipsec/policy/{id}
+      method: PATCH
+    delete:
+      path: /ip/ipsec/policy/{id}
+      method: DELETE
+  ip_ipsec_policy_group:
+    create:
+      path: /ip/ipsec/policy/group
+      method: PUT
+    read:
+      path: /ip/ipsec/policy/group/{id}
+      method: GET
+    delete:
+      path: /ip/ipsec/policy/group/{id}
+      method: DELETE
+  ip_ipsec_profile:
+    create:
+      path: /ip/ipsec/profile
+      method: PUT
+    read:
+      path: /ip/ipsec/profile/{id}
+      method: GET
+    update:
+      path: /ip/ipsec/profile/{id}
+      method: PATCH
+    delete:
+      path: /ip/ipsec/profile/{id}
+      method: DELETE
+  ip_ipsec_proposal:
+    create:
+      path: /ip/ipsec/proposal
+      method: PUT
+    read:
+      path: /ip/ipsec/proposal/{id}
+      method: GET
+    update:
+      path: /ip/ipsec/proposal/{id}
+      method: PATCH
+    delete:
+      path: /ip/ipsec/proposal/{id}
+      method: DELETE
+  ip_tftp:
+    create:
+      path: /ip/tftp
+      method: PUT
+    read:
+      path: /ip/tftp/{id}
+      method: GET
+    update:
+      path: /ip/tftp/{id}
+      method: PATCH
+    delete:
+      path: /ip/tftp/{id}
+      method: DELETE
+  ip_traffic_flow_target:
+    create:
+      path: /ip/traffic-flow/target
+      method: PUT
+    read:
+      path: /ip/traffic-flow/target/{id}
+      method: GET
+    update:
+      path: /ip/traffic-flow/target/{id}
+      method: PATCH
+    delete:
+      path: /ip/traffic-flow/target/{id}
+      method: DELETE
+  ipv6_dhcp_server:
+    create:
+      path: /ipv6/dhcp-server
+      method: PUT
+    read:
+      path: /ipv6/dhcp-server/{id}
+      method: GET
+    update:
+      path: /ipv6/dhcp-server/{id}
+      method: PATCH
+    delete:
+      path: /ipv6/dhcp-server/{id}
+      method: DELETE
+  ipv6_dhcp_server_option:
+    create:
+      path: /ipv6/dhcp-server/option
+      method: PUT
+    read:
+      path: /ipv6/dhcp-server/option/{id}
+      method: GET
+    update:
+      path: /ipv6/dhcp-server/option/{id}
+      method: PATCH
+    delete:
+      path: /ipv6/dhcp-server/option/{id}
+      method: DELETE
+  ipv6_dhcp_server_option_sets:
+    create:
+      path: /ipv6/dhcp-server/option/sets
+      method: PUT
+    read:
+      path: /ipv6/dhcp-server/option/sets/{id}
+      method: GET
+    update:
+      path: /ipv6/dhcp-server/option/sets/{id}
+      method: PATCH
+    delete:
+      path: /ipv6/dhcp-server/option/sets/{id}
+      method: DELETE
+  ipv6_nd_prefix:
+    create:
+      path: /ipv6/nd/prefix
+      method: PUT
+    read:
+      path: /ipv6/nd/prefix/{id}
+      method: GET
+    update:
+      path: /ipv6/nd/prefix/{id}
+      method: PATCH
+    delete:
+      path: /ipv6/nd/prefix/{id}
+      method: DELETE
+  ipv6_pool:
+    create:
+      path: /ipv6/pool
+      method: PUT
+    read:
+      path: /ipv6/pool/{id}
+      method: GET
+    update:
+      path: /ipv6/pool/{id}
+      method: PATCH
+    delete:
+      path: /ipv6/pool/{id}
+      method: DELETE
+  ip_nat_pmp_interfaces:
+    create:
+      path: /ip/nat-pmp/interfaces
+      method: PUT
+    read:
+      path: /ip/nat-pmp/interfaces/{id}
+      method: GET
+    update:
+      path: /ip/nat-pmp/interfaces/{id}
+      method: PATCH
+    delete:
+      path: /ip/nat-pmp/interfaces/{id}
+      method: DELETE
+  interface_ovpn_client:
+    create:
+      path: /interface/ovpn-client
+      method: PUT
+    read:
+      path: /interface/ovpn-client/{id}
+      method: GET
+    update:
+      path: /interface/ovpn-client/{id}
+      method: PATCH
+    delete:
+      path: /interface/ovpn-client/{id}
+      method: DELETE
+  ppp_profile:
+    create:
+      path: /ppp/profile
+      method: PUT
+    read:
+      path: /ppp/profile/{id}
+      method: GET
+    update:
+      path: /ppp/profile/{id}
+      method: PATCH
+    delete:
+      path: /ppp/profile/{id}
+      method: DELETE
+  ppp_secret:
+    create:
+      path: /ppp/secret
+      method: PUT
+    read:
+      path: /ppp/secret/{id}
+      method: GET
+    update:
+      path: /ppp/secret/{id}
+      method: PATCH
+    delete:
+      path: /ppp/secret/{id}
+      method: DELETE
+  queue_simple:
+    create:
+      path: /queue/simple
+      method: PUT
+    read:
+      path: /queue/simple/{id}
+      method: GET
+    update:
+      path: /queue/simple/{id}
+      method: PATCH
+    delete:
+      path: /queue/simple/{id}
+      method: DELETE
+  queue_tree:
+    create:
+      path: /queue/tree
+      method: PUT
+    read:
+      path: /queue/tree/{id}
+      method: GET
+    update:
+      path: /queue/tree/{id}
+      method: PATCH
+    delete:
+      path: /queue/tree/{id}
+      method: DELETE
+  queue_type:
+    create:
+      path: /queue/type
+      method: PUT
+    read:
+      path: /queue/type/{id}
+      method: GET
+    update:
+      path: /queue/type/{id}
+      method: PATCH
+    delete:
+      path: /queue/type/{id}
+      method: DELETE
+  radius:
+    create:
+      path: /radius
+      method: PUT
+    read:
+      path: /radius/{id}
+      method: GET
+    update:
+      path: /radius/{id}
+      method: PATCH
+    delete:
+      path: /radius/{id}
+      method: DELETE
+  routing_bfd_configuration:
+    create:
+      path: /routing/bfd/configuration
+      method: PUT
+    read:
+      path: /routing/bfd/configuration/{id}
+      method: GET
+    update:
+      path: /routing/bfd/configuration/{id}
+      method: PATCH
+    delete:
+      path: /routing/bfd/configuration/{id}
+      method: DELETE
+  routing_bgp_connection:
+    create:
+      path: /routing/bgp/connection
+      method: PUT
+    read:
+      path: /routing/bgp/connection/{id}
+      method: GET
+    update:
+      path: /routing/bgp/connection/{id}
+      method: PATCH
+    delete:
+      path: /routing/bgp/connection/{id}
+      method: DELETE
+  routing_bgp_evpn:
+    create:
+      path: /routing/bgp/evpn
+      method: PUT
+    read:
+      path: /routing/bgp/evpn/{id}
+      method: GET
+    update:
+      path: /routing/bgp/evpn/{id}
+      method: PATCH
+    delete:
+      path: /routing/bgp/evpn/{id}
+      method: DELETE
+  routing_bgp_instance:
+    create:
+      path: /routing/bgp/instance
+      method: PUT
+    read:
+      path: /routing/bgp/instance/{id}
+      method: GET
+    update:
+      path: /routing/bgp/instance/{id}
+      method: PATCH
+    delete:
+      path: /routing/bgp/instance/{id}
+      method: DELETE
+  routing_bgp_template:
+    create:
+      path: /routing/bgp/template
+      method: PUT
+    read:
+      path: /routing/bgp/template/{id}
+      method: GET
+    update:
+      path: /routing/bgp/template/{id}
+      method: PATCH
+    delete:
+      path: /routing/bgp/template/{id}
+      method: DELETE
+  routing_bgp_vpn:
+    create:
+      path: /routing/bgp/vpn
+      method: PUT
+    read:
+      path: /routing/bgp/vpn/{id}
+      method: GET
+    update:
+      path: /routing/bgp/vpn/{id}
+      method: PATCH
+    delete:
+      path: /routing/bgp/vpn/{id}
+      method: DELETE
+  routing_filter_rule:
+    create:
+      path: /routing/filter/rule
+      method: PUT
+    read:
+      path: /routing/filter/rule/{id}
+      method: GET
+    update:
+      path: /routing/filter/rule/{id}
+      method: PATCH
+    delete:
+      path: /routing/filter/rule/{id}
+      method: DELETE
+  routing_id:
+    create:
+      path: /routing/id
+      method: PUT
+    read:
+      path: /routing/id/{id}
+      method: GET
+    update:
+      path: /routing/id/{id}
+      method: PATCH
+    delete:
+      path: /routing/id/{id}
+      method: DELETE
+  routing_igmp_proxy_interface:
+    create:
+      path: /routing/igmp-proxy/interface
+      method: PUT
+    read:
+      path: /routing/igmp-proxy/interface/{id}
+      method: GET
+    update:
+      path: /routing/igmp-proxy/interface/{id}
+      method: PATCH
+    delete:
+      path: /routing/igmp-proxy/interface/{id}
+      method: DELETE
+  routing_ospf_area:
+    create:
+      path: /routing/ospf/area
+      method: PUT
+    read:
+      path: /routing/ospf/area/{id}
+      method: GET
+    update:
+      path: /routing/ospf/area/{id}
+      method: PATCH
+    delete:
+      path: /routing/ospf/area/{id}
+      method: DELETE
+  routing_ospf_area_range:
+    create:
+      path: /routing/ospf/area/range
+      method: PUT
+    read:
+      path: /routing/ospf/area/range/{id}
+      method: GET
+    update:
+      path: /routing/ospf/area/range/{id}
+      method: PATCH
+    delete:
+      path: /routing/ospf/area/range/{id}
+      method: DELETE
+  routing_ospf_instance:
+    create:
+      path: /routing/ospf/instance
+      method: PUT
+    read:
+      path: /routing/ospf/instance/{id}
+      method: GET
+    update:
+      path: /routing/ospf/instance/{id}
+      method: PATCH
+    delete:
+      path: /routing/ospf/instance/{id}
+      method: DELETE
+  routing_ospf_interface_template:
+    create:
+      path: /routing/ospf/interface-template
+      method: PUT
+    read:
+      path: /routing/ospf/interface-template/{id}
+      method: GET
+    update:
+      path: /routing/ospf/interface-template/{id}
+      method: PATCH
+    delete:
+      path: /routing/ospf/interface-template/{id}
+      method: DELETE
+  routing_rule:
+    create:
+      path: /routing/rule
+      method: PUT
+    read:
+      path: /routing/rule/{id}
+      method: GET
+    update:
+      path: /routing/rule/{id}
+      method: PATCH
+    delete:
+      path: /routing/rule/{id}
+      method: DELETE
+  snmp_community:
+    create:
+      path: /snmp/community
+      method: PUT
+    read:
+      path: /snmp/community/{id}
+      method: GET
+    update:
+      path: /snmp/community/{id}
+      method: PATCH
+    delete:
+      path: /snmp/community/{id}
+      method: DELETE
+  system_logging:
+    create:
+      path: /system/logging
+      method: PUT
+    read:
+      path: /system/logging/{id}
+      method: GET
+    update:
+      path: /system/logging/{id}
+      method: PATCH
+    delete:
+      path: /system/logging/{id}
+      method: DELETE
+  system_scheduler:
+    create:
+      path: /system/scheduler
+      method: PUT
+    read:
+      path: /system/scheduler/{id}
+      method: GET
+    update:
+      path: /system/scheduler/{id}
+      method: PATCH
+    delete:
+      path: /system/scheduler/{id}
+      method: DELETE
+  tool_graphing_interface:
+    create:
+      path: /tool/graphing/interface
+      method: PUT
+    read:
+      path: /tool/graphing/interface/{id}
+      method: GET
+    update:
+      path: /tool/graphing/interface/{id}
+      method: PATCH
+    delete:
+      path: /tool/graphing/interface/{id}
+      method: DELETE
+  tool_graphing_queue:
+    create:
+      path: /tool/graphing/queue
+      method: PUT
+    read:
+      path: /tool/graphing/queue/{id}
+      method: GET
+    update:
+      path: /tool/graphing/queue/{id}
+      method: PATCH
+    delete:
+      path: /tool/graphing/queue/{id}
+      method: DELETE
+  tool_graphing_resource:
+    create:
+      path: /tool/graphing/resource
+      method: PUT
+    read:
+      path: /tool/graphing/resource/{id}
+      method: GET
+    update:
+      path: /tool/graphing/resource/{id}
+      method: PATCH
+    delete:
+      path: /tool/graphing/resource/{id}
+      method: DELETE
+  tool_netwatch:
+    create:
+      path: /tool/netwatch
+      method: PUT
+    read:
+      path: /tool/netwatch/{id}
+      method: GET
+    update:
+      path: /tool/netwatch/{id}
+      method: PATCH
+    delete:
+      path: /tool/netwatch/{id}
+      method: DELETE
+  ip_upnp_interfaces:
+    create:
+      path: /ip/upnp/interfaces
+      method: PUT
+    read:
+      path: /ip/upnp/interfaces/{id}
+      method: GET
+    update:
+      path: /ip/upnp/interfaces/{id}
+      method: PATCH
+    delete:
+      path: /ip/upnp/interfaces/{id}
+      method: DELETE
+  system_user:
+    create:
+      path: /user
+      method: PUT
+    read:
+      path: /user/{id}
+      method: GET
+    update:
+      path: /user/{id}
+      method: PATCH
+    delete:
+      path: /user/{id}
+      method: DELETE
+  system_user_group:
+    create:
+      path: /user/group
+      method: PUT
+    read:
+      path: /user/group/{id}
+      method: GET
+    update:
+      path: /user/group/{id}
+      method: PATCH
+    delete:
+      path: /user/group/{id}
+      method: DELETE
+  system_user_sshkeys:
+    create:
+      path: /user/ssh-keys
+      method: PUT
+    read:
+      path: /user/ssh-keys/{id}
+      method: GET
+    delete:
+      path: /user/ssh-keys/{id}
+      method: DELETE

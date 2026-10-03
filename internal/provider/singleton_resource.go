@@ -17,9 +17,8 @@ import (
 )
 
 // singletonResource manages existing global settings, never collection records.
-// It is intentionally not registered yet: each policy/schema pair must first
-// pass the reviewed singleton adapter and both official generators. This helper
-// does not authorize exposure of any entry in the Batch A planning manifest.
+// Only explicitly reviewed policy/official-generated-schema pairs are registered.
+// The Batch A planning manifest and upstream inventory never authorize exposure.
 // Reference: pinned resource_actions.go SystemResourceCreateUpdate/Read/Delete.
 // Create/update POST a fixed /set action; destroy only relinquishes management.
 type singletonResource struct{ core *collectionResource }
@@ -94,13 +93,23 @@ func (r *singletonResource) validate(values map[string]attr.Value, mutation bool
 			if f.Mode == "required" && f.Name != "note" && strings.TrimSpace(text) == "" {
 				return fmt.Errorf("empty required singleton attribute %s", f.Name)
 			}
+			if len(f.Choices) > 0 && !oneOf(text, f.Choices...) {
+				return fmt.Errorf("unsupported singleton value for %s", f.Name)
+			}
+			if e := validateSingletonString(r.core.policy.Name, f.Name, text); e != nil {
+				return e
+			}
 		case "boolean":
 			if _, ok := v.(types.Bool); !ok {
 				return fmt.Errorf("invalid singleton boolean %s", f.Name)
 			}
 		case "integer":
-			if _, ok := v.(types.Int64); !ok {
+			x, ok := v.(types.Int64)
+			if !ok {
 				return fmt.Errorf("invalid singleton integer %s", f.Name)
+			}
+			if f.Minimum != nil && x.ValueInt64() < *f.Minimum || f.Maximum != nil && x.ValueInt64() > *f.Maximum {
+				return fmt.Errorf("singleton integer outside reviewed bounds: %s", f.Name)
 			}
 		}
 	}
@@ -176,6 +185,13 @@ func (r *singletonResource) refresh(ctx context.Context, old map[string]attr.Val
 		v, e := decodeField(ctx, f, raw)
 		if e != nil {
 			return nil, e
+		}
+		if singletonAddressList(r.core.policy.Name, f.Name) {
+			if previous, ok := old[f.Name].(types.String); ok && !previous.IsUnknown() && !previous.IsNull() {
+				if observed, ok := v.(types.String); ok && equivalentAddressList(previous.ValueString(), observed.ValueString()) {
+					v = previous
+				}
+			}
 		}
 		next[f.Name] = v
 	}

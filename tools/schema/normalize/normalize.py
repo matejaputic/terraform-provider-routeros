@@ -12,12 +12,16 @@ import sys
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / 'tools/schema/discover'))
 import discover
+import singleton_policy
+import batch_a_collection_policy
 
 CONTROLS = {'.query', '.proplist', 'numbers', 'number', 'copy-from', 'as-string', 'as-string-value', 'value-name'}
 HARDWARE = {'/interface/ethernet', '/interface/wireless', '/interface/wifi', '/interface/lte'}
 METHODS = {'get', 'put', 'post', 'patch', 'delete', 'head', 'options', 'trace'}
 FORMAT = 'routeros-adaptation@1'
 APPROVED_PATHS = {'ip_address': '/ip/address', 'interface_bridge': '/interface/bridge', 'interface_bridge_port': '/interface/bridge/port', 'interface_vlan': '/interface/vlan', 'interface_list': '/interface/list', 'interface_list_member': '/interface/list/member', 'ip_pool': '/ip/pool', 'ip_dhcp_server_network': '/ip/dhcp-server/network', 'ip_dhcp_server': '/ip/dhcp-server', 'ip_dhcp_server_lease': '/ip/dhcp-server/lease', 'ip_route': '/ip/route', 'ip_firewall_addr_list': '/ip/firewall/address-list', 'ip_firewall_filter': '/ip/firewall/filter', 'ip_firewall_nat': '/ip/firewall/nat', 'ip_firewall_mangle': '/ip/firewall/mangle', 'ip_firewall_raw': '/ip/firewall/raw', 'ip_dhcp_client_option': '/ip/dhcp-client/option', 'ip_dhcp_server_option': '/ip/dhcp-server/option', 'ip_dhcp_relay': '/ip/dhcp-relay', 'ip_dns_record': '/ip/dns/static'}
+APPROVED_PATHS.update(singleton_policy.PATHS)
+APPROVED_PATHS.update({name: definition[0] for name, definition in batch_a_collection_policy.DEFINITIONS.items()})
 ORDERED_RESOURCES = {'ip_firewall_filter', 'ip_firewall_nat', 'ip_firewall_mangle', 'ip_firewall_raw'}
 
 class AdaptationError(Exception):
@@ -38,10 +42,10 @@ def snake(name):
     check(re.fullmatch(r'[a-z][a-z0-9_]*', result), 'invalid Terraform identifier')
     return result
 
-def symbols(names):
+def symbols(names, aliases=None):
     tf, go = {}, {}
     for wire in sorted(names):
-        name = snake(wire)
+        name = (aliases or {}).get(wire, snake(wire))
         symbol = ''.join(part.capitalize() for part in name.split('_'))
         check(name not in tf, 'Terraform name collision: ' + name)
         check(symbol not in go, 'Go symbol collision: ' + symbol)
@@ -235,36 +239,49 @@ def normalize(raw, policy, *, metadata=None, origin=None, snapshot=None, include
     name = policy.get('resource_name')
     check(name in APPROVED_PATHS and policy.get('wire_path') == APPROVED_PATHS[name], 'unsupported lifecycle registration')
     resource_name = name
+    singleton = resource_name in singleton_policy.PATHS
+    curated_batch = resource_name in batch_a_collection_policy.DEFINITIONS
+    check(not curated_batch or policy == next(p for p in batch_a_collection_policy.policies() if p['resource_name'] == resource_name), 'unreviewed Batch A contract delta')
+    replacement_only = curated_batch and policy.get('replacement_only', False)
+    check(not singleton or policy == next(p for p in singleton_policy.policies() if p['resource_name'] == resource_name), 'unreviewed singleton contract delta')
+    name_aliases = {wire: tf for (resource, wire), tf in batch_a_collection_policy.NAME_ALIASES.items() if resource == resource_name}
     fields = policy.get('attributes')
     check(isinstance(fields, list) and fields, 'missing curated attributes')
     field_map = {}
     for field in fields:
         check(isinstance(field, dict), 'invalid field policy')
         wire, name = field.get('wire'), field.get('name')
-        check(name == snake(wire) and name not in field_map, 'invalid/duplicate catalog alias')
+        check(name == name_aliases.get(wire, snake(wire)) and name not in field_map, 'invalid/duplicate catalog alias')
         check(field.get('type') in ('string', 'boolean', 'integer', 'array') and field.get('mode') in ('required', 'computed_optional', 'computed'), 'unimplemented field type/mode')
-        check(field.get('sensitive') is False and (field.get('force_new') is False or resource_name != 'ip_address' and field.get('force_new') is True and (name == 'name' or resource_name == 'ip_dns_record' and name == 'type') and field.get('type') == 'string'), 'sensitivity/replacement policy requires a maintained implementation')
+        check((field.get('sensitive') is False or curated_batch and field.get('sensitive') is True and field.get('type') == 'string') and (field.get('force_new') is False or curated_batch and field.get('type') == 'string' or resource_name != 'ip_address' and field.get('force_new') is True and (name == 'name' or resource_name == 'ip_dns_record' and name == 'type') and field.get('type') == 'string'), 'sensitivity/replacement policy requires a maintained implementation')
+        primitive_codecs = {'string':'wire-string','integer':'decimal','boolean':'yes/no','array':'csv'}
+        check(field.get('codec') == primitive_codecs[field['type']] or field.get('codec') == 'placement' or curated_batch and (field['type']=='string' and field.get('codec') in ('csv-string-set','routeros-duration') or field['type']=='integer' and field.get('codec')=='auto-decimal'), 'unreviewed typed codec')
         check(resource_name != 'ip_address' or field.get('type') in ('string', 'boolean'), 'unimplemented IP address field type')
         check(field.get('codec') != 'placement' or resource_name in ORDERED_RESOURCES and name == 'place_before' and field['type'] == 'string' and field['mode'] == 'computed_optional', 'unimplemented ordered lifecycle')
         check(resource_name not in ORDERED_RESOURCES or name != 'place_before' or field.get('codec') == 'placement', 'missing explicit ordering codec')
         check(field.get('type') != 'array' or field.get('codec') == 'csv' and (resource_name, name) in (('ip_pool', 'ranges'), ('ip_dhcp_server_network', 'dns_server')), 'unimplemented array codec')
         if 'read_default' in field:
             expected_default = 'true' if (resource_name, name) == ('ip_dhcp_server', 'conflict_detection') else 'false' if (resource_name, name) in (('ip_dhcp_server_network', 'dns_none'), ('ip_dhcp_server', 'add_arp'), ('ip_dhcp_server_lease', 'block_access'), ('ip_dhcp_server_option', 'force'), ('ip_dns_record', 'match_subdomain'), ('ip_route', 'dynamic'), ('ip_route', 'active')) else 'none' if resource_name == 'ip_pool' and name == 'next_pool' else '' if (resource_name in ORDERED_RESOURCES and name in ('src_address_list', 'dst_address_list', 'to_addresses', 'new_connection_mark', 'new_packet_mark') or name in ('comment', 'include', 'exclude') and resource_name != 'ip_address' or resource_name == 'ip_dhcp_server_network' and name in ('dns_server', 'domain')) else None
-            check(field['read_default'] == expected_default and expected_default is not None and field['type'] in ('string', 'array', 'boolean') and (field['mode'] == 'computed_optional' or resource_name == 'ip_route' and name in ('dynamic', 'active') and field['mode'] == 'computed'), 'unreviewed omission default')
+            check(curated_batch or field['read_default'] == expected_default and expected_default is not None and field['type'] in ('string', 'array', 'boolean') and (field['mode'] == 'computed_optional' or resource_name == 'ip_route' and name in ('dynamic', 'active') and field['mode'] == 'computed'), 'unreviewed omission default')
         check('conditional_read' not in field or resource_name == 'interface_bridge' and name == 'pvid' and field['conditional_read'] == 'vlan_filtering', 'unimplemented conditional read')
         check(field.get('enum_kind') in ('none', 'device-instance-removed'), 'static enum requires reviewed runtime validator')
         field_map[name] = field
     check(field_map.get('id', {}).get('mode') == 'computed' and field_map['id']['wire'] == '.id', 'exactly one computed ID required')
-    symbols(f['wire'] for f in fields)
+    symbols((f['wire'] for f in fields), aliases=name_aliases)
     for mode, key in [('required', 'required'), ('computed_optional', 'optional_computed'), ('computed', 'computed')]:
         check(set(policy.get(key, [])) == {f['name'] for f in fields if f['mode'] == mode}, 'conflicting mode policy: ' + key)
     check(set(policy.get('booleans', [])) == {f['name'] for f in fields if f['type'] == 'boolean'}, 'conflicting boolean policy')
     path = policy['wire_path']
     paths = spec['paths']
-    check(path in paths and path + '/{id}' in paths and 'put' in paths[path] and {'get', 'patch', 'delete'} <= paths[path + '/{id}'].keys(), 'approved resource lost full CRUD lifecycle')
+    check(path in paths and path + '/{id}' in paths, 'approved resource lost published paths')
+    if singleton:
+        check('get' in paths[path] and {'get', 'patch'} <= paths[path + '/{id}'].keys(), 'approved singleton lost published observation structure')
+    else:
+        required_methods = {'get','delete'} if replacement_only else {'get','patch','delete'}
+        check('put' in paths[path] and required_methods <= paths[path + '/{id}'].keys(), 'approved resource lost reviewed CRUD/replacement collection lifecycle')
     resolver = Resolver(spec)
-    create = resolver.body(paths[path]['put'])
-    update = resolver.body(paths[path + '/{id}']['patch'])
+    create = resolver.body(paths[path + '/{id}']['patch'] if singleton else paths[path]['put'])
+    update = create if replacement_only else resolver.body(paths[path + '/{id}']['patch'])
     read = resolver.response(paths[path + '/{id}']['get'])
     check(read.get('type', 'object') == 'object', 'read must describe an object')
     cp, up = create['properties'], update['properties']
@@ -272,12 +289,14 @@ def normalize(raw, policy, *, metadata=None, origin=None, snapshot=None, include
     check(isinstance(rp, dict), 'invalid read properties')
     observed = set(cp) | set(up) | set(rp)
     # .id and an actual id together must not silently collapse into one attribute.
-    symbols(observed | {f['wire'] for f in fields})
+    symbol_observations = observed - ({'6to4-interface'} if resource_name == 'ipv6_nd_prefix' else set())
+    symbols(symbol_observations | {f['wire'] for f in fields}, aliases=name_aliases)
     create_only = sorted(set(cp) - set(up))
     for field in fields:
         for properties in (cp, up, rp):
             observed_schema = properties.get(field['wire'], {})
             allowed_types = (None, 'string', field['type'])
+            if curated_batch and field.get('codec') == 'csv-string-set': allowed_types += ('array',)
             if field['type'] == 'array' and observed_schema.get('type') == 'array':
                 check(observed_schema.get('items', {}).get('type') == 'string', 'unreviewed list element type')
             check(observed_schema.get('type') in allowed_types, 'reviewed field type drift requires policy review: ' + field['wire'])
@@ -285,6 +304,11 @@ def normalize(raw, policy, *, metadata=None, origin=None, snapshot=None, include
                 check(all(v in ('yes', 'no', 'true', 'false') for v in observed_schema['enum']), 'unreviewed boolean wire domain: ' + field['wire'])
         if field['mode'] != 'computed':
             check(field['wire'] not in create_only or field['force_new'] or resource_name in ORDERED_RESOURCES and field['name'] == 'place_before' and field['codec'] == 'placement', 'create-only approved field requires replacement policy: ' + field['wire'])
+    if curated_batch:
+        check(all(f['mode'] == 'computed' or f['wire'] in cp for f in fields), 'Batch A writable field absent from publication')
+        check(not replacement_only or all(f['mode'] == 'computed' or f['force_new'] for f in fields), 'replacement-only mutation field lacks replacement policy')
+    if singleton:
+        check(all(f['wire'] == '.id' or f['mode'] == 'computed' or f['wire'] in cp for f in fields), 'singleton writable field absent from publication')
     meta_hashes, suggestions = {}, set()
     for label, data in sorted((metadata or {}).items()):
         obj = discover.parse(data)
@@ -292,6 +316,9 @@ def normalize(raw, policy, *, metadata=None, origin=None, snapshot=None, include
         if '_meta' in obj:
             check(isinstance(obj['_meta'], dict) and obj['_meta'].get('version') == version, 'inspect version mismatch')
         meta_hashes[label] = sha(data)
+        if label.endswith('/extra/openapi.json'):
+            check(discover.version(obj.get('info', {}).get('version')) == version, 'companion metadata version mismatch')
+            continue  # A companion schema is hash-bound input, not inspect suggestions.
         # Inspect command trees/completions are observations, not type/default truth.
         def visit(node, depth=0):
             check(depth <= 64, 'inspect metadata too deep')
@@ -306,6 +333,7 @@ def normalize(raw, policy, *, metadata=None, origin=None, snapshot=None, include
     bodies, response_props = {}, {}
     for name, field in sorted(field_map.items()):
         definition = {'type': field['type']}
+        if field['sensitive']: definition['format'] = 'password'
         if field['type'] == 'array': definition['items'] = {'type': 'string'}
         response_props[name] = definition
         if field['mode'] != 'computed':
@@ -348,12 +376,45 @@ def normalize(raw, policy, *, metadata=None, origin=None, snapshot=None, include
     config = 'provider:\n  name: routeros\nresources:\n  ' + resource_name + ':\n'
     for action, method, route in [('create', 'PUT', path), ('read', 'GET', path + '/{id}'), ('update', 'PATCH', path + '/{id}'), ('delete', 'DELETE', path + '/{id}')]:
         config += f'    {action}:\n      path: {route}\n      method: {method}\n'
+    if curated_batch:
+        entry = descriptor['resources'][0]
+        for key in ('reference_constructor','replacement_only','required_package'):
+            if key in policy: entry[key] = policy[key]
+        if policy.get('required_package'):
+            entry['schema_input_flavor'] = 'extra'
+        if replacement_only:
+            normalized['paths'][path+'/{id}'].pop('patch')
+            entry['operations']['update'] = {'behavior': 'replacement-only'}
+            config = config.split('    update:\n',1)[0] + '    delete:\n      path: ' + path + '/{id}\n      method: DELETE\n'
+        report['normalized_sha256'] = sha(discover.encode(normalized))
+        report['wire_descriptor_sha256'] = sha(discover.encode(descriptor))
+    if singleton:
+        # Published item paths describe fields, not the global-settings lifecycle.
+        # The fixed /set action is reviewed from pinned DefaultSystem callbacks.
+        # No synthetic PUT/PATCH/DELETE is exposed to generation or runtime.
+        normalized['paths'] = {path: {'get': {'responses': {'200': response}}}, path + '/set': {'post': write()}}
+        entry = descriptor['resources'][0]
+        entry['lifecycle'] = 'reviewed-singleton'
+        entry['reference_constructor'] = policy['reference_constructor']
+        entry['id_wire_key'] = None
+        entry['identity'] = path.strip('/').replace('/', '.')
+        entry['schema_read'] = {'method': 'GET', 'path': path}
+        entry['runtime_read'] = {'method': 'GET', 'path': path, 'shape': 'object'}
+        entry['operations'] = {'create': {'method': 'POST', 'path': path + '/set'}, 'update': {'method': 'POST', 'path': path + '/set'}, 'delete': {'behavior': 'unmanage-only'}}
+        entry['publication_observation'] = {'read': path + '/{id}', 'update_method': 'PATCH', 'runtime_authority': 'reviewed pinned DefaultSystem callbacks, not published item lifecycle'}
+        config = 'provider:\n  name: routeros\nresources:\n  ' + resource_name + ':\n'
+        for action, method, route in [('create', 'POST', path + '/set'), ('read', 'GET', path), ('update', 'POST', path + '/set')]:
+            config += f'    {action}:\n      path: {route}\n      method: {method}\n'
+        report['normalized_sha256'] = sha(discover.encode(normalized))
+        report['wire_descriptor_sha256'] = sha(discover.encode(descriptor))
+        report['adaptations']['singleton_lifecycle'] = 'GET object; POST fixed /set; path identity; destroy unmanage only'
     report['config_sha256'] = sha(config.encode())
     return normalized, config.encode(), descriptor, report
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--input', type=Path, help='immutable OpenAPI input; defaults to the pinned fixture for the selected catalog')
+    parser.add_argument('--extra-input', type=Path, help='matching-version extra publication for reviewed package-only resources; never fabricated in base input')
     parser.add_argument('--policy', type=Path, default=ROOT / 'schemas/ip-address-policy.json')
     parser.add_argument('--output', type=Path, default=ROOT / 'schemas')
     parser.add_argument('--inspect', action='append', type=Path, default=[])
@@ -417,11 +478,35 @@ def main():
         check(not args.manifest or sha(discover.encode(policy)) == sha(discover.encode(discover.parse((ROOT / 'schemas/ip-address-policy.json').read_bytes()))), 'manifest policy override forbidden')
         normalized, config, descriptor, report = normalize(raw, policy, metadata=metadata, origin=origin, snapshot=snapshot)
         if args.collections:
-            policies = discover.parse((ROOT / 'internal/catalog/collections.json').read_bytes())
+            policies = discover.parse((ROOT / 'internal/catalog/collections.json').read_bytes()) + discover.parse((ROOT / 'internal/catalog/singletons.json').read_bytes()) + discover.parse((ROOT / 'internal/catalog/batch-a-collections.json').read_bytes())
+            extra_raw, extra_snapshot, extra_origin = None, None, None
+            if any(p.get('required_package') and p['wire_path'] not in snapshot.spec['paths'] for p in policies):
+                if args.manifest:
+                    check(not args.extra_input, 'manifest companion cannot be overridden')
+                    companion_path = 'docs/' + ('nightly' if candidate['channel'] == 'nightly' else candidate['version']) + '/extra/openapi.json'
+                    check(companion_path in metadata, 'missing hash-bound extra publication: rediscover with companion input')
+                    extra_raw = metadata[companion_path]
+                    extra_origin = dict(origin, flavor='extra', schema_path=companion_path, input_sha256=sha(extra_raw))
+                else:
+                    companion = args.extra_input
+                    if companion is None and args.input.resolve() == (ROOT/'tools/schema/normalize/fixtures/collections.upstream.json').resolve():
+                        companion = args.input.parent/'veth.extra.upstream.json'
+                    check(companion is not None, 'package-only resource requires a verified matching extra input')
+                    extra_raw = companion.read_bytes()
+                    if not args.extra_input:
+                        check(sha(extra_raw) == origin.get('companion_fixture_sha256'), 'default companion fixture hash mismatch')
+                        extra_origin = dict(origin, flavor='extra', schema_path=origin['companion_schema_path'], input_sha256=sha(extra_raw))
+                    else:
+                        extra_origin = {'kind':'explicit-input','flavor':'extra','input_sha256':sha(extra_raw)}
+                extra_snapshot = SchemaSnapshot(extra_raw)
+                check(extra_snapshot.version == snapshot.version, 'base/extra publication version mismatch')
             check({p['resource_name'] for p in policies} == set(APPROVED_PATHS) - {'ip_address'} and len(policies) == len(APPROVED_PATHS) - 1, 'incomplete/duplicate reviewed networking catalog')
             reports = {}
             for collection_policy in policies:
-                extra, extra_config, extra_descriptor, extra_report = normalize(raw, collection_policy, metadata=metadata, origin=origin, snapshot=snapshot, include_inventory=False)
+                use_companion = collection_policy.get('required_package') and collection_policy['wire_path'] not in snapshot.spec['paths']
+                extra, extra_config, extra_descriptor, extra_report = normalize(extra_raw if use_companion else raw, collection_policy, metadata=metadata, origin=extra_origin if use_companion else origin, snapshot=extra_snapshot if use_companion else snapshot, include_inventory=False)
+                if use_companion:
+                    report['package_input_origins'] = report.get('package_input_origins', {}) | {collection_policy['resource_name']: extra_origin}
                 check(not (set(normalized['paths']) & set(extra['paths'])), 'duplicate catalog paths')
                 normalized['paths'].update(extra['paths'])
                 config += extra_config.split(b'resources:\n', 1)[1]
@@ -436,11 +521,14 @@ def main():
             report['normalized_sha256'] = sha(discover.encode(normalized))
             report['config_sha256'] = sha(config)
             report['wire_descriptor_sha256'] = sha(discover.encode(descriptor))
+            if extra_raw is not None: report['companion_input_sha256'] = sha(extra_raw)
         # No output/checkpoint changes until every input has passed adaptation.
         outputs = {'upstream-input.json': raw, 'ip-address.openapi.json': discover.encode(normalized),
                    'generator-config.yml': config, 'wire-descriptors.json': discover.encode(descriptor),
                    'adaptation-report.json': discover.encode(report)}
+        if args.collections and extra_raw is not None: outputs['upstream-extra-input.json'] = extra_raw
         with discover.locked(args.output / 'adaptation'):
+            if 'upstream-extra-input.json' not in outputs: (args.output/'upstream-extra-input.json').unlink(missing_ok=True)
             for name in sorted(set(outputs) - {'adaptation-report.json'}):
                 discover.atomic(args.output / name, outputs[name])
             # The report is the final bundle marker; hashes bind every artifact.

@@ -1,4 +1,4 @@
-name: Framework slice verification
+name: Framework Batch A verification
 on:
   pull_request:
   push:
@@ -26,22 +26,23 @@ jobs:
       - name: Deterministic official generation
         run: |
           bash tools/schema/generate.sh
-          git diff --exit-code -- schemas internal/generated
+          git diff --exit-code -- schemas internal/generated internal/provider/batch_a_bindings.go
           bash tools/schema/generate.sh
-          git diff --exit-code -- schemas internal/generated
+          git diff --exit-code -- schemas internal/generated internal/provider/batch_a_bindings.go
       - name: Unit and mock Terraform lifecycle tests (not live acceptance)
         env:
           TF_ACC_TERRAFORM_VERSION: '1.14.0'
-        run: go test -race -count=1 ./...
+        run: go test -race -count=1 -timeout=300s ./...
       - run: go vet ./...
       - run: go build .
       - run: terraform fmt -check -recursive examples
   pinned-chr:
-    name: CHR acceptance (${{ matrix.version }} x86_64/base)
+    name: CHR acceptance (${{ matrix.version }} x86_64/${{ matrix.flavor }})
     strategy:
       fail-fast: false
       matrix:
         version: ['7.24.5', '7.25beta5']
+        flavor: ['base', 'routeros+container']
     needs: verify
     if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'matejaputic/terraform-provider-routeros'
     runs-on: ubuntu-24.04
@@ -63,12 +64,15 @@ jobs:
       - name: Disposable pinned-version CHR full reviewed-resource acceptance
         env:
           CHR_VERSION: ${{ matrix.version }}
+          CHR_FLAVOR: ${{ matrix.flavor }}
         shell: bash
         run: |
           trap 'python3 tools/chr/chr.py stop' EXIT
           trap 'exit 130' INT
           trap 'exit 143' TERM
-          python3 tools/chr/chr.py start --hosted --version "$CHR_VERSION"
+          extra=()
+          if [[ "$CHR_FLAVOR" == 'routeros+container' ]]; then extra=(--container); fi
+          python3 tools/chr/chr.py start --hosted --version "$CHR_VERSION" "${extra[@]}"
           python3 tools/chr/chr.py test --version "$CHR_VERSION"
       - name: Ensure owned guest, credentials and mutable disk are removed
         if: always()
@@ -77,7 +81,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: chr-${{ matrix.version }}-${{ github.run_id }}-${{ github.run_attempt }}
+          name: chr-${{ matrix.version }}-${{ matrix.flavor }}-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
             .local/chr/target.json
             .local/chr/acceptance-evidence.json

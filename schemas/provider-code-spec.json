@@ -4,6 +4,128 @@
 	},
 	"resources": [
 		{
+			"name": "interface_6to4",
+			"schema": {
+				"attributes": [
+					{
+						"name": "clamp_tcp_mss",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "local_address",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "mtu",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "remote_address",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "running",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "interface_bonding",
+			"schema": {
+				"attributes": [
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "mode",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "mtu",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "primary",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "slaves",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "running",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
 			"name": "interface_bridge",
 			"schema": {
 				"attributes": [
@@ -126,6 +248,332 @@
 			}
 		},
 		{
+			"name": "interface_bridge_settings",
+			"schema": {
+				"attributes": [
+					{
+						"name": "allow_fast_path",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "use_ip_firewall",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "use_ip_firewall_for_pppoe",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "use_ip_firewall_for_vlan",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "interface_bridge_vlan",
+			"schema": {
+				"attributes": [
+					{
+						"name": "bridge",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "tagged",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "untagged",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "vlan_ids",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "dynamic",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "interface_dot1x_client",
+			"schema": {
+				"attributes": [
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "eap_methods",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "identity",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "interface",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "password",
+						"string": {
+							"computed_optional_required": "computed_optional",
+							"sensitive": true
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "status",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "interface_dot1x_server",
+			"schema": {
+				"attributes": [
+					{
+						"name": "accounting",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "auth_types",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "interface",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "interface_gre6",
+			"schema": {
+				"attributes": [
+					{
+						"name": "clamp_tcp_mss",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "local_address",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "mtu",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "remote_address",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "running",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "interface_l2tp_client",
+			"schema": {
+				"attributes": [
+					{
+						"name": "add_default_route",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "connect_to",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "password",
+						"string": {
+							"computed_optional_required": "computed_optional",
+							"sensitive": true
+						}
+					},
+					{
+						"name": "profile",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "use_peer_dns",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "user",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "running",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
 			"name": "interface_list",
 			"schema": {
 				"attributes": [
@@ -218,6 +666,454 @@
 			}
 		},
 		{
+			"name": "interface_macvlan",
+			"schema": {
+				"attributes": [
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "interface",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "mode",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "mtu",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "running",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "interface_ovpn_client",
+			"schema": {
+				"attributes": [
+					{
+						"name": "add_default_route",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "connect_to",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "password",
+						"string": {
+							"computed_optional_required": "computed_optional",
+							"sensitive": true
+						}
+					},
+					{
+						"name": "port",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "profile",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "protocol",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "use_peer_dns",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "user",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "verify_server_certificate",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "running",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "interface_ovpn_server",
+			"schema": {
+				"attributes": [
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "user",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "running",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "interface_pppoe_client",
+			"schema": {
+				"attributes": [
+					{
+						"name": "add_default_route",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "interface",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "password",
+						"string": {
+							"computed_optional_required": "computed_optional",
+							"sensitive": true
+						}
+					},
+					{
+						"name": "profile",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "use_peer_dns",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "user",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "running",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "interface_pppoe_server",
+			"schema": {
+				"attributes": [
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "service",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "user",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "running",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "interface_sstp_client",
+			"schema": {
+				"attributes": [
+					{
+						"name": "add_default_route",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "connect_to",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "password",
+						"string": {
+							"computed_optional_required": "computed_optional",
+							"sensitive": true
+						}
+					},
+					{
+						"name": "port",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "profile",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "user",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "verify_server_certificate",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "running",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "interface_veth",
+			"schema": {
+				"attributes": [
+					{
+						"name": "address",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "dhcp",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "gateway",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "running",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
 			"name": "interface_vlan",
 			"schema": {
 				"attributes": [
@@ -272,6 +1168,214 @@
 					{
 						"name": "running",
 						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "interface_vxlan",
+			"schema": {
+				"attributes": [
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "local_address",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "mtu",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "port",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "vni",
+						"int64": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "running",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "interface_vxlan_vteps",
+			"schema": {
+				"attributes": [
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "interface",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "remote_ip",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "interface_wireguard",
+			"schema": {
+				"attributes": [
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "listen_port",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "mtu",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "public_key",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "interface_wireguard_peer",
+			"schema": {
+				"attributes": [
+					{
+						"name": "allowed_address",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "endpoint_address",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "endpoint_port",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "interface",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "persistent_keepalive",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "public_key",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
 							"computed_optional_required": "computed"
 						}
 					}
@@ -344,6 +1448,67 @@
 					},
 					{
 						"name": "vrf",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_dhcp_client",
+			"schema": {
+				"attributes": [
+					{
+						"name": "add_default_route",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "interface",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "use_peer_dns",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "use_peer_ntp",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "invalid",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "status",
 						"string": {
 							"computed_optional_required": "computed"
 						}
@@ -504,6 +1669,31 @@
 					{
 						"name": "invalid",
 						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_dhcp_server_config",
+			"schema": {
+				"attributes": [
+					{
+						"name": "accounting",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "radius_password",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
 							"computed_optional_required": "computed"
 						}
 					}
@@ -685,6 +1875,167 @@
 			}
 		},
 		{
+			"name": "ip_dhcp_server_option_matcher",
+			"schema": {
+				"attributes": [
+					{
+						"name": "address_pool",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "code",
+						"int64": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "matching_type",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "server",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "value",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_dhcp_server_option_set",
+			"schema": {
+				"attributes": [
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "options",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_dns_adlist",
+			"schema": {
+				"attributes": [
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "ssl_verify",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "url",
+						"string": {
+							"computed_optional_required": "required",
+							"sensitive": true
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_dns_forwarders",
+			"schema": {
+				"attributes": [
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "dns_servers",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
 			"name": "ip_dns_record",
 			"schema": {
 				"attributes": [
@@ -789,6 +2140,55 @@
 			}
 		},
 		{
+			"name": "ip_firewall_connection_tracking",
+			"schema": {
+				"attributes": [
+					{
+						"name": "enabled",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "liberal_tcp_tracking",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "loose_tcp_tracking",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "active_ipv4",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "active_ipv6",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "max_entries",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
 			"name": "ip_firewall_filter",
 			"schema": {
 				"attributes": [
@@ -855,6 +2255,31 @@
 					{
 						"name": "invalid",
 						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_firewall_layer7_protocol",
+			"schema": {
+				"attributes": [
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "regexp",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
 							"computed_optional_required": "computed"
 						}
 					}
@@ -1105,6 +2530,818 @@
 			}
 		},
 		{
+			"name": "ip_hotspot",
+			"schema": {
+				"attributes": [
+					{
+						"name": "address_pool",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "addresses_per_mac",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "interface",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "profile",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "invalid",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_hotspot_ip_binding",
+			"schema": {
+				"attributes": [
+					{
+						"name": "address",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "mac_address",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "server",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "to_address",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "type",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_hotspot_profile",
+			"schema": {
+				"attributes": [
+					{
+						"name": "dns_name",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "hotspot_address",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "login_by",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "use_radius",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_hotspot_user",
+			"schema": {
+				"attributes": [
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "password",
+						"string": {
+							"computed_optional_required": "computed_optional",
+							"sensitive": true
+						}
+					},
+					{
+						"name": "profile",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "server",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_hotspot_user_profile",
+			"schema": {
+				"attributes": [
+					{
+						"name": "add_mac_cookie",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "shared_users",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "transparent_proxy",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_hotspot_walled_garden",
+			"schema": {
+				"attributes": [
+					{
+						"name": "action",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "dst_host",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "method",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "path",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "server",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_hotspot_walled_garden_ip",
+			"schema": {
+				"attributes": [
+					{
+						"name": "action",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "dst_address",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "dst_port",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "protocol",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "server",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_ipsec_identity",
+			"schema": {
+				"attributes": [
+					{
+						"name": "auth_method",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "peer",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "secret",
+						"string": {
+							"computed_optional_required": "computed_optional",
+							"sensitive": true
+						}
+					},
+					{
+						"name": "dynamic",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_ipsec_mode_config",
+			"schema": {
+				"attributes": [
+					{
+						"name": "address_pool",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "responder",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "split_include",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_ipsec_peer",
+			"schema": {
+				"attributes": [
+					{
+						"name": "address",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "exchange_mode",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "passive",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "profile",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "dynamic",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_ipsec_policy",
+			"schema": {
+				"attributes": [
+					{
+						"name": "action",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "dst_address",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "group",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "proposal",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "src_address",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "template",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "dynamic",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "invalid",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_ipsec_policy_group",
+			"schema": {
+				"attributes": [
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_ipsec_profile",
+			"schema": {
+				"attributes": [
+					{
+						"name": "dh_group",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "enc_algorithm",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "hash_algorithm",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "nat_traversal",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_ipsec_proposal",
+			"schema": {
+				"attributes": [
+					{
+						"name": "auth_algorithms",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "enc_algorithms",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "pfs_group",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_ipsec_settings",
+			"schema": {
+				"attributes": [
+					{
+						"name": "accounting",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "xauth_use_radius",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_nat_pmp",
+			"schema": {
+				"attributes": [
+					{
+						"name": "enabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_nat_pmp_interfaces",
+			"schema": {
+				"attributes": [
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "forced_ip",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "interface",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "type",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "dynamic",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_neighbor_discovery_settings",
+			"schema": {
+				"attributes": [
+					{
+						"name": "discover_interface_list",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "lldp_mac_phy_config",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "lldp_max_frame_size",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "lldp_vlan_info",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "mode",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
 			"name": "ip_pool",
 			"schema": {
 				"attributes": [
@@ -1217,6 +3454,2839 @@
 					{
 						"name": "static",
 						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_settings",
+			"schema": {
+				"attributes": [
+					{
+						"name": "accept_redirects",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "accept_source_route",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "allow_fast_path",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "icmp_rate_limit",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "rp_filter",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "secure_redirects",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "send_redirects",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "tcp_syncookies",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "tcp_timestamps",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_tftp",
+			"schema": {
+				"attributes": [
+					{
+						"name": "allow",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "read_only",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "real_filename",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "req_filename",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_tftp_settings",
+			"schema": {
+				"attributes": [
+					{
+						"name": "max_block_size",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_traffic_flow",
+			"schema": {
+				"attributes": [
+					{
+						"name": "enabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "interfaces",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "packet_sampling",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "sampling_interval",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "sampling_space",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_traffic_flow_ipfix",
+			"schema": {
+				"attributes": [
+					{
+						"name": "bytes",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "dst_address",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "dst_port",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "packets",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "protocol",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "src_address",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "src_port",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "tcp_flags",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_traffic_flow_target",
+			"schema": {
+				"attributes": [
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "dst_address",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "port",
+						"int64": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "src_address",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "version",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_upnp_interfaces",
+			"schema": {
+				"attributes": [
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "forced_ip",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "interface",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "type",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "dynamic",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_vrf",
+			"schema": {
+				"attributes": [
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "interfaces",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ipv6_address",
+			"schema": {
+				"attributes": [
+					{
+						"name": "address",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "advertise",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "interface",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "dynamic",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "invalid",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ipv6_dhcp_client",
+			"schema": {
+				"attributes": [
+					{
+						"name": "add_default_route",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "interface",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "pool_name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "pool_prefix_length",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "request",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "use_peer_dns",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "invalid",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "status",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ipv6_dhcp_client_option",
+			"schema": {
+				"attributes": [
+					{
+						"name": "code",
+						"int64": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "value",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "raw_value",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ipv6_dhcp_server",
+			"schema": {
+				"attributes": [
+					{
+						"name": "address_pool",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "interface",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "preference",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "prefix_pool",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "dynamic",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "invalid",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ipv6_dhcp_server_option",
+			"schema": {
+				"attributes": [
+					{
+						"name": "code",
+						"int64": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "value",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "raw_value",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ipv6_dhcp_server_option_sets",
+			"schema": {
+				"attributes": [
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "options",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ipv6_firewall_addr_list",
+			"schema": {
+				"attributes": [
+					{
+						"name": "address",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "list",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "dynamic",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ipv6_firewall_filter",
+			"schema": {
+				"attributes": [
+					{
+						"name": "action",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "chain",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "dst_address_list",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "log",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "src_address_list",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "dynamic",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "invalid",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ipv6_nd_prefix",
+			"schema": {
+				"attributes": [
+					{
+						"name": "autonomous",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "interface",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "on_link",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "prefix",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "invalid",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ipv6_neighbor_discovery",
+			"schema": {
+				"attributes": [
+					{
+						"name": "advertise_dns",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "advertise_mac_address",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "hop_limit",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "interface",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "managed_address_configuration",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "mtu",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "other_configuration",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "invalid",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ipv6_pool",
+			"schema": {
+				"attributes": [
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "prefix",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "prefix_length",
+						"int64": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "dynamic",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ipv6_route",
+			"schema": {
+				"attributes": [
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "distance",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "dst_address",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "gateway",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "routing_table",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "active",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "dynamic",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "static",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ipv6_settings",
+			"schema": {
+				"attributes": [
+					{
+						"name": "accept_redirects",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "accept_router_advertisements",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "allow_fast_path",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "forward",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "multipath_hash_policy",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ppp_profile",
+			"schema": {
+				"attributes": [
+					{
+						"name": "change_tcp_mss",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "local_address",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "only_one",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "remote_address",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "use_encryption",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ppp_secret",
+			"schema": {
+				"attributes": [
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "local_address",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "password",
+						"string": {
+							"computed_optional_required": "computed_optional",
+							"sensitive": true
+						}
+					},
+					{
+						"name": "profile",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "remote_address",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "service",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "queue_simple",
+			"schema": {
+				"attributes": [
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "limit_at",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "max_limit",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "parent",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "priority",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "target",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "dynamic",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "invalid",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "queue_tree",
+			"schema": {
+				"attributes": [
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "limit_at",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "max_limit",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "packet_mark",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "parent",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "priority",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "dynamic",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "invalid",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "queue_type",
+			"schema": {
+				"attributes": [
+					{
+						"name": "kind",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "pfifo_limit",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "radius",
+			"schema": {
+				"attributes": [
+					{
+						"name": "accounting_port",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "address",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "authentication_port",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "protocol",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "secret",
+						"string": {
+							"computed_optional_required": "computed_optional",
+							"sensitive": true
+						}
+					},
+					{
+						"name": "service",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "radius_incoming",
+			"schema": {
+				"attributes": [
+					{
+						"name": "accept",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "port",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "vrf",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "routing_bfd_configuration",
+			"schema": {
+				"attributes": [
+					{
+						"name": "addresses",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "forbid_bfd",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "interfaces",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "multiplier",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "routing_bgp_connection",
+			"schema": {
+				"attributes": [
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "connect",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "instance",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "listen",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "local_role",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "remote_address",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "remote_as",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "routing_bgp_evpn",
+			"schema": {
+				"attributes": [
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "instance",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "rd",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "vni",
+						"int64": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "vrf",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "routing_bgp_instance",
+			"schema": {
+				"attributes": [
+					{
+						"name": "as",
+						"int64": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "router_id",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "routing_table",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "vrf",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "routing_bgp_template",
+			"schema": {
+				"attributes": [
+					{
+						"name": "address_families",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "as",
+						"int64": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "routing_bgp_vpn",
+			"schema": {
+				"attributes": [
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "instance",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "label_allocation_policy",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "route_distinguisher",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "vrf",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "routing_filter_rule",
+			"schema": {
+				"attributes": [
+					{
+						"name": "chain",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "rule",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "inactive",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "routing_id",
+			"schema": {
+				"attributes": [
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "router_id",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "dynamic",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "routing_igmp_proxy_interface",
+			"schema": {
+				"attributes": [
+					{
+						"name": "alternative_subnets",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "interface",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "threshold",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "upstream",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "routing_ospf_area",
+			"schema": {
+				"attributes": [
+					{
+						"name": "area_id",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "instance",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "type",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "inactive",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "routing_ospf_area_range",
+			"schema": {
+				"attributes": [
+					{
+						"name": "advertise",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "area",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "cost",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "prefix",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "routing_ospf_instance",
+			"schema": {
+				"attributes": [
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "router_id",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "routing_table",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "version",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "vrf",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "inactive",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "routing_ospf_interface_template",
+			"schema": {
+				"attributes": [
+					{
+						"name": "area",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "cost",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "interfaces",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "networks",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "priority",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "inactive",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "routing_rule",
+			"schema": {
+				"attributes": [
+					{
+						"name": "action",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "dst_address",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "table",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "inactive",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "snmp_community",
+			"schema": {
+				"attributes": [
+					{
+						"name": "addresses",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required",
+							"sensitive": true
+						}
+					},
+					{
+						"name": "read_access",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "security",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "write_access",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "system_certificate_scep_server",
+			"schema": {
+				"attributes": [
+					{
+						"name": "ca_cert",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "days_valid",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "path",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "system_identity",
+			"schema": {
+				"attributes": [
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "system_logging",
+			"schema": {
+				"attributes": [
+					{
+						"name": "action",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "prefix",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "topics",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "system_note",
+			"schema": {
+				"attributes": [
+					{
+						"name": "note",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "show_at_cli_login",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "show_at_login",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "system_ntp_client",
+			"schema": {
+				"attributes": [
+					{
+						"name": "enabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "mode",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "servers",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "vrf",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "status",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "system_ntp_server",
+			"schema": {
+				"attributes": [
+					{
+						"name": "broadcast",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "broadcast_addresses",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "enabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "local_clock_stratum",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "manycast",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "multicast",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "use_local_clock",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "vrf",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "system_scheduler",
+			"schema": {
+				"attributes": [
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "interval",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "on_event",
+						"string": {
+							"computed_optional_required": "required",
+							"sensitive": true
+						}
+					},
+					{
+						"name": "start_time",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "run_count",
+						"int64": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "system_user",
+			"schema": {
+				"attributes": [
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "group",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "password",
+						"string": {
+							"computed_optional_required": "required",
+							"sensitive": true
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "system_user_group",
+			"schema": {
+				"attributes": [
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "policy",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "system_user_sshkeys",
+			"schema": {
+				"attributes": [
+					{
+						"name": "key",
+						"string": {
+							"computed_optional_required": "required",
+							"sensitive": true
+						}
+					},
+					{
+						"name": "user",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "bits",
+						"int64": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "fingerprint",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "key_owner",
+						"string": {
+							"computed_optional_required": "computed",
+							"sensitive": true
+						}
+					},
+					{
+						"name": "key_type",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "tool_graphing_interface",
+			"schema": {
+				"attributes": [
+					{
+						"name": "allow_address",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "interface",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "store_on_disk",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "tool_graphing_queue",
+			"schema": {
+				"attributes": [
+					{
+						"name": "allow_address",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "allow_target",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "simple_queue",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "store_on_disk",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "tool_graphing_resource",
+			"schema": {
+				"attributes": [
+					{
+						"name": "allow_address",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "store_on_disk",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "tool_mac_server",
+			"schema": {
+				"attributes": [
+					{
+						"name": "allowed_interface_list",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "tool_mac_server_ping",
+			"schema": {
+				"attributes": [
+					{
+						"name": "enabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "tool_mac_server_winbox",
+			"schema": {
+				"attributes": [
+					{
+						"name": "allowed_interface_list",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "tool_netwatch",
+			"schema": {
+				"attributes": [
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "disabled",
+						"bool": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "host",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "interval",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "type",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
 							"computed_optional_required": "computed"
 						}
 					}

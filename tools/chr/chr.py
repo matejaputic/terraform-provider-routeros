@@ -131,7 +131,49 @@ def validate_packages(packages, version=VERSION):
         raise RuntimeError('CHR enabled packages do not match the pinned base lane')
 
 
-def start(hosted=False, version=VERSION):
+def install_container(credentials, version):
+    # Only pinned official packages, an owned loopback guest, password SFTP and
+    # a fixed reboot. No user SSH-key change or arbitrary RouterOS script.
+    recipes_path = ROOT/'tools/chr/container-recipes.json'
+    recipes = json.loads(recipes_path.read_text())
+    if version not in recipes: raise RuntimeError('No reviewed container acquisition recipe')
+    recipe = recipes[version]
+    package = STATE/recipe['member']
+    try:
+        with urllib.request.urlopen(recipe['url'],timeout=120) as response:
+            data=response.read(128*1024*1024+1)
+        if len(data)>128*1024*1024 or hashlib.sha256(data).hexdigest()!=recipe['archive_sha256']:
+            raise RuntimeError('container archive hash mismatch')
+        import io
+        with zipfile.ZipFile(io.BytesIO(data)) as archive: payload=archive.read(recipe['member'])
+        if len(payload)!=recipe['package_bytes'] or hashlib.sha256(payload).hexdigest()!=recipe['package_sha256']:
+            raise RuntimeError('container package hash mismatch')
+        package.write_bytes(payload)
+        console=Console();console.expect(b'] > ')
+        console.command('/ip service set ssh disabled=no')
+        console.s.close()
+        env=os.environ.copy();env['GOTOOLCHAIN']='go1.25.8'
+        result=subprocess.run(['go','run','tools/chr/package-upload/main.go',str(CREDENTIALS),str(package)],cwd=ROOT,env=env,timeout=120,capture_output=True)
+        if result.returncode!=0:raise RuntimeError('owned container package upload failed; protocol output suppressed')
+        console=Console();console.expect(b'] > ');console.send('/system reboot');console.expect(b'[y/N]:');console.send('y');console.s.close()
+        deadline=time.monotonic()+60
+        while subprocess.check_output(['docker','inspect','--format','{{.State.Running}}',NAME],text=True).strip()=='true':
+            if time.monotonic()>deadline:raise RuntimeError('owned package reboot did not stop QEMU')
+            time.sleep(1)
+        run('docker','start',NAME,stdout=subprocess.DEVNULL)
+        console=Console();console.expect(b'Login:');console.send('admin+ct');console.expect(b'Password:');console.send(credentials['password']);console.expect(b'] > ')
+        console.command('/ip service disable ssh');console.s.close()
+        deadline=time.monotonic()+60
+        while True:
+            try:request(credentials,'/system/resource');break
+            except (OSError,urllib.error.URLError):
+                if time.monotonic()>deadline:raise RuntimeError('extra guest REST unavailable') from None
+                time.sleep(1)
+        return dict(recipe,recipes_sha256=digest(recipes_path),installer='owned password SFTP; verified RouterOS package installation on reboot')
+    finally: package.unlink(missing_ok=True)
+
+
+def start(hosted=False, version=VERSION, container=False):
     if version not in RECIPES:
         raise RuntimeError('No pinned acquisition recipe for this RouterOS version')
     recipe = RECIPES[version]
@@ -183,8 +225,9 @@ def start(hosted=False, version=VERSION):
         run('docker', 'run', '-d', '--name', NAME, '--label', 'routeros-provider.disposable=true',
         '--platform', platform, '--cpus', '2', '--memory', '1536m', '--cap-drop', 'ALL',
         '--security-opt', 'no-new-privileges', '-p', '127.0.0.1:18780:8080', '-p', '127.0.0.1:18723:2323',
+        *(['-p','127.0.0.1:18722:8022'] if container else []),
         '-v', str(disk) + ':/chr.img', IMAGE, '-machine', 'pc', '-accel', 'tcg', '-m', '1024', '-smp', '1',
-        '-drive', 'file=/chr.img,format=raw,if=ide', '-netdev', 'user,id=net0,restrict=on,hostfwd=tcp:0.0.0.0:8080-:80',
+        '-drive', 'file=/chr.img,format=raw,if=ide', '-netdev', 'user,id=net0,restrict=on,hostfwd=tcp:0.0.0.0:8080-:80' + (',hostfwd=tcp:0.0.0.0:8022-:22' if container else ''),
         '-device', 'virtio-net-pci,netdev=net0',
         '-netdev', 'hubport,id=testnet,hubid=1', '-device', 'virtio-net-pci,netdev=testnet,mac=52:54:00:00:00:02',
         '-display', 'none', '-monitor', 'none',
@@ -230,6 +273,15 @@ def start(hosted=False, version=VERSION):
             raise RuntimeError('CHR version/architecture mismatch')
         packages = request(credentials, '/system/package')
         validate_packages(packages, version)
+        if container:
+            package_proof = install_container(credentials, version)
+            packages = request(credentials,'/system/package')
+            enabled=[p for p in packages if p.get('disabled') in ('false','no',False)]
+            if {p.get('name') for p in enabled}!={'routeros','container'} or any(p.get('version')!=version for p in enabled):
+                raise RuntimeError('extra guest package inventory mismatch')
+            provenance['container_acquisition'] = package_proof
+            provenance['package_flavor'] = 'routeros+container'
+        else: provenance['package_flavor'] = 'base'
         provenance.update({'archive_sha256': zip_hash, 'disk_sha256': disk_hash,
                            'recipes_sha256': digest(RECIPES_PATH),
                            'accelerator': 'tcg', 'engine': engine,
@@ -266,13 +318,13 @@ def test(version=VERSION):
     env = os.environ.copy()
     env.update(ROS_HOSTURL=credentials['hosturl'], ROS_USERNAME=credentials['username'], ROS_PASSWORD=credentials['password'],
                ROS_TEST_DISPOSABLE='1', ROS_TEST_VERSION=version, TF_ACC='1', TF_ACC_TERRAFORM_VERSION='1.14.0', GOTOOLCHAIN='go1.25.8')
-    pattern = '^TestAcc(IPAddress|Collections|DHCPRouting|DHCPOptions|DHCPRelay|DNSRecord|Firewall|FirewallFamilies)CHR$'
+    pattern = '^TestAcc(IPAddress|Collections|DHCPRouting|DHCPOptions|DHCPRelay|DNSRecord|Singletons|BatchACollections|Firewall|FirewallFamilies)CHR$'
     run('go', 'test', './internal/provider', '-run', pattern, '-count=1', '-v', '-timeout', '5m', env=env)
     evidence = {'format': 'routeros-chr-acceptance@1', 'success': True,
                 'provider_revision': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
                 'source_tree_clean': not subprocess.check_output(['git', 'status', '--porcelain'], cwd=ROOT),
                 'target_sha256': digest(STATE / 'target.json'), 'recipes_sha256': digest(RECIPES_PATH),
-                'version': version, 'architecture': 'x86_64', 'flavor': 'base',
+                'version': version, 'architecture': 'x86_64', 'flavor': provenance.get('package_flavor','base'),
                 'test_pattern': pattern, 'terraform_version': '1.14.0',
                 'limitations': 'configuration lifecycle only; no traffic processing or release binary verification'}
     (STATE / 'acceptance-evidence.json').write_text(json.dumps(evidence, indent=2) + '\n')
@@ -286,18 +338,23 @@ def stop():
             raise RuntimeError('Refusing cleanup of a container not owned by this harness')
         run('docker', 'rm', '-f', NAME, stdout=subprocess.DEVNULL)
     CREDENTIALS.unlink(missing_ok=True)
+    for version in RECIPES: (STATE/f'container-{version}.npk').unlink(missing_ok=True)
     (STATE / 'test.img').unlink(missing_ok=True)
     print('Disposable CHR stopped; credentials and mutable test disk removed')
 
 if __name__ == '__main__':
+    import signal
+    def cancel(signum,frame): raise KeyboardInterrupt()
+    signal.signal(signal.SIGTERM,cancel)
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('command', choices=['start', 'test', 'stop'])
     parser.add_argument('--hosted', action='store_true', help='Permit only this repository GitHub-hosted runner')
+    parser.add_argument('--container', action='store_true', help='Install the matching pinned container package on the owned disposable guest')
     parser.add_argument('--version', choices=sorted(RECIPES), default=VERSION,
                         help='Pinned acquisition/acceptance recipe; defaults to baseline')
     args = parser.parse_args()
     if args.command == 'start':
-        start(hosted=args.hosted, version=args.version)
+        start(hosted=args.hosted, version=args.version, container=args.container)
     elif args.command == 'test':
         test(version=args.version)
     else:

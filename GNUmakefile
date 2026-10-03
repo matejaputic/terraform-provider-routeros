@@ -19,7 +19,7 @@ fmt:
 	gofmt -s -w -e .
 
 test: testdiscovery testschema testmaintenance testcontracts testchr
-	GOTOOLCHAIN=go1.25.8 TF_ACC_TERRAFORM_VERSION=1.14.0 go test -v -race -cover -timeout=120s ./...
+	GOTOOLCHAIN=go1.25.8 TF_ACC_TERRAFORM_VERSION=1.14.0 go test -v -race -cover -timeout=300s ./...
 
 testdiscovery:
 	python3 -m unittest discover -s tools/schema/discover -v

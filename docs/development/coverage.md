@@ -1,6 +1,6 @@
 # Resource coverage
 
-Runtime revision `framework-rest-preview-v9`; official generator models/schemas with maintained Framework lifecycles. Twenty resources registered, zero data sources. Coverage is expanding in batches, not inferred from OpenAPI inventory.
+Runtime revision `framework-rest-preview-v10-batch-a`; **125 reviewed resource constructors**, zero data sources. The fixed 107 Batch A integrations are generated and registered, with focused mock/race and both pinned live lanes passing; VETH additionally passed both matching container-package lanes. Final clean-source consolidated verification/maintenance/hosted delivery gates remain in progress. See the sole [constructor tracker and subset limitations](batch-a.md). The table below retains the original twenty-resource contract details.
 
 | Resource | Implementation | Terraform mock CRUD/import | Live CHR CRUD/import |
 | --- | --- | --- | --- |
@@ -25,10 +25,7 @@ Runtime revision `framework-rest-preview-v9`; official generator models/schemas 
 | `routeros_ip_dhcp_relay` | Disabled-capable relay subset + IPv4 destinations | Pass | Pass (both base lanes, dirty-source focused suite) |
 | `routeros_ip_dns_record` | Named A/AAAA subset + replacement type | Pass | Pass (both base lanes, dirty-source focused suite) |
 
-Batch A remains **2/107 integrated, not complete**. See the sole current
-[constructor tracker and contract limitations](batch-a.md) and
-[hash-bound focused evidence](../../schemas/batch-a-integration-validation.json).
-The following clean-source statements retain their historical scope.
+All 107 Batch A constructors are integrated; final milestone delivery is not yet claimed. The original [two-resource focused evidence](../../schemas/batch-a-integration-validation.json) and following clean-source statements retain their historical scope.
 
 The new option wave and all original regressions passed from clean revision `06d10a6` on both local pinned lanes; [wave evidence](../../schemas/dhcp-options-wave-validation.json) records exact bindings. The historical hosted evidence below remains specific to its original sixteen-resource revision.
 
@@ -36,7 +33,7 @@ Original baseline live scope: disposable **RouterOS 7.24.5 x86_64/base CHR** on 
 
 ## Maintained collection behavior
 
-`internal/catalog/collections.json` authorizes nineteen concrete collection paths and fields. This file is embedded in the runtime and bound into discovery producer fingerprints; schema inventory never authorizes registration. The snapshot adapter supports the reviewed string/bool/int64/string-list types, aliases, decimal/boolean/CSV codecs and name replacement. Official OpenAPI and Framework generators produce twenty models/schemas. Independent gates require the complete exact resource/field/type/mode set before staged files replace last-good output. Name replacement modifiers and all lifecycle methods remain maintained code.
+`internal/catalog/collections.json` preserves nineteen accepted collection subsets; `singletons.json` and `batch-a-collections.json` explicitly authorize the remaining reviewed subsets. This file is embedded in the runtime and bound into discovery producer fingerprints; schema inventory never authorizes registration. The snapshot adapter supports the reviewed string/bool/int64/string-list types, aliases, decimal/boolean/CSV codecs and name replacement. Official OpenAPI and Framework generators produce 125 models/schemas. Independent gates require the complete exact resource/field/type/mode set before staged files replace last-good output. Name replacement modifiers and all lifecycle methods remain maintained code.
 
 CRUD uses PUT create, filtered collection GET by `.id`, PATCH update and DELETE item. Import accepts only an internal `*HEX` ID. Actual collection absence/typed 404 is distinguished from auth, malformed, partial and transport failures. Refresh commits a temporary model only after successful validation. Writes contain configured writable fields only, never computed state or IDs. Failed create-read preserves a known ID/partial state. Built-in or dynamic records cannot be imported/managed/deleted through this ordinary collection lifecycle. Changing a `name` replaces the object, matching the reviewed reference behavior, rather than silently renaming dependencies.
 
@@ -72,6 +69,6 @@ Action applicability validates configuration intent separately from readback: Ro
 
 `TestAccCollectionsCHR` creates a dependent bridge → VLAN / physical test port → interface list member topology plus an IP pool. It verifies create/read, numeric/bool/list state, comment and meaningful integer/bool/range updates, import for all six, empty subsequent plans/applies, out-of-band pool deletion/recreation, name replacement and final destroy. Existing IP acceptance still passes.
 
-The harness adds an isolated second virtio NIC on a QEMU-only hub with **no host/network backend**, named `tf-port`. The management NIC remains untouched; existing `tf-test` is a disconnected bridge for IP tests. No KVM, privileged containers, host networking or additional forwarded ports. All test bridge/VLAN/list/pool names use `tf-coverage-`; cleanup verifies owned records and then destroys the entire guest/container, credentials and mutable disk even after test failures.
+The harness adds an isolated second virtio NIC on a QEMU-only hub with **no host/network backend**, named `tf-port`. The management NIC remains untouched; existing `tf-test` is a disconnected bridge for IP tests. No KVM, privileged containers or host networking. Base uses only loopback REST/serial ports; explicitly requested container lanes briefly use a loopback password-SFTP provisioning port, then disable SSH. All test bridge/VLAN/list/pool names use `tf-coverage-`; cleanup verifies owned records and then destroys the entire guest/container, credentials and mutable disk even after test failures.
 
-Next work: continue small evidence-backed resource waves; see the [DHCP option contract](dhcp-options-wave.md). Release infrastructure (actual generated-candidate acceptance and durable tested/published receipts) remains an unfinished parallel backlog, not a prerequisite for resource development. Broader firewall matchers/actions and unset/presence semantics remain separately reviewed work. Singleton settings, hardware configuration, actions, async resources, sensitive read-back and SDK-state migration remain specialized work rather than invented generic CRUD support.
+Next work is the consolidated Batch A delivery gate, not another inventory or small resource wave. Release infrastructure (generated-candidate acceptance and durable tested/published receipts) remains separate unfinished work. Hardware/Batch B, unlisted fields/actions, traffic behavior and SDK-state migration remain unexposed or uncertified. Singletons and SSH keys use their reviewed special lifecycles, never invented blanket CRUD.

@@ -38,6 +38,9 @@ func (e *RequestError) Error() string { return "RouterOS request failed (transpo
 func (e *RequestError) Unwrap() error { return e.cause }
 func (c *Client) Close()              { c.http.CloseIdleConnections() }
 
+// IsAuthenticatedUser enables ownership guards without exposing credentials.
+func (c *Client) IsAuthenticatedUser(name string) bool { return name == c.username }
+
 func (e *StatusError) Error() string { return fmt.Sprintf("RouterOS HTTP status %d", e.Code) }
 func New(c Config) (*Client, error) {
 	u, e := url.Parse(c.HostURL)

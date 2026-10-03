@@ -84,18 +84,21 @@ func main() {
 	if e = json.Unmarshal(b, &s); e != nil {
 		panic(e)
 	}
-	if s.Version != "0.1" || s.Provider.Name != "routeros" || len(s.Resources) != 1+len(catalog.Collections()) || len(s.DataSources) != 0 {
+	if s.Version != "0.1" || s.Provider.Name != "routeros" || len(s.Resources) != 1+len(catalog.Resources()) || len(s.DataSources) != 0 {
 		panic("unexpected specification identity or resource set")
 	}
 	contracts := map[string]map[string]string{}
-	for _, collection := range catalog.Collections() {
+	sensitivities := map[string]map[string]bool{}
+	for _, collection := range catalog.Resources() {
 		fields := map[string]string{}
+		sensitivities[collection.Name] = map[string]bool{}
 		for _, field := range collection.Fields {
 			kind := map[string]string{"string": "string", "boolean": "bool", "integer": "int64", "array": "list"}[field.Type]
 			if kind == "" {
 				panic("unsupported catalog type")
 			}
 			fields[field.Name] = kind + "/" + field.Mode
+			sensitivities[collection.Name][field.Name] = field.Sensitive
 		}
 		contracts[collection.Name] = fields
 	}
@@ -124,6 +127,14 @@ func main() {
 					var metadata map[string]json.RawMessage
 					if err := json.Unmarshal(raw, &metadata); err != nil {
 						panic(err)
+					}
+					if sensitivities[res.Name][name] {
+						if kind != "string" || string(metadata["sensitive"]) != "true" {
+							panic("missing reviewed sensitivity: " + name)
+						}
+						delete(metadata, "sensitive")
+					} else if _, exists := metadata["sensitive"]; exists {
+						panic("unreviewed sensitive metadata: " + name)
 					}
 					if kind == "list" {
 						element := string(metadata["element_type"])

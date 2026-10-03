@@ -74,10 +74,16 @@ def inspect(files):
 def reconcile(inventory, descriptors):
     rows = []
     registered = inventory['registrations']['resources']
+    # The curated definitions authorize exposure. Frozen constructor identity is
+    # only correlation metadata for intentional canonical names, not aliases.
+    policies = [p for file in ('collections.json','singletons.json','batch-a-collections.json') for p in json.loads((ROOT/'internal/catalog'/file).read_bytes())]
+    identities = {'routeros_'+p['resource_name']:p['reference_constructor'] for p in policies if 'reference_constructor' in p}
     for resource in descriptors['resources']:
         name = resource['terraform_type']
-        constructor = registered.get(name)
-        if constructor is None:
+        if resource.get('reference_constructor') != identities.get(name):
+            raise ValueError('unreviewed canonical constructor identity: '+name)
+        constructor = identities.get(name, registered.get(name))
+        if constructor is None or constructor not in inventory['constructors']:
             raise ValueError('approved resource absent from pinned reference')
         contract = inventory['constructors'][constructor]
         source_fields = contract['fields']
@@ -121,7 +127,7 @@ def reconcile(inventory, descriptors):
     return {'format': 'routeros-contract-reconciliation@1', 'source_revision': PIN,
             'descriptor_sha256': digest(encode(descriptors)),
             'policy_inputs_sha256': {p: digest((ROOT / p).read_bytes()) for p in
-                                    ('schemas/ip-address-policy.json', 'internal/catalog/collections.json')},
+                                    ('schemas/ip-address-policy.json', 'internal/catalog/collections.json', 'internal/catalog/singletons.json', 'internal/catalog/batch-a-collections.json')},
             'public_schema_changes': False, 'automatic_promotion': False,
             'scope': 'static declarations only; overlays remain authoritative; differences need review',
             'resources': rows}

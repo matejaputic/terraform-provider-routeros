@@ -134,7 +134,7 @@ func (p *RouterOSProvider) Configure(ctx context.Context, q provider.ConfigureRe
 	r.DataSourceData = cl
 }
 func (p *RouterOSProvider) Resources(context.Context) []func() resource.Resource {
-	return append([]func() resource.Resource{NewIPAddressResource}, collectionConstructors()...)
+	return append(append(append([]func() resource.Resource{NewIPAddressResource}, collectionConstructors()...), singletonConstructors()...), batchACollectionConstructors()...)
 }
 func (p *RouterOSProvider) DataSources(context.Context) []func() datasource.DataSource { return nil }
 func New(version string) func() provider.Provider {

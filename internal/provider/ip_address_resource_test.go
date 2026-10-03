@@ -55,10 +55,10 @@ func TestProtocolSchema(t *testing.T) {
 			t.Fatal(d.Summary, d.Detail)
 		}
 	}
-	if len(resp.ResourceSchemas) != 1+len(catalog.Collections()) || resp.ResourceSchemas["routeros_ip_address"] == nil {
+	if len(resp.ResourceSchemas) != 1+len(catalog.Resources()) || resp.ResourceSchemas["routeros_ip_address"] == nil {
 		t.Fatal("unexpected resource set")
 	}
-	for _, policy := range catalog.Collections() {
+	for _, policy := range catalog.Resources() {
 		if resp.ResourceSchemas["routeros_"+policy.Name] == nil {
 			t.Fatalf("missing reviewed resource %s", policy.Name)
 		}

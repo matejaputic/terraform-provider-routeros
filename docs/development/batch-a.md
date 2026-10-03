@@ -1,72 +1,170 @@
-# Batch A — implementation in progress, not a completed milestone
+# Batch A — 107 integrations, final delivery gates in progress
 
-The owner authorized completion of the **fixed 107-constructor Batch A**. The
-milestone target remains **125 total implemented constructors**. It has not been
-reduced, completed, or substituted with a smaller wave.
-
-**Current integration accounting: 2/107 new public resources registered;
-20 total constructors. The 107-resource milestone remains incomplete.** Both
-new resources have official generated bindings, maintained collection behavior,
-race/mock coverage and focused live evidence on both pinned base lanes. Their
-live evidence binds dirty-source file hashes, not a clean-source revision.
-No expanded maintenance-candidate or release certification is claimed.
+The fixed roster remains **107 distinct constructors** (88 collections and 19
+singletons); **125 public constructors** including the eighteen preserved baseline
+resources. Batch B's other 107 constructors remain unexposed. Aliases do not count
+twice. Final milestone completion is NOT claimed until clean-source consolidated
+live evidence, immutable maintenance replay/no-op and hosted verification complete.
 
 ## Constructor-level implementation tracker
 
-All 105 other frozen ledger IDs remain pending in every column; the frozen ledger
-is planning evidence and remains unchanged. This table is the sole current tracker.
+This is the sole current tracker. Frozen ledger statuses remain historical planning
+evidence, never an exposure selector. `pass` below means observed focused tests;
+live results so far bind dirty source, not a maintenance candidate or release.
 
-| Constructor / canonical name | Contract | Lifecycle | Official generation | Registration | Mock/race | Live base lanes |
+| Constructor / canonical resource | Reviewed contract | Lifecycle | Official generation | Registration | Mock/race | Live |
 | --- | --- | --- | --- | --- | --- | --- |
-| `ResourceDhcpRelay` / `routeros_ip_dhcp_relay` | reviewed subset below | CRUD, import, replacement name | both pinned generators | public | passed | 7.24.5 and 7.25beta5 passed, dirty source |
-| `ResourceDnsRecord` / `routeros_ip_dns_record` | A/AAAA subset below | CRUD, import, replacement name/type | both pinned generators | public | passed | 7.24.5 and 7.25beta5 passed, dirty source |
+| `ResourceCertificateScepServer` / `routeros_system_certificate_scep_server` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceDhcpClient` / `routeros_ip_dhcp_client` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceDhcpRelay` / `routeros_ip_dhcp_relay` | explicit subset | CRUD, import | both pinned | public | pass | both base lanes |
+| `ResourceDhcpServerConfig` / `routeros_ip_dhcp_server_config` | explicit subset | GET object, POST /set, unmanage | both pinned | public | pass | both base lanes |
+| `ResourceDhcpServerOptionMatcher` / `routeros_ip_dhcp_server_option_matcher` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceDhcpServerOptionSets` / `routeros_ip_dhcp_server_option_set` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceDnsAdlist` / `routeros_ip_dns_adlist` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceDnsRecord` / `routeros_ip_dns_record` | explicit subset | CRUD, import | both pinned | public | pass | both base lanes |
+| `ResourceIPConnectionTracking` / `routeros_ip_firewall_connection_tracking` | explicit subset | GET object, POST /set, unmanage | both pinned | public | pass | both base lanes |
+| `ResourceIPVrf` / `routeros_ip_vrf` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceIPv6Address` / `routeros_ipv6_address` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceIPv6DhcpClient` / `routeros_ipv6_dhcp_client` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceIPv6DhcpClientOption` / `routeros_ipv6_dhcp_client_option` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceIPv6FirewallAddrList` / `routeros_ipv6_firewall_addr_list` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceIPv6FirewallFilter` / `routeros_ipv6_firewall_filter` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceIPv6NeighborDiscovery` / `routeros_ipv6_neighbor_discovery` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceIPv6Route` / `routeros_ipv6_route` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceInterface6to4` / `routeros_interface_6to4` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceInterfaceBonding` / `routeros_interface_bonding` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceInterfaceBridgeSettings` / `routeros_interface_bridge_settings` | explicit subset | GET object, POST /set, unmanage | both pinned | public | pass | both base lanes |
+| `ResourceInterfaceBridgeVlan` / `routeros_interface_bridge_vlan` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceInterfaceDot1xClient` / `routeros_interface_dot1x_client` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceInterfaceDot1xServer` / `routeros_interface_dot1x_server` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceInterfaceGre6` / `routeros_interface_gre6` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceInterfaceL2tpClient` / `routeros_interface_l2tp_client` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceInterfaceMacVlan` / `routeros_interface_macvlan` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceInterfaceOpenVPNServer` / `routeros_interface_ovpn_server` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceInterfacePPPoEClient` / `routeros_interface_pppoe_client` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceInterfacePppoeServer` / `routeros_interface_pppoe_server` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceInterfaceSSTPClient` / `routeros_interface_sstp_client` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceInterfaceVeth` / `routeros_interface_veth` | explicit subset | CRUD, import | both pinned | public | pass | both container lanes; unavailable on base |
+| `ResourceInterfaceVxlan` / `routeros_interface_vxlan` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceInterfaceVxlanVteps` / `routeros_interface_vxlan_vteps` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceInterfaceWireguard` / `routeros_interface_wireguard` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceInterfaceWireguardPeer` / `routeros_interface_wireguard_peer` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceIpDnsForwarders` / `routeros_ip_dns_forwarders` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceIpFirewallLayer7Protocol` / `routeros_ip_firewall_layer7_protocol` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceIpHotspot` / `routeros_ip_hotspot` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceIpHotspotIpBinding` / `routeros_ip_hotspot_ip_binding` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceIpHotspotProfile` / `routeros_ip_hotspot_profile` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceIpHotspotUser` / `routeros_ip_hotspot_user` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceIpHotspotUserProfile` / `routeros_ip_hotspot_user_profile` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceIpHotspotWalledGarden` / `routeros_ip_hotspot_walled_garden` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceIpHotspotWalledGardenIp` / `routeros_ip_hotspot_walled_garden_ip` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceIpIpsecIdentity` / `routeros_ip_ipsec_identity` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceIpIpsecModeConfig` / `routeros_ip_ipsec_mode_config` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceIpIpsecPeer` / `routeros_ip_ipsec_peer` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceIpIpsecPolicy` / `routeros_ip_ipsec_policy` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceIpIpsecPolicyGroup` / `routeros_ip_ipsec_policy_group` | explicit subset | replacement-only, import | both pinned | public | pass | both base + container lanes |
+| `ResourceIpIpsecProfile` / `routeros_ip_ipsec_profile` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceIpIpsecProposal` / `routeros_ip_ipsec_proposal` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceIpIpsecSettings` / `routeros_ip_ipsec_settings` | explicit subset | GET object, POST /set, unmanage | both pinned | public | pass | both base lanes |
+| `ResourceIpNeighborDiscoverySettings` / `routeros_ip_neighbor_discovery_settings` | explicit subset | GET object, POST /set, unmanage | both pinned | public | pass | both base lanes |
+| `ResourceIpSettings` / `routeros_ip_settings` | explicit subset | GET object, POST /set, unmanage | both pinned | public | pass | both base lanes |
+| `ResourceIpTFTP` / `routeros_ip_tftp` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceIpTFTPSettings` / `routeros_ip_tftp_settings` | explicit subset | GET object, POST /set, unmanage | both pinned | public | pass | both base lanes |
+| `ResourceIpTrafficFlow` / `routeros_ip_traffic_flow` | explicit subset | GET object, POST /set, unmanage | both pinned | public | pass | both base lanes |
+| `ResourceIpTrafficFlowIpfix` / `routeros_ip_traffic_flow_ipfix` | explicit subset | GET object, POST /set, unmanage | both pinned | public | pass | both base lanes |
+| `ResourceIpTrafficFlowTarget` / `routeros_ip_traffic_flow_target` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceIpv6DhcpServer` / `routeros_ipv6_dhcp_server` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceIpv6DhcpServerOption` / `routeros_ipv6_dhcp_server_option` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceIpv6DhcpServerOptionSets` / `routeros_ipv6_dhcp_server_option_sets` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceIpv6NdPrefix` / `routeros_ipv6_nd_prefix` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceIpv6Pool` / `routeros_ipv6_pool` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceIpv6Settings` / `routeros_ipv6_settings` | explicit subset | GET object, POST /set, unmanage | both pinned | public | pass | both base lanes |
+| `ResourceNatPmpInterfaces` / `routeros_ip_nat_pmp_interfaces` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceNatPmpSettings` / `routeros_ip_nat_pmp` | explicit subset | GET object, POST /set, unmanage | both pinned | public | pass | both base lanes |
+| `ResourceOpenVPNClient` / `routeros_interface_ovpn_client` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourcePPPProfile` / `routeros_ppp_profile` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourcePPPSecret` / `routeros_ppp_secret` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceQueueSimple` / `routeros_queue_simple` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceQueueTree` / `routeros_queue_tree` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceQueueType` / `routeros_queue_type` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceRadius` / `routeros_radius` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceRadiusIncoming` / `routeros_radius_incoming` | explicit subset | GET object, POST /set, unmanage | both pinned | public | pass | both base lanes |
+| `ResourceRoutingBfdConfiguration` / `routeros_routing_bfd_configuration` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceRoutingBgpConnection` / `routeros_routing_bgp_connection` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceRoutingBgpEvpn` / `routeros_routing_bgp_evpn` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceRoutingBgpInstance` / `routeros_routing_bgp_instance` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceRoutingBgpTemplate` / `routeros_routing_bgp_template` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceRoutingBgpVpn` / `routeros_routing_bgp_vpn` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceRoutingFilterRule` / `routeros_routing_filter_rule` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceRoutingId` / `routeros_routing_id` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceRoutingIgmpProxyInterface` / `routeros_routing_igmp_proxy_interface` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceRoutingOspfArea` / `routeros_routing_ospf_area` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceRoutingOspfAreaRange` / `routeros_routing_ospf_area_range` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceRoutingOspfInstance` / `routeros_routing_ospf_instance` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceRoutingOspfInterfaceTemplate` / `routeros_routing_ospf_interface_template` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceRoutingRule` / `routeros_routing_rule` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceSNMPCommunity` / `routeros_snmp_community` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceSystemIdentity` / `routeros_system_identity` | explicit subset | GET object, POST /set, unmanage | both pinned | public | pass | both base lanes |
+| `ResourceSystemLogging` / `routeros_system_logging` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceSystemNote` / `routeros_system_note` | explicit subset | GET object, POST /set, unmanage | both pinned | public | pass | both base lanes |
+| `ResourceSystemNtpClient` / `routeros_system_ntp_client` | explicit subset | GET object, POST /set, unmanage | both pinned | public | pass | both base lanes |
+| `ResourceSystemNtpServer` / `routeros_system_ntp_server` | explicit subset | GET object, POST /set, unmanage | both pinned | public | pass | both base lanes |
+| `ResourceSystemScheduler` / `routeros_system_scheduler` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceToolGraphingInterface` / `routeros_tool_graphing_interface` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceToolGraphingQueue` / `routeros_tool_graphing_queue` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceToolGraphingResource` / `routeros_tool_graphing_resource` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceToolMacServer` / `routeros_tool_mac_server` | explicit subset | GET object, POST /set, unmanage | both pinned | public | pass | both base lanes |
+| `ResourceToolMacServerPing` / `routeros_tool_mac_server_ping` | explicit subset | GET object, POST /set, unmanage | both pinned | public | pass | both base lanes |
+| `ResourceToolMacServerWinBox` / `routeros_tool_mac_server_winbox` | explicit subset | GET object, POST /set, unmanage | both pinned | public | pass | both base lanes |
+| `ResourceToolNetwatch` / `routeros_tool_netwatch` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceUPNPInterfaces` / `routeros_ip_upnp_interfaces` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceUser` / `routeros_system_user` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceUserGroup` / `routeros_system_user_group` | explicit subset | CRUD, import | both pinned | public | pass | both base + container lanes |
+| `ResourceUserSshKeys` / `routeros_system_user_sshkeys` | explicit subset | replacement-only, import | both pinned | public | pass | both base + container lanes |
 
-Reviewed contracts live in `internal/catalog/collections.json`, reproduced by
-`tools/schema/normalize/build_policy.py`. The normalizer's explicit path and
-replacement/default checks, independent specification/file-set gates, official
-Framework bindings, public registration and CHR test selector were extended
-alongside each contract. No custom schema/model emitter was added. Existing
-baseline policy objects and generated files retain their contracts.
+## Reviewed runtime scope and limitations
 
-- **DHCP relay:** required replacement-owned name, interface and canonical CSV
-  of unique unicast IPv4 DHCP destinations; optional/computed disabled,
-  add-relay-info and local-address (including `0.0.0.0` auto-selection); computed
-  invalid status. No duration, VRF or option-82 remote-ID contract is exposed.
-  Destination list order/spelling must already be canonical. Disabled relays on
-  the disconnected test bridge are used; no DHCP forwarding is certified.
-- **DNS address record:** required replacement-owned lowercase ASCII hostname
-  and A/AAAA type, required canonical address matching the type; optional/computed
-  comment, disabled and match-subdomain; computed dynamic status. Empty comments
-  clear. RouterOS omits false match-subdomain, so its explicit reviewed read
-  default is false. Live testing caught the initial missing default, then both
-  lanes passed after the correction. Regex/firewall-list actions and dynamic or
-  built-in imports fail closed. No other record types, TTL/duration, regex,
-  forwarding or firewall side effects are exposed; no DNS traffic is certified.
+- Contracts: `internal/catalog/{collections,singletons,batch-a-collections}.json`.
+  The maintained policy builders explicitly enumerate fields; unlisted fields,
+  actions, aliases and SDK upgraders remain unsupported. SDK migration and parity
+  are not claimed. Official OpenAPI v0.3.0 and Framework v0.4.1 generators emit
+  all schemas/models. `tools/schema/bindings.py` emits only function references.
+- Collections share bounded CRUD, ID import, ownership guards, omission, explicit
+  clearing, atomic readback, deletion recreation and retained allocated IDs after
+  create refresh failure. Scalar CSV sets preserve equivalent order; durations
+  preserve equivalent spelling. MAC/VLAN/IP formats and selected bounds/enums
+  are reviewed. Automatic MTU/hop-limit values remain null rather than becoming
+  fabricated numbers. User permission readback handles explicit negative flags.
+- SSH keys: required sensitive user-owned public key, replacement-only mutations,
+  SHA256 fingerprint ownership verification including RouterOS padding, omitted-key
+  state preservation. Import cannot recover key material; supplying a key after
+  fresh import requires replacement. Administrator/authentication-user keys cannot
+  be managed. Unsupported comment is omitted; key-owner metadata is sensitive.
+- VETH: actual extra publication is separately hash-bound; base paths are never
+  fabricated. Runtime requires enabled matching-version `container`. Pinned
+  official package recipes provision owned disposable guests via password SFTP,
+  fixed reboot and signature-verified RouterOS installation; no user key changes
+  or container execution. Both pinned container lanes passed.
+- Nineteen singletons: fixed GET-object/POST-`/set`, path-derived identity/import,
+  destroy-unmanage only, atomic malformed reads and failure recovery. Destroy
+  never DELETEs, resets or writes global settings. NTP lists/choices/bounds have
+  explicit validation and canonical readback.
+- Disabled/disconnected/unattached live objects preserve connectivity. The owned
+  CA prerequisite only serves disabled SCEP configuration; scheduler uses a
+  disabled harmless body, Netwatch imports with hidden callbacks fail closed.
+  No packet-processing, arbitrary script execution or credential rotation is
+  certified. OSPF passive and ignored ND/IPsec-group/SSH comments are unexposed.
+  The IPsec policy-group has only a meaningful replacement-owned name because
+  RouterOS does not support its purported comment field.
+- All eighteen accepted descriptors and generated files were independently
+  compared with `1897fb32c03c43fb48f6ab3020cc3baf2e2b57b2`: unchanged.
+  Historical matrices, receipts, ledger and examples are preserved.
 
-Both reuse collection preflight ownership checks, atomic readback, omission,
-failed-write recovery and import ID handling. New Terraform mocks exercise CRUD,
-import, subsequent empty plans, drift repair, external deletion recreation and
-replacement, with malformed/ownership/configuration negatives. Real target
-suites use disabled owned objects, remove them, and guest cleanup removes all
-mutable disks and temporary credentials even on failure.
+## Historical foundation evidence (superseded implementation status)
 
-Evidence: `schemas/batch-a-integration-validation.json`. Example:
-`examples/dhcp-relay-dns/main.tf`. The expanded twenty-resource maintenance
-baseline is explicit (`semantic-identity-v2-dhcp-relay-dns-address`); semantic
-identity/delta rejection rules are unchanged. Current reference reconciliation,
-capability matrix and provenance are refreshed; historical checkpoint evidence
-and the frozen 107/107 partition remain untouched.
-
-Observed integration gates: complete `make test` (including race/real Terraform
-mocks; provider package measured 80.758s under its existing 120s bound), new
-per-constructor write/read-failure recovery regressions, tooling gates, vet/build,
-pinned Terraform example formatting, actionlint and diff checks pass. A repeat
-of both official generators is byte-identical across all twenty bindings and
-adapted artifacts. All eighteen baseline descriptors and generated files were
-independently compared with the accepted baseline and remain byte-identical.
-Full clean-source live matrix, expanded immutable maintenance replay/no-op,
-consolidated hosted verification and the remaining 105 implementations are still
-required. The foundation notes below describe the earlier e9ee547 checkpoint.
+The sections below record the earlier groundwork checkpoint. Their statements
+about unregistered singleton support and pending implementation describe that
+historical checkpoint, not the current table above.
 
 ## Frozen ledger and immutable observations
 
@@ -176,19 +274,3 @@ No new CHR guests, credentials, hosted runs or pushes were created for this
 foundation work. No full 125-resource regression or final maintenance replay has
 occurred. Existing eighteen-resource historical evidence is unchanged. These foundation
 check results predate the public integrations recorded above.
-
-## Resume the same milestone
-
-1. Integrate reviewed singleton contracts through both official generators and
-   exact independent gates; keep `/set` runtime versus observed item PATCH
-   distinctions explicit. Do not expose the shared helper without those bindings.
-2. Execute the **remaining 86 of 88** collection rows by family with useful reviewed fields and
-   maintained validators/codecs/ownership/readback/recovery. Resolve VETH and
-   SSH-key special cases inside the original roster.
-3. Add per-resource real mock/negative scenarios and safe applicable target lanes;
-   retain all eighteen regressions. Amortize fixtures/CLI sessions and use bounded
-   measured suite timeouts, not test exclusions.
-4. At completed integration, refresh current—not historical—policy/provenance/
-   capability bindings and perform the one consolidated official deterministic
-   generation/full offline/two-version live/immutable replay/hosted delivery gate.
-5. Only then report 107/107 complete, 125 implemented and 107 Batch B remaining.

@@ -13,6 +13,10 @@ def verify(directory):
     for name, key in [('upstream-input.json', 'input_sha256'), ('ip-address.openapi.json', 'normalized_sha256'),
                       ('generator-config.yml', 'config_sha256'), ('wire-descriptors.json', 'wire_descriptor_sha256')]:
         n.check(n.sha((directory / name).read_bytes()) == report.get(key), 'partial/tampered adaptation artifact: ' + name)
+    if 'companion_input_sha256' in report:
+        n.check(n.sha((directory / 'upstream-extra-input.json').read_bytes()) == report['companion_input_sha256'], 'partial/tampered extra publication')
+        extra = n.SchemaSnapshot((directory / 'upstream-extra-input.json').read_bytes())
+        n.check(extra.version == report['version'], 'companion version mismatch')
     spec = n.discover.parse((directory / 'ip-address.openapi.json').read_bytes())
     n.check(spec['info']['version'] == report['version'], 'adaptation version mismatch')
     return report

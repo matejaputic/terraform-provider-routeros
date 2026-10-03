@@ -1,0 +1,1719 @@
+[
+  {
+    "revision": "singletons-curated-v1",
+    "reference_constructor": "ResourceDhcpServerConfig",
+    "resource_name": "ip_dhcp_server_config",
+    "wire_path": "/ip/dhcp-server/config",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "accounting",
+        "wire": "accounting",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "radius_password",
+        "wire": "radius-password",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": "maintained singleton validation",
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately",
+        "choices": [
+          "empty",
+          "same-as-user"
+        ]
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "accounting",
+      "radius_password"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [
+      "accounting"
+    ]
+  },
+  {
+    "revision": "singletons-curated-v1",
+    "reference_constructor": "ResourceIPConnectionTracking",
+    "resource_name": "ip_firewall_connection_tracking",
+    "wire_path": "/ip/firewall/connection/tracking",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "enabled",
+        "wire": "enabled",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": "maintained singleton validation",
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately",
+        "choices": [
+          "auto",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "name": "loose_tcp_tracking",
+        "wire": "loose-tcp-tracking",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "liberal_tcp_tracking",
+        "wire": "liberal-tcp-tracking",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "active_ipv4",
+        "wire": "active-ipv4",
+        "type": "boolean",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "active_ipv6",
+        "wire": "active-ipv6",
+        "type": "boolean",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "max_entries",
+        "wire": "max-entries",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "enabled",
+      "loose_tcp_tracking",
+      "liberal_tcp_tracking"
+    ],
+    "computed": [
+      "id",
+      "active_ipv4",
+      "active_ipv6",
+      "max_entries"
+    ],
+    "booleans": [
+      "loose_tcp_tracking",
+      "liberal_tcp_tracking",
+      "active_ipv4",
+      "active_ipv6"
+    ]
+  },
+  {
+    "revision": "singletons-curated-v1",
+    "reference_constructor": "ResourceInterfaceBridgeSettings",
+    "resource_name": "interface_bridge_settings",
+    "wire_path": "/interface/bridge/settings",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "allow_fast_path",
+        "wire": "allow-fast-path",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "use_ip_firewall",
+        "wire": "use-ip-firewall",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "use_ip_firewall_for_pppoe",
+        "wire": "use-ip-firewall-for-pppoe",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "use_ip_firewall_for_vlan",
+        "wire": "use-ip-firewall-for-vlan",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "allow_fast_path",
+      "use_ip_firewall",
+      "use_ip_firewall_for_pppoe",
+      "use_ip_firewall_for_vlan"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [
+      "allow_fast_path",
+      "use_ip_firewall",
+      "use_ip_firewall_for_pppoe",
+      "use_ip_firewall_for_vlan"
+    ]
+  },
+  {
+    "revision": "singletons-curated-v1",
+    "reference_constructor": "ResourceIpIpsecSettings",
+    "resource_name": "ip_ipsec_settings",
+    "wire_path": "/ip/ipsec/settings",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "accounting",
+        "wire": "accounting",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "xauth_use_radius",
+        "wire": "xauth-use-radius",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "accounting",
+      "xauth_use_radius"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [
+      "accounting",
+      "xauth_use_radius"
+    ]
+  },
+  {
+    "revision": "singletons-curated-v1",
+    "reference_constructor": "ResourceIpNeighborDiscoverySettings",
+    "resource_name": "ip_neighbor_discovery_settings",
+    "wire_path": "/ip/neighbor/discovery-settings",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "discover_interface_list",
+        "wire": "discover-interface-list",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "mode",
+        "wire": "mode",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": "maintained singleton validation",
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately",
+        "choices": [
+          "rx-only",
+          "tx-only",
+          "tx-and-rx"
+        ]
+      },
+      {
+        "name": "lldp_mac_phy_config",
+        "wire": "lldp-mac-phy-config",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "lldp_max_frame_size",
+        "wire": "lldp-max-frame-size",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "lldp_vlan_info",
+        "wire": "lldp-vlan-info",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "discover_interface_list",
+      "mode",
+      "lldp_mac_phy_config",
+      "lldp_max_frame_size",
+      "lldp_vlan_info"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [
+      "lldp_mac_phy_config",
+      "lldp_max_frame_size",
+      "lldp_vlan_info"
+    ]
+  },
+  {
+    "revision": "singletons-curated-v1",
+    "reference_constructor": "ResourceIpSettings",
+    "resource_name": "ip_settings",
+    "wire_path": "/ip/settings",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "accept_redirects",
+        "wire": "accept-redirects",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "accept_source_route",
+        "wire": "accept-source-route",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "allow_fast_path",
+        "wire": "allow-fast-path",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "icmp_rate_limit",
+        "wire": "icmp-rate-limit",
+        "type": "integer",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "decimal",
+        "enum_kind": "none",
+        "validators": "maintained singleton validation",
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately",
+        "minimum": 0,
+        "maximum": 2147483647
+      },
+      {
+        "name": "rp_filter",
+        "wire": "rp-filter",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": "maintained singleton validation",
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately",
+        "choices": [
+          "no",
+          "loose",
+          "strict"
+        ]
+      },
+      {
+        "name": "secure_redirects",
+        "wire": "secure-redirects",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "send_redirects",
+        "wire": "send-redirects",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "tcp_syncookies",
+        "wire": "tcp-syncookies",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "tcp_timestamps",
+        "wire": "tcp-timestamps",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": "maintained singleton validation",
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately",
+        "choices": [
+          "disabled",
+          "enabled",
+          "random-offset"
+        ]
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "accept_redirects",
+      "accept_source_route",
+      "allow_fast_path",
+      "icmp_rate_limit",
+      "rp_filter",
+      "secure_redirects",
+      "send_redirects",
+      "tcp_syncookies",
+      "tcp_timestamps"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [
+      "accept_redirects",
+      "accept_source_route",
+      "allow_fast_path",
+      "secure_redirects",
+      "send_redirects",
+      "tcp_syncookies"
+    ]
+  },
+  {
+    "revision": "singletons-curated-v1",
+    "reference_constructor": "ResourceIpTFTPSettings",
+    "resource_name": "ip_tftp_settings",
+    "wire_path": "/ip/tftp/settings",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "max_block_size",
+        "wire": "max-block-size",
+        "type": "integer",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "decimal",
+        "enum_kind": "none",
+        "validators": "maintained singleton validation",
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately",
+        "minimum": 512,
+        "maximum": 65535
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "max_block_size"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": []
+  },
+  {
+    "revision": "singletons-curated-v1",
+    "reference_constructor": "ResourceIpTrafficFlow",
+    "resource_name": "ip_traffic_flow",
+    "wire_path": "/ip/traffic-flow",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "enabled",
+        "wire": "enabled",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "interfaces",
+        "wire": "interfaces",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "packet_sampling",
+        "wire": "packet-sampling",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "sampling_interval",
+        "wire": "sampling-interval",
+        "type": "integer",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "decimal",
+        "enum_kind": "none",
+        "validators": "maintained singleton validation",
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately",
+        "minimum": 0,
+        "maximum": 2147483647
+      },
+      {
+        "name": "sampling_space",
+        "wire": "sampling-space",
+        "type": "integer",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "decimal",
+        "enum_kind": "none",
+        "validators": "maintained singleton validation",
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately",
+        "minimum": 0,
+        "maximum": 2147483647
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "enabled",
+      "interfaces",
+      "packet_sampling",
+      "sampling_interval",
+      "sampling_space"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [
+      "enabled",
+      "packet_sampling"
+    ]
+  },
+  {
+    "revision": "singletons-curated-v1",
+    "reference_constructor": "ResourceIpTrafficFlowIpfix",
+    "resource_name": "ip_traffic_flow_ipfix",
+    "wire_path": "/ip/traffic-flow/ipfix",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "bytes",
+        "wire": "bytes",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "packets",
+        "wire": "packets",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "src_address",
+        "wire": "src-address",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "dst_address",
+        "wire": "dst-address",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "src_port",
+        "wire": "src-port",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "dst_port",
+        "wire": "dst-port",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "protocol",
+        "wire": "protocol",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "tcp_flags",
+        "wire": "tcp-flags",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "bytes",
+      "packets",
+      "src_address",
+      "dst_address",
+      "src_port",
+      "dst_port",
+      "protocol",
+      "tcp_flags"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [
+      "bytes",
+      "packets",
+      "src_address",
+      "dst_address",
+      "src_port",
+      "dst_port",
+      "protocol",
+      "tcp_flags"
+    ]
+  },
+  {
+    "revision": "singletons-curated-v1",
+    "reference_constructor": "ResourceIpv6Settings",
+    "resource_name": "ipv6_settings",
+    "wire_path": "/ipv6/settings",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "accept_redirects",
+        "wire": "accept-redirects",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": "maintained singleton validation",
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately",
+        "choices": [
+          "no",
+          "yes-if-forwarding-disabled"
+        ]
+      },
+      {
+        "name": "accept_router_advertisements",
+        "wire": "accept-router-advertisements",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": "maintained singleton validation",
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately",
+        "choices": [
+          "no",
+          "yes",
+          "yes-if-forwarding-disabled"
+        ]
+      },
+      {
+        "name": "allow_fast_path",
+        "wire": "allow-fast-path",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "forward",
+        "wire": "forward",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "multipath_hash_policy",
+        "wire": "multipath-hash-policy",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": "maintained singleton validation",
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately",
+        "choices": [
+          "l3",
+          "l4",
+          "l3-inner"
+        ]
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "accept_redirects",
+      "accept_router_advertisements",
+      "allow_fast_path",
+      "forward",
+      "multipath_hash_policy"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [
+      "allow_fast_path",
+      "forward"
+    ]
+  },
+  {
+    "revision": "singletons-curated-v1",
+    "reference_constructor": "ResourceNatPmpSettings",
+    "resource_name": "ip_nat_pmp",
+    "wire_path": "/ip/nat-pmp",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "enabled",
+        "wire": "enabled",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "enabled"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [
+      "enabled"
+    ]
+  },
+  {
+    "revision": "singletons-curated-v1",
+    "reference_constructor": "ResourceRadiusIncoming",
+    "resource_name": "radius_incoming",
+    "wire_path": "/radius/incoming",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "accept",
+        "wire": "accept",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "port",
+        "wire": "port",
+        "type": "integer",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "decimal",
+        "enum_kind": "none",
+        "validators": "maintained singleton validation",
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately",
+        "minimum": 1,
+        "maximum": 65535
+      },
+      {
+        "name": "vrf",
+        "wire": "vrf",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "accept",
+      "port",
+      "vrf"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [
+      "accept"
+    ]
+  },
+  {
+    "revision": "singletons-curated-v1",
+    "reference_constructor": "ResourceSystemIdentity",
+    "resource_name": "system_identity",
+    "wire_path": "/system/identity",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "name",
+        "wire": "name",
+        "type": "string",
+        "mode": "required",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      }
+    ],
+    "required": [
+      "name"
+    ],
+    "optional_computed": [],
+    "computed": [
+      "id"
+    ],
+    "booleans": []
+  },
+  {
+    "revision": "singletons-curated-v1",
+    "reference_constructor": "ResourceSystemNote",
+    "resource_name": "system_note",
+    "wire_path": "/system/note",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "note",
+        "wire": "note",
+        "type": "string",
+        "mode": "required",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "show_at_login",
+        "wire": "show-at-login",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "show_at_cli_login",
+        "wire": "show-at-cli-login",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      }
+    ],
+    "required": [
+      "note"
+    ],
+    "optional_computed": [
+      "show_at_login",
+      "show_at_cli_login"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [
+      "show_at_login",
+      "show_at_cli_login"
+    ]
+  },
+  {
+    "revision": "singletons-curated-v1",
+    "reference_constructor": "ResourceSystemNtpClient",
+    "resource_name": "system_ntp_client",
+    "wire_path": "/system/ntp/client",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "enabled",
+        "wire": "enabled",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "mode",
+        "wire": "mode",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": "maintained singleton validation",
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately",
+        "choices": [
+          "unicast",
+          "broadcast",
+          "multicast",
+          "manycast"
+        ]
+      },
+      {
+        "name": "vrf",
+        "wire": "vrf",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "servers",
+        "wire": "servers",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "status",
+        "wire": "status",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "enabled",
+      "mode",
+      "vrf",
+      "servers"
+    ],
+    "computed": [
+      "id",
+      "status"
+    ],
+    "booleans": [
+      "enabled"
+    ]
+  },
+  {
+    "revision": "singletons-curated-v1",
+    "reference_constructor": "ResourceSystemNtpServer",
+    "resource_name": "system_ntp_server",
+    "wire_path": "/system/ntp/server",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "enabled",
+        "wire": "enabled",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "broadcast",
+        "wire": "broadcast",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "multicast",
+        "wire": "multicast",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "manycast",
+        "wire": "manycast",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "use_local_clock",
+        "wire": "use-local-clock",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "local_clock_stratum",
+        "wire": "local-clock-stratum",
+        "type": "integer",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "decimal",
+        "enum_kind": "none",
+        "validators": "maintained singleton validation",
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately",
+        "minimum": 1,
+        "maximum": 16
+      },
+      {
+        "name": "vrf",
+        "wire": "vrf",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "broadcast_addresses",
+        "wire": "broadcast-addresses",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "enabled",
+      "broadcast",
+      "multicast",
+      "manycast",
+      "use_local_clock",
+      "local_clock_stratum",
+      "vrf",
+      "broadcast_addresses"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [
+      "enabled",
+      "broadcast",
+      "multicast",
+      "manycast",
+      "use_local_clock"
+    ]
+  },
+  {
+    "revision": "singletons-curated-v1",
+    "reference_constructor": "ResourceToolMacServer",
+    "resource_name": "tool_mac_server",
+    "wire_path": "/tool/mac-server",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "allowed_interface_list",
+        "wire": "allowed-interface-list",
+        "type": "string",
+        "mode": "required",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      }
+    ],
+    "required": [
+      "allowed_interface_list"
+    ],
+    "optional_computed": [],
+    "computed": [
+      "id"
+    ],
+    "booleans": []
+  },
+  {
+    "revision": "singletons-curated-v1",
+    "reference_constructor": "ResourceToolMacServerPing",
+    "resource_name": "tool_mac_server_ping",
+    "wire_path": "/tool/mac-server/ping",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "enabled",
+        "wire": "enabled",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "validators": null,
+        "default": "server-owned",
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "enabled"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [
+      "enabled"
+    ]
+  },
+  {
+    "revision": "singletons-curated-v1",
+    "reference_constructor": "ResourceToolMacServerWinBox",
+    "resource_name": "tool_mac_server_winbox",
+    "wire_path": "/tool/mac-server/mac-winbox",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      },
+      {
+        "name": "allowed_interface_list",
+        "wire": "allowed-interface-list",
+        "type": "string",
+        "mode": "required",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "validators": null,
+        "default": null,
+        "provenance": "explicit singleton subset reviewed against pinned SDK declarations and published item PATCH structure; object/set lifecycle maintained separately"
+      }
+    ],
+    "required": [
+      "allowed_interface_list"
+    ],
+    "optional_computed": [],
+    "computed": [
+      "id"
+    ],
+    "booleans": []
+  }
+]

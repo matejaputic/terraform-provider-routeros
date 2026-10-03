@@ -1,0 +1,16 @@
+{
+  "7.24.5": {
+    "url": "https://download.mikrotik.com/routeros/7.24.5/all_packages-x86-7.24.5.zip",
+    "archive_sha256": "6acfd80b3f6edfd23cea14bfcdbbb183a6258acb3aedb3d7b0a23f60a19e51c6",
+    "member": "container-7.24.5.npk",
+    "package_sha256": "7515c52499bd11b063517c7b48a6553519976098040d9dec67f6bf087876a3c9",
+    "package_bytes": 1175697
+  },
+  "7.25beta5": {
+    "url": "https://download.mikrotik.com/routeros/7.25beta5/all_packages-x86-7.25beta5.zip",
+    "archive_sha256": "ae52ae5c917e9070afdd479f375f5923f429e015118dfe67e907e65af26ffa9d",
+    "member": "container-7.25beta5.npk",
+    "package_sha256": "0e18d644c273155ceeeed838d6eb85f7085f5391af82fd058844b82f4afe6750",
+    "package_bytes": 1142929
+  }
+}

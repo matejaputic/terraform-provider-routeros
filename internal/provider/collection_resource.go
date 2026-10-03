@@ -127,6 +127,9 @@ func (r *collectionResource) validate(ctx context.Context, values map[string]att
 			continue
 		}
 		if v.IsNull() {
+			if !apply && f.Sensitive && f.PreserveSecretOnOmission {
+				continue
+			}
 			if f.Mode == "required" {
 				return fmt.Errorf("attribute %s is required", f.Name)
 			}
@@ -134,6 +137,9 @@ func (r *collectionResource) validate(ctx context.Context, values map[string]att
 		}
 		if f.Mode == "computed" {
 			continue
+		}
+		if e := validateReviewedField(f, v); e != nil {
+			return e
 		}
 		switch x := v.(type) {
 		case types.String:
@@ -236,6 +242,9 @@ func (r *collectionResource) validate(ctx context.Context, values map[string]att
 				}
 			}
 		}
+	}
+	if e := r.validateBatchAResource(values, apply); e != nil {
+		return e
 	}
 	return r.validateFirewallFields(values, apply)
 }
@@ -352,6 +361,11 @@ func strictWireBool(raw any) (types.Bool, error) {
 	return wireBool(raw)
 }
 func decodeField(ctx context.Context, f catalog.Field, raw any) (attr.Value, error) {
+	if f.Codec == "auto-decimal" {
+		if x, ok := raw.(string); ok && oneOf(x, "auto", "unspecified") {
+			return types.Int64Null(), nil
+		}
+	}
 	switch f.Type {
 	case "string":
 		x, ok := raw.(string)
@@ -453,6 +467,9 @@ func (r *collectionResource) refresh(ctx context.Context, values map[string]attr
 	// Importing built-in/dynamic collections could otherwise delete hardware or
 	// system-owned records through ordinary CRUD. These objects are not managed.
 	ownershipFlags := []string{"builtin", "dynamic"}
+	if r.batchACollection() {
+		ownershipFlags = append(ownershipFlags, "default")
+	}
 	if r.policy.Name == "ip_dhcp_client_option" {
 		// RouterOS marks its default DHCP client options with this distinct flag.
 		ownershipFlags = append(ownershipFlags, "default")
@@ -479,11 +496,14 @@ func (r *collectionResource) refresh(ctx context.Context, values map[string]attr
 			}
 		}
 	}
-	if r.policy.Name == "ip_route" {
+	if r.policy.Name == "ip_route" || r.policy.Name == "ipv6_route" {
 		flag, e := strictWireBool(rows[0]["static"])
 		if e != nil || !flag.ValueBool() {
 			return nil, false, fmt.Errorf("only explicitly static routes are manageable")
 		}
+	}
+	if e := r.guardBatchARead(values, rows[0]); e != nil {
+		return nil, false, e
 	}
 	result := map[string]attr.Value{}
 	for _, f := range r.policy.Fields {
@@ -505,6 +525,14 @@ func (r *collectionResource) refresh(ctx context.Context, values map[string]attr
 		}
 		raw, exists := rows[0][f.Wire]
 		if !exists {
+			if f.Sensitive && f.PreserveSecretOnOmission {
+				previous := values[f.Name]
+				if previous == nil || previous.IsUnknown() {
+					previous = nullField(f)
+				}
+				result[f.Name] = previous
+				continue
+			}
 			if f.ReadDefault != nil {
 				v, e := decodeField(ctx, f, *f.ReadDefault)
 				if e != nil {
@@ -536,6 +564,13 @@ func (r *collectionResource) refresh(ctx context.Context, values map[string]attr
 		if e != nil {
 			return nil, false, e
 		}
+		if f.Sensitive && f.PreserveSecretOnOmission && (wireString(raw) == "*****" || wireString(raw) == "**hidden**") {
+			v = values[f.Name]
+			if v == nil || v.IsUnknown() {
+				v = nullField(f)
+			}
+		}
+		v = preserveReviewedSpelling(f, values[f.Name], v)
 		if r.policy.Name == "ip_firewall_addr_list" && f.Name == "address" {
 			if old, ok := values[f.Name].(types.String); ok && !old.IsNull() && !old.IsUnknown() {
 				a, e := firewallAddressBounds(old.ValueString())
@@ -567,6 +602,10 @@ func (r *collectionResource) refresh(ctx context.Context, values map[string]attr
 	return result, true, nil
 }
 func (r *collectionResource) ready(d *diag.Diagnostics) bool {
+	if r.client != nil && r.policy.RequiredPackage != "" && !oneOf(r.policy.RequiredPackage, r.client.Packages...) {
+		d.AddError("Required RouterOS package unavailable", "This reviewed resource requires the enabled matching-version "+r.policy.RequiredPackage+" package.")
+		return false
+	}
 	if r.client == nil {
 		d.AddError("Unconfigured resource", "RouterOS client is unavailable.")
 		return false
@@ -652,6 +691,10 @@ func (r *collectionResource) Read(ctx context.Context, q resource.ReadRequest, s
 	s.Diagnostics.Append(s.State.Set(ctx, r.object(next))...)
 }
 func (r *collectionResource) Update(ctx context.Context, q resource.UpdateRequest, s *resource.UpdateResponse) {
+	if r.policy.ReplacementOnly {
+		s.Diagnostics.AddError("Replacement required", "This resource has no supported item PATCH; change requires replacement.")
+		return
+	}
 	if !r.ready(&s.Diagnostics) {
 		return
 	}

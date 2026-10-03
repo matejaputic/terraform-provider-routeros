@@ -231,7 +231,7 @@ def fingerprints(root):
     files = [root / 'go.mod', root / 'go.sum', root / 'tools/go.mod', root / 'tools/go.sum',
              root / 'schemas/ip-address-policy.json', root / 'internal/catalog/collections.json', root / 'schemas/generator-config.yml',
              root / 'tools/schema/discover/discover.py']
-    for name in ('schemas/maintenance-policy.json', 'schemas/wire-descriptors.json'):
+    for name in ('schemas/maintenance-policy.json', 'schemas/wire-descriptors.json', 'internal/catalog/singletons.json', 'internal/catalog/batch-a-collections.json', 'tools/schema/bindings.py'):
         if (root / name).is_file():
             files.append(root / name)
     for directory in ('internal/client', 'internal/provider', 'internal/catalog', 'tools/schema/normalize', 'tools/schema/validate'):
@@ -247,7 +247,9 @@ def fingerprints(root):
                     and (p.name.endswith('_test.go') or p.suffix in ('.py', '.yml', '.json')
                          or (directory == 'tools' and p.suffix == '.go'))):
                 verification_files.append(p)
-    return {'provenance': provenance, 'sources': {str(p.relative_to(root)): digest(p.read_bytes()) for p in sorted(files)},
+    package_policy = root/'internal/catalog/batch-a-collections.json'
+    requires_extra = package_policy.is_file() and any(p.get('required_package') for p in parse(package_policy.read_bytes()))
+    return {'requires_extra_companion':bool(requires_extra),'provenance': provenance, 'sources': {str(p.relative_to(root)): digest(p.read_bytes()) for p in sorted(files)},
             'verification': {str(p.relative_to(root)): digest(p.read_bytes()) for p in sorted(verification_files)}}
 
 def discover(source, inputs, state, *, requested=None, backfill=0, extras=False, nightly=False,
@@ -312,6 +314,15 @@ def discover(source, inputs, state, *, requested=None, backfill=0, extras=False,
             spec = parse(raw)
             validate_spec(spec, selected_version, path)
             metadata = {}
+            if flavor == 'base' and inputs.get('requires_extra_companion'):
+                companion = valid_path(f'docs/{name}/extra/openapi.json')
+                try: companion_data = fetch(companion)
+                except Missing:
+                    deferred.append({'path':companion,'reason':'reviewed-package-companion-not-yet-published'})
+                    continue
+                companion_spec = parse(companion_data)
+                validate_spec(companion_spec, selected_version, companion)
+                metadata[companion] = {'sha256':digest(companion_data),'semantic_sha256':digest(encode(semantic(companion_spec)))}
             for leaf in ('inspect.json', 'deep-inspect.json', 'deep-inspect.x86.json', 'deep-inspect.arm64.json'):
                 artifact = directory + '/' + leaf
                 if artifact not in indexed.get(name, set()):

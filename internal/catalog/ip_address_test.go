@@ -33,7 +33,7 @@ func TestGeneratedWireDescriptorMatchesMaintainedRuntime(t *testing.T) {
 	if err := json.Unmarshal(b, &manifest); err != nil {
 		t.Fatal(err)
 	}
-	if len(manifest.Resources) != 1+len(Collections()) {
+	if len(manifest.Resources) != 1+len(Resources()) {
 		t.Fatal("unexpected resource set")
 	}
 	r := manifest.Resources[0]

@@ -120,23 +120,29 @@ def matrix(bundle, descriptors):
     if (inventory['source']['revision'] != extract.PIN
             or reconciliation['descriptor_sha256'] != extract.digest(extract.encode(descriptors))):
         raise ValueError('stale reference/overlay reconciliation')
-    if set(reconciliation['policy_inputs_sha256']) != {'schemas/ip-address-policy.json', 'internal/catalog/collections.json'}:
+    if set(reconciliation['policy_inputs_sha256']) != {'schemas/ip-address-policy.json', 'internal/catalog/collections.json', 'internal/catalog/singletons.json', 'internal/catalog/batch-a-collections.json'}:
         raise ValueError('unexpected runtime policy bindings')
     for path, expected in reconciliation['policy_inputs_sha256'].items():
         if extract.digest((ROOT / path).read_bytes()) != expected:
             raise ValueError('stale reviewed runtime policy')
     current = index(descriptors['resources'], 'terraform_type')
-    catalog = {r['resource_name']: r for r in load(ROOT / 'internal/catalog/collections.json')}
+    catalog = {r['resource_name']: r for file in ('collections.json','singletons.json','batch-a-collections.json') for r in load(ROOT / 'internal/catalog' / file)}
     helper_sources = ['internal/provider/collection_resource.go', 'internal/provider/ip_address_resource.go',
                       'internal/provider/firewall_order.go', 'internal/provider/firewall_actions.go',
                       'internal/provider/firewall_config_validation.go', 'internal/provider/firewall_address.go',
                       'internal/provider/recovery.go', 'internal/provider/validators.go',
                       'internal/provider/dhcp_relay.go', 'internal/provider/dns_record.go',
-                      'internal/catalog/collections.go', 'internal/catalog/ip_address.go']
+                      'internal/catalog/collections.go', 'internal/catalog/ip_address.go',
+                      'internal/provider/singleton_resource.go', 'internal/provider/singleton_validation.go',
+                      'internal/provider/singletons.go', 'internal/provider/batch_a_bindings.go',
+                      'internal/provider/batch_a_validation.go', 'internal/provider/batch_a_duration.go']
     codec_helpers = {'wire-string': 'payload/decodeField (or maintained IP address lifecycle)',
                      'yes/no': 'strictWireBool/decodeField', 'decimal': 'payload/decodeField',
                      'csv': 'validateCSV/payload/decodeField',
-                     'placement': 'filterOrder/positionFilter (not ordinary payload)'}
+                     'placement': 'filterOrder/positionFilter (not ordinary payload)',
+                     'csv-string-set':'validateReviewedField/payload/decodeField/preserveReviewedSpelling',
+                     'routeros-duration':'routerDuration/payload/decodeField/preserveReviewedSpelling',
+                     'auto-decimal':'payload/decodeField (reviewed auto/unspecified sentinel to null)'}
     rows = []
     groups = {}
     for name, constructor in inventory['registrations']['resources'].items():
@@ -167,7 +173,7 @@ def matrix(bundle, descriptors):
         if path and path.startswith('/ip/firewall/'):
             risks.append('ordered-firewall-and-action-applicability')
         implemented = []
-        for name in sorted(set(names) & set(current)):
+        for name in sorted(n for n,r in current.items() if n in names or r.get('reference_constructor') == constructor):
             resource = current[name]
             if path != resource['path']:
                 raise ValueError('reviewed runtime path differs from reference declaration: ' + name)
@@ -177,7 +183,7 @@ def matrix(bundle, descriptors):
                 if field['codec'] not in codec_helpers:
                     raise ValueError('unmapped maintained codec: ' + field['codec'])
                 mapped = {key: field.get(key) for key in
-                          ('name', 'wire', 'type', 'mode', 'codec', 'force_new', 'sensitive', 'default', 'validators')}
+                          ('name', 'wire', 'type', 'mode', 'codec', 'force_new', 'sensitive', 'default', 'validators', 'constraint', 'minimum', 'maximum', 'choices', 'preserve_secret_on_omission')}
                 mapped['maintained_codec_helper'] = codec_helpers[field['codec']]
                 if resource['name'] == 'ip_address':
                     mapped['maintained_codec_helper'] = ('wireBool/payload/refresh' if field['codec'] == 'yes/no'

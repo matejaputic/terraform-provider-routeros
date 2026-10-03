@@ -20,6 +20,9 @@ tools/bin/tfplugingen-framework generate resources --input "$stage/provider-code
 # Exact declared filenames, not a fixed count or partial initial-wave check.
 python3 tools/schema/validate/generated.py "$stage/generated"
 gofmt -w "$stage/generated"
+python3 tools/schema/bindings.py "$stage/generated" "$stage/batch_a_bindings.go"
+gofmt -w "$stage/batch_a_bindings.go"
 # Do not overwrite the last good specification/model with permissive CLI output.
 mv "$stage/provider-code-spec.json" schemas/provider-code-spec.json
 for file in "$stage/generated/"*.go; do mv "$file" internal/generated/; done
+mv "$stage/batch_a_bindings.go" internal/provider/batch_a_bindings.go
