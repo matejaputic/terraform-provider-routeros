@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Disposable x86 CHR in QEMU/TCG on OrbStack's Docker engine.
+"""Disposable x86 CHR in QEMU/TCG on OrbStack or an owned GitHub-hosted runner.
 No privileged container, bridged LAN, KVM, production-router inputs, or secret logs.
 """
 import argparse
@@ -86,9 +86,22 @@ def request(credentials, path, method='GET', data=None):
         return json.loads(body) if body else None
 
 
-def start():
-    if subprocess.check_output(['docker', 'context', 'show'], text=True).strip() != 'orbstack':
+def execution_platform(hosted=False):
+    context = subprocess.check_output(['docker', 'context', 'show'], text=True).strip()
+    if hosted:
+        if not (os.environ.get('GITHUB_ACTIONS') == 'true'
+                and os.environ.get('RUNNER_ENVIRONMENT') == 'github-hosted'
+                and os.environ.get('GITHUB_REPOSITORY') == 'matejaputic/terraform-provider-routeros'
+                and context == 'default'):
+            raise RuntimeError('Hosted execution requires the owned GitHub-hosted repository runner')
+        return 'linux/amd64', 'GitHub-hosted Docker'
+    if context != 'orbstack':
         raise RuntimeError('Select the OrbStack Docker context first; no other Docker engine will be modified')
+    return 'linux/arm64', 'OrbStack Docker'
+
+
+def start(hosted=False):
+    platform, engine = execution_platform(hosted)
     existing = subprocess.check_output(['docker', 'ps', '-a', '--filter', 'name=^/' + NAME + '$', '--format', '{{.Names}}'], text=True).strip()
     if existing:
         raise RuntimeError('Disposable container already exists; run stop before starting a fresh fixture')
@@ -110,13 +123,14 @@ def start():
     shutil.copyfile(original, disk)
     os.chmod(disk, 0o666)  # unprivileged container UID; parent is mode 0700
     with (STATE / 'build.log').open('w') as log:
-        run('docker', 'build', '--platform', 'linux/arm64', '-t', IMAGE, 'tools/chr', stdout=log, stderr=subprocess.STDOUT)
+        run('docker', 'build', '--platform', platform, '-t', IMAGE, 'tools/chr', stdout=log, stderr=subprocess.STDOUT)
     credentials = {'hosturl': 'http://127.0.0.1:18780', 'username': 'admin', 'password': secrets.token_hex(24)}
     fd = os.open(CREDENTIALS, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
     with os.fdopen(fd, 'w') as f:
         json.dump(credentials, f)
-    run('docker', 'run', '-d', '--name', NAME, '--label', 'routeros-provider.disposable=true',
-        '--platform', 'linux/arm64', '--cpus', '2', '--memory', '1536m', '--cap-drop', 'ALL',
+    try:
+        run('docker', 'run', '-d', '--name', NAME, '--label', 'routeros-provider.disposable=true',
+        '--platform', platform, '--cpus', '2', '--memory', '1536m', '--cap-drop', 'ALL',
         '--security-opt', 'no-new-privileges', '-p', '127.0.0.1:18780:8080', '-p', '127.0.0.1:18723:2323',
         '-v', str(disk) + ':/chr.img', IMAGE, '-machine', 'pc', '-accel', 'tcg', '-m', '1024', '-smp', '1',
         '-drive', 'file=/chr.img,format=raw,if=ide', '-netdev', 'user,id=net0,restrict=on,hostfwd=tcp:0.0.0.0:8080-:80',
@@ -124,7 +138,6 @@ def start():
         '-netdev', 'hubport,id=testnet,hubid=1', '-device', 'virtio-net-pci,netdev=testnet,mac=52:54:00:00:00:02',
         '-display', 'none', '-monitor', 'none',
         '-serial', 'tcp:0.0.0.0:2323,server=on,wait=off', '-no-reboot', stdout=subprocess.DEVNULL)
-    try:
         console = Console()
         console.send('')
         console.expect(b'Login: ')
@@ -165,7 +178,11 @@ def start():
             raise RuntimeError('CHR version/architecture mismatch')
         provenance = {k: target.get(k) for k in ('version', 'architecture-name', 'board-name')}
         packages = request(credentials, '/system/package')
-        provenance.update({'archive_sha256': ZIP_HASH, 'disk_sha256': DISK_HASH, 'accelerator': 'tcg', 'engine': 'OrbStack Docker',
+        enabled = [p for p in packages if p.get('disabled', 'false') in ('false', 'no', False)]
+        if (len(enabled) != 1 or enabled[0].get('name') != 'routeros'
+                or enabled[0].get('version') != VERSION):
+            raise RuntimeError('CHR enabled packages do not match the pinned base lane')
+        provenance.update({'archive_sha256': ZIP_HASH, 'disk_sha256': DISK_HASH, 'accelerator': 'tcg', 'engine': engine,
                            'packages': [{k: p.get(k) for k in ('name', 'version', 'disabled')} for p in packages]})
         (STATE / 'target.json').write_text(json.dumps(provenance, indent=2) + '\n')
         print('Ready: disposable RouterOS 7.24.5 x86_64 at 127.0.0.1:18780 (credentials not displayed)')
@@ -196,5 +213,9 @@ def stop():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('command', choices=['start', 'test', 'stop'])
+    parser.add_argument('--hosted', action='store_true', help='Permit only this repository GitHub-hosted runner')
     args = parser.parse_args()
-    {'start': start, 'test': test, 'stop': stop}[args.command]()
+    if args.command == 'start':
+        start(hosted=args.hosted)
+    else:
+        {'test': test, 'stop': stop}[args.command]()

@@ -22,7 +22,7 @@ jobs:
         with:
           python-version: '3.14.7'
       - name: Offline discovery, adaptation and independent specification gates
-        run: make testdiscovery testschema testmaintenance testcontracts
+        run: make testdiscovery testschema testmaintenance testcontracts testchr
       - name: Deterministic official generation
         run: |
           bash tools/schema/generate.sh
@@ -36,3 +36,43 @@ jobs:
       - run: go vet ./...
       - run: go build .
       - run: terraform fmt -check -recursive examples
+  baseline-chr:
+    needs: verify
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'matejaputic/terraform-provider-routeros'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version: '1.25.8'
+      - uses: hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e # v4.0.1
+        with:
+          terraform_version: '1.14.0'
+          terraform_wrapper: false
+      - uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548 # v6.1.0
+        with:
+          python-version: '3.14.7'
+      - name: Disposable pinned baseline CHR full sixteen-resource acceptance
+        shell: bash
+        run: |
+          trap 'python3 tools/chr/chr.py stop' EXIT
+          trap 'exit 130' INT
+          trap 'exit 143' TERM
+          python3 tools/chr/chr.py start --hosted
+          python3 tools/chr/chr.py test
+      - name: Ensure owned guest, credentials and mutable disk are removed
+        if: always()
+        run: python3 tools/chr/chr.py stop
+      - name: Retain only redacted target provenance (not credentials or serial buffers)
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: baseline-chr-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            .local/chr/target.json
+            .local/chr/build.log
+          if-no-files-found: warn
+          retention-days: 90

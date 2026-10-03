@@ -10,6 +10,12 @@ The VirtualBox CHR instructions translate to QEMU: attach the official CHR disk 
 
 The suggested ARM64 ISO URL and the ARM64 CHR image both returned HTTP 200, but neither was used or acceptance-tested. An ARM64 installer ISO is not the same artifact as a preinstalled CHR disk. The supplied RouterOS documentation describes x86 CHR; the tested target is explicitly **x86_64 CHR 7.24.5 stable base**, not ARM64 or the nightly train.
 
+## Hosted baseline regression
+
+On trusted pushes to `main`, `test.yml` also attempts the same pinned **7.24.5 x86_64/base** suite using QEMU/TCG on `ubuntu-24.04`. `start --hosted` requires explicit GitHub-hosted execution, this repository identity and Docker's default context; ordinary local `start` still requires OrbStack. Container platform becomes `linux/amd64`, not a different RouterOS target architecture. Enabled packages must consist of the matching base `routeros` package. This does not provision or certify newer versions.
+
+Shell exit/signal traps and an `always()` cleanup step remove the owned container, credentials and mutable disk; destruction of the ephemeral runner is the final cancellation boundary. Only target provenance and the credential-free Docker image-build log are retained, never credentials, disks or console buffers. Hosted results are tracked in [the checklist](hosted-checkpoint.md); adding the job alone is not live evidence.
+
 ## Requirements and commands
 
 OrbStack Docker context `orbstack`, Docker CLI, Python 3.11+, curl, Go 1.25.8 (downloadable by Go), and internet for first-time image/tool downloads. Observed engine: OrbStack 2.2.3. The container base is pinned by digest, QEMU by Debian package version, and CHR ZIP/raw disk by SHA256. Package availability failures are visible; the harness never silently upgrades QEMU.
