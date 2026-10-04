@@ -13,12 +13,12 @@ generate:
 	bash tools/schema/generate.sh
 
 docs:
-	cd tools; go generate ./...
+	python3 tools/docs/resources.py
 
 fmt:
 	gofmt -s -w -e .
 
-test: testdiscovery testschema testmaintenance testcontracts testchr
+test: testdiscovery testschema testmaintenance testcontracts testchr testdocs
 	GOTOOLCHAIN=go1.25.8 TF_ACC_TERRAFORM_VERSION=1.14.0 go test -v -race -cover -timeout=300s ./...
 
 testdiscovery:
@@ -40,7 +40,11 @@ maintenance:
 testchr:
 	python3 -m unittest discover -s tools/chr -v
 
+testdocs:
+	python3 tools/docs/resources.py --check
+	python3 -m unittest discover -s tools/docs -v
+
 testacc:
 	python3 tools/chr/chr.py test
 
-.PHONY: fmt lint test testdiscovery testschema testmaintenance testcontracts testchr maintenance testacc build install generate docs
+.PHONY: fmt lint test testdiscovery testschema testmaintenance testcontracts testchr testdocs maintenance testacc build install generate docs
