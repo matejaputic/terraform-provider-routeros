@@ -1,16 +1,16 @@
 # Remaining resource support
 
-The remaining constructor identities are recorded in [the frozen 107-constructor plan](../../schemas/remaining-resource-plan.json). This is an identity/partition record, **not an exposure authorization**. The eighteen original constructors and verified 125-constructor baseline remain preserved.
+The current provider registers **152 constructors**, with **80 of the pinned reference's 232 constructors unimplemented**. The [frozen 107-constructor plan](../../schemas/remaining-resource-plan.json) records the original remainder at the preserved 125-constructor baseline; 27 of those identities now have reviewed settings implementations. Frozen pending statuses are historical, not current coverage or exposure authorization. The eighteen original constructors and verified 125-constructor baseline remain preserved.
 
 ## Current checkpoint
 
-- **27 reviewed settings constructors** generated through the pinned official OpenAPI and Framework generators and registered: 152 public constructors in the current working tree.
+- **27 additional reviewed settings constructors** are generated through the pinned official OpenAPI and Framework generators and registered in committed source (`c092eea`): 152 public constructors, split into 106 collections / 46 settings, with zero data sources. All exposed settings and their attributes/import identities/package requirements are listed in the [resource reference](../resources/index.md).
 - **80 remaining constructors are not integrated**. Complete constructor coverage, release publication, and maintenance-candidate live certification are not claimed.
 - Maintained singleton lifecycle: GET object, path identity/import, fixed POST `/set`, atomic malformed refresh, mutation failure recovery, and destroy by unmanagement only. Destroy does not reset global settings.
 - Explicit scalar/CSV contracts and sensitivity: `tools/schema/normalize/additional_settings_policy.py`, `internal/catalog/additional-settings.json`; registry references only in `internal/provider/additional_settings_bindings.go`.
 - All 27 have schema/validation/atomic-failure/secret tests and Terraform mock create/no-op/update/import/drift/explicit-clearing/destroy coverage. The full offline/race suite passes (80.8% provider statement coverage).
 - Focused **dirty-source** live configuration lifecycles passed on 7.24.5 and 7.25beta5: 19 constructors on base; 26 with matching enabled container, wireless, and user-manager packages. Physical LED controls report unsupported on CHR and are not live-certified.
-- Live evidence is focused development evidence, **not** clean-source consolidated acceptance, a released binary, or a generated maintenance candidate. Hosted additional-settings verification and fresh expanded maintenance replay/no-op remain pending.
+- Live evidence is [focused development evidence](../../schemas/additional-settings-validation.json), **not** clean-source consolidated acceptance, a released binary, or a generated maintenance candidate. Hosted additional-settings verification and fresh expanded maintenance replay/no-op remain pending. The default CHR/hosted selector covers the preserved 125-constructor suites only; the additional settings use `TestAccAdditionalSettingsCHR` explicitly. See [safe runner commands](orbstack-chr.md).
 
 ## Reviewed live findings
 

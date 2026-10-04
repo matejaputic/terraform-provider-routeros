@@ -1,6 +1,10 @@
 # Hosted maintenance/release checkpoint
 
-The observations below belong to the original sixteen-resource baseline. Remaining-resource development now proceeds first; release gates must certify the actual current reviewed resource set, not a hard-coded historical count.
+The current provider has **152 registered resources** (106 collections / 46 settings), zero data sources and 80 unimplemented reference constructors. Release gates must certify the actual reviewed candidate, not a hard-coded historical count. Current `.github/workflows/test.yml` performs full offline verification and four 7.24.5/7.25beta5 × base/container CHR jobs; the CHR selector covers the preserved 125-constructor suites, not the 27 additional settings.
+
+Recorded [expanded hosted bindings](../../schemas/hosted-configuration-validation.json) at `48d6b43` certify the historical 125-constructor configuration-tested set, including target/package hashes and cleanup. The [additional settings evidence](../../schemas/additional-settings-validation.json) is focused dirty-source development evidence: 19 base / 26 matching optional-package settings, with physical LEDs unavailable. No consolidated current 152-resource hosted or snapshot-candidate live certification is recorded. Do not infer hosted outcomes merely from a push or workflow definition.
+
+The repository settings and run observations below are historical observations from 2026-10-03, not a fresh audit of branch protection, credentials or environments.
 
 ## Decision boundary
 
@@ -27,7 +31,8 @@ On 2026-10-03, using authenticated `gh` against the existing repository:
 - [x] Implement deterministic offline recovery archives and fail-closed fresh-directory restoration.
 - [x] Observe fresh-runner recovery/no-op job on the new revision.
 - [ ] Select and implement protected durable checkpoint index plus immutable bundle storage. The current Actions transfer is a recovery test, not permanent storage. Suggested backend: protected automation branch containing hash-bound pointers to permanent immutable release/storage objects. Authenticate pointers, serialize updates and never silently replace an existing digest.
-- [x] Generalize pinned CHR acquisition/runner execution and prove source-revision full sixteen-resource acceptance on pinned 7.24.5 and 7.25beta5 x86_64/base guests.
+- [x] Generalize pinned CHR acquisition/runner execution and prove the historical 125-constructor source suites on pinned 7.24.5/7.25beta5 x86_64 base/container guests (base VETH explicitly unavailable).
+- [ ] Add the additional settings to consolidated clean-source/hosted acceptance with matching package lanes; do not substitute schema/mock or unavailable-hardware results for live evidence.
 - [ ] Bind live acceptance to the actual snapshot-generated maintenance candidate and advance independently verified tested receipts only after that gate.
 - [ ] Implement authenticated digest-bound decision packet and automatic continuation for human-only exceptions; ordinary failures stay autonomous.
 - [ ] Verify owner notification routing with an acknowledged test. Personal email/mobile/OS settings cannot be assumed or changed silently.

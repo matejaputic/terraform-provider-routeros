@@ -1,5 +1,7 @@
 # Resource support and configuration verification
 
+**Current registration:** 152 reviewed constructors (106 collections / 46 settings), zero data sources and 80 unimplemented reference constructors. The [complete resource reference](../resources/index.md) describes every current schema; [coverage](coverage.md) separates current implementation from historical/local/hosted evidence. The 27 additional settings have focused development evidence, not consolidated current-source/hosted or maintenance-candidate certification. The table and foundation records below retain their explicitly historical scopes.
+
 This historical verification covers **107 integrated constructors** (88 collections
 and 19 singletons), or **125 public constructors** including the eighteen preserved
 baseline resources. Aliases do not count twice. Later implementation progress is
@@ -183,13 +185,13 @@ The sections below record the earlier groundwork checkpoint. Their statements
 about unregistered singleton support and pending implementation describe that
 historical checkpoint, not the current table above.
 
-## Frozen ledger and immutable observations
+## Historical frozen plan and immutable observations
 
 [`schemas/resource-plan.json`](../../schemas/resource-plan.json) records all 107
 IDs, explicit canonical-name proposals, deferred aliases, source locations,
 static field candidates/unresolved declarations, triage risks, and path/method
 observations for **7.24.5/base, 7.24.5/extra, 7.25beta5/base and 7.25beta5/extra**.
-Its 107 complement IDs identify the remaining constructor work. Pending statuses and empty evidence
+Its 107 complement IDs identify the original remainder; 27 now have registered additional-settings contracts and 80 remain unimplemented. Pending statuses and empty evidence
 are deliberate: inventory and observations do not authorize exposure.
 
 Source baseline: `1897fb32c03c43fb48f6ab3020cc3baf2e2b57b2`; SDK reference:
@@ -230,10 +232,11 @@ Other unresolved rows remain in the reviewed constructor plan. OSPF interface-te
 sets/nesting, secrets, ownership, async/import behavior and canonical wire values
 still require explicit field/action contracts and tests, not a blanket approval.
 
-## Maintained singleton lifecycle foundation
+## Historical singleton lifecycle foundation
 
-`internal/provider/singleton_resource.go` is **unregistered support**, not nineteen
-implemented resources. Its explicit lifecycle follows static reference
+At that foundation checkpoint, `internal/provider/singleton_resource.go` was
+unregistered support rather than nineteen implemented resources. **It now backs
+46 registered settings resources.** The original lifecycle followed static reference
 `resource_actions.go:311–355` and `resource_actions_default_system.go`:
 
 - Read the singleton object through GET at its fixed policy path.
@@ -254,10 +257,12 @@ implemented resources. Its explicit lifecycle follows static reference
   until their singleton equivalents have reviewed implementations.
 
 Test-only schemas and a test-only provider exercise the engine; they do **not**
-replace the two required official generators. Before exposing each of the nineteen
-singletons, add its reviewed validators/defaults/field semantics, adapter and
-exact generated-file/spec gates, official generated schema/model binding, and
-applicable live evidence. Runtime registration remains unchanged meanwhile.
+replace the two required official generators. The original exposure prerequisites were reviewed validators/defaults/field
+semantics, adapter and exact generated-file/spec gates, official generated
+schema/model bindings and applicable live evidence. Those prerequisites were
+implemented for the nineteen settings in the preserved 125-constructor set;
+27 additional settings now share the maintained engine with their separately
+scoped evidence. This paragraph is not pending registration work.
 
 ## Amortized immutable-input adaptation
 
@@ -269,7 +274,7 @@ report classifications are copied and cannot mutate sibling observations.
 Secondary per-resource reports omit an unused full inventory copy; the final
 bundle still contains the complete observed inventory and exact reviewed set.
 
-The cached CLI produced byte-identical current normalized OpenAPI, generator
+At the historical foundation checkpoint, the cached CLI produced byte-identical normalized OpenAPI, generator
 configuration, wire descriptors and upstream input compared with the existing
 artifacts. No generated model or public schema changed. A **single local
 18-policy fixture sample** measured 0.098s without reuse versus 0.013s with reuse
@@ -287,7 +292,8 @@ estimate or a substitute for larger batching and actual implementation work.
   comparisons: passed.
 - `go vet ./internal/provider` and `git diff --check`: passed.
 
-No new CHR guests, credentials, hosted runs or pushes were created for this
-foundation work. No full 125-resource regression or final maintenance replay has
-occurred. Existing eighteen-resource historical evidence is unchanged. These foundation
-check results predate the public integrations recorded above.
+No new CHR guests, credentials, hosted runs or pushes were created for that
+foundation checkpoint, and its checks did not include a full 125-resource
+regression or final maintenance replay. Later 125-constructor consolidated
+verification and replay are recorded above; the additional settings have their
+own focused evidence. These foundation results do not describe current coverage.

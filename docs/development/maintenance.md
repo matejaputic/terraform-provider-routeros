@@ -2,21 +2,24 @@
 
 This project is the Framework provider **and its ongoing restraml-driven maintenance loop**, not a one-off schema port. Coverage expansion extends the policies and lifecycles that this loop can safely maintain. Both official HashiCorp generators remain mandatory.
 
-## Working baseline
+## Current scope and historical baseline
 
-Commit `1f522d3` establishes the sixteen-resource Framework/REST baseline. `schemas/baseline-manifest.json` records its immutable commit/tree, original tracked-file hashes, resource/field counts, producer pins and successful offline/live gates. Live evidence is restricted to RouterOS **7.24.5 x86_64/base CHR**; configuration lifecycle tests do not certify packet processing or SDK state migration. The guest, credentials and mutable disk were removed after the baseline rerun.
+The current reviewed provider exposes **152 resources** (106 collections / 46 settings) and zero data sources. Offline candidates must preserve that source revision's exact approved contracts; historical sixteen/eighteen/125-resource receipts cannot certify an expanded candidate. The active maintenance policy is `semantic-identity-v3-remaining-resources-settings-reviewed-subsets`, bound to the current descriptors. See [coverage](coverage.md) for current registration and separately scoped live evidence.
+
+Historical commit `1f522d3` established the sixteen-resource Framework/REST baseline. `schemas/baseline-manifest.json` records its immutable commit/tree, original tracked-file hashes, resource/field counts, producer pins and successful offline/live gates. Live evidence is restricted to RouterOS **7.24.5 x86_64/base CHR**; configuration lifecycle tests do not certify packet processing or SDK state migration. The guest, credentials and mutable disk were removed after the baseline rerun.
 
 ## Run from a clean committed provider checkout
 
 ```sh
 make testmaintenance
-python3 tools/maintenance/maintain.py
+python3 tools/maintenance/maintain.py --extra
 
-# Offline immutable upstream Git replay (committed blobs only).
+# Offline immutable upstream Git replay, including matching extra publications.
+# --replay explicitly permits the pinned historical input.
 python3 tools/maintenance/maintain.py \
   --repository-dir ../restraml \
   --sha adc39cdbb0a3062aa93cc7aff50ef1185a1c0b0a \
-  --output .local/maintenance-replay
+  --replay --extra --output .local/maintenance-replay
 
 # Optional extra packages/nightly; stale nightly provenance fails unless explicitly replayed.
 python3 tools/maintenance/maintain.py --extra --nightly
@@ -35,13 +38,15 @@ Requires Python 3.11+ with the backported tar extraction filters (3.11.8+), POSI
 
 `--output` contains `checkpoints.json`, `candidates/<key>/` immutable successful bundles, `runs/<run-id>/` immutable inputs/logs/attempt evidence, and `latest-summary.json`. Keep checkpoints **and their bundles together** when restoring. Output locks reject overlapping runs; checkpoint locks remain compatible with the discovery CLI. Discovery/build failures exit 1, requested missing artifacts exit 2 (pending, never a successful no-op). Previous good candidate outputs remain untouched, and failed summaries distinguish failures from unchanged inputs. An invalid discovery cannot advance its checkpoints. Discovery frontiers are distinct from generated/functional/publication stages.
 
-## End-to-end validation
+## Recorded end-to-end validation
 
-At provider revision `70015da`, committed restraml snapshot `adc39cdbb0a3062aa93cc7aff50ef1185a1c0b0a` selected stable 7.24.5/base and prerelease 7.25beta5/base. Both candidates passed two official-generation runs, all 59 Python tooling tests (45 existing + 14 maintenance), Go race/mock tests, vet and build, with no changes to the source checkout. Candidate generation/full offline verification took approximately 76 seconds each; a second run reused the intact evidence and reported unchanged. `schemas/maintenance-validation.json` records candidate keys, raw-input/evidence hashes, checks and measured timings. Only discovered/generated receipts were advanced: **the newer candidate has no live compatibility certification**.
+The expanded [125-constructor record](../../schemas/resource-configuration-validation.json) binds four stable/latest × base/extra candidates, successful offline generation/contract deltas and an intact no-op repeat. Those candidates remained `live_tested=false` / `published=false`. A fresh equivalent replay for the current 152-resource source set is not recorded. Extra publication is hash-bound and version-matched for package-only resources such as VETH; package installation occurs only in the separate owned-guest harness, never offline maintenance.
+
+**Historical sixteen-resource checkpoint:** at provider revision `70015da`, committed restraml snapshot `adc39cdbb0a3062aa93cc7aff50ef1185a1c0b0a` selected stable 7.24.5/base and prerelease 7.25beta5/base. Both candidates passed two official-generation runs, all 59 Python tooling tests (45 existing + 14 maintenance), Go race/mock tests, vet and build, with no changes to the source checkout. Candidate generation/full offline verification took approximately 76 seconds each; a second run reused the intact evidence and reported unchanged. `schemas/maintenance-validation.json` records candidate keys, raw-input/evidence hashes, checks and measured timings. Only discovered/generated receipts were advanced: **the newer candidate has no live compatibility certification**.
 
 Nineteen orchestration tests additionally exercise changed/unchanged inputs, force without replacing receipts, test-change invalidation, ignored-cache handling, dirty-checkout/output-path rejection, build/discovery failures, missing/tampered evidence, partial-artifact recovery, deferred artifacts, locking, documentation-only receipt reuse, retained review-required contract reports, a real producer delta rejection before tests/build, last-good preservation after review-failed force validation, policy/baseline key invalidation, and removal of live flags/credentials from offline subprocesses.
 
-The producer now applies [`semantic-identity-v1`](capabilities.md) after deterministic official generation and before tests/build or receipt advancement. This compares adapted public contracts only; raw RouterOS semantics and new live lanes remain uncertified. Review-required candidates retain actionable delta reports in the run directory without altering last-good evidence. Workflow syntax/security lint passed with actionlint v1.7.7; hosted execution has not yet been observed.
+The producer applies the [current policy-bound semantic identity gate](capabilities.md) after deterministic official generation and before tests/build or receipt advancement. This compares adapted public contracts only; raw RouterOS semantics and new live lanes remain uncertified. Review-required candidates retain actionable delta reports in the run directory without altering last-good evidence. Workflow syntax/security lint passed with actionlint v1.7.7. Hosted offline execution and independent restoration/no-op were observed at the historical revisions recorded in the [hosted checklist](hosted-checkpoint.md); this does not certify current expanded candidates.
 
 ## Scheduled workflow
 
@@ -66,8 +71,8 @@ The maintenance workflow transfers this bundle to a separate runner for an indep
 
 ### Explicit remaining work
 
-- Cross-run durable hosted receipt/bundle restoration (protected automation branch or permanent immutable storage). The current hosted workflow starts each fresh runner from an empty state and revalidates candidates; it does **not** pretend Actions caches or expiring artifacts are a permanent successful frontier. Local reuse works when the output directory is retained/restored. Add the hosted backend before claiming persistent scheduled deduplication or full A1 completion.
-- Pinned SDK contract/test extraction and reconciliation, lifecycle capability classification, field-level semantic delta/promotion policy and reusable review candidates.
-- Automated corresponding-version acceptance targets and live lane matrices; the fixed local 7.24.5 CHR baseline cannot certify a newly discovered version. Advance `tested` only with actual target evidence.
+- Cross-run durable hosted receipt/bundle restoration (protected automation branch or permanent immutable storage). The current hosted workflow starts each fresh runner from an empty state and revalidates candidates; it does **not** pretend Actions caches or expiring artifacts are a permanent successful frontier. Local reuse works when the output directory is retained/restored. Add the hosted backend before claiming persistent scheduled deduplication or complete cross-run receipt automation.
+- Raw upstream semantic-delta analysis and finer reviewed adaptation/promotion rules. Pinned static SDK extraction/reconciliation, lifecycle classification and the adapted-public-contract delta gate are already implemented; they do not authorize new exposure or replace raw-semantic/live review.
+- Bind automated corresponding-version acceptance to each generated candidate. Pinned 7.24.5/7.25beta5 x86_64 base/container source-test lanes and focused optional-package settings tests already exist, but cannot certify a newly discovered version or rebuilt candidate. Advance `tested` only with actual candidate/target evidence.
 - Freshness/coverage ledger, outage/lag alerts and rolling review PR/issue handling; currently summaries expose observed SHA, versions, statuses, deferred artifacts and timings without inventing latest compatibility.
 - Authorized nightly publication and protected stable Registry promotion. No release/signing gate is weakened by this artifact milestone.

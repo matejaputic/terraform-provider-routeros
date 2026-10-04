@@ -1,54 +1,88 @@
-# Disposable CHR on OrbStack (Apple Silicon)
+# Disposable CHR on OrbStack and hosted runners
 
-Coverage update: `test` runs IP-address, six-resource networking and four-resource DHCP/static-routing and isolated firewall/address-list/order acceptance. An additional virtio NIC named `tf-port` connects only to a QEMU hub without a host/network backend, permitting bridge-port tests without touching the management NIC. Existing disconnected `tf-test` bridge remains for IP tests. No additional ports, privileges or egress are introduced. See [coverage evidence](coverage.md).
+The harness supports pinned **7.24.5 and 7.25beta5 x86_64 CHR** on QEMU/TCG. The provider currently registers 152 resources, but `chr.py test` selects the preserved 125-constructor configuration suites, **not the 27 additional settings**. VETH is explicitly unavailable on base and tested with container. Focused additional-settings tests cover 19 base / 26 matching optional-package settings; physical LEDs are unavailable on CHR. See [coverage and evidence](coverage.md).
 
 ## Why QEMU, not an ISO machine
 
-The supplied OrbStack docs describe supported Linux distributions, not arbitrary ISO boot. Its x86 Linux support uses Rosetta for userspace; this does not boot an x86 RouterOS kernel. The supplied docs also rule out nested KVM on Apple Silicon.
+OrbStack hosts the unprivileged Linux QEMU container; it does not boot an arbitrary RouterOS ISO or create/change an OrbStack Linux machine. Apple Silicon uses software TCG, not nested KVM. The guest is an official preinstalled x86 CHR disk with pinned archive/disk hashes. An ARM64 installer/image is not the tested artifact; no ARM64 CHR acquisition/runtime recipe or live acceptance is implemented.
 
-The VirtualBox CHR instructions translate to QEMU: attach the official CHR disk image, allocate 1 GiB RAM, attach a virtio network adapter, boot, and set the initial admin password. We use OrbStack's Docker engine as the Linux QEMU host and explicitly select software TCG, not KVM. No OrbStack Linux machine is created or changed.
+## Requirements
 
-The suggested ARM64 ISO URL and the ARM64 CHR image both returned HTTP 200, but neither was used or acceptance-tested. An ARM64 installer ISO is not the same artifact as a preinstalled CHR disk. The supplied RouterOS documentation describes x86 CHR; the tested target is explicitly **x86_64 CHR 7.24.5 stable base**, not ARM64 or the nightly train.
+Use Docker context `orbstack`, Docker CLI, Python 3.11+, curl, downloadable Go 1.25.8 / Terraform 1.14.0, and internet for verified image/tool/package acquisition. The Docker base image, QEMU package version, CHR archive and raw disk are pinned. The default RouterOS recipe is 7.24.5; explicit versions must be selected consistently at startup and test.
 
-## Hosted baseline regression
+Hosted `start --hosted` requires this owned GitHub repository, a GitHub-hosted runner and Docker's default context. Hosted Docker uses `linux/amd64`; local Apple Silicon uses `linux/arm64` for the container while the emulated RouterOS guest remains x86_64. Local startup refuses a different Docker context rather than changing it.
 
-On trusted pushes to `main`, `test.yml` attempts separate pinned **7.24.5 and 7.25beta5 x86_64/base** suites using QEMU/TCG on `ubuntu-24.04`. `start --hosted` requires explicit GitHub-hosted execution, this repository identity and Docker's default context; ordinary local `start` still requires OrbStack. Container platform becomes `linux/amd64`, not a different RouterOS target architecture. Enabled packages must consist of the matching base `routeros` package. `tools/chr/recipes.json` pins both archive/disk hashes; the default remains 7.24.5. Select an explicit recipe with `--version 7.25beta5` on both `start` and `test`. The full suite verifies that recipe's actual version before mutation. Adding a recipe is acquisition capability, not compatibility certification; failed lanes cannot inherit successful evidence.
+## Base configuration suites
 
-Shell exit/signal traps and an `always()` cleanup step remove the owned container, credentials and mutable disk; destruction of the ephemeral runner is the final cancellation boundary. Only target provenance, successful acceptance evidence, whitelisted container/console-event diagnostics and the credential-free Docker image-build log are retained, never credentials, disks or console buffers. Successful evidence binds the target/recipe hashes and source commit/cleanliness; it is not yet a candidate-specific tested receipt or release-binary proof. Hosted results are tracked in [the checklist](hosted-checkpoint.md); adding the job alone is not live evidence.
-
-## Requirements and commands
-
-OrbStack Docker context `orbstack`, Docker CLI, Python 3.11+, curl, Go 1.25.8 (downloadable by Go), and internet for first-time image/tool downloads. Observed engine: OrbStack 2.2.3. The container base is pinned by digest, QEMU by Debian package version, and CHR ZIP/raw disk by SHA256. Package availability failures are visible; the harness never silently upgrades QEMU.
-
-Run from the repository root:
+Run from the repository root; cleanup must run on every outcome:
 
 ```sh
-python3 tools/chr/chr.py start
-python3 tools/chr/chr.py test
-python3 tools/chr/chr.py stop
+trap 'python3 tools/chr/chr.py stop' EXIT
+python3 tools/chr/chr.py start --version 7.24.5
+python3 tools/chr/chr.py test --version 7.24.5
 ```
 
-Always run `stop` after testing, including after a failed test. Startup failures clean up the owned container automatically. `start` refuses a preexisting same-name container; `stop` refuses one lacking the harness ownership label. Only this container, its mutable disk, and its local credentials are removed. Cached verified image downloads remain for replay. No existing containers/machines, OrbStack defaults, Docker contexts, host routes or bridges are changed.
+Repeat with `--version 7.25beta5` on both commands for the second pinned recipe. The default selector is:
 
-## Isolation and bootstrap
+```text
+^TestAcc(IPAddress|Collections|DHCPRouting|DHCPOptions|DHCPRelay|DNSRecord|Singletons|ExtendedCollections|Firewall|FirewallFamilies)CHR$
+```
 
-- Unprivileged QEMU container, all capabilities dropped, no-new-privileges, 2-CPU/1536-MiB container limit; guest has 1 CPU and 1024 MiB RAM.
-- Docker publishes REST `127.0.0.1:18780` and serial console `127.0.0.1:18723`. No bridged LAN or publicly bound host listener.
-- QEMU user networking uses `restrict=on`: guest outbound connectivity is blocked. The default DHCP lease supplies `10.0.2.15/24`; an explicit gateway route is needed for replies to Docker's forwarding peer.
-- Serial bootstrap changes the blank admin password to a random value, enables HTTP REST, disables other configurable management services and creates a disconnected `tf-test` bridge. Acceptance mutates only an IP on this bridge, not the management interface.
-- The private guest's www service accepts forwarded peers; protection is the explicit loopback host mapping and restricted QEMU network, not production-grade HTTPS. HTTP would be unsuitable for a production management network.
-- Console input uses **CR only**, because CRLF submits passwords twice on RouterOS. Buffers and passwords are never printed.
-- `.local/chr/` is ignored and mode 0700; `credentials.json` is mode 0600. Do not upload it or the mutable VM disk. The console is privileged access even without a password prompt: leave the container running only while testing.
+This exercises collections, DHCP options/relay, DNS records, nineteen settings, extended resources and ordered firewall families. It verifies disposable/version/architecture guards, create/read/update-or-replacement, imports, no-op plans, drift/deletion repair and owned-object cleanup as applicable. It does not select `TestAccAdditionalSettingsCHR` or certify actual packet/client/server exchanges.
 
-## Verified behavior and fixes
+## Matching optional-package lanes
 
-`TestAccIPAddressCHR` checks actual target version/architecture before mutation. Terraform 1.14.0 drives protocol 6 create/read/update/import/destroy, repeated empty plans/applies, out-of-band deletion/recreation, unique IDs, booleans and computed fields. A final REST query verifies no test addresses remain.
+```sh
+# Enables matching container package; VETH configuration becomes available.
+python3 tools/chr/chr.py start --version 7.24.5 --container
+python3 tools/chr/chr.py test --version 7.24.5
+python3 tools/chr/chr.py stop
 
-Live testing exposed regressions absent from the original mock:
+# Broader owned-guest fixture for additional settings tests.
+python3 tools/chr/chr.py start --version 7.24.5 \
+  --packages container wireless user-manager
+```
 
-1. `%2A3` in REST resource paths produces HTTP 400; literal `*3` succeeds. The client preserves literal `*` but escapes other special characters as a single path segment. Mock regression checks now assert the encoded path too.
-2. `vrf` is present on read but rejected on write in 7.24.5 (`unknown parameter vrf`). It is computed-only for the supported slice. Mutations use configured values, not computed plan/state defaults. This is a documented exception to the reference SDK schema, not a claim of full migration compatibility.
+Both versions have hash-bound official package recipes. `container-recipes.json` retains the container-only bindings; `optional-package-recipes.json` binds container/wireless/user-manager members to the same reviewed archives. Upload uses bounded password SFTP to owned loopback SSH, one fixed reboot, then disables SSH and verifies the exact matching enabled package/version set. Provisioning files are removed even after failure. It does not change administrator keys, execute arbitrary scripts or start containers.
 
-3. Updating a bare IP can inherit the previous netmask. The client sends an explicit host prefix and retains the configured bare representation only on semantically identical readback. A live update/empty-plan regression test covers this.
+To run the focused settings suite against a started fixture without printing credentials:
 
-The live run does not establish ARM64, extra-package, prerelease/nightly, older SDK-state migration, native API, or Registry release compatibility. Those retain their separate plan gates. Signing/publication remains disabled.
+```sh
+trap 'python3 tools/chr/chr.py stop' EXIT
+python3 - <<'PY'
+import json, os, subprocess
+from pathlib import Path
+state = Path('.local/chr')
+credentials = json.loads((state / 'credentials.json').read_text())
+target = json.loads((state / 'target.json').read_text())
+env = os.environ.copy()
+env.update(ROS_HOSTURL=credentials['hosturl'],
+           ROS_USERNAME=credentials['username'], ROS_PASSWORD=credentials['password'],
+           ROS_TEST_DISPOSABLE='1', ROS_TEST_VERSION=target['version'],
+           TF_ACC='1', TF_ACC_TERRAFORM_VERSION='1.14.0', GOTOOLCHAIN='go1.25.8')
+subprocess.run(['go', 'test', './internal/provider',
+                '-run', '^TestAccAdditionalSettingsCHR$', '-count=1',
+                '-v', '-timeout=5m'], env=env, check=True)
+PY
+```
+
+Base skips package-required settings; the broader package fixture makes 26 settings available. The physical LED resource remains unavailable on CHR. The direct focused invocation above does not write `chr.py test`'s acceptance receipt; record its source/target/package evidence separately and do not call it consolidated or maintenance-candidate certification. Database-path changes use explicit dependencies to avoid resetting concurrently configured user-manager settings.
+
+## Isolation and cleanup
+
+- Unprivileged QEMU container, capabilities dropped, no-new-privileges; 2-CPU/1536-MiB container limits and a 1-CPU/1024-MiB guest.
+- REST `127.0.0.1:18780` and serial `127.0.0.1:18723`; optional package provisioning briefly publishes loopback SSH `18722`, then disables the guest service. No public/bridged host listener, privileged container, KVM or host networking.
+- Restricted user networking blocks guest outbound connectivity. Its DHCP lease/gateway support replies to the forwarding peer; acquisition downloads occur on the host, not through unrestricted guest egress.
+- A second virtio NIC named `tf-port` uses a QEMU hub with **no host/network backend**. A disconnected `tf-test` bridge supports IP tests. Acceptance uses disabled/disconnected/unattached owned objects and does not modify management connectivity.
+- Serial bootstrap assigns a random admin password, enables isolated HTTP REST and disables other management services. Console input is CR only; buffers/passwords are never logged.
+- `.local/chr/` is ignored and mode 0700; credentials are mode 0600. Never upload credentials, mutable disks or serial buffers. HTTP is appropriate only for this isolated fixture, not production credential transport.
+
+`start` refuses a preexisting same-name container; startup failures clean the owned fixture. `stop` refuses a container without the ownership label, removes guest/credentials/mutable disk/provisioning files, and retains verified immutable download caches. Do not leave the privileged serial console available after testing. Existing containers/machines, Docker contexts and host routes/bridges are not changed.
+
+## Hosted evidence boundary
+
+`test.yml` currently has four version × base/container jobs on `ubuntu-24.04`, after offline verification. EXIT/signal traps and an always-run cleanup step remove the owned fixture; runner destruction is the final cancellation boundary. Only target provenance, successful acceptance receipts, whitelisted diagnostics and credential-free image-build logs are retained for 90 days.
+
+Successful default receipts bind source commit/cleanliness and target/recipe/package hashes for the selected 125-constructor suites. Historical clean-source local/hosted four-lane runs are recorded in [configuration validation](../../schemas/resource-configuration-validation.json) and [hosted bindings](../../schemas/hosted-configuration-validation.json). Adding recipes/jobs, changing selector names or seeing offline success is not live evidence for a new candidate/version/architecture. Durable tested/published receipts and release publication remain unfinished.
+
+Historical IP live findings remain regression-tested: literal `*` IDs are required in REST paths; `vrf` is read-only; bare-IP updates need an explicit host prefix. Those fixes do not authorize SDK-state migration or full reference parity.
