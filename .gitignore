@@ -9,6 +9,8 @@ dist/
 .local/
 __pycache__/
 *.pyc
+.venv/
+.ruff_cache/
 /schemas/adaptation.lock
 /schemas/reference-contracts/.contracts.lock
 modules-dev/

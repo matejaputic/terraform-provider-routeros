@@ -21,6 +21,12 @@ jobs:
       - uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548 # v6.1.0
         with:
           python-version: '3.14.7'
+      - name: Install pinned Python quality tooling
+        run: |
+          python3 -m pip install uv==0.12.23
+          uv sync --locked
+      - name: Python lint, formatting and type checks
+        run: make lintpython
       - name: Offline discovery, adaptation and independent specification gates
         run: make testdiscovery testschema testmaintenance testcontracts testchr testdocs
       - name: Deterministic official generation

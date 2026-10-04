@@ -1,3 +1,5 @@
+PYTHON ?= uv run --locked python
+
 default: test build
 
 build:
@@ -6,45 +8,54 @@ build:
 install: build
 	go install -v ./...
 
-lint:
+lint: lintpython
 	golangci-lint run
+
+lintpython:
+	uv run --locked ruff check tools
+	uv run --locked ruff format --check tools
+	uv run --locked ty check --error-on-warning
+
+fmtpython:
+	uv run --locked ruff check --fix tools
+	uv run --locked ruff format tools
 
 generate:
 	bash tools/schema/generate.sh
 
 docs:
-	python3 tools/docs/resources.py
+	$(PYTHON) tools/docs/resources.py
 
-fmt:
+fmt: fmtpython
 	gofmt -s -w -e .
 
-test: testdiscovery testschema testmaintenance testcontracts testchr testdocs
+test: lintpython testdiscovery testschema testmaintenance testcontracts testchr testdocs
 	GOTOOLCHAIN=go1.25.8 TF_ACC_TERRAFORM_VERSION=1.14.0 go test -v -race -cover -timeout=300s ./...
 
 testdiscovery:
-	python3 -m unittest discover -s tools/schema/discover -v
+	$(PYTHON) -m unittest discover -s tools/schema/discover -v
 
 testschema:
-	python3 -m unittest discover -s tools/schema/normalize -v
-	python3 -m unittest discover -s tools/schema/validate -v
+	$(PYTHON) -m unittest discover -s tools/schema/normalize -v
+	$(PYTHON) -m unittest discover -s tools/schema/validate -v
 
 testcontracts:
-	python3 -m unittest discover -s tools/contracts -v
+	$(PYTHON) -m unittest discover -s tools/contracts -v
 
 testmaintenance:
-	python3 -m unittest discover -s tools/maintenance -v
+	$(PYTHON) -m unittest discover -s tools/maintenance -v
 
 maintenance:
-	python3 tools/maintenance/maintain.py
+	$(PYTHON) tools/maintenance/maintain.py
 
 testchr:
-	python3 -m unittest discover -s tools/chr -v
+	$(PYTHON) -m unittest discover -s tools/chr -v
 
 testdocs:
-	python3 tools/docs/resources.py --check
-	python3 -m unittest discover -s tools/docs -v
+	$(PYTHON) tools/docs/resources.py --check
+	$(PYTHON) -m unittest discover -s tools/docs -v
 
 testacc:
-	python3 tools/chr/chr.py test
+	$(PYTHON) tools/chr/chr.py test
 
-.PHONY: fmt lint test testdiscovery testschema testmaintenance testcontracts testchr testdocs maintenance testacc build install generate docs
+.PHONY: fmt fmtpython lint lintpython test testdiscovery testschema testmaintenance testcontracts testchr testdocs maintenance testacc build install generate docs

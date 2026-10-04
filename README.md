@@ -2,6 +2,22 @@
 
 This provider combines schemas and models automatically generated from versioned RouterOS OpenAPI descriptions with reviewed lifecycle code for safe REST-based resource management. Its continuous-maintenance pipeline detects schema drift and validates generated updates through deterministic generation, contract checks, and lifecycle tests before promotion.
 
+## Python tooling
+
+The Python helpers use only the standard library (Python 3.11+). Development
+checks use pinned Astral tools managed by `uv`; `mise.toml` pins `uv` locally.
+
+```sh
+mise install
+mise exec -- uv sync --locked
+mise exec -- make lintpython  # Ruff lint/format checks and ty type checking
+mise exec -- make fmtpython   # Apply safe lint fixes and formatting
+mise exec -- make testdiscovery testschema testmaintenance testcontracts testchr testdocs
+```
+
+The same Python quality gates run in CI. `.local/` scratch files and backups are
+not checked; all Python sources and tests under `tools/` are checked.
+
 ## Usage Example
 
 ```hcl
