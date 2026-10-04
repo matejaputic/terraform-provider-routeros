@@ -1,6 +1,7 @@
 {
   "conclusion": "success",
-  "format": "routeros-batch-a-hosted-validation@1",
+  "format": "routeros-hosted-configuration-validation@1",
+  "historical_path_labels": "Paths, selectors and job names use current descriptive terminology. Recorded digests, run IDs and results still bind the historical source revisions and original artifacts, not the renamed working tree.",
   "inspection": "consolidated offline/deterministic generation/race/vet/build/format job plus four clean-source target/recipe/package-bound full configuration acceptance artifacts inspected; all owned-guest cleanup steps passed",
   "jobs": [
     {
@@ -578,7 +579,7 @@
         "success": true,
         "target_sha256": "51a4cb199ed42ca32dee494530b4ec9c658812e76d6d46b40ec23b5a29d42f23",
         "terraform_version": "1.14.0",
-        "test_pattern": "^TestAcc(IPAddress|Collections|DHCPRouting|DHCPOptions|DHCPRelay|DNSRecord|Singletons|BatchACollections|Firewall|FirewallFamilies)CHR$",
+        "test_pattern": "^TestAcc(IPAddress|Collections|DHCPRouting|DHCPOptions|DHCPRelay|DNSRecord|Singletons|ExtendedCollections|Firewall|FirewallFamilies)CHR$",
         "version": "7.24.5"
       },
       "target": {
@@ -614,7 +615,7 @@
         "success": true,
         "target_sha256": "3e16630eb041960c4e64f75bd69c1c1fc7eba82ff9afb8ba68e66ba5fcf2c943",
         "terraform_version": "1.14.0",
-        "test_pattern": "^TestAcc(IPAddress|Collections|DHCPRouting|DHCPOptions|DHCPRelay|DNSRecord|Singletons|BatchACollections|Firewall|FirewallFamilies)CHR$",
+        "test_pattern": "^TestAcc(IPAddress|Collections|DHCPRouting|DHCPOptions|DHCPRelay|DNSRecord|Singletons|ExtendedCollections|Firewall|FirewallFamilies)CHR$",
         "version": "7.24.5"
       },
       "target": {
@@ -664,7 +665,7 @@
         "success": true,
         "target_sha256": "ac2303cac1cbfda7fcc01931bf09ed2b22de1f5e187da8965e36be838dc36c61",
         "terraform_version": "1.14.0",
-        "test_pattern": "^TestAcc(IPAddress|Collections|DHCPRouting|DHCPOptions|DHCPRelay|DNSRecord|Singletons|BatchACollections|Firewall|FirewallFamilies)CHR$",
+        "test_pattern": "^TestAcc(IPAddress|Collections|DHCPRouting|DHCPOptions|DHCPRelay|DNSRecord|Singletons|ExtendedCollections|Firewall|FirewallFamilies)CHR$",
         "version": "7.25beta5"
       },
       "target": {
@@ -700,7 +701,7 @@
         "success": true,
         "target_sha256": "b46fe385a31d108e950e5f1bbcf8750da6dd99e18cc16cff9ace167cb5241539",
         "terraform_version": "1.14.0",
-        "test_pattern": "^TestAcc(IPAddress|Collections|DHCPRouting|DHCPOptions|DHCPRelay|DNSRecord|Singletons|BatchACollections|Firewall|FirewallFamilies)CHR$",
+        "test_pattern": "^TestAcc(IPAddress|Collections|DHCPRouting|DHCPOptions|DHCPRelay|DNSRecord|Singletons|ExtendedCollections|Firewall|FirewallFamilies)CHR$",
         "version": "7.25beta5"
       },
       "target": {

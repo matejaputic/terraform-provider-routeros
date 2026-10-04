@@ -28,14 +28,14 @@ resources['ip_firewall_raw']=('/ip/firewall/raw',list(base))
 option_fields=[('name','string','required'),('code','integer','required'),('value','string','required'),('raw-value','string','computed')]
 resources['ip_dhcp_client_option']=('/ip/dhcp-client/option',list(option_fields))
 resources['ip_dhcp_server_option']=('/ip/dhcp-server/option',option_fields+[('comment','string','computed_optional'),('force','boolean','computed_optional')])
-# Batch A DHCP relay: deliberately omit duration and option-82 payload fields
+# Reviewed DHCP relay: deliberately omit duration and option-82 payload fields
 # until their canonicalization and clearing semantics have dedicated review.
 resources['ip_dhcp_relay']=('/ip/dhcp-relay',[
  ('name','string','required'),('interface','string','required'),
  ('dhcp-server','string','required'),('disabled','boolean','computed_optional'),
  ('local-address','string','computed_optional'),('add-relay-info','boolean','computed_optional'),
  ('invalid','boolean','computed')])
-# Batch A named address DNS records: A/AAAA only; no regex, forwarding,
+# Reviewed named address DNS records: A/AAAA only; no regex, forwarding,
 # dynamic firewall address-list actions, or duration canonicalization.
 resources['ip_dns_record']=('/ip/dns/static',[
  ('name','string','required'),('type','string','required'),('address','string','required'),

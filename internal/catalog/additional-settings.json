@@ -1,0 +1,2721 @@
+[
+  {
+    "revision": "remaining-resources-settings-curated-v1",
+    "reference_constructor": "ResourceCapsManAaa",
+    "resource_name": "capsman_aaa",
+    "wire_path": "/caps-man/aaa",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "called_format",
+        "wire": "called-format",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "mac_format",
+        "wire": "mac-format",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "mac_mode",
+        "wire": "mac-mode",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "called_format",
+      "mac_format",
+      "mac_mode"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [],
+    "required_package": "wireless"
+  },
+  {
+    "revision": "remaining-resources-settings-curated-v1",
+    "reference_constructor": "ResourceCapsManManager",
+    "resource_name": "capsman_manager",
+    "wire_path": "/caps-man/manager",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "enabled",
+        "wire": "enabled",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "require_peer_certificate",
+        "wire": "require-peer-certificate",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "certificate",
+        "wire": "certificate",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "ca_certificate",
+        "wire": "ca-certificate",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "upgrade_policy",
+        "wire": "upgrade-policy",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim",
+        "choices": [
+          "none",
+          "suggest-same-version",
+          "require-same-version"
+        ]
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "enabled",
+      "require_peer_certificate",
+      "certificate",
+      "ca_certificate",
+      "upgrade_policy"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [
+      "enabled",
+      "require_peer_certificate"
+    ],
+    "required_package": "wireless"
+  },
+  {
+    "revision": "remaining-resources-settings-curated-v1",
+    "reference_constructor": "ResourceContainerConfig",
+    "resource_name": "container_config",
+    "wire_path": "/container/config",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "registry_url",
+        "wire": "registry-url",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "username",
+        "wire": "username",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": true,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim",
+        "preserve_secret_on_omission": true
+      },
+      {
+        "name": "password",
+        "wire": "password",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": true,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim",
+        "preserve_secret_on_omission": true
+      },
+      {
+        "name": "tmpdir",
+        "wire": "tmpdir",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "layer_dir",
+        "wire": "layer-dir",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "registry_url",
+      "username",
+      "password",
+      "tmpdir",
+      "layer_dir"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [],
+    "required_package": "container"
+  },
+  {
+    "revision": "remaining-resources-settings-curated-v1",
+    "reference_constructor": "ResourceDiskSettings",
+    "resource_name": "disk_settings",
+    "wire_path": "/disk/settings",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "auto_media_interface",
+        "wire": "auto-media-interface",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "auto_media_sharing",
+        "wire": "auto-media-sharing",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "auto_smb_sharing",
+        "wire": "auto-smb-sharing",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "default_mount_point_template",
+        "wire": "default-mount-point-template",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "auto_media_interface",
+      "auto_media_sharing",
+      "auto_smb_sharing",
+      "default_mount_point_template"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [
+      "auto_media_sharing",
+      "auto_smb_sharing"
+    ]
+  },
+  {
+    "revision": "remaining-resources-settings-curated-v1",
+    "reference_constructor": "ResourceDns",
+    "resource_name": "ip_dns",
+    "wire_path": "/ip/dns",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "servers",
+        "wire": "servers",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "csv-string-set",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "allow_remote_requests",
+        "wire": "allow-remote-requests",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "cache_size",
+        "wire": "cache-size",
+        "type": "integer",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "decimal",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim",
+        "minimum": 64,
+        "maximum": 4294967295
+      },
+      {
+        "name": "max_concurrent_queries",
+        "wire": "max-concurrent-queries",
+        "type": "integer",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "decimal",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim",
+        "minimum": 1,
+        "maximum": 65535
+      },
+      {
+        "name": "max_concurrent_tcp_sessions",
+        "wire": "max-concurrent-tcp-sessions",
+        "type": "integer",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "decimal",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim",
+        "minimum": 1,
+        "maximum": 65535
+      },
+      {
+        "name": "max_udp_packet_size",
+        "wire": "max-udp-packet-size",
+        "type": "integer",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "decimal",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim",
+        "minimum": 512,
+        "maximum": 65535
+      },
+      {
+        "name": "verify_doh_cert",
+        "wire": "verify-doh-cert",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "vrf",
+        "wire": "vrf",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "servers",
+      "allow_remote_requests",
+      "cache_size",
+      "max_concurrent_queries",
+      "max_concurrent_tcp_sessions",
+      "max_udp_packet_size",
+      "verify_doh_cert",
+      "vrf"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [
+      "allow_remote_requests",
+      "verify_doh_cert"
+    ]
+  },
+  {
+    "revision": "remaining-resources-settings-curated-v1",
+    "reference_constructor": "ResourceInterfaceDetectInternet",
+    "resource_name": "interface_detect_internet",
+    "wire_path": "/interface/detect-internet",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "detect_interface_list",
+        "wire": "detect-interface-list",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "internet_interface_list",
+        "wire": "internet-interface-list",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "lan_interface_list",
+        "wire": "lan-interface-list",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "wan_interface_list",
+        "wire": "wan-interface-list",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "detect_interface_list",
+      "internet_interface_list",
+      "lan_interface_list",
+      "wan_interface_list"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": []
+  },
+  {
+    "revision": "remaining-resources-settings-curated-v1",
+    "reference_constructor": "ResourceInterfaceL2tpServer",
+    "resource_name": "interface_l2tp_server",
+    "wire_path": "/interface/l2tp-server/server",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "enabled",
+        "wire": "enabled",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "default_profile",
+        "wire": "default-profile",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "max_mtu",
+        "wire": "max-mtu",
+        "type": "integer",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "decimal",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim",
+        "minimum": 128,
+        "maximum": 65535
+      },
+      {
+        "name": "max_mru",
+        "wire": "max-mru",
+        "type": "integer",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "decimal",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim",
+        "minimum": 128,
+        "maximum": 65535
+      },
+      {
+        "name": "authentication",
+        "wire": "authentication",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "csv-string-set",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "allow_fast_path",
+        "wire": "allow-fast-path",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "one_session_per_host",
+        "wire": "one-session-per-host",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "enabled",
+      "default_profile",
+      "max_mtu",
+      "max_mru",
+      "authentication",
+      "allow_fast_path",
+      "one_session_per_host"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [
+      "enabled",
+      "allow_fast_path",
+      "one_session_per_host"
+    ]
+  },
+  {
+    "revision": "remaining-resources-settings-curated-v1",
+    "reference_constructor": "ResourceInterfaceSSTPServer",
+    "resource_name": "interface_sstp_server",
+    "wire_path": "/interface/sstp-server/server",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "enabled",
+        "wire": "enabled",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "default_profile",
+        "wire": "default-profile",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "certificate",
+        "wire": "certificate",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "max_mtu",
+        "wire": "max-mtu",
+        "type": "integer",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "decimal",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim",
+        "minimum": 128,
+        "maximum": 65535
+      },
+      {
+        "name": "max_mru",
+        "wire": "max-mru",
+        "type": "integer",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "decimal",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim",
+        "minimum": 128,
+        "maximum": 65535
+      },
+      {
+        "name": "authentication",
+        "wire": "authentication",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "csv-string-set",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "verify_client_certificate",
+        "wire": "verify-client-certificate",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "pfs",
+        "wire": "pfs",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim",
+        "choices": [
+          "no",
+          "yes",
+          "required"
+        ]
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "enabled",
+      "default_profile",
+      "certificate",
+      "max_mtu",
+      "max_mru",
+      "authentication",
+      "verify_client_certificate",
+      "pfs"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [
+      "enabled",
+      "verify_client_certificate"
+    ]
+  },
+  {
+    "revision": "remaining-resources-settings-curated-v1",
+    "reference_constructor": "ResourceInterfaceWirelessCap",
+    "resource_name": "interface_wireless_cap",
+    "wire_path": "/interface/wireless/cap",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "enabled",
+        "wire": "enabled",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "bridge",
+        "wire": "bridge",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "caps_man_addresses",
+        "wire": "caps-man-addresses",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "csv-string-set",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "discovery_interfaces",
+        "wire": "discovery-interfaces",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "csv-string-set",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "interfaces",
+        "wire": "interfaces",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "csv-string-set",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "lock_to_caps_man",
+        "wire": "lock-to-caps-man",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "enabled",
+      "bridge",
+      "caps_man_addresses",
+      "discovery_interfaces",
+      "interfaces",
+      "lock_to_caps_man"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [
+      "enabled",
+      "lock_to_caps_man"
+    ],
+    "required_package": "wireless"
+  },
+  {
+    "revision": "remaining-resources-settings-curated-v1",
+    "reference_constructor": "ResourceIpCloud",
+    "resource_name": "ip_cloud",
+    "wire_path": "/ip/cloud",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "ddns_enabled",
+        "wire": "ddns-enabled",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim",
+        "choices": [
+          "auto",
+          "yes"
+        ]
+      },
+      {
+        "name": "update_time",
+        "wire": "update-time",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "dns_name",
+        "wire": "dns-name",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "public_address",
+        "wire": "public-address",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "status",
+        "wire": "status",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "ddns_enabled",
+      "update_time"
+    ],
+    "computed": [
+      "id",
+      "dns_name",
+      "public_address",
+      "status"
+    ],
+    "booleans": [
+      "update_time"
+    ]
+  },
+  {
+    "revision": "remaining-resources-settings-curated-v1",
+    "reference_constructor": "ResourceIpCloudAdvanced",
+    "resource_name": "ip_cloud_advanced",
+    "wire_path": "/ip/cloud/advanced",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "use_local_address",
+        "wire": "use-local-address",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "use_local_address"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [
+      "use_local_address"
+    ]
+  },
+  {
+    "revision": "remaining-resources-settings-curated-v1",
+    "reference_constructor": "ResourceIpSMB",
+    "resource_name": "ip_smb",
+    "wire_path": "/ip/smb",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "enabled",
+        "wire": "enabled",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim",
+        "choices": [
+          "auto",
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "name": "interfaces",
+        "wire": "interfaces",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "csv-string-set",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "domain",
+        "wire": "domain",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "comment",
+        "wire": "comment",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "status",
+        "wire": "status",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "enabled",
+      "interfaces",
+      "domain",
+      "comment"
+    ],
+    "computed": [
+      "id",
+      "status"
+    ],
+    "booleans": []
+  },
+  {
+    "revision": "remaining-resources-settings-curated-v1",
+    "reference_constructor": "ResourceIpSSHServer",
+    "resource_name": "ip_ssh_server",
+    "wire_path": "/ip/ssh",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "strong_crypto",
+        "wire": "strong-crypto",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "forwarding_enabled",
+        "wire": "forwarding-enabled",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim",
+        "choices": [
+          "no",
+          "local",
+          "remote",
+          "both"
+        ]
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "strong_crypto",
+      "forwarding_enabled"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [
+      "strong_crypto"
+    ]
+  },
+  {
+    "revision": "remaining-resources-settings-curated-v1",
+    "reference_constructor": "ResourcePppAaa",
+    "resource_name": "ppp_aaa",
+    "wire_path": "/ppp/aaa",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "accounting",
+        "wire": "accounting",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "enable_ipv6_accounting",
+        "wire": "enable-ipv6-accounting",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "use_radius",
+        "wire": "use-radius",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "use_circuit_id_in_nas_port_id",
+        "wire": "use-circuit-id-in-nas-port-id",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "accounting",
+      "enable_ipv6_accounting",
+      "use_radius",
+      "use_circuit_id_in_nas_port_id"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [
+      "accounting",
+      "enable_ipv6_accounting",
+      "use_radius",
+      "use_circuit_id_in_nas_port_id"
+    ]
+  },
+  {
+    "revision": "remaining-resources-settings-curated-v1",
+    "reference_constructor": "ResourceSNMP",
+    "resource_name": "snmp",
+    "wire_path": "/snmp",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "enabled",
+        "wire": "enabled",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "contact",
+        "wire": "contact",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "location",
+        "wire": "location",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "src_address",
+        "wire": "src-address",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "trap_version",
+        "wire": "trap-version",
+        "type": "integer",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "decimal",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim",
+        "minimum": 1,
+        "maximum": 3
+      },
+      {
+        "name": "vrf",
+        "wire": "vrf",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "enabled",
+      "contact",
+      "location",
+      "src_address",
+      "trap_version",
+      "vrf"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [
+      "enabled"
+    ]
+  },
+  {
+    "revision": "remaining-resources-settings-curated-v1",
+    "reference_constructor": "ResourceSystemClock",
+    "resource_name": "system_clock",
+    "wire_path": "/system/clock",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "time_zone_name",
+        "wire": "time-zone-name",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "time_zone_autodetect",
+        "wire": "time-zone-autodetect",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "dst_active",
+        "wire": "dst-active",
+        "type": "boolean",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "gmt_offset",
+        "wire": "gmt-offset",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "time_zone_name",
+      "time_zone_autodetect"
+    ],
+    "computed": [
+      "id",
+      "dst_active",
+      "gmt_offset"
+    ],
+    "booleans": [
+      "time_zone_autodetect",
+      "dst_active"
+    ]
+  },
+  {
+    "revision": "remaining-resources-settings-curated-v1",
+    "reference_constructor": "ResourceSystemLedSettings",
+    "resource_name": "system_led_settings",
+    "wire_path": "/system/leds/settings",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "all_leds_off",
+        "wire": "all-leds-off",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim",
+        "choices": [
+          "never",
+          "after-1h",
+          "immediate"
+        ]
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "all_leds_off"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": []
+  },
+  {
+    "revision": "remaining-resources-settings-curated-v1",
+    "reference_constructor": "ResourceSystemUserSettings",
+    "resource_name": "system_user_settings",
+    "wire_path": "/user/settings",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "minimum_password_length",
+        "wire": "minimum-password-length",
+        "type": "integer",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "decimal",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim",
+        "minimum": 0,
+        "maximum": 255
+      },
+      {
+        "name": "minimum_categories",
+        "wire": "minimum-categories",
+        "type": "integer",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "decimal",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim",
+        "minimum": 0,
+        "maximum": 4
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "minimum_password_length",
+      "minimum_categories"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": []
+  },
+  {
+    "revision": "remaining-resources-settings-curated-v1",
+    "reference_constructor": "ResourceToolBandwidthServer",
+    "resource_name": "tool_bandwidth_server",
+    "wire_path": "/tool/bandwidth-server",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "enabled",
+        "wire": "enabled",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "authenticate",
+        "wire": "authenticate",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "allocate_udp_ports_from",
+        "wire": "allocate-udp-ports-from",
+        "type": "integer",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "decimal",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim",
+        "minimum": 1,
+        "maximum": 65535
+      },
+      {
+        "name": "max_sessions",
+        "wire": "max-sessions",
+        "type": "integer",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "decimal",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim",
+        "minimum": 1,
+        "maximum": 65535
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "enabled",
+      "authenticate",
+      "allocate_udp_ports_from",
+      "max_sessions"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [
+      "enabled",
+      "authenticate"
+    ]
+  },
+  {
+    "revision": "remaining-resources-settings-curated-v1",
+    "reference_constructor": "ResourceToolEmail",
+    "resource_name": "tool_email",
+    "wire_path": "/tool/e-mail",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "server",
+        "wire": "server",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "port",
+        "wire": "port",
+        "type": "integer",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "decimal",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim",
+        "minimum": 1,
+        "maximum": 65535
+      },
+      {
+        "name": "user",
+        "wire": "user",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "password",
+        "wire": "password",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": true,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim",
+        "preserve_secret_on_omission": true
+      },
+      {
+        "name": "from",
+        "wire": "from",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "tls",
+        "wire": "tls",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim",
+        "choices": [
+          "no",
+          "yes",
+          "starttls"
+        ]
+      },
+      {
+        "name": "vrf",
+        "wire": "vrf",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "last_status",
+        "wire": "last-status",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "server",
+      "port",
+      "user",
+      "password",
+      "from",
+      "tls",
+      "vrf"
+    ],
+    "computed": [
+      "id",
+      "last_status"
+    ],
+    "booleans": []
+  },
+  {
+    "revision": "remaining-resources-settings-curated-v1",
+    "reference_constructor": "ResourceUPNPSettings",
+    "resource_name": "ip_upnp",
+    "wire_path": "/ip/upnp",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "enabled",
+        "wire": "enabled",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "allow_disable_external_interface",
+        "wire": "allow-disable-external-interface",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "show_dummy_rule",
+        "wire": "show-dummy-rule",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "enabled",
+      "allow_disable_external_interface",
+      "show_dummy_rule"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [
+      "enabled",
+      "allow_disable_external_interface",
+      "show_dummy_rule"
+    ]
+  },
+  {
+    "revision": "remaining-resources-settings-curated-v1",
+    "reference_constructor": "ResourceUserAaa",
+    "resource_name": "system_user_aaa",
+    "wire_path": "/user/aaa",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "accounting",
+        "wire": "accounting",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "default_group",
+        "wire": "default-group",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "exclude_groups",
+        "wire": "exclude-groups",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "csv-string-set",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "use_radius",
+        "wire": "use-radius",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "accounting",
+      "default_group",
+      "exclude_groups",
+      "use_radius"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [
+      "accounting",
+      "use_radius"
+    ]
+  },
+  {
+    "revision": "remaining-resources-settings-curated-v1",
+    "reference_constructor": "ResourceUserManagerAdvanced",
+    "resource_name": "user_manager_advanced",
+    "wire_path": "/user-manager/advanced",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "paypal_allow",
+        "wire": "paypal-allow",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "paypal_use_sandbox",
+        "wire": "paypal-use-sandbox",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "paypal_user",
+        "wire": "paypal-user",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": true,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim",
+        "preserve_secret_on_omission": true
+      },
+      {
+        "name": "paypal_password",
+        "wire": "paypal-password",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": true,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim",
+        "preserve_secret_on_omission": true
+      },
+      {
+        "name": "paypal_signature",
+        "wire": "paypal-signature",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": true,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim",
+        "preserve_secret_on_omission": true
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "paypal_allow",
+      "paypal_use_sandbox",
+      "paypal_user",
+      "paypal_password",
+      "paypal_signature"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [
+      "paypal_allow",
+      "paypal_use_sandbox"
+    ],
+    "required_package": "user-manager"
+  },
+  {
+    "revision": "remaining-resources-settings-curated-v1",
+    "reference_constructor": "ResourceUserManagerDatabase",
+    "resource_name": "user_manager_database",
+    "wire_path": "/user-manager/database",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "db_path",
+        "wire": "db-path",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "db_path"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [],
+    "required_package": "user-manager"
+  },
+  {
+    "revision": "remaining-resources-settings-curated-v1",
+    "reference_constructor": "ResourceUserManagerSettings",
+    "resource_name": "user_manager_settings",
+    "wire_path": "/user-manager",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "enabled",
+        "wire": "enabled",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "authentication_port",
+        "wire": "authentication-port",
+        "type": "integer",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "decimal",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim",
+        "minimum": 1,
+        "maximum": 65535
+      },
+      {
+        "name": "accounting_port",
+        "wire": "accounting-port",
+        "type": "integer",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "decimal",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim",
+        "minimum": 1,
+        "maximum": 65535
+      },
+      {
+        "name": "certificate",
+        "wire": "certificate",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "use_profiles",
+        "wire": "use-profiles",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "require_message_auth",
+        "wire": "require-message-auth",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim",
+        "choices": [
+          "no",
+          "yes-access-request"
+        ]
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "enabled",
+      "authentication_port",
+      "accounting_port",
+      "certificate",
+      "use_profiles",
+      "require_message_auth"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [
+      "enabled",
+      "use_profiles"
+    ],
+    "required_package": "user-manager"
+  },
+  {
+    "revision": "remaining-resources-settings-curated-v1",
+    "reference_constructor": "ResourceWifiCap",
+    "resource_name": "wifi_cap",
+    "wire_path": "/interface/wifi/cap",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "enabled",
+        "wire": "enabled",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "caps_man_addresses",
+        "wire": "caps-man-addresses",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "csv-string-set",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "discovery_interfaces",
+        "wire": "discovery-interfaces",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "csv-string-set",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "lock_to_caps_man",
+        "wire": "lock-to-caps-man",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "slaves_static",
+        "wire": "slaves-static",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "enabled",
+      "caps_man_addresses",
+      "discovery_interfaces",
+      "lock_to_caps_man",
+      "slaves_static"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [
+      "enabled",
+      "lock_to_caps_man",
+      "slaves_static"
+    ]
+  },
+  {
+    "revision": "remaining-resources-settings-curated-v1",
+    "reference_constructor": "ResourceWifiCapsman",
+    "resource_name": "wifi_capsman",
+    "wire_path": "/interface/wifi/capsman",
+    "lifecycle": "singleton",
+    "schema_version": 0,
+    "migration_compatibility": "not claimed",
+    "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+    "attributes": [
+      {
+        "name": "id",
+        "wire": ".id",
+        "type": "string",
+        "mode": "computed",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": null,
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "enabled",
+        "wire": "enabled",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "interfaces",
+        "wire": "interfaces",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "csv-string-set",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "require_peer_certificate",
+        "wire": "require-peer-certificate",
+        "type": "boolean",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "yes/no",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "certificate",
+        "wire": "certificate",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "ca_certificate",
+        "wire": "ca-certificate",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim"
+      },
+      {
+        "name": "upgrade_policy",
+        "wire": "upgrade-policy",
+        "type": "string",
+        "mode": "computed_optional",
+        "force_new": false,
+        "sensitive": false,
+        "codec": "wire-string",
+        "enum_kind": "none",
+        "default": "server-owned",
+        "validators": "maintained additional settings scalar validation",
+        "provenance": "explicit reviewed additional settings subset; pinned static SDK declarations plus separately verified publication; no SDK migration claim",
+        "choices": [
+          "none",
+          "suggest-same-version",
+          "require-same-version"
+        ]
+      }
+    ],
+    "required": [],
+    "optional_computed": [
+      "enabled",
+      "interfaces",
+      "require_peer_certificate",
+      "certificate",
+      "ca_certificate",
+      "upgrade_policy"
+    ],
+    "computed": [
+      "id"
+    ],
+    "booleans": [
+      "enabled",
+      "require_peer_certificate"
+    ]
+  }
+]

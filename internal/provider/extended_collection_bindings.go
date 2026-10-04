@@ -11,7 +11,7 @@ import (
 	"github.com/matejaputic/terraform-provider-routeros/internal/generated"
 )
 
-func batchACollectionConstructors() []func() resource.Resource {
+func extendedCollectionConstructors() []func() resource.Resource {
 	bindings := map[string]func(context.Context) schema.Schema{
 		"system_certificate_scep_server":  generated.SystemCertificateScepServerResourceSchema,
 		"ip_dhcp_client":                  generated.IpDhcpClientResourceSchema,
@@ -101,7 +101,7 @@ func batchACollectionConstructors() []func() resource.Resource {
 		"system_user_sshkeys":             generated.SystemUserSshkeysResourceSchema,
 	}
 	result := []func() resource.Resource{}
-	for _, policy := range catalog.BatchACollections() {
+	for _, policy := range catalog.ExtendedCollections() {
 		result = append(result, func() resource.Resource { return newCollection(policy, bindings[policy.Name](context.Background())) })
 	}
 	return result

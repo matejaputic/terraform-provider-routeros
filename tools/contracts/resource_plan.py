@@ -17,7 +17,7 @@ BASELINE = "1897fb32c03c43fb48f6ab3020cc3baf2e2b57b2"
 UPSTREAM = "adc39cdbb0a3062aa93cc7aff50ef1185a1c0b0a"
 REFERENCE = "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb"
 MATRIX_SHA256 = "002626579aade6fa2f0ea28d06ccc0623512bd0be90ac74b1889d7544821969b"
-BASELINE_MATRIX = ROOT / "tools/contracts/fixtures/batch-a-baseline-matrix.json"
+BASELINE_MATRIX = ROOT / "tools/contracts/fixtures/resource-plan-baseline-matrix.json"
 ROSTER = """ResourceCertificateScepServer
 ResourceDhcpClient
 ResourceDhcpRelay
@@ -207,13 +207,13 @@ def build(matrix_raw, contracts_raw, snapshots):
  if len({e["canonical_name_proposal"] for e in entries}) != 107:
   raise ValueError("duplicate canonical name proposal")
  return {
-  "format": "routeros-batch-a-planning@1", "scope": "planning-only; not exposure/implementation/certification authority",
+  "format": "routeros-reviewed-resources-planning@1", "scope": "planning-only; not exposure/implementation/certification authority",
   "baseline_source": BASELINE, "baseline_matrix_sha256": MATRIX_SHA256,
   "reference_sha": REFERENCE, "reference_contracts_sha256": digest(contracts_raw),
   "upstream_sha": UPSTREAM,
   "schema_inputs": {label: {"path": path, "sha256": digest(raw)} for label, (path, raw, _) in snapshots.items()},
-  "batch_a_denominator": 107, "baseline_implemented": 18, "target_implemented": 125,
-  "batch_b_constructor_ids": sorted(remaining - set(ROSTER)),
+  "planned_constructor_count": 107, "baseline_implemented": 18, "target_implemented": 125,
+  "remaining_constructor_ids": sorted(remaining - set(ROSTER)),
   "resources": entries,
  }
 
@@ -221,7 +221,7 @@ def build(matrix_raw, contracts_raw, snapshots):
 def main():
  parser = argparse.ArgumentParser(description=__doc__)
  parser.add_argument("--upstream-dir", required=True, type=Path)
- parser.add_argument("--output", type=Path, default=ROOT / "schemas/batch-a-ledger.json")
+ parser.add_argument("--output", type=Path, default=ROOT / "schemas/resource-plan.json")
  args = parser.parse_args()
  snapshots = {}
  for version in ("7.24.5", "7.25beta5"):

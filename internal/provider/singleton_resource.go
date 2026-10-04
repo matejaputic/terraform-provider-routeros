@@ -18,7 +18,7 @@ import (
 
 // singletonResource manages existing global settings, never collection records.
 // Only explicitly reviewed policy/official-generated-schema pairs are registered.
-// The Batch A planning manifest and upstream inventory never authorize exposure.
+// Planning manifests and upstream inventory never authorize exposure.
 // Reference: pinned resource_actions.go SystemResourceCreateUpdate/Read/Delete.
 // Create/update POST a fixed /set action; destroy only relinquishes management.
 type singletonResource struct{ core *collectionResource }
@@ -116,6 +116,9 @@ func (r *singletonResource) validate(values map[string]attr.Value, mutation bool
 	if idCount != 1 {
 		return fmt.Errorf("exactly one computed singleton ID required")
 	}
+	if strings.HasPrefix(r.core.policy.Revision, "remaining-resources-") {
+		return validateAdditionalSettings(r.core.policy, values)
+	}
 	return nil
 }
 func (r *singletonResource) ValidateConfig(ctx context.Context, q resource.ValidateConfigRequest, s *resource.ValidateConfigResponse) {
@@ -174,6 +177,14 @@ func (r *singletonResource) refresh(ctx context.Context, old map[string]attr.Val
 			continue
 		}
 		raw, exists := observed[f.Wire]
+		if f.Sensitive && f.PreserveSecretOnOmission && (!exists || wireString(raw) == "*****" || wireString(raw) == "**hidden**") {
+			prior := old[f.Name]
+			if prior == nil || prior.IsUnknown() {
+				prior = nullField(f)
+			}
+			next[f.Name] = prior
+			continue
+		}
 		if !exists {
 			previous := old[f.Name]
 			if f.Mode == "required" || f.Mode != "computed" && previous != nil && !previous.IsNull() && !previous.IsUnknown() {
@@ -193,6 +204,7 @@ func (r *singletonResource) refresh(ctx context.Context, old map[string]attr.Val
 				}
 			}
 		}
+		v = preserveReviewedSpelling(f, old[f.Name], v)
 		next[f.Name] = v
 	}
 	if e := r.validate(next, false); e != nil {

@@ -4,6 +4,162 @@
 	},
 	"resources": [
 		{
+			"name": "capsman_aaa",
+			"schema": {
+				"attributes": [
+					{
+						"name": "called_format",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "mac_format",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "mac_mode",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "capsman_manager",
+			"schema": {
+				"attributes": [
+					{
+						"name": "ca_certificate",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "certificate",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "enabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "require_peer_certificate",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "upgrade_policy",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "container_config",
+			"schema": {
+				"attributes": [
+					{
+						"name": "layer_dir",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "password",
+						"string": {
+							"computed_optional_required": "computed_optional",
+							"sensitive": true
+						}
+					},
+					{
+						"name": "registry_url",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "tmpdir",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "username",
+						"string": {
+							"computed_optional_required": "computed_optional",
+							"sensitive": true
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "disk_settings",
+			"schema": {
+				"attributes": [
+					{
+						"name": "auto_media_interface",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "auto_media_sharing",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "auto_smb_sharing",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "default_mount_point_template",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
 			"name": "interface_6to4",
 			"schema": {
 				"attributes": [
@@ -340,6 +496,43 @@
 			}
 		},
 		{
+			"name": "interface_detect_internet",
+			"schema": {
+				"attributes": [
+					{
+						"name": "detect_interface_list",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "internet_interface_list",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "lan_interface_list",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "wan_interface_list",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
 			"name": "interface_dot1x_client",
 			"schema": {
 				"attributes": [
@@ -567,6 +760,61 @@
 					{
 						"name": "running",
 						"bool": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "interface_l2tp_server",
+			"schema": {
+				"attributes": [
+					{
+						"name": "allow_fast_path",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "authentication",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "default_profile",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "enabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "max_mru",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "max_mtu",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "one_session_per_host",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
 							"computed_optional_required": "computed"
 						}
 					}
@@ -1059,6 +1307,67 @@
 			}
 		},
 		{
+			"name": "interface_sstp_server",
+			"schema": {
+				"attributes": [
+					{
+						"name": "authentication",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "certificate",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "default_profile",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "enabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "max_mru",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "max_mtu",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "pfs",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "verify_client_certificate",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
 			"name": "interface_veth",
 			"schema": {
 				"attributes": [
@@ -1383,6 +1692,55 @@
 			}
 		},
 		{
+			"name": "interface_wireless_cap",
+			"schema": {
+				"attributes": [
+					{
+						"name": "bridge",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "caps_man_addresses",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "discovery_interfaces",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "enabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "interfaces",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "lock_to_caps_man",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
 			"name": "ip_address",
 			"schema": {
 				"attributes": [
@@ -1448,6 +1806,68 @@
 					},
 					{
 						"name": "vrf",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_cloud",
+			"schema": {
+				"attributes": [
+					{
+						"name": "ddns_enabled",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "update_time",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "dns_name",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "public_address",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "status",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_cloud_advanced",
+			"schema": {
+				"attributes": [
+					{
+						"name": "use_local_address",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
 						"string": {
 							"computed_optional_required": "computed"
 						}
@@ -1955,6 +2375,67 @@
 						"name": "options",
 						"string": {
 							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_dns",
+			"schema": {
+				"attributes": [
+					{
+						"name": "allow_remote_requests",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "cache_size",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "max_concurrent_queries",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "max_concurrent_tcp_sessions",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "max_udp_packet_size",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "servers",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "verify_doh_cert",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "vrf",
+						"string": {
+							"computed_optional_required": "computed_optional"
 						}
 					},
 					{
@@ -3528,6 +4009,74 @@
 			}
 		},
 		{
+			"name": "ip_smb",
+			"schema": {
+				"attributes": [
+					{
+						"name": "comment",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "domain",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "enabled",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "interfaces",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "status",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_ssh_server",
+			"schema": {
+				"attributes": [
+					{
+						"name": "forwarding_enabled",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "strong_crypto",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
 			"name": "ip_tftp",
 			"schema": {
 				"attributes": [
@@ -3725,6 +4274,37 @@
 						"name": "version",
 						"string": {
 							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ip_upnp",
+			"schema": {
+				"attributes": [
+					{
+						"name": "allow_disable_external_interface",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "enabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "show_dummy_rule",
+						"bool": {
+							"computed_optional_required": "computed_optional"
 						}
 					},
 					{
@@ -4483,6 +5063,43 @@
 					{
 						"name": "multipath_hash_policy",
 						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ppp_aaa",
+			"schema": {
+				"attributes": [
+					{
+						"name": "accounting",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "enable_ipv6_accounting",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "use_circuit_id_in_nas_port_id",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "use_radius",
+						"bool": {
 							"computed_optional_required": "computed_optional"
 						}
 					},
@@ -5611,6 +6228,55 @@
 			}
 		},
 		{
+			"name": "snmp",
+			"schema": {
+				"attributes": [
+					{
+						"name": "contact",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "enabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "location",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "src_address",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "trap_version",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "vrf",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
 			"name": "snmp_community",
 			"schema": {
 				"attributes": [
@@ -5704,6 +6370,43 @@
 			}
 		},
 		{
+			"name": "system_clock",
+			"schema": {
+				"attributes": [
+					{
+						"name": "time_zone_autodetect",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "time_zone_name",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "dst_active",
+						"bool": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "gmt_offset",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
 			"name": "system_identity",
 			"schema": {
 				"attributes": [
@@ -5711,6 +6414,25 @@
 						"name": "name",
 						"string": {
 							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "system_led_settings",
+			"schema": {
+				"attributes": [
+					{
+						"name": "all_leds_off",
+						"string": {
+							"computed_optional_required": "computed_optional"
 						}
 					},
 					{
@@ -5995,6 +6717,43 @@
 			}
 		},
 		{
+			"name": "system_user_aaa",
+			"schema": {
+				"attributes": [
+					{
+						"name": "accounting",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "default_group",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "exclude_groups",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "use_radius",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
 			"name": "system_user_group",
 			"schema": {
 				"attributes": [
@@ -6014,6 +6773,31 @@
 						"name": "policy",
 						"string": {
 							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "system_user_settings",
+			"schema": {
+				"attributes": [
+					{
+						"name": "minimum_categories",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "minimum_password_length",
+						"int64": {
+							"computed_optional_required": "computed_optional"
 						}
 					},
 					{
@@ -6069,6 +6853,105 @@
 					},
 					{
 						"name": "key_type",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "tool_bandwidth_server",
+			"schema": {
+				"attributes": [
+					{
+						"name": "allocate_udp_ports_from",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "authenticate",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "enabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "max_sessions",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "tool_email",
+			"schema": {
+				"attributes": [
+					{
+						"name": "from",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "password",
+						"string": {
+							"computed_optional_required": "computed_optional",
+							"sensitive": true
+						}
+					},
+					{
+						"name": "port",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "server",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "tls",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "user",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "vrf",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					},
+					{
+						"name": "last_status",
 						"string": {
 							"computed_optional_required": "computed"
 						}
@@ -6280,6 +7163,212 @@
 					},
 					{
 						"name": "type",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "user_manager_advanced",
+			"schema": {
+				"attributes": [
+					{
+						"name": "paypal_allow",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "paypal_password",
+						"string": {
+							"computed_optional_required": "computed_optional",
+							"sensitive": true
+						}
+					},
+					{
+						"name": "paypal_signature",
+						"string": {
+							"computed_optional_required": "computed_optional",
+							"sensitive": true
+						}
+					},
+					{
+						"name": "paypal_use_sandbox",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "paypal_user",
+						"string": {
+							"computed_optional_required": "computed_optional",
+							"sensitive": true
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "user_manager_database",
+			"schema": {
+				"attributes": [
+					{
+						"name": "db_path",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "user_manager_settings",
+			"schema": {
+				"attributes": [
+					{
+						"name": "accounting_port",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "authentication_port",
+						"int64": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "certificate",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "enabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "require_message_auth",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "use_profiles",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "wifi_cap",
+			"schema": {
+				"attributes": [
+					{
+						"name": "caps_man_addresses",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "discovery_interfaces",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "enabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "lock_to_caps_man",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "slaves_static",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed"
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "wifi_capsman",
+			"schema": {
+				"attributes": [
+					{
+						"name": "ca_certificate",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "certificate",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "enabled",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "interfaces",
+						"string": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "require_peer_certificate",
+						"bool": {
+							"computed_optional_required": "computed_optional"
+						}
+					},
+					{
+						"name": "upgrade_policy",
 						"string": {
 							"computed_optional_required": "computed_optional"
 						}

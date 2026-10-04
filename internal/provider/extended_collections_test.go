@@ -29,9 +29,9 @@ import (
 	"golang.org/x/crypto/ssh"
 )
 
-type batchAFixture struct{ secret, key, wgKey, fingerprint string }
+type extendedResourceFixture struct{ secret, key, wgKey, fingerprint string }
 
-func newBatchAFixture(t *testing.T) batchAFixture {
+func newExtendedResourceFixture(t *testing.T) extendedResourceFixture {
 	t.Helper()
 	pub, _, err := ed25519.GenerateKey(rand.Reader)
 	if err != nil {
@@ -45,9 +45,9 @@ func newBatchAFixture(t *testing.T) batchAFixture {
 	if _, err := rand.Read(nonce); err != nil {
 		t.Fatal("ephemeral fixture generation failed")
 	}
-	return batchAFixture{secret: hex.EncodeToString(nonce), key: strings.TrimSpace(string(ssh.MarshalAuthorizedKey(key))), wgKey: base64.StdEncoding.EncodeToString(pub), fingerprint: ssh.FingerprintSHA256(key)}
+	return extendedResourceFixture{secret: hex.EncodeToString(nonce), key: strings.TrimSpace(string(ssh.MarshalAuthorizedKey(key))), wgKey: base64.StdEncoding.EncodeToString(pub), fingerprint: ssh.FingerprintSHA256(key)}
 }
-func (fixture batchAFixture) value(p catalog.Collection, f catalog.Field, phase int) any {
+func (fixture extendedResourceFixture) value(p catalog.Collection, f catalog.Field, phase int) any {
 	index := phase
 	if f.ForceNew && !p.ReplacementOnly {
 		index = 0
@@ -131,9 +131,9 @@ func (fixture batchAFixture) value(p catalog.Collection, f catalog.Field, phase 
 	}
 	return fmt.Sprintf("tf-%s-%d", f.Name, index)
 }
-func batchAResource(t *testing.T, name string) *collectionResource {
+func extendedResource(t *testing.T, name string) *collectionResource {
 	t.Helper()
-	for _, constructor := range batchACollectionConstructors() {
+	for _, constructor := range extendedCollectionConstructors() {
 		r := constructor().(*collectionResource)
 		if r.policy.Name == name {
 			return r
@@ -142,7 +142,7 @@ func batchAResource(t *testing.T, name string) *collectionResource {
 	t.Fatalf("missing reviewed binding %s", name)
 	return nil
 }
-func (fixture batchAFixture) values(r *collectionResource, phase int) map[string]attr.Value {
+func (fixture extendedResourceFixture) values(r *collectionResource, phase int) map[string]attr.Value {
 	v := map[string]attr.Value{}
 	for _, f := range r.policy.Fields {
 		v[f.Name] = nullField(f)
@@ -165,10 +165,10 @@ func (fixture batchAFixture) values(r *collectionResource, phase int) map[string
 	}
 	return v
 }
-func (fixture batchAFixture) config(provider string, phase int) string {
+func (fixture extendedResourceFixture) config(provider string, phase int) string {
 	var b strings.Builder
 	b.WriteString(provider)
-	for _, p := range catalog.BatchACollections() {
+	for _, p := range catalog.ExtendedCollections() {
 		fmt.Fprintf(&b, "\nresource %q %q {\n", "routeros_"+p.Name, "test")
 		for _, f := range p.Fields {
 			if f.Mode == "computed" {
@@ -182,7 +182,7 @@ func (fixture batchAFixture) config(provider string, phase int) string {
 	}
 	return b.String()
 }
-func (fixture batchAFixture) completeRow(p catalog.Collection, row map[string]any) {
+func (fixture extendedResourceFixture) completeRow(p catalog.Collection, row map[string]any) {
 	for _, f := range p.Fields {
 		if f.Name == "id" || f.Mode != "computed" {
 			continue
@@ -211,14 +211,14 @@ func (fixture batchAFixture) completeRow(p catalog.Collection, row map[string]an
 		}
 	}
 }
-func TestBatchACollectionContractsAndAtomicFailures(t *testing.T) {
-	fixture := newBatchAFixture(t)
-	if len(catalog.BatchACollections()) != 86 {
+func TestExtendedResourceCollectionContractsAndAtomicFailures(t *testing.T) {
+	fixture := newExtendedResourceFixture(t)
+	if len(catalog.ExtendedCollections()) != 86 {
 		t.Fatal("fixed collection set changed")
 	}
-	for _, p := range catalog.BatchACollections() {
+	for _, p := range catalog.ExtendedCollections() {
 		t.Run(p.Name, func(t *testing.T) {
-			r := batchAResource(t, p.Name)
+			r := extendedResource(t, p.Name)
 			v := fixture.values(r, 0)
 			payload, err := r.payload(context.Background(), v)
 			if err != nil {
@@ -327,14 +327,14 @@ func TestBatchACollectionContractsAndAtomicFailures(t *testing.T) {
 		})
 	}
 }
-func TestTerraformBatchACollectionsMockLifecycle(t *testing.T) {
-	fixture := newBatchAFixture(t)
+func TestTerraformExtendedCollectionsMockLifecycle(t *testing.T) {
+	fixture := newExtendedResourceFixture(t)
 	var mu sync.Mutex
 	rows := map[string]map[string]map[string]any{}
 	policies := map[string]catalog.Collection{}
 	counts := map[string]map[string]int{}
 	counter := 0
-	for _, p := range catalog.BatchACollections() {
+	for _, p := range catalog.ExtendedCollections() {
 		rows[p.Path] = map[string]map[string]any{}
 		policies[p.Path] = p
 		counts[p.Name] = map[string]int{}
@@ -430,11 +430,11 @@ func TestTerraformBatchACollectionsMockLifecycle(t *testing.T) {
 }`, srv.URL)
 	first, changed := fixture.config(provider, 0), fixture.config(provider, 1)
 	checks := []resource.TestCheckFunc{}
-	for _, p := range catalog.BatchACollections() {
+	for _, p := range catalog.ExtendedCollections() {
 		checks = append(checks, resource.TestCheckResourceAttrSet("routeros_"+p.Name+".test", "id"))
 	}
 	steps := []resource.TestStep{{Config: first, Check: resource.ComposeTestCheckFunc(checks...)}, {Config: first, PlanOnly: true}, {Config: changed}, {Config: changed, PlanOnly: true}}
-	for _, p := range catalog.BatchACollections() {
+	for _, p := range catalog.ExtendedCollections() {
 		ignore := []string{}
 		for _, f := range p.Fields {
 			if f.PreserveSecretOnOmission {
@@ -446,7 +446,7 @@ func TestTerraformBatchACollectionsMockLifecycle(t *testing.T) {
 	steps = append(steps, resource.TestStep{Config: changed, PreConfig: func() {
 		mu.Lock()
 		defer mu.Unlock()
-		for _, p := range catalog.BatchACollections() {
+		for _, p := range catalog.ExtendedCollections() {
 			for id := range rows[p.Path] {
 				delete(rows[p.Path], id)
 			}
@@ -455,7 +455,7 @@ func TestTerraformBatchACollectionsMockLifecycle(t *testing.T) {
 	resource.UnitTest(t, resource.TestCase{ProtoV6ProviderFactories: map[string]func() (tfprotov6.ProviderServer, error){"routeros": providerserver.NewProtocol6WithError(New("test")())}, Steps: steps, CheckDestroy: func(*terraform.State) error {
 		mu.Lock()
 		defer mu.Unlock()
-		for _, p := range catalog.BatchACollections() {
+		for _, p := range catalog.ExtendedCollections() {
 			if len(rows[p.Path]) != 0 {
 				return fmt.Errorf("owned object remains: %s", p.Name)
 			}
@@ -464,7 +464,7 @@ func TestTerraformBatchACollectionsMockLifecycle(t *testing.T) {
 	}})
 	mu.Lock()
 	defer mu.Unlock()
-	for _, p := range catalog.BatchACollections() {
+	for _, p := range catalog.ExtendedCollections() {
 		if counts[p.Name]["PUT"] < 2 || counts[p.Name]["DELETE"] < 1 {
 			t.Fatalf("missing lifecycle for %s", p.Name)
 		}

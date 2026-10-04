@@ -231,7 +231,7 @@ def fingerprints(root):
     files = [root / 'go.mod', root / 'go.sum', root / 'tools/go.mod', root / 'tools/go.sum',
              root / 'schemas/ip-address-policy.json', root / 'internal/catalog/collections.json', root / 'schemas/generator-config.yml',
              root / 'tools/schema/discover/discover.py']
-    for name in ('schemas/maintenance-policy.json', 'schemas/wire-descriptors.json', 'internal/catalog/singletons.json', 'internal/catalog/batch-a-collections.json', 'tools/schema/bindings.py'):
+    for name in ('schemas/maintenance-policy.json', 'schemas/wire-descriptors.json', 'internal/catalog/singletons.json', 'internal/catalog/extended-collections.json', 'tools/schema/bindings.py', 'internal/catalog/additional-settings.json', 'tools/schema/additional_settings_bindings.py'):
         if (root / name).is_file():
             files.append(root / name)
     for directory in ('internal/client', 'internal/provider', 'internal/catalog', 'tools/schema/normalize', 'tools/schema/validate'):
@@ -247,8 +247,8 @@ def fingerprints(root):
                     and (p.name.endswith('_test.go') or p.suffix in ('.py', '.yml', '.json')
                          or (directory == 'tools' and p.suffix == '.go'))):
                 verification_files.append(p)
-    package_policy = root/'internal/catalog/batch-a-collections.json'
-    requires_extra = package_policy.is_file() and any(p.get('required_package') for p in parse(package_policy.read_bytes()))
+    package_policies = [root/'internal/catalog'/name for name in ('extended-collections.json','additional-settings.json')]
+    requires_extra = any(p.is_file() and any(row.get('required_package') for row in parse(p.read_bytes())) for p in package_policies)
     return {'requires_extra_companion':bool(requires_extra),'provenance': provenance, 'sources': {str(p.relative_to(root)): digest(p.read_bytes()) for p in sorted(files)},
             'verification': {str(p.relative_to(root)): digest(p.read_bytes()) for p in sorted(verification_files)}}
 

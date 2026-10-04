@@ -11,9 +11,9 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
 
 def generate(directory):
- policies=json.loads((ROOT/'internal/catalog/batch-a-collections.json').read_text())
+ policies=json.loads((ROOT/'internal/catalog/extended-collections.json').read_text())
  names=[p['resource_name'] for p in policies]
- if len(names)!=86 or len(set(names))!=86:raise ValueError('reviewed Batch A collection binding set changed')
+ if len(names)!=86 or len(set(names))!=86:raise ValueError('reviewed extended collection binding set changed')
  rows=[]
  for name in names:
   text=(directory/(name+'_resource_gen.go')).read_text()
@@ -31,12 +31,12 @@ import (
  "github.com/matejaputic/terraform-provider-routeros/internal/catalog"
  "github.com/matejaputic/terraform-provider-routeros/internal/generated"
 )
-func batchACollectionConstructors() []func() resource.Resource {
+func extendedCollectionConstructors() []func() resource.Resource {
  bindings:=map[string]func(context.Context) schema.Schema{
 '''+ '\n'.join(rows)+'''
  }
  result:=[]func() resource.Resource{}
- for _,policy:=range catalog.BatchACollections() {
+ for _,policy:=range catalog.ExtendedCollections() {
   result=append(result,func()resource.Resource{return newCollection(policy,bindings[policy.Name](context.Background()))})
  }
  return result

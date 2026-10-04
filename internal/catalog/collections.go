@@ -12,8 +12,11 @@ var collectionsJSON []byte
 //go:embed singletons.json
 var singletonsJSON []byte
 
-//go:embed batch-a-collections.json
-var batchACollectionsJSON []byte
+//go:embed extended-collections.json
+var extendedCollectionsJSON []byte
+
+//go:embed additional-settings.json
+var additionalSettingsJSON []byte
 
 type Field struct {
 	Name                     string   `json:"name"`
@@ -60,13 +63,20 @@ func Singletons() []Collection {
 }
 
 // Resources is the exact reviewed set consumed by independent code-spec gates.
-func BatchACollections() []Collection {
+func ExtendedCollections() []Collection {
 	var result []Collection
-	if err := json.Unmarshal(batchACollectionsJSON, &result); err != nil {
-		panic("invalid embedded reviewed Batch A collection catalog")
+	if err := json.Unmarshal(extendedCollectionsJSON, &result); err != nil {
+		panic("invalid embedded reviewed extended collection catalog")
+	}
+	return result
+}
+func AdditionalSettings() []Collection {
+	var result []Collection
+	if err := json.Unmarshal(additionalSettingsJSON, &result); err != nil {
+		panic("invalid embedded reviewed additional settings catalog")
 	}
 	return result
 }
 func Resources() []Collection {
-	return append(append(Collections(), BatchACollections()...), Singletons()...)
+	return append(append(append(Collections(), ExtendedCollections()...), Singletons()...), AdditionalSettings()...)
 }

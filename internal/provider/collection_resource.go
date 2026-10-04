@@ -243,7 +243,7 @@ func (r *collectionResource) validate(ctx context.Context, values map[string]att
 			}
 		}
 	}
-	if e := r.validateBatchAResource(values, apply); e != nil {
+	if e := r.validateExtendedResource(values, apply); e != nil {
 		return e
 	}
 	return r.validateFirewallFields(values, apply)
@@ -467,7 +467,7 @@ func (r *collectionResource) refresh(ctx context.Context, values map[string]attr
 	// Importing built-in/dynamic collections could otherwise delete hardware or
 	// system-owned records through ordinary CRUD. These objects are not managed.
 	ownershipFlags := []string{"builtin", "dynamic"}
-	if r.batchACollection() {
+	if r.extendedCollection() {
 		ownershipFlags = append(ownershipFlags, "default")
 	}
 	if r.policy.Name == "ip_dhcp_client_option" {
@@ -502,7 +502,7 @@ func (r *collectionResource) refresh(ctx context.Context, values map[string]attr
 			return nil, false, fmt.Errorf("only explicitly static routes are manageable")
 		}
 	}
-	if e := r.guardBatchARead(values, rows[0]); e != nil {
+	if e := r.guardExtendedResourceRead(values, rows[0]); e != nil {
 		return nil, false, e
 	}
 	result := map[string]attr.Value{}

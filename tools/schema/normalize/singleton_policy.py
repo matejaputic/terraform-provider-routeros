@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MPL-2.0
-"""Explicit reviewed Batch A settings subsets, not schema/inventory discovery.
+"""Explicit reviewed singleton settings subsets, not schema/inventory discovery.
 
 Durations, hardware-specific settings, credentials, dynamic counters and nested
 fields not listed here remain unexposed. Runtime uses GET object and fixed POST

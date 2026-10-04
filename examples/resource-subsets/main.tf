@@ -8,7 +8,7 @@ terraform {
 provider "routeros" {}
 
 resource "routeros_interface_bridge" "owned" {
-  name = "tf-owned-batch-a"
+  name = "tf-owned-reviewed-resources"
 }
 
 resource "routeros_ipv6_pool" "owned" {
@@ -52,4 +52,4 @@ resource "routeros_system_note" "owned" {
 }
 
 # Optional VETH configuration requires the enabled matching-version container
-# package. See docs/development/batch-a.md; base-only devices fail closed.
+# package. See docs/development/resource-support.md; base-only devices fail closed.

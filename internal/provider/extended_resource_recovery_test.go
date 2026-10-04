@@ -16,7 +16,7 @@ import (
 	"github.com/matejaputic/terraform-provider-routeros/internal/client"
 )
 
-func TestBatchAIntegratedFailureRecovery(t *testing.T) {
+func TestExtendedResourceIntegratedFailureRecovery(t *testing.T) {
 	for _, name := range []string{"ip_dhcp_relay", "ip_dns_record"} {
 		t.Run(name, func(t *testing.T) {
 			ctx := context.Background()

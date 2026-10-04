@@ -13,7 +13,8 @@ ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / 'tools/schema/discover'))
 import discover
 import singleton_policy
-import batch_a_collection_policy
+import extended_collection_policy
+import additional_settings_policy
 
 CONTROLS = {'.query', '.proplist', 'numbers', 'number', 'copy-from', 'as-string', 'as-string-value', 'value-name'}
 HARDWARE = {'/interface/ethernet', '/interface/wireless', '/interface/wifi', '/interface/lte'}
@@ -21,7 +22,8 @@ METHODS = {'get', 'put', 'post', 'patch', 'delete', 'head', 'options', 'trace'}
 FORMAT = 'routeros-adaptation@1'
 APPROVED_PATHS = {'ip_address': '/ip/address', 'interface_bridge': '/interface/bridge', 'interface_bridge_port': '/interface/bridge/port', 'interface_vlan': '/interface/vlan', 'interface_list': '/interface/list', 'interface_list_member': '/interface/list/member', 'ip_pool': '/ip/pool', 'ip_dhcp_server_network': '/ip/dhcp-server/network', 'ip_dhcp_server': '/ip/dhcp-server', 'ip_dhcp_server_lease': '/ip/dhcp-server/lease', 'ip_route': '/ip/route', 'ip_firewall_addr_list': '/ip/firewall/address-list', 'ip_firewall_filter': '/ip/firewall/filter', 'ip_firewall_nat': '/ip/firewall/nat', 'ip_firewall_mangle': '/ip/firewall/mangle', 'ip_firewall_raw': '/ip/firewall/raw', 'ip_dhcp_client_option': '/ip/dhcp-client/option', 'ip_dhcp_server_option': '/ip/dhcp-server/option', 'ip_dhcp_relay': '/ip/dhcp-relay', 'ip_dns_record': '/ip/dns/static'}
 APPROVED_PATHS.update(singleton_policy.PATHS)
-APPROVED_PATHS.update({name: definition[0] for name, definition in batch_a_collection_policy.DEFINITIONS.items()})
+APPROVED_PATHS.update(additional_settings_policy.PATHS)
+APPROVED_PATHS.update({name: definition[0] for name, definition in extended_collection_policy.DEFINITIONS.items()})
 ORDERED_RESOURCES = {'ip_firewall_filter', 'ip_firewall_nat', 'ip_firewall_mangle', 'ip_firewall_raw'}
 
 class AdaptationError(Exception):
@@ -239,12 +241,15 @@ def normalize(raw, policy, *, metadata=None, origin=None, snapshot=None, include
     name = policy.get('resource_name')
     check(name in APPROVED_PATHS and policy.get('wire_path') == APPROVED_PATHS[name], 'unsupported lifecycle registration')
     resource_name = name
-    singleton = resource_name in singleton_policy.PATHS
-    curated_batch = resource_name in batch_a_collection_policy.DEFINITIONS
-    check(not curated_batch or policy == next(p for p in batch_a_collection_policy.policies() if p['resource_name'] == resource_name), 'unreviewed Batch A contract delta')
+    remaining_resources = resource_name in additional_settings_policy.PATHS
+    singleton = resource_name in singleton_policy.PATHS or remaining_resources and policy.get('lifecycle')=='singleton'
+    curated_a = resource_name in extended_collection_policy.DEFINITIONS
+    curated_batch = curated_a or remaining_resources
+    check(not curated_a or policy == next(p for p in extended_collection_policy.policies() if p['resource_name'] == resource_name), 'unreviewed extended collection contract delta')
+    check(not remaining_resources or policy == next(p for p in additional_settings_policy.policies() if p['resource_name'] == resource_name), 'unreviewed additional settings contract delta')
     replacement_only = curated_batch and policy.get('replacement_only', False)
-    check(not singleton or policy == next(p for p in singleton_policy.policies() if p['resource_name'] == resource_name), 'unreviewed singleton contract delta')
-    name_aliases = {wire: tf for (resource, wire), tf in batch_a_collection_policy.NAME_ALIASES.items() if resource == resource_name}
+    check(resource_name not in singleton_policy.PATHS or policy == next(p for p in singleton_policy.policies() if p['resource_name'] == resource_name), 'unreviewed singleton contract delta')
+    name_aliases = {wire: tf for (resource, wire), tf in extended_collection_policy.NAME_ALIASES.items() if resource == resource_name}
     fields = policy.get('attributes')
     check(isinstance(fields, list) and fields, 'missing curated attributes')
     field_map = {}
@@ -305,7 +310,7 @@ def normalize(raw, policy, *, metadata=None, origin=None, snapshot=None, include
         if field['mode'] != 'computed':
             check(field['wire'] not in create_only or field['force_new'] or resource_name in ORDERED_RESOURCES and field['name'] == 'place_before' and field['codec'] == 'placement', 'create-only approved field requires replacement policy: ' + field['wire'])
     if curated_batch:
-        check(all(f['mode'] == 'computed' or f['wire'] in cp for f in fields), 'Batch A writable field absent from publication')
+        check(all(f['mode'] == 'computed' or f['wire'] in cp for f in fields), 'Extended collection writable field absent from publication')
         check(not replacement_only or all(f['mode'] == 'computed' or f['force_new'] for f in fields), 'replacement-only mutation field lacks replacement policy')
     if singleton:
         check(all(f['wire'] == '.id' or f['mode'] == 'computed' or f['wire'] in cp for f in fields), 'singleton writable field absent from publication')
@@ -478,7 +483,7 @@ def main():
         check(not args.manifest or sha(discover.encode(policy)) == sha(discover.encode(discover.parse((ROOT / 'schemas/ip-address-policy.json').read_bytes()))), 'manifest policy override forbidden')
         normalized, config, descriptor, report = normalize(raw, policy, metadata=metadata, origin=origin, snapshot=snapshot)
         if args.collections:
-            policies = discover.parse((ROOT / 'internal/catalog/collections.json').read_bytes()) + discover.parse((ROOT / 'internal/catalog/singletons.json').read_bytes()) + discover.parse((ROOT / 'internal/catalog/batch-a-collections.json').read_bytes())
+            policies = discover.parse((ROOT / 'internal/catalog/collections.json').read_bytes()) + discover.parse((ROOT / 'internal/catalog/singletons.json').read_bytes()) + discover.parse((ROOT / 'internal/catalog/extended-collections.json').read_bytes()) + discover.parse((ROOT / 'internal/catalog/additional-settings.json').read_bytes())
             extra_raw, extra_snapshot, extra_origin = None, None, None
             if any(p.get('required_package') and p['wire_path'] not in snapshot.spec['paths'] for p in policies):
                 if args.manifest:

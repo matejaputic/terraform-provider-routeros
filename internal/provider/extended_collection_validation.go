@@ -17,8 +17,8 @@ import (
 	"golang.org/x/crypto/ssh"
 )
 
-func (r *collectionResource) batchACollection() bool {
-	return strings.HasPrefix(r.policy.Revision, "batch-a-collections-curated-")
+func (r *collectionResource) extendedCollection() bool {
+	return strings.HasPrefix(r.policy.Revision, "extended-collections-curated-")
 }
 func validateReviewedField(f catalog.Field, v attr.Value) error {
 	if v == nil || v.IsNull() || v.IsUnknown() {
@@ -229,8 +229,8 @@ func preserveReviewedSpelling(f catalog.Field, old, next attr.Value) attr.Value 
 	}
 	return next
 }
-func (r *collectionResource) validateBatchAResource(values map[string]attr.Value, apply bool) error {
-	if !r.batchACollection() {
+func (r *collectionResource) validateExtendedResource(values map[string]attr.Value, apply bool) error {
+	if !r.extendedCollection() {
 		return nil
 	}
 	text := func(name string) string { v, _ := values[name].(types.String); return v.ValueString() }
@@ -281,8 +281,8 @@ func reviewedSSHKey(text string) (ssh.PublicKey, error) {
 	}
 	return key, nil
 }
-func (r *collectionResource) guardBatchARead(old map[string]attr.Value, row map[string]any) error {
-	if !r.batchACollection() {
+func (r *collectionResource) guardExtendedResourceRead(old map[string]attr.Value, row map[string]any) error {
+	if !r.extendedCollection() {
 		return nil
 	}
 	if r.policy.Name == "tool_netwatch" {

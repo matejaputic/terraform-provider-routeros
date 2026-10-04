@@ -1563,3 +1563,273 @@ resources:
     delete:
       path: /user/ssh-keys/{id}
       method: DELETE
+  capsman_aaa:
+    create:
+      path: /caps-man/aaa/set
+      method: POST
+    read:
+      path: /caps-man/aaa
+      method: GET
+    update:
+      path: /caps-man/aaa/set
+      method: POST
+  capsman_manager:
+    create:
+      path: /caps-man/manager/set
+      method: POST
+    read:
+      path: /caps-man/manager
+      method: GET
+    update:
+      path: /caps-man/manager/set
+      method: POST
+  container_config:
+    create:
+      path: /container/config/set
+      method: POST
+    read:
+      path: /container/config
+      method: GET
+    update:
+      path: /container/config/set
+      method: POST
+  disk_settings:
+    create:
+      path: /disk/settings/set
+      method: POST
+    read:
+      path: /disk/settings
+      method: GET
+    update:
+      path: /disk/settings/set
+      method: POST
+  ip_dns:
+    create:
+      path: /ip/dns/set
+      method: POST
+    read:
+      path: /ip/dns
+      method: GET
+    update:
+      path: /ip/dns/set
+      method: POST
+  interface_detect_internet:
+    create:
+      path: /interface/detect-internet/set
+      method: POST
+    read:
+      path: /interface/detect-internet
+      method: GET
+    update:
+      path: /interface/detect-internet/set
+      method: POST
+  interface_l2tp_server:
+    create:
+      path: /interface/l2tp-server/server/set
+      method: POST
+    read:
+      path: /interface/l2tp-server/server
+      method: GET
+    update:
+      path: /interface/l2tp-server/server/set
+      method: POST
+  interface_sstp_server:
+    create:
+      path: /interface/sstp-server/server/set
+      method: POST
+    read:
+      path: /interface/sstp-server/server
+      method: GET
+    update:
+      path: /interface/sstp-server/server/set
+      method: POST
+  interface_wireless_cap:
+    create:
+      path: /interface/wireless/cap/set
+      method: POST
+    read:
+      path: /interface/wireless/cap
+      method: GET
+    update:
+      path: /interface/wireless/cap/set
+      method: POST
+  ip_cloud:
+    create:
+      path: /ip/cloud/set
+      method: POST
+    read:
+      path: /ip/cloud
+      method: GET
+    update:
+      path: /ip/cloud/set
+      method: POST
+  ip_cloud_advanced:
+    create:
+      path: /ip/cloud/advanced/set
+      method: POST
+    read:
+      path: /ip/cloud/advanced
+      method: GET
+    update:
+      path: /ip/cloud/advanced/set
+      method: POST
+  ip_smb:
+    create:
+      path: /ip/smb/set
+      method: POST
+    read:
+      path: /ip/smb
+      method: GET
+    update:
+      path: /ip/smb/set
+      method: POST
+  ip_ssh_server:
+    create:
+      path: /ip/ssh/set
+      method: POST
+    read:
+      path: /ip/ssh
+      method: GET
+    update:
+      path: /ip/ssh/set
+      method: POST
+  ppp_aaa:
+    create:
+      path: /ppp/aaa/set
+      method: POST
+    read:
+      path: /ppp/aaa
+      method: GET
+    update:
+      path: /ppp/aaa/set
+      method: POST
+  snmp:
+    create:
+      path: /snmp/set
+      method: POST
+    read:
+      path: /snmp
+      method: GET
+    update:
+      path: /snmp/set
+      method: POST
+  system_clock:
+    create:
+      path: /system/clock/set
+      method: POST
+    read:
+      path: /system/clock
+      method: GET
+    update:
+      path: /system/clock/set
+      method: POST
+  system_led_settings:
+    create:
+      path: /system/leds/settings/set
+      method: POST
+    read:
+      path: /system/leds/settings
+      method: GET
+    update:
+      path: /system/leds/settings/set
+      method: POST
+  system_user_settings:
+    create:
+      path: /user/settings/set
+      method: POST
+    read:
+      path: /user/settings
+      method: GET
+    update:
+      path: /user/settings/set
+      method: POST
+  tool_bandwidth_server:
+    create:
+      path: /tool/bandwidth-server/set
+      method: POST
+    read:
+      path: /tool/bandwidth-server
+      method: GET
+    update:
+      path: /tool/bandwidth-server/set
+      method: POST
+  tool_email:
+    create:
+      path: /tool/e-mail/set
+      method: POST
+    read:
+      path: /tool/e-mail
+      method: GET
+    update:
+      path: /tool/e-mail/set
+      method: POST
+  ip_upnp:
+    create:
+      path: /ip/upnp/set
+      method: POST
+    read:
+      path: /ip/upnp
+      method: GET
+    update:
+      path: /ip/upnp/set
+      method: POST
+  system_user_aaa:
+    create:
+      path: /user/aaa/set
+      method: POST
+    read:
+      path: /user/aaa
+      method: GET
+    update:
+      path: /user/aaa/set
+      method: POST
+  user_manager_advanced:
+    create:
+      path: /user-manager/advanced/set
+      method: POST
+    read:
+      path: /user-manager/advanced
+      method: GET
+    update:
+      path: /user-manager/advanced/set
+      method: POST
+  user_manager_database:
+    create:
+      path: /user-manager/database/set
+      method: POST
+    read:
+      path: /user-manager/database
+      method: GET
+    update:
+      path: /user-manager/database/set
+      method: POST
+  user_manager_settings:
+    create:
+      path: /user-manager/set
+      method: POST
+    read:
+      path: /user-manager
+      method: GET
+    update:
+      path: /user-manager/set
+      method: POST
+  wifi_cap:
+    create:
+      path: /interface/wifi/cap/set
+      method: POST
+    read:
+      path: /interface/wifi/cap
+      method: GET
+    update:
+      path: /interface/wifi/cap/set
+      method: POST
+  wifi_capsman:
+    create:
+      path: /interface/wifi/capsman/set
+      method: POST
+    read:
+      path: /interface/wifi/capsman
+      method: GET
+    update:
+      path: /interface/wifi/capsman/set
+      method: POST

@@ -22,7 +22,7 @@ import (
 // Explicit owned, disabled/unattached configuration; not inferred from schema.
 // Parent references form a Terraform dependency graph. No administrator key,
 // script execution, management interface, global reset or traffic assertion.
-var batchALiveBodies = map[string]string{
+var extendedResourceLiveBodies = map[string]string{
 	"ip_dhcp_client":                  `interface="tf-test" add_default_route="no" use_peer_dns=false`,
 	"ip_dhcp_server_option_matcher":   `name="tf-batch-matcher" server=routeros_ip_dhcp_server.batch_parent.name address_pool=routeros_ip_pool.batch_parent.name code=60 value="tf-batch" matching_type="exact"`,
 	"ip_dhcp_server_option_set":       `name="tf-batch-options" options=routeros_ip_dhcp_server_option.batch_parent.name`,
@@ -31,12 +31,12 @@ var batchALiveBodies = map[string]string{
 	"ipv6_address":                    `address="2001:db8:107::1/64" interface="tf-test" advertise=false`,
 	"ipv6_dhcp_client":                `interface="tf-test" request="prefix" pool_name="tf-batch-received" add_default_route=false use_peer_dns=false`,
 	"ipv6_dhcp_client_option":         `name="tf-batch-v6client-option" code=100 value="0x01"`,
-	"ipv6_firewall_addr_list":         `list="tf-batch-addresses" address="2001:db8:107::/64"`,
+	"ipv6_firewall_addr_list":         `list="tf-reviewed-resourcesddresses" address="2001:db8:107::/64"`,
 	"ipv6_firewall_filter":            `chain="tf-batch-unattached" action="drop"`,
 	"ipv6_neighbor_discovery":         `interface="tf-test"`,
 	"ipv6_route":                      `dst_address="2001:db8:108::/64" gateway="2001:db8:107::2%tf-test"`,
 	"interface_6to4":                  `name="tf-batch-6to4" local_address="192.0.2.1" remote_address="192.0.2.2"`,
-	"interface_bonding":               `name="tf-batch-bond" slaves="tf-port" mode="active-backup"`,
+	"interface_bonding":               `name="tf-remaining-resourcesond" slaves="tf-port" mode="active-backup"`,
 	"interface_bridge_vlan":           `bridge="tf-test" vlan_ids="107" tagged="tf-test"`,
 	"interface_dot1x_client":          `interface="tf-port" identity="tf-batch-dot1x" eap_methods="eap-mschapv2"`,
 	"interface_dot1x_server":          `interface="tf-port"`,
@@ -84,15 +84,15 @@ var batchALiveBodies = map[string]string{
 	"queue_type":                      `name="tf-batch-queue-type" kind="pfifo" pfifo_limit=100`,
 	"radius":                          `address="192.0.2.2" service="ppp"`,
 	"routing_bfd_configuration":       `interfaces="tf-test" addresses="192.0.2.0/24" forbid_bfd=true`,
-	"routing_bgp_connection":          `name="tf-batch-bgp-connection" instance=routeros_routing_bgp_instance.test.name remote_address="192.0.2.2/32" local_role="ibgp" remote_as=64512 connect=false listen=false`,
+	"routing_bgp_connection":          `name="tf-remaining-resourcesgp-connection" instance=routeros_routing_bgp_instance.test.name remote_address="192.0.2.2/32" local_role="ibgp" remote_as=64512 connect=false listen=false`,
 	"routing_bgp_evpn":                `name="tf-batch-evpn" instance=routeros_routing_bgp_instance.test.name rd="64512:107" vni=107 vrf=routeros_ip_vrf.test.name`,
-	"routing_bgp_instance":            `name="tf-batch-bgp" as=64512 router_id="192.0.2.1"`,
+	"routing_bgp_instance":            `name="tf-remaining-resourcesgp" as=64512 router_id="192.0.2.1"`,
 	"routing_bgp_template":            `name="tf-batch-template" as=64512 address_families="ip"`,
 	"routing_bgp_vpn":                 `name="tf-batch-vpn" instance=routeros_routing_bgp_instance.test.name route_distinguisher="64512:108" label_allocation_policy="per-vrf" vrf=routeros_ip_vrf.test.name`,
 	"routing_filter_rule":             `chain="tf-batch-unattached" rule="reject"`,
 	"routing_id":                      `name="tf-batch-id" router_id="192.0.2.1"`,
 	"routing_igmp_proxy_interface":    `interface="tf-test" upstream=false`,
-	"routing_ospf_area":               `name="tf-batch-area" instance=routeros_routing_ospf_instance.test.name area_id="0.0.0.107"`,
+	"routing_ospf_area":               `name="tf-reviewed-resourcesrea" instance=routeros_routing_ospf_instance.test.name area_id="0.0.0.107"`,
 	"routing_ospf_area_range":         `area=routeros_routing_ospf_area.test.name prefix="192.0.2.0/24"`,
 	"routing_ospf_instance":           `name="tf-batch-ospf" version=2 router_id="192.0.2.1"`,
 	"routing_ospf_interface_template": `area=routeros_routing_ospf_area.test.name interfaces="tf-test"`,
@@ -109,7 +109,7 @@ var batchALiveBodies = map[string]string{
 	"system_user_sshkeys":             `user=routeros_system_user.test.name`,
 }
 
-func batchALiveConfig(t *testing.T, fixture batchAFixture, changed bool, withContainer bool) string {
+func extendedResourceLiveConfig(t *testing.T, fixture extendedResourceFixture, changed bool, withContainer bool) string {
 	t.Helper()
 	var b strings.Builder
 	b.WriteString(`provider "routeros" {}
@@ -129,11 +129,11 @@ func batchALiveConfig(t *testing.T, fixture batchAFixture, changed bool, withCon
  value="0x01"
  }
  `)
-	for _, p := range catalog.BatchACollections() {
+	for _, p := range catalog.ExtendedCollections() {
 		if p.RequiredPackage != "" && !withContainer {
 			continue
 		}
-		body, exists := batchALiveBodies[p.Name]
+		body, exists := extendedResourceLiveBodies[p.Name]
 		if p.Name == "snmp_community" {
 			name, _ := json.Marshal("tf-batch-" + fixture.secret)
 			body = fmt.Sprintf(`name=%s addresses="192.0.2.0/24" read_access=false write_access=false`, name)
@@ -176,7 +176,7 @@ func batchALiveConfig(t *testing.T, fixture batchAFixture, changed bool, withCon
 	}
 	return b.String()
 }
-func TestAccBatchACollectionsCHR(t *testing.T) {
+func TestAccExtendedCollectionsCHR(t *testing.T) {
 	if os.Getenv("TF_ACC") != "1" {
 		t.Skip("live CHR requires TF_ACC=1")
 	}
@@ -221,13 +221,13 @@ func TestAccBatchACollectionsCHR(t *testing.T) {
 			_ = c.Request(ctx, "DELETE", "/certificate", id, nil, nil, nil)
 		}
 	}()
-	fixture := newBatchAFixture(t)
-	first := batchALiveConfig(t, fixture, false, withContainer)
+	fixture := newExtendedResourceFixture(t)
+	first := extendedResourceLiveConfig(t, fixture, false, withContainer)
 	updatedFixture := fixture
-	updatedFixture.key = newBatchAFixture(t).key
-	changed := batchALiveConfig(t, updatedFixture, true, withContainer)
+	updatedFixture.key = newExtendedResourceFixture(t).key
+	changed := extendedResourceLiveConfig(t, updatedFixture, true, withContainer)
 	steps := []resource.TestStep{{Config: first}, {Config: first, PlanOnly: true}, {Config: changed}, {Config: changed, PlanOnly: true}}
-	for _, p := range catalog.BatchACollections() {
+	for _, p := range catalog.ExtendedCollections() {
 		if p.RequiredPackage != "" && !withContainer {
 			t.Logf("%s: unavailable on base lane; requires container", p.Name)
 			continue
@@ -245,7 +245,7 @@ func TestAccBatchACollectionsCHR(t *testing.T) {
 			if rs.Primary == nil {
 				continue
 			}
-			for _, p := range catalog.BatchACollections() {
+			for _, p := range catalog.ExtendedCollections() {
 				if rs.Type == "routeros_"+p.Name {
 					var rows []map[string]any
 					if err := c.Request(ctx, "GET", p.Path, "", url.Values{".id": {rs.Primary.ID}, ".proplist": {".id"}}, nil, &rows); err != nil {

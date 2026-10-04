@@ -1,0 +1,1861 @@
+{
+  "baseline_implemented": 125,
+  "baseline_matrix_sha256": "5fb44ecb7fead96435bbd482c707681f4ee3a8c10ee9549c2fffb6566046ba38",
+  "baseline_source": "9d59eb91818dc5b35acd8903b46a28d482dac164",
+  "remaining_constructor_count": 107,
+  "format": "routeros-remaining-resource-plan@1",
+  "historical_partition_sha256": "296d619429e09fdae949f59b3448ff2b2f3b7b4c5345d3dadba02c1024f63fd7",
+  "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
+  "resources": [
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceCapsManAaa",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_capsman_aaa"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_capsman_manager.go",
+        "line": 141
+      },
+      "risks": [
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/caps-man/aaa"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceCapsManAccessList",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_capsman_access_list"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_capsman_access_list.go",
+        "line": 27
+      },
+      "risks": [
+        "custom-or-unresolved"
+      ],
+      "static_family": "custom-or-unresolved",
+      "wire_path_observation": "/caps-man/access-list"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceCapsManChannel",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_capsman_channel"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_capsman_channel.go",
+        "line": 25
+      },
+      "risks": [
+        "nested-or-set-semantics",
+        "sdk-state-upgrades-not-ported"
+      ],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/caps-man/channel"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceCapsManConfiguration",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_capsman_configuration"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_capsman_configuration.go",
+        "line": 38
+      },
+      "risks": [
+        "nested-or-set-semantics",
+        "sdk-state-upgrades-not-ported"
+      ],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/caps-man/configuration"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceCapsManDatapath",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_capsman_datapath"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_capsman_datapath.go",
+        "line": 27
+      },
+      "risks": [
+        "sdk-state-upgrades-not-ported"
+      ],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/caps-man/datapath"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceCapsManInterface",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_capsman_interface"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_capsman_interface.go",
+        "line": 33
+      },
+      "risks": [
+        "nested-or-set-semantics"
+      ],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/caps-man/interface"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceCapsManManager",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_capsman_manager"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_capsman_manager.go",
+        "line": 22
+      },
+      "risks": [
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/caps-man/manager"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceCapsManManagerInterface",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_capsman_manager_interface"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_capsman_manager.go",
+        "line": 98
+      },
+      "risks": [],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/caps-man/manager/interface"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceCapsManProvisioning",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_capsman_provisioning"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_capsman_provisioning.go",
+        "line": 26
+      },
+      "risks": [
+        "nested-or-set-semantics",
+        "sdk-state-upgrades-not-ported"
+      ],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/caps-man/provisioning"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceCapsManRates",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_capsman_rates"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_capsman_rates.go",
+        "line": 24
+      },
+      "risks": [
+        "nested-or-set-semantics",
+        "sdk-state-upgrades-not-ported"
+      ],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/caps-man/rates"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceCapsManSecurity",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_capsman_security"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_capsman_security.go",
+        "line": 26
+      },
+      "risks": [
+        "nested-or-set-semantics",
+        "sdk-state-upgrades-not-ported",
+        "sensitive-readback-and-state"
+      ],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/caps-man/security"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceContainer",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_container"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_container.go",
+        "line": 31
+      },
+      "risks": [
+        "custom-or-unresolved",
+        "nested-or-set-semantics"
+      ],
+      "static_family": "custom-or-unresolved",
+      "wire_path_observation": "/container"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceContainerConfig",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_container_config"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_container_config.go",
+        "line": 8
+      },
+      "risks": [
+        "sensitive-readback-and-state",
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/container/config"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceContainerEnvs",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_container_envs"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_container_envs.go",
+        "line": 8
+      },
+      "risks": [],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/container/envs"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceContainerMounts",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_container_mounts"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_container_mounts.go",
+        "line": 8
+      },
+      "risks": [],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/container/mounts"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceDiskSettings",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_disk_settings"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_disk_settings.go",
+        "line": 18
+      },
+      "risks": [
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/disk/settings"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceDns",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_dns",
+        "routeros_ip_dns"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_ip_dns.go",
+        "line": 30
+      },
+      "risks": [
+        "custom-or-unresolved",
+        "nested-or-set-semantics",
+        "sdk-state-upgrades-not-ported"
+      ],
+      "static_family": "custom-or-unresolved",
+      "wire_path_observation": "/ip/dns"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceFile",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_file"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_file.go",
+        "line": 12
+      },
+      "risks": [
+        "custom-or-unresolved"
+      ],
+      "static_family": "custom-or-unresolved",
+      "wire_path_observation": "/file"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceIPv6FirewallMangle",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_ipv6_firewall_mangle"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_ipv6_firewall_mangle.go",
+        "line": 28
+      },
+      "risks": [
+        "custom-or-unresolved"
+      ],
+      "static_family": "custom-or-unresolved",
+      "wire_path_observation": "/ipv6/firewall/mangle"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceIPv6FirewallNat",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_ipv6_firewall_nat"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_ipv6_firewall_nat.go",
+        "line": 30
+      },
+      "risks": [
+        "custom-or-unresolved"
+      ],
+      "static_family": "custom-or-unresolved",
+      "wire_path_observation": "/ipv6/firewall/nat"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceInterfaceBridgeFilter",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_interface_bridge_filter"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_interface_bridge_filter.go",
+        "line": 46
+      },
+      "risks": [
+        "custom-or-unresolved"
+      ],
+      "static_family": "custom-or-unresolved",
+      "wire_path_observation": "/interface/bridge/filter"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceInterfaceBridgeMlag",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_bridge_mlag"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_interface_bridge_mlag.go",
+        "line": 15
+      },
+      "risks": [
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/interface/bridge/mlag"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceInterfaceDetectInternet",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_interface_detect_internet"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_interface_detect_internet.go",
+        "line": 17
+      },
+      "risks": [
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/interface/detect-internet"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceInterfaceEoip",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_interface_eoip"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_interface_eoip.go",
+        "line": 9
+      },
+      "risks": [
+        "custom-or-unresolved",
+        "sdk-state-upgrades-not-ported",
+        "sensitive-readback-and-state"
+      ],
+      "static_family": "custom-or-unresolved",
+      "wire_path_observation": "/interface/eoip"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceInterfaceEthernet",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_interface_ethernet"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_interface_ethernet.go",
+        "line": 52
+      },
+      "risks": [
+        "hardware-update-only"
+      ],
+      "static_family": "hardware-update-only",
+      "wire_path_observation": "/interface/ethernet"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceInterfaceEthernetSwitch",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_interface_ethernet_switch"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_interface_ethernet_switch.go",
+        "line": 79
+      },
+      "risks": [
+        "custom-or-unresolved",
+        "unresolved-schema-construction"
+      ],
+      "static_family": "custom-or-unresolved",
+      "wire_path_observation": "/interface/ethernet/switch"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceInterfaceEthernetSwitchCrs",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_interface_ethernet_switch_crs"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_interface_ethernet_switch_crs.go",
+        "line": 42
+      },
+      "risks": [
+        "nested-or-set-semantics",
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/interface/ethernet/switch"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceInterfaceEthernetSwitchCrsEgressVlanTag",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_interface_ethernet_switch_crs_egress_vlan_tag"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_interface_ethernet_switch_crs_egress_vlan_tag.go",
+        "line": 19
+      },
+      "risks": [
+        "nested-or-set-semantics"
+      ],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/interface/ethernet/switch/egress-vlan-tag"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceInterfaceEthernetSwitchCrsEgressVlanTranslation",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_interface_ethernet_switch_crs_egress_vlan_translation"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_interface_ethernet_switch_crs_egress_vlan_translation.go",
+        "line": 25
+      },
+      "risks": [
+        "nested-or-set-semantics"
+      ],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/interface/ethernet/switch/egress-vlan-translation"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceInterfaceEthernetSwitchCrsIngressVlanTranslation",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_interface_ethernet_switch_crs_ingress_vlan_translation"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_interface_ethernet_switch_crs_ingress_vlan_translation.go",
+        "line": 26
+      },
+      "risks": [
+        "nested-or-set-semantics"
+      ],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/interface/ethernet/switch/ingress-vlan-translation"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceInterfaceEthernetSwitchCrsVlan",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_interface_ethernet_switch_crs_vlan"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_interface_ethernet_switch_crs_vlan.go",
+        "line": 12
+      },
+      "risks": [
+        "nested-or-set-semantics"
+      ],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/interface/ethernet/switch/vlan"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceInterfaceEthernetSwitchHost",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_interface_ethernet_switch_host"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_interface_ethernet_switch_host.go",
+        "line": 23
+      },
+      "risks": [
+        "nested-or-set-semantics"
+      ],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/interface/ethernet/switch/host"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceInterfaceEthernetSwitchPort",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_interface_ethernet_switch_port"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_interface_ethernet_switch_port.go",
+        "line": 64
+      },
+      "risks": [
+        "custom-or-unresolved",
+        "unresolved-schema-construction"
+      ],
+      "static_family": "custom-or-unresolved",
+      "wire_path_observation": "/interface/ethernet/switch/port"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceInterfaceEthernetSwitchPortIsolation",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_interface_ethernet_switch_port_isolation"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_interface_ethernet_switch_port_isolation.go",
+        "line": 22
+      },
+      "risks": [
+        "custom-or-unresolved",
+        "unresolved-schema-construction"
+      ],
+      "static_family": "custom-or-unresolved",
+      "wire_path_observation": "/interface/ethernet/switch/port-isolation"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceInterfaceEthernetSwitchRule",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_interface_ethernet_switch_rule"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_interface_ethernet_switch_rule.go",
+        "line": 13
+      },
+      "risks": [
+        "nested-or-set-semantics"
+      ],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/interface/ethernet/switch/rule"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceInterfaceEthernetSwitchVlan",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_interface_ethernet_switch_vlan"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_interface_ethernet_switch_vlan.go",
+        "line": 19
+      },
+      "risks": [
+        "nested-or-set-semantics"
+      ],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/interface/ethernet/switch/vlan"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceInterfaceGre",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_gre",
+        "routeros_interface_gre"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_interface_gre.go",
+        "line": 9
+      },
+      "risks": [
+        "custom-or-unresolved",
+        "sdk-state-upgrades-not-ported",
+        "sensitive-readback-and-state"
+      ],
+      "static_family": "custom-or-unresolved",
+      "wire_path_observation": "/interface/gre"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceInterfaceIPIP",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_interface_ipip",
+        "routeros_ipip"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_interface_ipip.go",
+        "line": 9
+      },
+      "risks": [
+        "custom-or-unresolved",
+        "sensitive-readback-and-state"
+      ],
+      "static_family": "custom-or-unresolved",
+      "wire_path_observation": "/interface/ipip"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceInterfaceL2tpServer",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_interface_l2tp_server"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_interface_l2tp_server.go",
+        "line": 33
+      },
+      "risks": [
+        "nested-or-set-semantics",
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/interface/l2tp-server/server"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceInterfaceLte",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_interface_lte"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_interface_lte.go",
+        "line": 31
+      },
+      "risks": [
+        "custom-or-unresolved",
+        "nested-or-set-semantics"
+      ],
+      "static_family": "custom-or-unresolved",
+      "wire_path_observation": "/interface/lte"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceInterfaceLteApn",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_interface_lte_apn"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_interface_lte_apn.go",
+        "line": 27
+      },
+      "risks": [],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/interface/lte/apn"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceInterfaceSSTPServer",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_interface_sstp_server"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_interface_sstp_server.go",
+        "line": 27
+      },
+      "risks": [
+        "nested-or-set-semantics",
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/interface/sstp-server/server"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceInterfaceVrrp",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_interface_vrrp",
+        "routeros_vrrp"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_interface_vrrp.go",
+        "line": 41
+      },
+      "risks": [
+        "custom-or-unresolved",
+        "sdk-state-upgrades-not-ported",
+        "sensitive-readback-and-state"
+      ],
+      "static_family": "custom-or-unresolved",
+      "wire_path_observation": "/interface/vrrp"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceInterfaceW60g",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_interface_w60g"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_interface_w60g.go",
+        "line": 44
+      },
+      "risks": [
+        "custom-or-unresolved",
+        "nested-or-set-semantics",
+        "sensitive-readback-and-state"
+      ],
+      "static_family": "custom-or-unresolved",
+      "wire_path_observation": "/interface/w60g"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceInterfaceW60gStation",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_interface_w60g_station"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_interface_w60g_station.go",
+        "line": 25
+      },
+      "risks": [],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/interface/w60g/station"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceInterfaceWireless",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_interface_wireless"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_interface_wireless.go",
+        "line": 110
+      },
+      "risks": [
+        "custom-or-unresolved",
+        "nested-or-set-semantics",
+        "sensitive-readback-and-state"
+      ],
+      "static_family": "custom-or-unresolved",
+      "wire_path_observation": "/interface/wireless"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceInterfaceWirelessAccessList",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_interface_wireless_access_list"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_interface_wireless_access_list.go",
+        "line": 31
+      },
+      "risks": [],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/interface/wireless/access-list"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceInterfaceWirelessCap",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_interface_wireless_cap"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_interface_wireless_cap.go",
+        "line": 26
+      },
+      "risks": [
+        "nested-or-set-semantics",
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/interface/wireless/cap"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceInterfaceWirelessConnectList",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_interface_wireless_connect_list"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_interface_wireless_connect_list.go",
+        "line": 24
+      },
+      "risks": [],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/interface/wireless/connect-list"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceInterfaceWirelessSecurityProfiles",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_interface_wireless_security_profiles"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_interface_wireless_security_profiles.go",
+        "line": 53
+      },
+      "risks": [
+        "nested-or-set-semantics",
+        "sensitive-readback-and-state"
+      ],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/interface/wireless/security-profiles"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceIpCloud",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_ip_cloud"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_ip_cloud.go",
+        "line": 21
+      },
+      "risks": [
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/ip/cloud"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceIpCloudAdvanced",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_ip_cloud_advanced"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_ip_cloud_advanced.go",
+        "line": 14
+      },
+      "risks": [
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/ip/cloud/advanced"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceIpHotspotServicePort",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_ip_hotspot_service_port"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_ip_hotspot_service_port.go",
+        "line": 16
+      },
+      "risks": [
+        "custom-or-unresolved"
+      ],
+      "static_family": "custom-or-unresolved",
+      "wire_path_observation": "/ip/hotspot/service-port"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceIpIpsecKey",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_ip_ipsec_key"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_ip_ipsec_key.go",
+        "line": 29
+      },
+      "risks": [
+        "custom-or-unresolved"
+      ],
+      "static_family": "custom-or-unresolved",
+      "wire_path_observation": "/ip/ipsec/key"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceIpSMB",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_ip_smb"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_ip_smb.go",
+        "line": 18
+      },
+      "risks": [
+        "nested-or-set-semantics",
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/ip/smb"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceIpSSHServer",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_ip_ssh_server"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_ip_ssh_server.go",
+        "line": 19
+      },
+      "risks": [
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/ip/ssh"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceIpService",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_ip_service"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_ip_service.go",
+        "line": 35
+      },
+      "risks": [
+        "custom-or-unresolved"
+      ],
+      "static_family": "custom-or-unresolved",
+      "wire_path_observation": "/ip/service"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceMoveItems",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_move_items"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_move.go",
+        "line": 14
+      },
+      "risks": [
+        "custom-or-unresolved",
+        "nested-or-set-semantics",
+        "unresolved-schema-construction"
+      ],
+      "static_family": "custom-or-unresolved",
+      "wire_path_observation": "/path"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceOpenVPNServer",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_ovpn_server"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_ovpn_server.go",
+        "line": 33
+      },
+      "risks": [
+        "nested-or-set-semantics",
+        "sdk-state-upgrades-not-ported",
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/interface/ovpn-server/server"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourcePppAaa",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_ppp_aaa"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_ppp_aaa.go",
+        "line": 17
+      },
+      "risks": [
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/ppp/aaa"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceRoutingTable",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_routing_table"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_routing_table.go",
+        "line": 22
+      },
+      "risks": [
+        "custom-or-unresolved",
+        "unresolved-schema-construction"
+      ],
+      "static_family": "custom-or-unresolved",
+      "wire_path_observation": "/routing/table"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceSNMP",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_snmp"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_snmp.go",
+        "line": 25
+      },
+      "risks": [
+        "nested-or-set-semantics",
+        "sensitive-readback-and-state",
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/snmp"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceSystemCertificate",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_system_certificate"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_system_certificate.go",
+        "line": 41
+      },
+      "risks": [
+        "custom-or-unresolved",
+        "nested-or-set-semantics",
+        "sensitive-readback-and-state",
+        "unresolved-schema-construction"
+      ],
+      "static_family": "custom-or-unresolved",
+      "wire_path_observation": "/certificate"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceSystemClock",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_system_clock"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_system_clock.go",
+        "line": 16
+      },
+      "risks": [
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/system/clock"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceSystemLed",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_system_led"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_system_led.go",
+        "line": 20
+      },
+      "risks": [
+        "nested-or-set-semantics"
+      ],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/system/leds"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceSystemLedSettings",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_system_led_settings"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_system_led_settings.go",
+        "line": 15
+      },
+      "risks": [
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/system/leds/settings"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceSystemLoggingAction",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_system_logging_action"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_system_logging_actions.go",
+        "line": 29
+      },
+      "risks": [
+        "custom-or-unresolved"
+      ],
+      "static_family": "custom-or-unresolved",
+      "wire_path_observation": "/system/logging/action"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceSystemRouterboardButtonMode",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_system_routerboard_button_mode"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_system_routerboard_button_mode.go",
+        "line": 16
+      },
+      "risks": [
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/system/routerboard/mode-button"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceSystemRouterboardButtonReset",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_system_routerboard_button_reset"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_system_routerboard_button_reset.go",
+        "line": 16
+      },
+      "risks": [
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/system/routerboard/reset-button"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceSystemRouterboardButtonWps",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_system_routerboard_button_wps"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_system_routerboard_button_wps.go",
+        "line": 16
+      },
+      "risks": [
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/system/routerboard/wps-button"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceSystemRouterboardSettings",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_system_routerboard_settings"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_system_routerboard_settings.go",
+        "line": 25
+      },
+      "risks": [
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/system/routerboard/settings"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceSystemRouterboardUsb",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_system_routerboard_usb"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_system_routerboard_usb.go",
+        "line": 16
+      },
+      "risks": [
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/system/routerboard/usb"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceSystemScript",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_system_script"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_system_script.go",
+        "line": 26
+      },
+      "risks": [
+        "custom-or-unresolved",
+        "nested-or-set-semantics"
+      ],
+      "static_family": "custom-or-unresolved",
+      "wire_path_observation": "/system/script"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceSystemUserSettings",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_system_user_settings"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_system_user_settings.go",
+        "line": 16
+      },
+      "risks": [
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/user/settings"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceToolBandwidthServer",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_tool_bandwidth_server"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_tool_bandwidth_server.go",
+        "line": 18
+      },
+      "risks": [
+        "nested-or-set-semantics",
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/tool/bandwidth-server"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceToolEmail",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_tool_email"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_tool_email.go",
+        "line": 21
+      },
+      "risks": [
+        "sensitive-readback-and-state",
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/tool/e-mail"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceToolSniffer",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_tool_sniffer"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_tool_sniffer.go",
+        "line": 48
+      },
+      "risks": [
+        "custom-or-unresolved",
+        "nested-or-set-semantics"
+      ],
+      "static_family": "custom-or-unresolved",
+      "wire_path_observation": "/tool/sniffer"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceUPNPSettings",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_ip_upnp"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_ip_upnp.go",
+        "line": 8
+      },
+      "risks": [
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/ip/upnp"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceUserAaa",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_system_user_aaa"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_system_user_aaa.go",
+        "line": 18
+      },
+      "risks": [
+        "nested-or-set-semantics",
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/user/aaa"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceUserManagerAdvanced",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_user_manager_advanced"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_user_manager_advanced.go",
+        "line": 21
+      },
+      "risks": [
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/user-manager/advanced"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceUserManagerAttribute",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_user_manager_attribute"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_user_manager_attribute.go",
+        "line": 23
+      },
+      "risks": [
+        "nested-or-set-semantics"
+      ],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/user-manager/attribute"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceUserManagerDatabase",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_user_manager_database"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_user_manager_database.go",
+        "line": 16
+      },
+      "risks": [
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/user-manager/database"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceUserManagerLimitation",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_user_manager_limitation"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_user_manager_limitation.go",
+        "line": 33
+      },
+      "risks": [],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/user-manager/limitation"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceUserManagerProfile",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_user_manager_profile"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_user_manager_profile.go",
+        "line": 21
+      },
+      "risks": [],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/user-manager/profile"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceUserManagerProfileLimitation",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_user_manager_profile_limitation"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_user_manager_profile_limitation.go",
+        "line": 20
+      },
+      "risks": [
+        "nested-or-set-semantics"
+      ],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/user-manager/profile-limitation"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceUserManagerRouter",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_user_manager_router"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_user_manager_router.go",
+        "line": 19
+      },
+      "risks": [
+        "sensitive-readback-and-state"
+      ],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/user-manager/router"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceUserManagerSettings",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_user_manager_settings"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_user_manager_settings.go",
+        "line": 19
+      },
+      "risks": [
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/user-manager"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceUserManagerUser",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_user_manager_user"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_user_manager_user.go",
+        "line": 23
+      },
+      "risks": [
+        "nested-or-set-semantics"
+      ],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/user-manager/user"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceUserManagerUserGroup",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_user_manager_user_group"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_user_manager_user_group.go",
+        "line": 21
+      },
+      "risks": [
+        "nested-or-set-semantics"
+      ],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/user-manager/user/group"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceUserManagerUserProfile",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_user_manager_user_profile"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_user_manager_user_profile.go",
+        "line": 18
+      },
+      "risks": [],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/user-manager/user-profile"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceWifi",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_wifi"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_wifi.go",
+        "line": 33
+      },
+      "risks": [
+        "nested-or-set-semantics"
+      ],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/interface/wifi"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceWifiAaa",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_wifi_aaa"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_wifi_aaa.go",
+        "line": 23
+      },
+      "risks": [],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/interface/wifi/aaa"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceWifiAccessList",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_wifi_access_list"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_wifi_access_list.go",
+        "line": 31
+      },
+      "risks": [
+        "custom-or-unresolved"
+      ],
+      "static_family": "custom-or-unresolved",
+      "wire_path_observation": "/interface/wifi/access-list"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceWifiCap",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_wifi_cap"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_wifi_cap.go",
+        "line": 25
+      },
+      "risks": [
+        "nested-or-set-semantics",
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/interface/wifi/cap"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceWifiCapsman",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_wifi_capsman"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_wifi_capsman.go",
+        "line": 23
+      },
+      "risks": [
+        "nested-or-set-semantics",
+        "singleton-candidate"
+      ],
+      "static_family": "singleton-candidate",
+      "wire_path_observation": "/interface/wifi/capsman"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceWifiChannel",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_wifi_channel"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_wifi_channel.go",
+        "line": 22
+      },
+      "risks": [
+        "nested-or-set-semantics"
+      ],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/interface/wifi/channel"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceWifiConfiguration",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_wifi_configuration"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_wifi_configuration.go",
+        "line": 37
+      },
+      "risks": [
+        "nested-or-set-semantics"
+      ],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/interface/wifi/configuration"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceWifiDatapath",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_wifi_datapath"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_wifi_datapath.go",
+        "line": 23
+      },
+      "risks": [],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/interface/wifi/datapath"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceWifiInterworking",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_wifi_interworking"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_wifi_interworking.go",
+        "line": 43
+      },
+      "risks": [
+        "nested-or-set-semantics"
+      ],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/interface/wifi/interworking"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceWifiProvisioning",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_wifi_provisioning"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_wifi_provisioning.go",
+        "line": 25
+      },
+      "risks": [
+        "nested-or-set-semantics"
+      ],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/interface/wifi/provisioning"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceWifiSecurity",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_wifi_security"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_wifi_security.go",
+        "line": 48
+      },
+      "risks": [
+        "nested-or-set-semantics"
+      ],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/interface/wifi/security"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceWifiSecurityMultiPassphrase",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_wifi_security_multi_passphrase"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_wifi_security_multi_passphrase.go",
+        "line": 19
+      },
+      "risks": [
+        "sensitive-readback-and-state"
+      ],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/interface/wifi/security/multi-passphrase"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceWifiSteering",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_wifi_steering"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_wifi_steering.go",
+        "line": 19
+      },
+      "risks": [
+        "nested-or-set-semantics"
+      ],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/interface/wifi/steering"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceWireguardKeys",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_wireguard_keys"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_wireguard_keys.go",
+        "line": 14
+      },
+      "risks": [
+        "custom-or-unresolved",
+        "nested-or-set-semantics",
+        "sensitive-readback-and-state",
+        "unresolved-wire-path"
+      ],
+      "static_family": "custom-or-unresolved",
+      "wire_path_observation": null
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceZerotier",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_zerotier"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_zerotier.go",
+        "line": 25
+      },
+      "risks": [
+        "nested-or-set-semantics"
+      ],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/zerotier"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceZerotierController",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_zerotier_controller"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_zerotier_controller.go",
+        "line": 29
+      },
+      "risks": [
+        "nested-or-set-semantics"
+      ],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/zerotier/controller"
+    },
+    {
+      "automatic_exposure_authorized": false,
+      "constructor": "ResourceZerotierInterface",
+      "implementation_status": "pending explicit maintained contract and lifecycle review",
+      "reference_names": [
+        "routeros_zerotier_interface"
+      ],
+      "reference_source": {
+        "file": "routeros/resource_zerotier_interface.go",
+        "line": 30
+      },
+      "risks": [],
+      "static_family": "ordinary-collection-candidate",
+      "wire_path_observation": "/zerotier/interface"
+    }
+  ],
+  "scope": "frozen constructor identities only; aliases are not separate integrations; no inventory/ledger row authorizes exposure",
+  "target_total": 232
+}

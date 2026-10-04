@@ -13,7 +13,7 @@
   ],
   "clean_source_live": {
     "binary_scope": "configuration-lifecycle test executable, NOT a release or maintenance-candidate binary",
-    "format": "routeros-batch-a-clean-live@1",
+    "format": "routeros-reviewed-resources-clean-live@1",
     "lanes": [
       {
         "exit_code": 0,
@@ -153,14 +153,15 @@
     "source_tree_clean": true,
     "terraform_version": "1.14.0",
     "test_binary_sha256": "d3b3c2d4b63cdcd334f4b2d7b3dc97c41da0be8723fb4ead9c95d5c423fcbf42",
-    "test_pattern": "^TestAcc(IPAddress|Collections|DHCPRouting|DHCPOptions|DHCPRelay|DNSRecord|Singletons|BatchACollections|Firewall|FirewallFamilies)CHR$"
+    "test_pattern": "^TestAcc(IPAddress|Collections|DHCPRouting|DHCPOptions|DHCPRelay|DNSRecord|Singletons|ExtendedCollections|Firewall|FirewallFamilies)CHR$"
   },
-  "format": "routeros-batch-a-expanded-validation@1",
-  "hosted_verification": {"conclusion": "success", "evidence": "schemas/batch-a-hosted-validation.json", "provider_revision": "48d6b43b2fa47cf4adc579cb9ccc0dab29ca36c6", "run_url": "https://github.com/matejaputic/terraform-provider-routeros/actions/runs/37156502451", "scope": "all five jobs and all four target-bound artifacts inspected; normal main push; configuration lifecycle only"},
+  "format": "routeros-resource-configuration-validation@1",
+  "historical_path_labels": "Paths and selector names use current descriptive terminology. Recorded digests and results still bind the historical source revisions and original artifacts, not the renamed working tree.",
+  "hosted_verification": {"conclusion": "success", "evidence": "schemas/hosted-configuration-validation.json", "provider_revision": "48d6b43b2fa47cf4adc579cb9ccc0dab29ca36c6", "run_url": "https://github.com/matejaputic/terraform-provider-routeros/actions/runs/37156502451", "scope": "all five jobs and all four target-bound artifacts inspected; normal main push; configuration lifecycle only"},
   "integration_counts": {
     "baseline": 18,
-    "batch_a": 107,
-    "batch_b_unexposed": 107,
+    "resource_plan": 107,
+    "remaining_unexposed": 107,
     "total": 125
   },
   "limitations": [
@@ -302,8 +303,8 @@
           "provider-source.tar": "a5e5e5c58d0cf4f0dbbb93a83ad6d03c885ac0b7cd40e17a01bfe4b67000c622",
           "schemas/adaptation-report.json": "05c502bad2034d2909995b71e931c0e34845de4df5f5db7752e810bef1722e18",
           "schemas/baseline-manifest.json": "9a16ca6492adec7c2dc02d359475b98c5cda004c7d40a72e974a7efc76879ed0",
-          "schemas/batch-a-integration-validation.json": "c11a5b0362cc8ef8c63459b28f86bdef0da7c1b6c208475a1911755fb6718e08",
-          "schemas/batch-a-ledger.json": "296d619429e09fdae949f59b3448ff2b2f3b7b4c5345d3dadba02c1024f63fd7",
+          "schemas/relay-dns-validation.json": "c11a5b0362cc8ef8c63459b28f86bdef0da7c1b6c208475a1911755fb6718e08",
+          "schemas/resource-plan.json": "296d619429e09fdae949f59b3448ff2b2f3b7b4c5345d3dadba02c1024f63fd7",
           "schemas/capability-checkpoint-validation.json": "c9fd218579d975bc2f27eced80246292a1c7616420a4e97a10194329af3af5db",
           "schemas/capability-matrix.json": "5fb44ecb7fead96435bbd482c707681f4ee3a8c10ee9549c2fffb6566046ba38",
           "schemas/contract-delta.json": "b2d568572f9ca490a2594a39b9e169eb4f77e36f43d83a9aacc29717a3208001",
@@ -336,7 +337,7 @@
           "format": "routeros-contract-delta@1",
           "live_tested": false,
           "new_exposure_authorized": false,
-          "policy_revision": "semantic-identity-v2-batch-a-reviewed-subsets",
+          "policy_revision": "semantic-identity-v2-reviewed-resources-reviewed-subsets",
           "policy_sha256": "da620adbf14581adbec5ffc24f414d1a7169ec764a052520a92780896bd367ce",
           "publication_authorized": false,
           "scope": "adapted public contract only; no upstream semantic or live-lane certification"
@@ -487,8 +488,8 @@
           "provider-source.tar": "a5e5e5c58d0cf4f0dbbb93a83ad6d03c885ac0b7cd40e17a01bfe4b67000c622",
           "schemas/adaptation-report.json": "5b44e1cf378f275856305885f9603a0749765c8892b59983ab695ebff92ab276",
           "schemas/baseline-manifest.json": "9a16ca6492adec7c2dc02d359475b98c5cda004c7d40a72e974a7efc76879ed0",
-          "schemas/batch-a-integration-validation.json": "c11a5b0362cc8ef8c63459b28f86bdef0da7c1b6c208475a1911755fb6718e08",
-          "schemas/batch-a-ledger.json": "296d619429e09fdae949f59b3448ff2b2f3b7b4c5345d3dadba02c1024f63fd7",
+          "schemas/relay-dns-validation.json": "c11a5b0362cc8ef8c63459b28f86bdef0da7c1b6c208475a1911755fb6718e08",
+          "schemas/resource-plan.json": "296d619429e09fdae949f59b3448ff2b2f3b7b4c5345d3dadba02c1024f63fd7",
           "schemas/capability-checkpoint-validation.json": "c9fd218579d975bc2f27eced80246292a1c7616420a4e97a10194329af3af5db",
           "schemas/capability-matrix.json": "5fb44ecb7fead96435bbd482c707681f4ee3a8c10ee9549c2fffb6566046ba38",
           "schemas/contract-delta.json": "b2d568572f9ca490a2594a39b9e169eb4f77e36f43d83a9aacc29717a3208001",
@@ -520,7 +521,7 @@
           "format": "routeros-contract-delta@1",
           "live_tested": false,
           "new_exposure_authorized": false,
-          "policy_revision": "semantic-identity-v2-batch-a-reviewed-subsets",
+          "policy_revision": "semantic-identity-v2-reviewed-resources-reviewed-subsets",
           "policy_sha256": "da620adbf14581adbec5ffc24f414d1a7169ec764a052520a92780896bd367ce",
           "publication_authorized": false,
           "scope": "adapted public contract only; no upstream semantic or live-lane certification"
@@ -671,8 +672,8 @@
           "provider-source.tar": "a5e5e5c58d0cf4f0dbbb93a83ad6d03c885ac0b7cd40e17a01bfe4b67000c622",
           "schemas/adaptation-report.json": "454a4c545468fd723e87e2d74c4fdeccbac08333537cc093a54c98d626e948a4",
           "schemas/baseline-manifest.json": "9a16ca6492adec7c2dc02d359475b98c5cda004c7d40a72e974a7efc76879ed0",
-          "schemas/batch-a-integration-validation.json": "c11a5b0362cc8ef8c63459b28f86bdef0da7c1b6c208475a1911755fb6718e08",
-          "schemas/batch-a-ledger.json": "296d619429e09fdae949f59b3448ff2b2f3b7b4c5345d3dadba02c1024f63fd7",
+          "schemas/relay-dns-validation.json": "c11a5b0362cc8ef8c63459b28f86bdef0da7c1b6c208475a1911755fb6718e08",
+          "schemas/resource-plan.json": "296d619429e09fdae949f59b3448ff2b2f3b7b4c5345d3dadba02c1024f63fd7",
           "schemas/capability-checkpoint-validation.json": "c9fd218579d975bc2f27eced80246292a1c7616420a4e97a10194329af3af5db",
           "schemas/capability-matrix.json": "5fb44ecb7fead96435bbd482c707681f4ee3a8c10ee9549c2fffb6566046ba38",
           "schemas/contract-delta.json": "b2d568572f9ca490a2594a39b9e169eb4f77e36f43d83a9aacc29717a3208001",
@@ -705,7 +706,7 @@
           "format": "routeros-contract-delta@1",
           "live_tested": false,
           "new_exposure_authorized": false,
-          "policy_revision": "semantic-identity-v2-batch-a-reviewed-subsets",
+          "policy_revision": "semantic-identity-v2-reviewed-resources-reviewed-subsets",
           "policy_sha256": "da620adbf14581adbec5ffc24f414d1a7169ec764a052520a92780896bd367ce",
           "publication_authorized": false,
           "scope": "adapted public contract only; no upstream semantic or live-lane certification"
@@ -856,8 +857,8 @@
           "provider-source.tar": "a5e5e5c58d0cf4f0dbbb93a83ad6d03c885ac0b7cd40e17a01bfe4b67000c622",
           "schemas/adaptation-report.json": "eea84eeaea848e50cec7248bebe38fe9ab9358198035ab94bad4bd627d7bf06e",
           "schemas/baseline-manifest.json": "9a16ca6492adec7c2dc02d359475b98c5cda004c7d40a72e974a7efc76879ed0",
-          "schemas/batch-a-integration-validation.json": "c11a5b0362cc8ef8c63459b28f86bdef0da7c1b6c208475a1911755fb6718e08",
-          "schemas/batch-a-ledger.json": "296d619429e09fdae949f59b3448ff2b2f3b7b4c5345d3dadba02c1024f63fd7",
+          "schemas/relay-dns-validation.json": "c11a5b0362cc8ef8c63459b28f86bdef0da7c1b6c208475a1911755fb6718e08",
+          "schemas/resource-plan.json": "296d619429e09fdae949f59b3448ff2b2f3b7b4c5345d3dadba02c1024f63fd7",
           "schemas/capability-checkpoint-validation.json": "c9fd218579d975bc2f27eced80246292a1c7616420a4e97a10194329af3af5db",
           "schemas/capability-matrix.json": "5fb44ecb7fead96435bbd482c707681f4ee3a8c10ee9549c2fffb6566046ba38",
           "schemas/contract-delta.json": "b2d568572f9ca490a2594a39b9e169eb4f77e36f43d83a9aacc29717a3208001",
@@ -889,7 +890,7 @@
           "format": "routeros-contract-delta@1",
           "live_tested": false,
           "new_exposure_authorized": false,
-          "policy_revision": "semantic-identity-v2-batch-a-reviewed-subsets",
+          "policy_revision": "semantic-identity-v2-reviewed-resources-reviewed-subsets",
           "policy_sha256": "da620adbf14581adbec5ffc24f414d1a7169ec764a052520a92780896bd367ce",
           "publication_authorized": false,
           "scope": "adapted public contract only; no upstream semantic or live-lane certification"

@@ -76,7 +76,7 @@ def reconcile(inventory, descriptors):
     registered = inventory['registrations']['resources']
     # The curated definitions authorize exposure. Frozen constructor identity is
     # only correlation metadata for intentional canonical names, not aliases.
-    policies = [p for file in ('collections.json','singletons.json','batch-a-collections.json') for p in json.loads((ROOT/'internal/catalog'/file).read_bytes())]
+    policies = [p for file in ('collections.json','singletons.json','extended-collections.json','additional-settings.json') for p in json.loads((ROOT/'internal/catalog'/file).read_bytes())]
     identities = {'routeros_'+p['resource_name']:p['reference_constructor'] for p in policies if 'reference_constructor' in p}
     for resource in descriptors['resources']:
         name = resource['terraform_type']
@@ -127,7 +127,7 @@ def reconcile(inventory, descriptors):
     return {'format': 'routeros-contract-reconciliation@1', 'source_revision': PIN,
             'descriptor_sha256': digest(encode(descriptors)),
             'policy_inputs_sha256': {p: digest((ROOT / p).read_bytes()) for p in
-                                    ('schemas/ip-address-policy.json', 'internal/catalog/collections.json', 'internal/catalog/singletons.json', 'internal/catalog/batch-a-collections.json')},
+                                    ('schemas/ip-address-policy.json', 'internal/catalog/collections.json', 'internal/catalog/singletons.json', 'internal/catalog/extended-collections.json', 'internal/catalog/additional-settings.json')},
             'public_schema_changes': False, 'automatic_promotion': False,
             'scope': 'static declarations only; overlays remain authoritative; differences need review',
             'resources': rows}

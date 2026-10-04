@@ -3,9 +3,9 @@ import json
 from pathlib import Path
 import unittest
 
-import batch_a as b
+import resource_plan as b
 
-class BatchAPlanningTest(unittest.TestCase):
+class ResourcePlanningTest(unittest.TestCase):
  def setUp(self):
   self.matrix = b.BASELINE_MATRIX.read_bytes()
   self.contracts = (b.ROOT / 'schemas/reference-contracts/reference-contracts.json').read_bytes()
@@ -15,7 +15,7 @@ class BatchAPlanningTest(unittest.TestCase):
   matrix = json.loads(self.matrix)
   remaining = {r['constructor'] for r in matrix['constructors'] if not r['implemented']}
   a = {r['constructor'] for r in ledger['resources']}
-  complement = set(ledger['batch_b_constructor_ids'])
+  complement = set(ledger['remaining_constructor_ids'])
   self.assertEqual(len(a), 107)
   self.assertEqual(len(complement), 107)
   self.assertFalse(a & complement)
@@ -48,7 +48,7 @@ class BatchAPlanningTest(unittest.TestCase):
   self.assertFalse(missing['structural_collection_crud'])
 
  def test_persisted_ledger_has_correct_bindings_and_four_observation_lanes(self):
-  ledger = json.loads((b.ROOT / 'schemas/batch-a-ledger.json').read_text())
+  ledger = json.loads((b.ROOT / 'schemas/resource-plan.json').read_text())
   self.assertEqual(ledger['baseline_matrix_sha256'], b.MATRIX_SHA256)
   self.assertEqual(ledger['baseline_source'], b.BASELINE)
   self.assertEqual(ledger['upstream_sha'], b.UPSTREAM)

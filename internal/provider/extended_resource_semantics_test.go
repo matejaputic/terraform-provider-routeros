@@ -18,11 +18,11 @@ import (
 	"github.com/matejaputic/terraform-provider-routeros/internal/client"
 )
 
-func TestBatchACollectionFailedCreateRetainsAllocatedIdentity(t *testing.T) {
-	fixture := newBatchAFixture(t)
-	for _, p := range catalog.BatchACollections() {
+func TestExtendedResourceCollectionFailedCreateRetainsAllocatedIdentity(t *testing.T) {
+	fixture := newExtendedResourceFixture(t)
+	for _, p := range catalog.ExtendedCollections() {
 		t.Run(p.Name, func(t *testing.T) {
-			r := batchAResource(t, p.Name)
+			r := extendedResource(t, p.Name)
 			v := fixture.values(r, 0)
 			v["id"] = types.StringNull()
 			ctx := context.Background()
@@ -89,8 +89,8 @@ func TestBatchACollectionFailedCreateRetainsAllocatedIdentity(t *testing.T) {
 		})
 	}
 }
-func TestBatchAConstructorRegistrationMatchesFrozenRoster(t *testing.T) {
-	raw, err := os.ReadFile("../../schemas/batch-a-ledger.json")
+func TestExtendedResourceConstructorRegistrationMatchesFrozenRoster(t *testing.T) {
+	raw, err := os.ReadFile("../../schemas/resource-plan.json")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -113,7 +113,7 @@ func TestBatchAConstructorRegistrationMatchesFrozenRoster(t *testing.T) {
 		}
 		names[response.TypeName] = true
 	}
-	if len(names) != 125 || len(ledger.Resources) != 107 {
+	if len(names) != 125+len(catalog.AdditionalSettings()) || len(ledger.Resources) != 107 {
 		t.Fatal("fixed milestone accounting changed")
 	}
 	seen := map[string]bool{}
@@ -124,7 +124,7 @@ func TestBatchAConstructorRegistrationMatchesFrozenRoster(t *testing.T) {
 		seen[row.Constructor] = true
 	}
 }
-func TestBatchAReviewedScalarSemantics(t *testing.T) {
+func TestExtendedResourceReviewedScalarSemantics(t *testing.T) {
 	for _, text := range []string{"NaN:00:00", "Inf:00:00", "-1s", "1garbage", "9999999999999999w", "", "1sbad"} {
 		if _, err := routerDuration(text); err == nil {
 			t.Fatal("malformed duration accepted")
@@ -149,7 +149,7 @@ func TestBatchAReviewedScalarSemantics(t *testing.T) {
 			t.Fatal("automatic numeric default became a fabricated number")
 		}
 	}
-	r := batchAResource(t, "interface_veth")
+	r := extendedResource(t, "interface_veth")
 	c, err := client.New(client.Config{HostURL: "http://127.0.0.1:1", Timeout: time.Second})
 	if err != nil {
 		t.Fatal(err)

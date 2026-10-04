@@ -1,4 +1,4 @@
-name: Framework Batch A verification
+name: Framework resource verification
 on:
   pull_request:
   push:
@@ -26,9 +26,9 @@ jobs:
       - name: Deterministic official generation
         run: |
           bash tools/schema/generate.sh
-          git diff --exit-code -- schemas internal/generated internal/provider/batch_a_bindings.go
+          git diff --exit-code -- schemas internal/generated internal/provider/extended_collection_bindings.go internal/provider/additional_settings_bindings.go
           bash tools/schema/generate.sh
-          git diff --exit-code -- schemas internal/generated internal/provider/batch_a_bindings.go
+          git diff --exit-code -- schemas internal/generated internal/provider/extended_collection_bindings.go internal/provider/additional_settings_bindings.go
       - name: Unit and mock Terraform lifecycle tests (not live acceptance)
         env:
           TF_ACC_TERRAFORM_VERSION: '1.14.0'

@@ -120,13 +120,13 @@ def matrix(bundle, descriptors):
     if (inventory['source']['revision'] != extract.PIN
             or reconciliation['descriptor_sha256'] != extract.digest(extract.encode(descriptors))):
         raise ValueError('stale reference/overlay reconciliation')
-    if set(reconciliation['policy_inputs_sha256']) != {'schemas/ip-address-policy.json', 'internal/catalog/collections.json', 'internal/catalog/singletons.json', 'internal/catalog/batch-a-collections.json'}:
+    if set(reconciliation['policy_inputs_sha256']) != {'schemas/ip-address-policy.json', 'internal/catalog/collections.json', 'internal/catalog/singletons.json', 'internal/catalog/extended-collections.json', 'internal/catalog/additional-settings.json'}:
         raise ValueError('unexpected runtime policy bindings')
     for path, expected in reconciliation['policy_inputs_sha256'].items():
         if extract.digest((ROOT / path).read_bytes()) != expected:
             raise ValueError('stale reviewed runtime policy')
     current = index(descriptors['resources'], 'terraform_type')
-    catalog = {r['resource_name']: r for file in ('collections.json','singletons.json','batch-a-collections.json') for r in load(ROOT / 'internal/catalog' / file)}
+    catalog = {r['resource_name']: r for file in ('collections.json','singletons.json','extended-collections.json','additional-settings.json') for r in load(ROOT / 'internal/catalog' / file)}
     helper_sources = ['internal/provider/collection_resource.go', 'internal/provider/ip_address_resource.go',
                       'internal/provider/firewall_order.go', 'internal/provider/firewall_actions.go',
                       'internal/provider/firewall_config_validation.go', 'internal/provider/firewall_address.go',
@@ -134,8 +134,9 @@ def matrix(bundle, descriptors):
                       'internal/provider/dhcp_relay.go', 'internal/provider/dns_record.go',
                       'internal/catalog/collections.go', 'internal/catalog/ip_address.go',
                       'internal/provider/singleton_resource.go', 'internal/provider/singleton_validation.go',
-                      'internal/provider/singletons.go', 'internal/provider/batch_a_bindings.go',
-                      'internal/provider/batch_a_validation.go', 'internal/provider/batch_a_duration.go']
+                      'internal/provider/singletons.go', 'internal/provider/extended_collection_bindings.go',
+                      'internal/provider/extended_collection_validation.go', 'internal/provider/routeros_duration.go',
+                       'internal/provider/additional_settings_bindings.go', 'internal/provider/additional_settings_validation.go']
     codec_helpers = {'wire-string': 'payload/decodeField (or maintained IP address lifecycle)',
                      'yes/no': 'strictWireBool/decodeField', 'decimal': 'payload/decodeField',
                      'csv': 'validateCSV/payload/decodeField',

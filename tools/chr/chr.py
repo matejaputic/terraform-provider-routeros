@@ -131,30 +131,38 @@ def validate_packages(packages, version=VERSION):
         raise RuntimeError('CHR enabled packages do not match the pinned base lane')
 
 
-def install_container(credentials, version):
+def install_container(credentials, version, package_names=None):
     # Only pinned official packages, an owned loopback guest, password SFTP and
     # a fixed reboot. No user SSH-key change or arbitrary RouterOS script.
-    recipes_path = ROOT/'tools/chr/container-recipes.json'
+    names=tuple(sorted(package_names or ('container',)))
+    if not names or len(names)!=len(set(names)) or not set(names)<= {'container','wireless','user-manager'}:raise RuntimeError('Unreviewed disposable package selection')
+    recipes_path = ROOT/('tools/chr/optional-package-recipes.json' if package_names else 'tools/chr/container-recipes.json')
     recipes = json.loads(recipes_path.read_text())
-    if version not in recipes: raise RuntimeError('No reviewed container acquisition recipe')
+    if version not in recipes: raise RuntimeError('No reviewed extra acquisition recipe')
     recipe = recipes[version]
-    package = STATE/recipe['member']
+    entries=recipe['packages'] if package_names else {'container':recipe}
+    files=[STATE/entries[name]['member'] for name in names]
     try:
         with urllib.request.urlopen(recipe['url'],timeout=120) as response:
             data=response.read(128*1024*1024+1)
         if len(data)>128*1024*1024 or hashlib.sha256(data).hexdigest()!=recipe['archive_sha256']:
             raise RuntimeError('container archive hash mismatch')
         import io
-        with zipfile.ZipFile(io.BytesIO(data)) as archive: payload=archive.read(recipe['member'])
-        if len(payload)!=recipe['package_bytes'] or hashlib.sha256(payload).hexdigest()!=recipe['package_sha256']:
-            raise RuntimeError('container package hash mismatch')
-        package.write_bytes(payload)
+        with zipfile.ZipFile(io.BytesIO(data)) as archive:
+            for name,package in zip(names,files):
+                entry=entries[name]
+                if entry['member']!=f'{name}-{version}.npk':raise RuntimeError('Unexpected package member')
+                payload=archive.read(entry['member'])
+                if len(payload)!=entry['package_bytes'] or hashlib.sha256(payload).hexdigest()!=entry['package_sha256']:
+                    raise RuntimeError('extra package hash mismatch')
+                package.write_bytes(payload)
         console=Console();console.expect(b'] > ')
         console.command('/ip service set ssh disabled=no')
         console.s.close()
         env=os.environ.copy();env['GOTOOLCHAIN']='go1.25.8'
-        result=subprocess.run(['go','run','tools/chr/package-upload/main.go',str(CREDENTIALS),str(package)],cwd=ROOT,env=env,timeout=120,capture_output=True)
-        if result.returncode!=0:raise RuntimeError('owned container package upload failed; protocol output suppressed')
+        for package in files:
+            result=subprocess.run(['go','run','tools/chr/package-upload/main.go',str(CREDENTIALS),str(package)],cwd=ROOT,env=env,timeout=120,capture_output=True)
+            if result.returncode!=0:raise RuntimeError('owned extra package upload failed; protocol output suppressed')
         console=Console();console.expect(b'] > ');console.send('/system reboot');console.expect(b'[y/N]:');console.send('y');console.s.close()
         deadline=time.monotonic()+60
         while subprocess.check_output(['docker','inspect','--format','{{.State.Running}}',NAME],text=True).strip()=='true':
@@ -170,12 +178,16 @@ def install_container(credentials, version):
                 if time.monotonic()>deadline:raise RuntimeError('extra guest REST unavailable') from None
                 time.sleep(1)
         return dict(recipe,recipes_sha256=digest(recipes_path),installer='owned password SFTP; verified RouterOS package installation on reboot')
-    finally: package.unlink(missing_ok=True)
+    finally:
+        for package in files:package.unlink(missing_ok=True)
 
 
-def start(hosted=False, version=VERSION, container=False):
+def start(hosted=False, version=VERSION, container=False, packages=()):
     if version not in RECIPES:
         raise RuntimeError('No pinned acquisition recipe for this RouterOS version')
+    selected=tuple(sorted(set(packages)|({'container'} if container else set())))
+    if not set(selected)<={'container','wireless','user-manager'}:raise RuntimeError('Unreviewed disposable package selection')
+    container=bool(selected)
     recipe = RECIPES[version]
     zip_hash, disk_hash = recipe['archive_sha256'], recipe['disk_sha256']
     url = f'https://download.mikrotik.com/routeros/{version}/chr-{version}.img.zip'
@@ -274,13 +286,13 @@ def start(hosted=False, version=VERSION, container=False):
         packages = request(credentials, '/system/package')
         validate_packages(packages, version)
         if container:
-            package_proof = install_container(credentials, version)
+            package_proof = install_container(credentials, version,selected if selected!=('container',) else None)
             packages = request(credentials,'/system/package')
             enabled=[p for p in packages if p.get('disabled') in ('false','no',False)]
-            if {p.get('name') for p in enabled}!={'routeros','container'} or any(p.get('version')!=version for p in enabled):
+            if {p.get('name') for p in enabled}!={'routeros',*selected} or any(p.get('version')!=version for p in enabled):
                 raise RuntimeError('extra guest package inventory mismatch')
-            provenance['container_acquisition'] = package_proof
-            provenance['package_flavor'] = 'routeros+container'
+            provenance['container_acquisition' if selected==('container',) else 'package_acquisition'] = package_proof
+            provenance['package_flavor'] = 'routeros+'+'+'.join(selected)
         else: provenance['package_flavor'] = 'base'
         provenance.update({'archive_sha256': zip_hash, 'disk_sha256': disk_hash,
                            'recipes_sha256': digest(RECIPES_PATH),
@@ -318,7 +330,7 @@ def test(version=VERSION):
     env = os.environ.copy()
     env.update(ROS_HOSTURL=credentials['hosturl'], ROS_USERNAME=credentials['username'], ROS_PASSWORD=credentials['password'],
                ROS_TEST_DISPOSABLE='1', ROS_TEST_VERSION=version, TF_ACC='1', TF_ACC_TERRAFORM_VERSION='1.14.0', GOTOOLCHAIN='go1.25.8')
-    pattern = '^TestAcc(IPAddress|Collections|DHCPRouting|DHCPOptions|DHCPRelay|DNSRecord|Singletons|BatchACollections|Firewall|FirewallFamilies)CHR$'
+    pattern = '^TestAcc(IPAddress|Collections|DHCPRouting|DHCPOptions|DHCPRelay|DNSRecord|Singletons|ExtendedCollections|Firewall|FirewallFamilies)CHR$'
     run('go', 'test', './internal/provider', '-run', pattern, '-count=1', '-v', '-timeout', '5m', env=env)
     evidence = {'format': 'routeros-chr-acceptance@1', 'success': True,
                 'provider_revision': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
@@ -338,7 +350,8 @@ def stop():
             raise RuntimeError('Refusing cleanup of a container not owned by this harness')
         run('docker', 'rm', '-f', NAME, stdout=subprocess.DEVNULL)
     CREDENTIALS.unlink(missing_ok=True)
-    for version in RECIPES: (STATE/f'container-{version}.npk').unlink(missing_ok=True)
+    for version in RECIPES:
+        for package in ('container','wireless','user-manager'):(STATE/f'{package}-{version}.npk').unlink(missing_ok=True)
     (STATE / 'test.img').unlink(missing_ok=True)
     print('Disposable CHR stopped; credentials and mutable test disk removed')
 
@@ -350,11 +363,12 @@ if __name__ == '__main__':
     parser.add_argument('command', choices=['start', 'test', 'stop'])
     parser.add_argument('--hosted', action='store_true', help='Permit only this repository GitHub-hosted runner')
     parser.add_argument('--container', action='store_true', help='Install the matching pinned container package on the owned disposable guest')
+    parser.add_argument('--packages',nargs='+',choices=['container','wireless','user-manager'],default=[],help='Additional hash-bound owned-guest package lane')
     parser.add_argument('--version', choices=sorted(RECIPES), default=VERSION,
                         help='Pinned acquisition/acceptance recipe; defaults to baseline')
     args = parser.parse_args()
     if args.command == 'start':
-        start(hosted=args.hosted, version=args.version, container=args.container)
+        start(hosted=args.hosted, version=args.version, container=args.container,packages=args.packages)
     elif args.command == 'test':
         test(version=args.version)
     else:

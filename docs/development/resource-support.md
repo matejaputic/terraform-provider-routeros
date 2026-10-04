@@ -1,9 +1,10 @@
-# Batch A — 107-constructor milestone complete
+# Resource support and configuration verification
 
-The fixed roster remains **107 distinct constructors** (88 collections and 19
-singletons); **125 public constructors** including the eighteen preserved baseline
-resources. Batch B's other 107 constructors remain unexposed. Aliases do not count
-twice. The fixed Batch A integration milestone is complete: clean-source
+This historical verification covers **107 integrated constructors** (88 collections
+and 19 singletons), or **125 public constructors** including the eighteen preserved
+baseline resources. Aliases do not count twice. Later implementation progress is
+tracked in [remaining resource support](remaining-resources.md). Verification of
+this 125-constructor source revision is complete: clean-source
 consolidated acceptance, immutable expanded maintenance replay/no-op, normal push
 and inspected consolidated hosted verification passed. Release publication and
 maintenance live-tested/published receipt automation remain separate unfinished work.
@@ -13,17 +14,17 @@ maintenance live-tested/published receipt automation remain separate unfinished 
 and both pinned `routeros+container` lanes. Four fresh immutable expanded
 maintenance candidates generated twice, passed all offline gates and produced
 `offline-compatible` contract deltas; the repeat was an intact four-candidate
-no-op. [Expanded exact bindings](../../schemas/batch-a-expanded-validation.json)
+no-op. [Expanded exact bindings](../../schemas/resource-configuration-validation.json)
 separate source-test binary evidence from offline candidate binaries.
 [Hosted run 37156502451](https://github.com/matejaputic/terraform-provider-routeros/actions/runs/37156502451)
 passed all five jobs at `48d6b43`; all four hash/package-bound acceptance artifacts
-and cleanup steps were inspected. [Hosted bindings](../../schemas/batch-a-hosted-validation.json)
+and cleanup steps were inspected. [Hosted bindings](../../schemas/hosted-configuration-validation.json)
 retain the initial official-CDN acquisition timeouts and successful failed-lane
 rerun, without weakening any gate.
 
 ## Constructor-level implementation tracker
 
-This is the sole current tracker. Frozen ledger statuses remain historical planning
+This table records the verified 125-constructor source revision. Frozen ledger statuses remain historical planning
 evidence, never an exposure selector. `pass` below means observed focused tests;
 live results now include the consolidated clean-source four-lane run at
 `c61b371`; no maintenance-candidate live or release certification is claimed.
@@ -140,7 +141,7 @@ live results now include the consolidated clean-source four-lane run at
 
 ## Reviewed runtime scope and limitations
 
-- Contracts: `internal/catalog/{collections,singletons,batch-a-collections}.json`.
+- Contracts: `internal/catalog/{collections,singletons,extended-collections}.json`.
   The maintained policy builders explicitly enumerate fields; unlisted fields,
   actions, aliases and SDK upgraders remain unsupported. SDK migration and parity
   are not claimed. Official OpenAPI v0.3.0 and Framework v0.4.1 generators emit
@@ -184,11 +185,11 @@ historical checkpoint, not the current table above.
 
 ## Frozen ledger and immutable observations
 
-[`schemas/batch-a-ledger.json`](../../schemas/batch-a-ledger.json) records all 107
+[`schemas/resource-plan.json`](../../schemas/resource-plan.json) records all 107
 IDs, explicit canonical-name proposals, deferred aliases, source locations,
 static field candidates/unresolved declarations, triage risks, and path/method
 observations for **7.24.5/base, 7.24.5/extra, 7.25beta5/base and 7.25beta5/extra**.
-Its 107 complement IDs keep Batch B fixed. Pending statuses and empty evidence
+Its 107 complement IDs identify the remaining constructor work. Pending statuses and empty evidence
 are deliberate: inventory and observations do not authorize exposure.
 
 Source baseline: `1897fb32c03c43fb48f6ab3020cc3baf2e2b57b2`; SDK reference:
@@ -199,8 +200,8 @@ from the current capability matrix, so later implementation status changes do
 not shrink the denominator or invalidate the partition test in shallow CI.
 
 ```sh
-python3 tools/contracts/batch_a.py --upstream-dir ../restraml
-python3 -m unittest discover -s tools/contracts -p 'test_batch_a.py'
+python3 tools/contracts/resource_plan.py --upstream-dir ../restraml
+python3 -m unittest discover -s tools/contracts -p 'test_resource_plan.py'
 ```
 
 The builder reads committed blobs only, never upstream callbacks/scripts. It
@@ -225,7 +226,7 @@ Two cases specifically require maintained behavior rather than blanket CRUD:
   never PATCH an unsupported path, manage the acceptance admin's keys, or leak key
   material through errors/evidence.
 
-Other unresolved rows stay inside Batch A. OSPF interface-template construction,
+Other unresolved rows remain in the reviewed constructor plan. OSPF interface-template construction,
 sets/nesting, secrets, ownership, async/import behavior and canonical wire values
 still require explicit field/action contracts and tests, not a blanket approval.
 

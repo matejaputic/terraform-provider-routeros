@@ -144,7 +144,7 @@ def policies():
    wire,flags=token.split(':');kind=flags[0];flags,_,constraint=flags.partition('/')
    tf='id' if wire=='.id' else NAME_ALIASES.get((name,wire),wire.replace('-','_').replace('.','_'))
    typ={'s':'string','i':'integer','b':'boolean'}[kind];mode='required' if '!' in flags else 'computed' if '*' in flags else 'computed_optional'
-   field={'name':tf,'wire':wire,'type':typ,'mode':mode,'sensitive':'~' in flags,'force_new':'^' in flags,'codec':'csv-string-set' if '+' in flags else 'routeros-duration' if constraint=='duration' else {'string':'wire-string','boolean':'yes/no','integer':'decimal'}[typ],'enum_kind':'none','validators':'maintained Batch A validation','default':'server-owned' if mode=='computed_optional' else None,'provenance':'explicit reviewed Batch A scalar/CSV subset; published structures are separately verified, not lifecycle authority'}
+   field={'name':tf,'wire':wire,'type':typ,'mode':mode,'sensitive':'~' in flags,'force_new':'^' in flags,'codec':'csv-string-set' if '+' in flags else 'routeros-duration' if constraint=='duration' else {'string':'wire-string','boolean':'yes/no','integer':'decimal'}[typ],'enum_kind':'none','validators':'maintained extended collection validation','default':'server-owned' if mode=='computed_optional' else None,'provenance':'explicit reviewed extended collection scalar/CSV subset; published structures are separately verified, not lifecycle authority'}
    if constraint:field['constraint']=constraint
    if (name,tf) in CHOICES:field['choices']=CHOICES[name,tf]
    if typ=='integer' and tf in BOUNDS:field['minimum'],field['maximum']=BOUNDS[tf]
@@ -156,11 +156,11 @@ def policies():
    if tf=='disabled':field['read_default']='false'
    if '~' in flags and tf in ('password','secret','key'):field['preserve_secret_on_omission']=True
    fields.append(field)
-  policy={'revision':'batch-a-collections-curated-v1','reference_constructor':constructor(name),'resource_name':name,'wire_path':path,'schema_version':0,'migration_compatibility':'not claimed','attributes':fields,'reference_sha':'0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb','required':[f['name'] for f in fields if f['mode']=='required'],'optional_computed':[f['name'] for f in fields if f['mode']=='computed_optional'],'computed':[f['name'] for f in fields if f['mode']=='computed'],'booleans':[f['name'] for f in fields if f['type']=='boolean']}
+  policy={'revision':'extended-collections-curated-v1','reference_constructor':constructor(name),'resource_name':name,'wire_path':path,'schema_version':0,'migration_compatibility':'not claimed','attributes':fields,'reference_sha':'0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb','required':[f['name'] for f in fields if f['mode']=='required'],'optional_computed':[f['name'] for f in fields if f['mode']=='computed_optional'],'computed':[f['name'] for f in fields if f['mode']=='computed'],'booleans':[f['name'] for f in fields if f['type']=='boolean']}
   if name in ('system_user_sshkeys','ip_ipsec_policy_group'):policy['replacement_only']=True
   if name=='interface_veth':policy['required_package']='container'
   result.append(policy)
  return result
 
 if __name__=='__main__':
- (ROOT/'internal/catalog/batch-a-collections.json').write_text(json.dumps(policies(),indent=2)+'\n')
+ (ROOT/'internal/catalog/extended-collections.json').write_text(json.dumps(policies(),indent=2)+'\n')

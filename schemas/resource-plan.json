@@ -2,8 +2,8 @@
   "baseline_implemented": 18,
   "baseline_matrix_sha256": "002626579aade6fa2f0ea28d06ccc0623512bd0be90ac74b1889d7544821969b",
   "baseline_source": "1897fb32c03c43fb48f6ab3020cc3baf2e2b57b2",
-  "batch_a_denominator": 107,
-  "batch_b_constructor_ids": [
+  "planned_constructor_count": 107,
+  "remaining_constructor_ids": [
     "ResourceCapsManAaa",
     "ResourceCapsManAccessList",
     "ResourceCapsManChannel",
@@ -112,7 +112,7 @@
     "ResourceZerotierController",
     "ResourceZerotierInterface"
   ],
-  "format": "routeros-batch-a-planning@1",
+  "format": "routeros-reviewed-resources-planning@1",
   "reference_contracts_sha256": "1d6154b2615618aafffa9777a672e8d899e02426f4457dadd2cbfdbb42c76657",
   "reference_sha": "0d8c069c20a012300dfeeb96cb343ad7a5e7ebfb",
   "resources": [

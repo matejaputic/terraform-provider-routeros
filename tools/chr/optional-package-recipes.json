@@ -1,0 +1,44 @@
+{
+  "7.24.5": {
+    "archive_sha256": "6acfd80b3f6edfd23cea14bfcdbbb183a6258acb3aedb3d7b0a23f60a19e51c6",
+    "packages": {
+      "container": {
+        "member": "container-7.24.5.npk",
+        "package_bytes": 1175697,
+        "package_sha256": "7515c52499bd11b063517c7b48a6553519976098040d9dec67f6bf087876a3c9"
+      },
+      "user-manager": {
+        "member": "user-manager-7.24.5.npk",
+        "package_bytes": 417937,
+        "package_sha256": "7117ab28169f450846e800a74c932c0d668c83179ec46794e86421c6fbc5eb85"
+      },
+      "wireless": {
+        "member": "wireless-7.24.5.npk",
+        "package_bytes": 1163409,
+        "package_sha256": "c61d2d766c3320d384f3481b14c66df5f7faf86c8f78313b18acd77df4808613"
+      }
+    },
+    "url": "https://download.mikrotik.com/routeros/7.24.5/all_packages-x86-7.24.5.zip"
+  },
+  "7.25beta5": {
+    "archive_sha256": "ae52ae5c917e9070afdd479f375f5923f429e015118dfe67e907e65af26ffa9d",
+    "packages": {
+      "container": {
+        "member": "container-7.25beta5.npk",
+        "package_bytes": 1142929,
+        "package_sha256": "0e18d644c273155ceeeed838d6eb85f7085f5391af82fd058844b82f4afe6750"
+      },
+      "user-manager": {
+        "member": "user-manager-7.25beta5.npk",
+        "package_bytes": 417937,
+        "package_sha256": "1b73d43f13dc8a1f5466d30a525149ed5ab124413336fa5b2ed0016522c4afdb"
+      },
+      "wireless": {
+        "member": "wireless-7.25beta5.npk",
+        "package_bytes": 1138833,
+        "package_sha256": "1c8c2f487f18458111868e47e78bbf0a150d7258e1e76549dd8364d2e7fc07c1"
+      }
+    },
+    "url": "https://download.mikrotik.com/routeros/7.25beta5/all_packages-x86-7.25beta5.zip"
+  }
+}

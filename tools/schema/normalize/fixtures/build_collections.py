@@ -12,7 +12,7 @@ p.add_argument('--sha', default='adc39cdbb0a3062aa93cc7aff50ef1185a1c0b0a')
 a=p.parse_args()
 s=n.discover.GitSource(a.repository_dir);commit=s.resolve(a.sha)
 raw=s.get(commit,'docs/7.24.5/openapi.json');spec=n.discover.parse(raw)
-policies=n.discover.parse((n.ROOT/'internal/catalog/collections.json').read_bytes())+n.discover.parse((n.ROOT/'internal/catalog/singletons.json').read_bytes())+n.discover.parse((n.ROOT/'internal/catalog/batch-a-collections.json').read_bytes())
+policies=n.discover.parse((n.ROOT/'internal/catalog/collections.json').read_bytes())+n.discover.parse((n.ROOT/'internal/catalog/singletons.json').read_bytes())+n.discover.parse((n.ROOT/'internal/catalog/extended-collections.json').read_bytes())+n.discover.parse((n.ROOT/'internal/catalog/additional-settings.json').read_bytes())
 paths=['/ip/address']+[x['wire_path'] for x in policies if not x.get('required_package')]
 extra_raw=s.get(commit,'docs/7.24.5/extra/openapi.json');extra_spec=n.discover.parse(extra_raw)
 extra_subset={k:extra_spec[k] for k in ('openapi','info','components')}
