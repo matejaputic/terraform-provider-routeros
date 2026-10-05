@@ -18,7 +18,7 @@ jobs:
         with:
           terraform_version: '1.14.0'
           terraform_wrapper: false
-      - uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548 # v6.1.0
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: '3.14.7'
       - name: Install pinned Python quality tooling
@@ -64,7 +64,7 @@ jobs:
         with:
           terraform_version: '1.14.0'
           terraform_wrapper: false
-      - uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548 # v6.1.0
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: '3.14.7'
       - name: Disposable pinned-version CHR full reviewed-resource acceptance
@@ -85,7 +85,7 @@ jobs:
         run: python3 tools/chr/chr.py stop
       - name: Retain only redacted target provenance (not credentials or serial buffers)
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: chr-${{ matrix.version }}-${{ matrix.flavor }}-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
